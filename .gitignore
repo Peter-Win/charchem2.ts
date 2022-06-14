@@ -1,0 +1,9 @@
+/fe-gui
+node_modules/
+.idea/
+.vscode/
+/*.log
+/coverage
+.eslintcache
+/dist
+/lib

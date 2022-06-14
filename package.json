@@ -1,0 +1,49 @@
+{
+  "name": "charchem2.ts",
+  "private": true,
+  "version": "1.0.0",
+  "description": "System to describe the chemical formulas for WEB",
+  "main": "dist/index.js",
+  "files": [
+    "dist"
+  ],
+  "types": "dist/index.d.ts",
+  "keywords": [],
+  "author": "PeterWin",
+  "license": "",
+  "scripts": {
+    "buildLib": "webpack --mode=production",
+    "buildDev": "tsc --declaration",
+    "test": "jest",
+    "test:coverage": "jest --coverage",
+    "lint": "eslint ./src --ext .ts",
+    "lint:fix": "eslint ./src --ext .ts --fix",
+    "prepare": "husky install"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@testing-library/dom": "^8.13.0",
+    "@testing-library/jest-dom": "^5.16.4",
+    "@types/jest": "^27.5.1",
+    "@typescript-eslint/eslint-plugin": "^5.26.0",
+    "@typescript-eslint/parser": "^5.26.0",
+    "clean-webpack-plugin": "^4.0.0",
+    "eslint": "^8.16.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-import-resolver-alias": "^1.1.2",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "husky": "^8.0.0",
+    "jest": "^28.1.0",
+    "jest-canvas-mock": "^2.4.0",
+    "jest-environment-jsdom": "^28.1.0",
+    "loader-utils": "^3.2.0",
+    "prettier": "^2.6.2",
+    "ts-jest": "^28.0.3",
+    "ts-loader": "^9.3.0",
+    "typescript": "^4.7.2",
+    "webpack": "^5.72.1",
+    "webpack-cli": "^4.9.2"
+  }
+}
