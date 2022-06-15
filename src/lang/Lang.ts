@@ -1,8 +1,8 @@
-type LocalDict = Record<string, string>;
-type LangParam = [string, string | number];
+import { baseDictEn } from "./baseDictEn";
+import { baseDictRu } from "./baseDictRu";
 
-const baseDictRu: LocalDict = {};
-const baseDictEn: LocalDict = {};
+type LocalDict = Record<string, string>;
+type LangParams = Record<string, string | number>;
 
 export class Lang {
   /**
@@ -16,7 +16,7 @@ export class Lang {
    * Translate phrase
    * example: Lang.tr("Hello, [first] [last]", listOf("first" to "John", "last" to "Connor"))
    */
-  static tr(key: string, params?: LangParam[], langId?: string): string {
+  static tr(key: string, params?: LangParams, langId?: string): string {
     // actual language
     const lang = (!langId ? Lang.curLang : langId).toLowerCase();
     const { dict } = Lang;
@@ -30,11 +30,10 @@ export class Lang {
     // find phrase
     const text = finalDict[key] ?? key;
     // parameters
-    return (
-      params?.reduce(
-        (acc, [name, val]) => acc.replace(`[${name}]`, String(val)),
-        text
-      ) ?? text
+    const paramsList = params ? Object.entries(params) : [];
+    return paramsList.reduce(
+      (acc, [name, val]) => acc.replace(`[${name}]`, String(val)),
+      text
     );
   }
 
