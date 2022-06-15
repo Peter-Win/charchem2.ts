@@ -17,6 +17,6 @@ export class ChemAtom extends ChemSubObj {
   }
 
   walk<T extends Visitor>(visitor: T) {
-    if (visitor.atom) visitor.atom(this);
+    visitor.atom?.(this);
   }
 }

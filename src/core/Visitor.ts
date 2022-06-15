@@ -1,25 +1,37 @@
 import { ChemAtom } from "./ChemAtom";
+import { ChemNodeItem } from "./ChemNodeItem";
+import { ChemNode } from "./ChemNode";
+import { ChemComment } from "./ChemComment";
+import { ChemCustom } from "./ChemCustom";
+import { ChemRadical } from "./ChemRadical";
+import { ChemBond } from "./ChemBond";
+import { ChemAgent } from "./ChemAgent";
+import { ChemBracketBegin, ChemBracketEnd } from "./ChemBracket";
+import { ChemComma } from "./ChemComma";
+import { ChemMul, ChemMulEnd } from "./ChemMul";
+import { ChemOp } from "./ChemOp";
+import { ChemObj } from "./ChemObj";
 
-export class Visitor {
+export interface Visitor {
   isStop?: boolean;
 
-  // open fun agentPre(obj: ChemAgent) {}
-  // open fun agentPost(obj: ChemAgent) {}
+  agentPre?: (obj: ChemAgent) => void;
+  agentPost?: (obj: ChemAgent) => void;
   atom?: (obj: ChemAtom) => void;
-  // open fun bond(obj: ChemBond) {}
-  // open fun bracketBegin(obj: ChemBracketBegin) {}
-  // open fun bracketEnd(obj: ChemBracketEnd) {}
-  // open fun comment(obj: ChemComment) {}
-  // open fun custom(obj: ChemCustom) {}
-  // open fun entityPre(obj: ChemObj) {}
-  // open fun entityPost(obj: ChemObj) {}
-  // open fun itemPre(obj: ChemNodeItem) {}
-  // open fun itemPost(obj: ChemNodeItem) {}
-  // open fun mul(obj: ChemMul) {}
-  // open fun mulEnd(obj: ChemMulEnd) {}
-  // open fun nodePre(obj: ChemNode) {}
-  // open fun nodePost(obj: ChemNode) {}
-  // open fun operation(obj: ChemOp) {}
-  // open fun radical(obj: ChemRadical) {}
-  // open fun comma(obj: ChemComma) {}
+  bond?: (obj: ChemBond) => void;
+  bracketBegin?: (obj: ChemBracketBegin) => void;
+  bracketEnd?: (obj: ChemBracketEnd) => void;
+  comment?: (obj: ChemComment) => void;
+  custom?: (obj: ChemCustom) => void;
+  entityPre?: (obj: ChemObj) => void;
+  entityPost?: (obj: ChemObj) => void;
+  itemPre?: (obj: ChemNodeItem) => void;
+  itemPost?: (obj: ChemNodeItem) => void;
+  mul?: (obj: ChemMul) => void;
+  mulEnd?: (obj: ChemMulEnd) => void;
+  nodePre?: (obj: ChemNode) => void;
+  nodePost?: (obj: ChemNode) => void;
+  operation?: (obj: ChemOp) => void;
+  radical?: (obj: ChemRadical) => void;
+  comma?: (obj: ChemComma) => void;
 }
