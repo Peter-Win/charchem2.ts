@@ -2,7 +2,7 @@ import { baseDictEn } from "./baseDictEn";
 import { baseDictRu } from "./baseDictRu";
 
 type LocalDict = Record<string, string>;
-type LangParams = Record<string, string | number>;
+export type LangParams = Record<string, string | number>;
 
 export class Lang {
   /**
