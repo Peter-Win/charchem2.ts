@@ -81,9 +81,9 @@ describe("universalBondProps", () => {
     expect(bond.tx).toBe("-->");
   });
   it("Specified width", () => {
-    const expr = compile("_(A90,w0)_(A0,w1)_(A-90,w2)")
+    const expr = compile("_(A90,w0)_(A0,w1)_(A-90,w2)");
     expect(expr.getMessage()).toBe("");
-    const {bonds} = expr.getAgents()[0]!
-    expect(bonds.map(b => `${b.w0},${b.w1}`)).toEqual(["0,0", "0,0", "1,1"]);
-  })
+    const { bonds } = expr.getAgents()[0]!;
+    expect(bonds.map((b) => `${b.w0},${b.w1}`)).toEqual(["0,0", "0,0", "1,1"]);
+  });
 });
