@@ -45,6 +45,12 @@ export class Point {
     this.y += deltaY;
   }
 
+  iadd(pt: Point): Point {
+    this.x += pt.x;
+    this.y += pt.y;
+    return this;
+  }
+
   // Operator p - p
   minus(pt: Point): Point {
     return new Point(this.x - pt.x, this.y - pt.y);

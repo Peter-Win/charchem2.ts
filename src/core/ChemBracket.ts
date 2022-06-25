@@ -41,7 +41,7 @@ export class ChemBracketEnd extends ChemObj implements ChemChargeOwner {
     super();
   }
 
-  charge: ChemCharge | null = null;
+  charge?: ChemCharge = undefined;
 
   n: ChemK = new ChemK(1);
 

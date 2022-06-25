@@ -3,11 +3,14 @@ import { ChemObj } from "./ChemObj";
 import { ChemSubObj } from "./ChemSubObj";
 import { ChemK } from "./ChemK";
 import { Visitor } from "./Visitor";
+import { ChemCharge } from "./ChemCharge";
 
 export class ChemNodeItem extends ChemObj {
   constructor(public readonly obj: ChemSubObj, public n: ChemK = ChemK.one) {
     super();
   }
+
+  charge?: ChemCharge;
 
   // Special mass.
   // If specified, then ignore mass of sub object
@@ -15,9 +18,9 @@ export class ChemNodeItem extends ChemObj {
 
   atomNum?: Int; // признак вывода атомного номера (для ядерных реакций).
 
-  color?: String; // общий цвет
+  color?: string; // общий цвет
 
-  atomColor?: String; // цвет атомов
+  atomColor?: string; // цвет атомов
 
   bCenter?: boolean; // признак приоритетности элемента, задаваемый при помощи обратного апострофа: H3C`O|
   // this.dots = [];

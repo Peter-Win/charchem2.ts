@@ -26,7 +26,7 @@ export const baseDictRu: Record<string, string> = {
   "Expected node declaration before charge":
     "Неизвестно, к чему нужно применить заряд в позиции [pos]",
   "Invalid charge declaration": "Ошибка в описании заряда в позиции [pos]",
-  "It is necessary: close the bracket":
+  "It is necessary to close the bracket":
     "Необходимо закрыть скобку, открытую в позиции [pos]",
   "Expected variable name": "Требуется указать имя переменной в позиции [pos]",
   "Undefined variable [name]":
@@ -41,7 +41,7 @@ export const baseDictRu: Record<string, string> = {
   "Cant close bracket before branch":
     "Нельзя закрыть скобку в позиции [pos], пока не закрыта ветка в позиции [pos0]",
   "Invalid bracket close": "Нет пары для скобки, закрытой в позиции [pos]",
-  "It is necessary: close the branch":
+  "It is necessary to close the branch":
     "Необходимо закрыть ветку, открытую в позиции [pos]",
   "Expected [must] instead of [have]":
     "Требуется [must] вместо [have] в позиции [pos]",

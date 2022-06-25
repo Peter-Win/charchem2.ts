@@ -1,7 +1,9 @@
-import { Lang } from "../lang/Lang";
+import { Double } from "../types";
 import { ChemObj } from "./ChemObj";
 import { Visitor } from "./Visitor";
 import { ChemAgent } from "./ChemAgent";
+import { getErrorMessage } from "./ChemError";
+import { calcMass } from "../inspectors/calcMass";
 
 export class ChemExpr extends ChemObj {
   error?: Error;
@@ -23,13 +25,7 @@ export class ChemExpr extends ChemObj {
   // Extended error message. Empty string, if not error
   getMessage(locale?: string): string {
     const { error } = this;
-    if (!error) return "";
-    if (!locale) return error.message;
-    const oldLang = Lang.curLang;
-    Lang.curLang = locale;
-    const { message } = error;
-    Lang.curLang = oldLang;
-    return message;
+    return error ? getErrorMessage(error, locale) : "";
   }
 
   override walk(visitor: Visitor) {
@@ -59,7 +55,7 @@ export class ChemExpr extends ChemObj {
    * Данная функция считает массу каждого агента отдельно.
    * @param applyK Если false, то не учитываются коэффициенты перед агентами.
    */
-  // mass(applyK: boolean = true): Double[] {
-  //     return this.getAgents().map(it => calcMass(it, applyK))
-  // }
+  mass(applyK: boolean = true): Double[] {
+    return this.getAgents().map((it) => calcMass(it, applyK));
+  }
 }

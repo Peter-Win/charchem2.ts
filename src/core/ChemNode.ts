@@ -34,7 +34,7 @@ export class ChemNode extends ChemObj implements ChemChargeOwner {
 
   pt: Point;
 
-  charge: ChemCharge | null = null;
+  charge?: ChemCharge = undefined;
 
   items: ChemNodeItem[] = [];
 

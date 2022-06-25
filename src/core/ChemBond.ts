@@ -8,7 +8,7 @@ import { ChemObj } from "./ChemObj";
 export class ChemBond extends ChemObj {
   n: Double = 1.0; // multiplicity of the bond
 
-  nodes: ChemNode[] = [];
+  nodes: (ChemNode | undefined)[] = [undefined, undefined];
 
   index?: Int; // index of bond in ChemAgent.bonds array
   // TODO: может быть нарушена в closeAgent при удалении дублирующих связей !!!
@@ -112,7 +112,7 @@ export class ChemBond extends ChemObj {
       `${it.nodes[1]?.index}`;
 
     const bondTextExt = (bond: ChemBond) =>
-      `${bond.linearText()}${bond.nodes.map((it) => it.index)}`;
+      `${bond.linearText()}${bond.nodes.map((it) => it?.index)}`;
 
     return this.nodes.length === 2 ? bondTextStd(this) : bondTextExt(this);
   }
