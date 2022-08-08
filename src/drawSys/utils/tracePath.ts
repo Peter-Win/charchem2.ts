@@ -5,7 +5,8 @@ export const tracePath = (segments: PathSeg[], visitor: PathVisitor) => {
   let p0 = new Point();
   let prev = p0.clone();
   let cpPrev = p0.clone();
-  const getPoint = (rel: boolean, p: Point): Point => (rel ? prev.plus(p) : p);
+  const getPoint = (rel: boolean | undefined, p: Point): Point =>
+    rel ? prev.plus(p) : p;
   const update = (p: Point, cp?: Point) => {
     prev = p;
     cpPrev = cp ?? p;

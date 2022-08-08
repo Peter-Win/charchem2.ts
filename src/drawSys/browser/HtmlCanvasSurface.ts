@@ -47,14 +47,20 @@ export class HtmlCanvasSurface implements AbstractSurface {
     return font;
   }
 
-  drawPath(org: Point, segments: PathSeg[], style: PathStyle): void {
+  applyStyle(style: PathStyle, org?: Point) {
     const { htmlContext } = this;
-    htmlContext.save();
-    htmlContext.translate(org.x, org.y);
+    if (org) htmlContext.translate(org.x, org.y);
     htmlContext.beginPath();
     htmlContext.fillStyle = style.fill ?? "transparent";
     htmlContext.strokeStyle = style.stroke ?? "transparent";
     htmlContext.lineWidth = style.strokeWidth ?? 1;
+  }
+
+  drawPath(org: Point, segments: PathSeg[], style: PathStyle): void {
+    const { htmlContext } = this;
+    htmlContext.save();
+    this.applyStyle(style, org);
+
     const visitor: PathVisitor = {
       onM(p: Point) {
         htmlContext.moveTo(p.x, p.y);
@@ -74,7 +80,29 @@ export class HtmlCanvasSurface implements AbstractSurface {
       },
     };
     tracePath(segments, visitor);
-    // htmlContext.closePath();
+    if (style.fill) htmlContext.fill();
+    if (style.stroke) htmlContext.stroke();
+    htmlContext.restore();
+  }
+
+  drawEllipse(
+    offset: Point,
+    center: Point,
+    radius: Point,
+    style: PathStyle
+  ): void {
+    const { htmlContext } = this;
+    htmlContext.save();
+    this.applyStyle(style, offset);
+    htmlContext.ellipse(
+      center.x,
+      center.y,
+      radius.x,
+      radius.y,
+      0,
+      0,
+      2 * Math.PI
+    );
     if (style.fill) htmlContext.fill();
     if (style.stroke) htmlContext.stroke();
     htmlContext.restore();

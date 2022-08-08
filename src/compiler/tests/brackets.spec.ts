@@ -1,7 +1,7 @@
 import { ChemObj } from "../../core/ChemObj";
 import { ChemNode } from "../../core/ChemNode";
 import { ChemBond } from "../../core/ChemBond";
-import { ChemBracketEnd } from "../../core/ChemBracket";
+import { ChemBracketBegin, ChemBracketEnd } from "../../core/ChemBracket";
 import { makeTextFormula } from "../../inspectors/makeTextFormula";
 import { compile } from "../compile";
 import { PeriodicTable } from "../../core/PeriodicTable";
@@ -52,6 +52,13 @@ describe("Brackets", () => {
     const expr = compile("(NH4)2SO4");
     expect(expr.getMessage()).toBe("");
     expect(makeTextFormula(expr)).toBe("(NH4)2SO4");
+
+    const { commands } = expr.getAgents()[0]!;
+    expect(commands[0]).toBeInstanceOf(ChemBracketBegin);
+    expect(commands[0]).toHaveProperty("text", "(");
+    expect(commands[2]).toBeInstanceOf(ChemBracketEnd);
+    expect(commands[2]).toHaveProperty("text", ")");
+
     const { dict } = PeriodicTable;
     const m = dict.H.mass * 8 + dict.N.mass * 2 + dict.O.mass * 4 + dict.S.mass;
     expect(roundMass(calcMass(expr))).toBe(roundMass(m));
@@ -123,7 +130,7 @@ describe("Brackets", () => {
     expect(bracketEnd).toBeInstanceOf(ChemBracketEnd);
     const { nodeIn } = bracketEnd;
     expect(nodeIn).toBeDefined();
-    expect(makeTextFormula(nodeIn)).toBe("Cu");
+    expect(makeTextFormula(nodeIn!)).toBe("Cu");
     const bracketEndBond = bracketEnd.bond;
     expect(bracketEndBond).toBeDefined();
     expect(makeTextFormula(bracketEndBond!)).toBe("-");

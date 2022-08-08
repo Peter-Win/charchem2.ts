@@ -32,6 +32,7 @@ export class LocalSvgFont implements LocalFont {
     this.fontFace.ascent *= scale;
     this.fontFace.descent *= scale;
     this.fontFace.capHeight *= scale;
+    this.fontFace.xHeight *= scale;
     const { bbox } = factory.fontFace;
     if (bbox) this.fontFace.bbox = bbox.map((v) => v * scale) as FontFaceBBox;
 

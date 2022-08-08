@@ -13,6 +13,9 @@ import {
   mergeBonds,
 } from "./bondCommon";
 import { closeItem } from "./item";
+import { lastItem } from "../../utils/lastItem";
+import { ChemBracketEnd } from "../../core/ChemBracket";
+import { createBackground } from "../../core/ChemBackground";
 
 export const closeNode = (compiler: ChemCompiler) => {
   closeItem(compiler);
@@ -38,6 +41,7 @@ export const openNode = (
         compiler.nodesBranch.onNode(existsNode);
         if (!bond.soft || existsNode.autoMode) {
           if (!bond.middlePoints) {
+            existsNode.fixed = true; // Узел уже не может автокорректироваться, т.к. это деформирует ранее построенную структуру.
             const oldNode = bond.nodes[0]!;
             const oldBond = findBondBetweenNodes(compiler, oldNode, existsNode);
             if (oldBond) {
@@ -53,15 +57,34 @@ export const openNode = (
   }
   closeNode(compiler);
   checkMiddlePoints(compiler);
+  // previous closed bracket
+  {
+    const cmd = lastItem(compiler.curAgent!.commands);
+    if (cmd instanceof ChemBracketEnd) {
+      compiler.chainSys.createSubChain();
+    }
+  }
   const node = compiler.curAgent!.addNode(new ChemNode());
   node.index = compiler.curAgent!.nodes.length - 1;
   node.autoMode = isAuto;
+
   compiler.curNode = node;
   compiler.chargeOwner = node;
   compiler.chainSys.addNode(node);
   compiler.nodesBranch.onNode(node);
+  compiler.mulCounter.onNode(node);
+  node.bCenter = compiler.centralNode;
+  compiler.centralNode = false;
 
   bindNodeToCurrentBond(compiler, node);
+  compiler.bracketsCtrl.onNode(node);
+
+  if (compiler.background) {
+    compiler.curAgent!.commands.push(
+      createBackground(compiler.background, node)
+    );
+    compiler.background = undefined;
+  }
   return node;
 };
 

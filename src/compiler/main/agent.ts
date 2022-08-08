@@ -24,7 +24,9 @@ export const createAgent = (compiler: ChemCompiler): ChemAgent => {
   compiler.references = {};
   compiler.varMass = 0.0;
   compiler.curWidth = 0;
+  compiler.centralNode = false;
   compiler.nodesBranch.onSubChain();
+  compiler.bracketsCtrl.clear();
   return agent;
 };
 
@@ -39,6 +41,7 @@ export const closeChain = (compiler: ChemCompiler) => {
   closeNode(compiler);
   compiler.chainSys.closeChain();
   compiler.nodesBranch.onSubChain();
+  compiler.bracketsCtrl.clear();
 };
 
 export const onCloseAgent = (compiler: ChemCompiler) => {
@@ -53,6 +56,7 @@ export const onCloseAgent = (compiler: ChemCompiler) => {
     checkBranch(compiler);
     finalUpdateBondsForNodes(curAgent);
     finalUpdateAutoNodes(curAgent);
+    compiler.background = undefined;
   }
 };
 

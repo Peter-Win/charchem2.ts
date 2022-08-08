@@ -9,10 +9,12 @@ export const startMul = (
   isFirst: boolean
 ) => {
   const mul = new ChemMul(k, isFirst, compiler.varColor);
+  mul.nodes[0] = compiler.curNode;
   closeNode(compiler);
   compiler.chainSys.closeSubChain();
   compiler.curAgent!.commands.push(mul);
   compiler.mulCounter.create(mul);
+  compiler.bracketsCtrl.clear();
 };
 
 export const stopMul = (compiler: ChemCompiler, mul: ChemMul) => {

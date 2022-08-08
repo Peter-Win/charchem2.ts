@@ -3,32 +3,32 @@ import { Point } from "../math/Point";
 
 export interface PathSegPt {
   cmd: "M" | "L" | "T";
-  rel: boolean;
+  rel?: boolean;
   pt: Point;
 }
 
 export interface PathSegVert {
   cmd: "V";
-  rel: boolean;
+  rel?: boolean;
   y: Double;
 }
 
 export interface PathSegHoriz {
   cmd: "H";
-  rel: boolean;
+  rel?: boolean;
   x: Double;
 }
 
 export interface PathSegCubic {
   cmd: "Q";
-  rel: boolean;
+  rel?: boolean;
   cp: Point;
   pt: Point;
 }
 
 export interface PathSegBezier {
   cmd: "C";
-  rel: boolean;
+  rel?: boolean;
   cp1: Point;
   cp2: Point;
   pt: Point;
@@ -36,7 +36,7 @@ export interface PathSegBezier {
 
 export interface PathSegBezierShort {
   cmd: "S";
-  rel: boolean;
+  rel?: boolean;
   cp2: Point;
   pt: Point;
 }
@@ -44,7 +44,7 @@ export interface PathSegBezierShort {
 // see: https://developer.mozilla.org/en-US/docs/Web/SVG/Tutorial/Paths#arcs
 export interface PathSegArc {
   cmd: "A";
-  rel: boolean;
+  rel?: boolean;
   r: Point;
   xRot: number; // in degrees
   largeArc: 0 | 1;
@@ -54,7 +54,7 @@ export interface PathSegArc {
 
 export interface PathSegZ {
   cmd: "Z" | "z";
-  rel: boolean;
+  rel?: boolean;
 }
 
 export type PathSeg =

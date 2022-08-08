@@ -5,11 +5,16 @@ import { ChemRadical } from "../../core/ChemRadical";
 import { ChemCustom } from "../../core/ChemCustom";
 import { scanPostItem } from "../parse/scanPostItem";
 import { stateAgentMid } from "./stateAgentMid";
+import { openBrace } from "../main/brackets";
 
 /**
  * Создание абстрактного элемента или радикала
  */
 export const stateCustom: CompilerState = (compiler) => {
+  if (compiler.curChar() === "{") {
+    //  {{
+    return openBrace(compiler);
+  }
   const startPos = compiler.pos; // pos установлен на символ, следующий за '{'
   if (!scanTo(compiler, "}"))
     compiler.error("Abstract element is not closed", { pos: startPos - 1 });

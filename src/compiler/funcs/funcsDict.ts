@@ -1,5 +1,7 @@
 import { Int } from "../../types";
 import { ChemCompiler } from "../ChemCompiler";
+import { funcBackground } from "./funcBackground";
+import { funcC } from "./funcC";
 import {
   funcAtomColor,
   funcAtomColor1,
@@ -19,6 +21,9 @@ type ChemFunc = (compiler: ChemCompiler, args: string[], argPos: Int[]) => void;
 export const funcsDict: Record<string, ChemFunc> = {
   atomColor: funcAtomColor,
   atomColor1: funcAtomColor1,
+  background: funcBackground,
+  bg: funcBackground, // short form of 'background'
+  C: funcC,
   color: funcColor,
   dblAlign: funcDblAlign,
   itemColor: funcItemColor,

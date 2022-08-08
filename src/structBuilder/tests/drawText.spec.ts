@@ -1,0 +1,19 @@
+import { FigFrame } from "../../drawSys/figures/FigFrame";
+import { createTestStyle, createTestSurface } from "./testEnv";
+import { drawText } from "../drawText";
+
+it("drawText", () => {
+  const frame = new FigFrame();
+  const surface = createTestSurface();
+  const style = createTestStyle(surface, 20);
+  const fig = drawText(frame, "COOH", style);
+  frame.update();
+
+  expect(fig.text).toBe("COOH");
+  expect(fig.font).toBe(style.font);
+  expect(fig.style).toBe(style.style);
+  expect(fig.org.toString()).toBe("(0, 0)");
+  expect(fig.bounds.toString()).toBe("{0, -15.55, 41.42, 4.45}");
+  expect(frame.bounds).not.toBe(fig.bounds);
+  expect(frame.bounds).toEqual(fig.bounds);
+});

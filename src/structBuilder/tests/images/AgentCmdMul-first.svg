@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg viewBox="0 0 92.24082767883729 42.71415809780852" xmlns="http://www.w3.org/2000/svg" version="1.1" baseProfile="full" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ev="http://www.w3.org/2001/xml-events">
+  <defs>
+    <path id="HussarBoldWeb-H" d="M248 331v-331h-188v825h188v-329h266v329h188v-825h-188v331h-266z" />
+    <path id="HussarBoldWeb-two" d="M363 681c-90 0 -147 -157 -147 -157l-157 76s80 240 304 240c283 0 320 -186 320 -290c0 -193 -291 -385 -291 -385h306v-165h-643v47s425 351 425 503c0 30 -7 131 -117 131z" />
+    <path id="HussarBoldWeb-O" d="M23 413c0 241 189 427 416 427c229 0 415 -186 415 -427s-178 -428 -415 -428c-244 0 -416 187 -416 428zM226 413c0 -123 59 -246 213 -246c150 0 212 123 212 246s-66 246 -212 246c-145 0 -213 -123 -213 -246z" />
+    <path id="HussarBoldWeb-three" d="M205 587l-148 72s42 181 273 181c157 0 271 -100 271 -240c0 -68 -28 -120 -73 -155c64 -39 105 -102 105 -189c0 -158 -129 -271 -306 -271c-254 0 -310 203 -310 203l174 85s11 -126 135 -126c69 0 119 39 119 109c0 71 -53 121 -119 121c-20 0 -36 -6 -36 -6v123h41
+ c50 0 99 44 99 104c0 53 -49 91 -102 91c-104 0 -123 -102 -123 -102z" />
+    <path id="HussarBoldWeb-bracketleft" d="M60 860h322v-117h-169v-886h169v-117h-322v1120z" />
+    <path id="HussarBoldWeb-bracketright" d="M60 -143h169v886h-169v117h322v-1120h-322v117z" />
+  </defs>
+  <use xlink:href="#HussarBoldWeb-H" transform="matrix(0.02534227915787606 0 0 -0.02534227915787606 28.053903027768804 31.1048600155855)" fill="black" />
+  <use xlink:href="#HussarBoldWeb-two" transform="matrix(0.015205367494725636 0 0 -0.015205367494725636 47.364719746070364 37.37707410715983)" fill="black" />
+  <use xlink:href="#HussarBoldWeb-O" transform="matrix(0.02534227915787606 0 0 -0.02534227915787606 58.814361469598765 31.1048600155855)" fill="black" />
+  <use xlink:href="#HussarBoldWeb-three" transform="matrix(0.02534227915787606 0 0 -0.02534227915787606 11.201287387781221 31.1048600155855)" fill="black" />
+  <use xlink:href="#HussarBoldWeb-bracketleft" transform="matrix(0.02534227915787606 0 0 -0.02534227915787606 0 31.1048600155855)" fill="black" />
+  <use xlink:href="#HussarBoldWeb-bracketright" transform="matrix(0.02534227915787606 0 0 -0.02534227915787606 81.03954029105608 31.1048600155855)" fill="black" />
+</svg>

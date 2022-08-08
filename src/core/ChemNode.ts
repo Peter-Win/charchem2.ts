@@ -54,6 +54,8 @@ export class ChemNode extends ChemObj implements ChemChargeOwner {
 
   atomColor?: string;
 
+  bCenter = false; // Признак центрального узла для центрирования агентов в выражении
+
   override walk(visitor: Visitor) {
     visitor.nodePre?.(this);
     if (visitor.isStop) return;
@@ -111,3 +113,6 @@ export class ChemNode extends ChemObj implements ChemChargeOwner {
     return foundItem;
   }
 }
+
+export type ChemNodeOpt = ChemNode | undefined;
+export type ChemNodeOptPair = [ChemNodeOpt, ChemNodeOpt];

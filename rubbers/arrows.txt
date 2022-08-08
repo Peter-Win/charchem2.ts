@@ -1,0 +1,13 @@
+Cambria
+--> 27F6
+<-- 27F5
+<--> 27F7
+<=> 21CB, 21CC, 21C4
+-> arrowright
+<- arrowleft
+
+} 23AB, 23AC, 23AD
+{ 23A7 - 23A9
+) 239E - 23A0
+( 239B - 239D
+^-o 229D

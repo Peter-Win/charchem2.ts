@@ -23,6 +23,9 @@ const cmd2str = (cmd: ChemObj): string => {
     : makeTextFormula(cmd);
 };
 
+const getCommand = (expr: ChemExpr, i: number): ChemObj =>
+  expr.getAgents()[0]!.commands[i]!;
+
 const getCommands = (expr: ChemExpr): string[] =>
   expr.getAgents()[0]!.commands.map((it) => cmd2str(it));
 
@@ -32,6 +35,11 @@ describe("Mul", () => {
     expect(expr.getMessage()).toBe("");
     expect(getCommands(expr)).toEqual(["[", "2{{", "H2O", "}}", "]"]);
     expect(makeTextFormula(expr, rulesHtml)).toBe("[2H<sub>2</sub>O]");
+    const cmd = getCommand(expr, 1) as ChemMul;
+    expect(cmd).toBeInstanceOf(ChemMul);
+    expect(cmd.nodes[0]).toBeUndefined();
+    expect(cmd.nodes[1]).toBeDefined();
+    expect(makeTextFormula(cmd.nodes[1]!)).toBe("H2O");
   });
   it("Simple", () => {
     const expr = compile("CuSO4*5H2O");
@@ -49,6 +57,12 @@ describe("Mul", () => {
     expect(roundMass(calcMass(expr))).toBe(
       roundMass(mCu + mS + mO * 4 + 5 * (mH * 2 + mO))
     );
+    const cmd = getCommand(expr, 1) as ChemMul;
+    expect(cmd).toBeInstanceOf(ChemMul);
+    expect(cmd.nodes[0]).toBeDefined();
+    expect(makeTextFormula(cmd.nodes[0]!)).toBe("CuSO4");
+    expect(cmd.nodes[1]).toBeDefined();
+    expect(makeTextFormula(cmd.nodes[1]!)).toBe("H2O");
   });
   it("NestedBrackets", () => {
     const expr = compile("[2Ca(OH)2*3Mg(OH)2]");
@@ -77,6 +91,20 @@ describe("Mul", () => {
       roundMass(2 * (mCa + mOH2) + 3 * (mMg + mOH2))
     );
     expect(makeTextFormula(makeBrutto(expr))).toBe("H10Ca2Mg3O10");
+    {
+      const m1 = getCommand(expr, 1) as ChemMul;
+      expect(m1).toBeInstanceOf(ChemMul);
+      expect(m1.nodes[0]).toBeUndefined();
+      expect(m1.nodes[1]).toBeDefined();
+      expect(makeTextFormula(m1.nodes[1]!)).toBe("Ca");
+    }
+    {
+      const m2 = getCommand(expr, 7) as ChemMul;
+      expect(m2).toBeInstanceOf(ChemMul);
+      expect(m2.nodes[0]).not.toBeDefined();
+      expect(m2.nodes[1]).toBeDefined();
+      expect(makeTextFormula(m2.nodes[1]!)).toBe("Mg");
+    }
   });
   it("Abstract", () => {
     // Limonite

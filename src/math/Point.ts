@@ -18,6 +18,16 @@ export class Point {
     this.y = y;
   }
 
+  set(x: Double, y: Double) {
+    this.x = x;
+    this.y = y;
+  }
+
+  setPt(src: Point) {
+    this.x = src.x;
+    this.y = src.y;
+  }
+
   toString(): string {
     return `(${toa(this.x)}, ${toa(this.y)})`;
   }
@@ -43,6 +53,7 @@ export class Point {
   add(deltaX: Double, deltaY: Double) {
     this.x += deltaX;
     this.y += deltaY;
+    return this;
   }
 
   iadd(pt: Point): Point {
@@ -51,9 +62,19 @@ export class Point {
     return this;
   }
 
+  isub(pt: Point): Point {
+    this.x -= pt.x;
+    this.y -= pt.y;
+    return this;
+  }
+
   // Operator p - p
   minus(pt: Point): Point {
     return new Point(this.x - pt.x, this.y - pt.y);
+  }
+
+  neg(): Point {
+    return new Point(-this.x, -this.y);
   }
 
   // Operator p * k

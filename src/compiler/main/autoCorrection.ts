@@ -25,6 +25,9 @@ const correctPrev = (
   prevBond: ChemBond,
   length?: Double
 ) => {
+  if (prevBond.nodes[1]?.fixed) {
+    return;
+  }
   const corrNode = prevBond.nodes[1];
   if (!corrNode) {
     correct(prevBond, length);
@@ -38,7 +41,10 @@ const correctPrev = (
   const dstNodes = allNodes
     .slice(corrNode.index + 1)
     .filter((it) => it.subChain === subChain);
-  dstNodes.forEach((it) => it.pt.iadd(step));
+  dstNodes.reverse();
+  dstNodes.forEach((it) => {
+    it.pt.iadd(step);
+  });
 };
 
 export const autoCorrection = (

@@ -20,7 +20,7 @@
     "baseUrl": "./",
     "paths": {},
     "types": [
-      "jest"
+      "jest", "node"
     ],
     "typeRoots": [
       "node_modules/@types",

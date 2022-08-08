@@ -64,20 +64,31 @@ export const openSquareBracket = (compiler: ChemCompiler): Int => {
   return compiler.setState(stateBracketBegin);
 };
 
+export const openBrace = (compiler: ChemCompiler): Int => {
+  openBracket(compiler, "{", compiler.pos - 1);
+  compiler.pos++;
+  return compiler.setState(stateBracketBegin);
+};
+
 const openBracket = (compiler: ChemCompiler, text: string, pos: Int) => {
   const begin = new ChemBracketBegin(text);
   begin.color = compiler.varColor;
   compiler.mulCounter.onOpenBracket();
   compiler.curAgent!.commands.push(begin);
   compiler.push(new BracketDecl(pos, begin));
-  if (compiler.curBond != null) {
+  compiler.bracketsCtrl.onBracket(begin);
+  if (compiler.curBond) {
     begin.bond = compiler.curBond;
+    // eslint-disable-next-line prefer-destructuring
+    begin.nodes[0] = begin.bond.nodes[0];
   } else {
+    begin.nodes[0] = compiler.curNode;
     closeNode(compiler);
+    compiler.chainSys.createSubChain();
   }
 };
 
-const bracketPairs: Record<string, string> = { "(": ")", "[": "]" };
+const bracketPairs: Record<string, string> = { "(": ")", "[": "]", "{": "}" };
 
 export const getNodeForBracketEnd = (compiler: ChemCompiler): ChemNode => {
   const { curNode } = compiler;
@@ -90,7 +101,8 @@ export const getNodeForBracketEnd = (compiler: ChemCompiler): ChemNode => {
     lastCmd = commands[commands.length - 2];
   }
   if (lastCmd instanceof ChemBracketEnd) {
-    return lastCmd.nodeIn;
+    const { nodeIn } = lastCmd;
+    if (nodeIn) return nodeIn;
   }
   return openNode(compiler, true);
 };
@@ -130,6 +142,7 @@ export const closeBracket = (
       decl.begin.end = bracketEnd;
       closeNode(compiler);
       compiler.chargeOwner = bracketEnd;
+      compiler.bracketsCtrl.onBracket(bracketEnd);
       return bracketEnd;
     }
     return compiler.error("Cant close bracket before branch", {
@@ -139,7 +152,13 @@ export const closeBracket = (
   }) ?? compiler.error("Invalid bracket close", { pos });
 
 export const closeBracketShort = (compiler: ChemCompiler): Int => {
-  const end = closeBracket(compiler, compiler.curChar(), compiler.pos++);
+  const ch = compiler.curChar();
+  let step = 1;
+  if (ch === "}" && compiler.nextChar() === "}") {
+    step = 2;
+  }
+  const end = closeBracket(compiler, ch, compiler.pos);
+  compiler.pos += step;
   scanPostItem(compiler, (it) => {
     end.n = it;
   });

@@ -58,7 +58,7 @@ export class ChainSys {
     return this.chainsDict[this.curChainId]!;
   }
 
-  private createSubChain(): Int {
+  createSubChain(): Int {
     this.lastBond = undefined;
     const newId = generateSubChainId();
     this.curSubChainId = newId;

@@ -3,3 +3,10 @@
 
 System to describe the chemical formulas for WEB
 
+Features of 2.0
+- Braces by {{OH}} (+)
+- $background()  (...)
+
+Problems:
+- It is possible to insert unsafe code in HTML formula view by Text and Custom items.
+

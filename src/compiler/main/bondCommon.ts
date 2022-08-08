@@ -83,8 +83,11 @@ export const getNodeForBondStart = (
   const bracketEnd: ChemBracketEnd | undefined =
     lastCmd instanceof ChemBracketEnd ? lastCmd : undefined;
   if (bracketEnd) {
-    bracketEnd.bond = bond;
-    return bracketEnd.nodeIn;
+    const { nodeIn } = bracketEnd;
+    if (nodeIn) {
+      bracketEnd.bond = bond;
+      return nodeIn;
+    }
   }
   return openNode(compiler, true);
 };

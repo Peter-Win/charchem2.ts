@@ -1,5 +1,6 @@
 import { Int } from "../../types";
 import { ChemMul } from "../../core/ChemMul";
+import { ChemNode } from "../../core/ChemNode";
 
 /*
  Множители появляются:
@@ -19,6 +20,13 @@ export class MulCounter {
   onOpenBracket() {
     if (this.mul) {
       ++this.bracketCounter;
+    }
+  }
+
+  onNode(node: ChemNode) {
+    const { mul } = this;
+    if (mul && !mul.nodes[1]) {
+      mul.nodes[1] = node;
     }
   }
 

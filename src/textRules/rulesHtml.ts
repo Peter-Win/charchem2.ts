@@ -22,7 +22,7 @@ import { ChemComment } from "../core/ChemComment";
  * <sub/> - Подстрочные коэффициенты
  * <span class="echem-op"/> - Операции в химических выражениях
  */
-class RulesHtml extends RulesBase {
+export class RulesHtml extends RulesBase {
   agentK(k: ChemK): string {
     return `<b>${k}</b>`;
   }

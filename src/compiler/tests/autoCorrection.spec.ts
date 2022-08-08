@@ -243,4 +243,33 @@ describe("autoCorrection", () => {
       ])
     );
   });
+  it("Fixed point", () => {
+    //  7__6   8__9
+    //      \ /
+    //       0
+    //   1       5
+    //   |       |
+    //   2       4
+    //       3
+    // В старых реализациях при вводе последней связи происходила неприемлемая деформация
+    const expr = compile("`/|\\/`|`\\<`\\`->/-");
+    expect(expr.getMessage()).toBe("");
+    const agent = expr.getAgents()[0]!;
+    const { nodes } = agent;
+    expect(nodes).toHaveLength(10);
+    const points = nodes.map(({ pt }) => String(pt));
+    expect(nodes[0]).toHaveProperty("fixed", true);
+    expect(points[0]).toBe("(0, 0)");
+    expect(points[1]).toBe(String(new Point(-q32, 0.5)));
+    expect(points[2]).toBe(String(new Point(-q32, 1.5)));
+    expect(points[3]).toBe("(0, 2)");
+    expect(points[4]).toBe(String(new Point(q32, 1.5)));
+    expect(points[5]).toBe(String(new Point(q32, 0.5)));
+    // corrected point in left branch
+    expect(points[6]).toBe(String(new Point(-0.5, -q32)));
+    expect(points[7]).toBe(String(new Point(-1.5, -q32)));
+    // corrected point in right branch
+    expect(points[8]).toBe(String(new Point(0.5, -q32)));
+    expect(points[9]).toBe(String(new Point(1.5, -q32)));
+  });
 });

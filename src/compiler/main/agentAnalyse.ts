@@ -66,6 +66,7 @@ export const agentAnalyse = (
       return openSquareBracket(compiler);
     case ")":
     case "]":
+    case "}":
       return closeBracketShort(compiler);
     case "*":
       return star(compiler);

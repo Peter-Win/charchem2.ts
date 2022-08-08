@@ -2,6 +2,7 @@
 import { ChemObj } from "./ChemObj";
 import { Visitor } from "./Visitor";
 import { ChemK } from "./ChemK";
+import { ChemNodeOptPair } from "./ChemNode";
 /**
  * В версиях до 1.1 включительно умножитель действует только начиная с символа умножения
  * Например, CuSO4*5H2O. Здесь один умножитель.
@@ -26,6 +27,10 @@ import { ChemK } from "./ChemK";
 // example: CuSO4*5H2O
 // isFirst для коэффициента, который стоит первым внутри скобок (2FeO*3H2O)
 export class ChemMul extends ChemObj {
+  // если соседние узлы внутри скобок, то они здесь не заполняются.
+  // Н.р для "Ca(OH)2*3Mg(OH)2" после компиляции nodes=[undefined, "Mg"]
+  nodes: ChemNodeOptPair = [undefined, undefined];
+
   constructor(
     public readonly n: ChemK,
     public readonly isFirst: boolean,

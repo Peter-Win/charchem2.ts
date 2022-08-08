@@ -1,4 +1,5 @@
 import { Point } from "../math/Point";
+import { Rect } from "../math/Rect";
 import { FontWeight, FontStyle, FontStretch } from "./FontTypes";
 import { CommonFontFace } from "./CommonFontFace";
 import { PathSeg } from "./path";
@@ -36,5 +37,12 @@ export interface LocalFont {
 export interface AbstractSurface {
   getFont(props: LocalFontProps): LocalFont;
   drawPath(org: Point, path: PathSeg[], style: PathStyle): void;
+  drawEllipse(
+    offset: Point,
+    center: Point,
+    radius: Point,
+    style: PathStyle
+  ): void;
+  drawRect?(offset: Point, rect: Rect, style: PathStyle): void;
   setSize(size: Point): void;
 }

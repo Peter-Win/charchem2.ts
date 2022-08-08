@@ -18,6 +18,8 @@ import { StackItem } from "./main/StackItem";
 
 import { stateBegin } from "./state/stateBegin";
 import { prepareText } from "./parse/prepareText";
+import { BracketsCtrl } from "./main/BracketsCtrl";
+import { ParamsChemBackground } from "../core/ChemBackground";
 
 export type CompilerState = (c: ChemCompiler) => Int;
 
@@ -66,9 +68,13 @@ export class ChemCompiler {
 
   readonly nodesBranch = new NodesBranch();
 
+  readonly bracketsCtrl = new BracketsCtrl();
+
   readonly middlePoints: MiddlePoint[] = [];
 
   private readonly stack: StackItem[] = [];
+
+  background?: ParamsChemBackground;
 
   push(item: StackItem) {
     this.stack.unshift(item);
@@ -110,8 +116,14 @@ export class ChemCompiler {
 
   varAlign?: Char;
 
+  centralNode: boolean = false;
+
   curChar(): Char {
     return this.text[this.pos]!;
+  }
+
+  nextChar(): Char {
+    return this.text[this.pos + 1]!;
   }
 
   subStr(startPos: Int): string {
