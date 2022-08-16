@@ -8,15 +8,15 @@
     <path id="HussarBoldWeb-three" d="M205 587l-148 72s42 181 273 181c157 0 271 -100 271 -240c0 -68 -28 -120 -73 -155c64 -39 105 -102 105 -189c0 -158 -129 -271 -306 -271c-254 0 -310 203 -310 203l174 85s11 -126 135 -126c69 0 119 39 119 109c0 71 -53 121 -119 121c-20 0 -36 -6 -36 -6v123h41
  c50 0 99 44 99 104c0 53 -49 91 -102 91c-104 0 -123 -102 -123 -102z" />
   </defs>
-  <path d="M11.66 0L34.89 0" fill="none" stroke="black" stroke-width="2" transform="translate(47.66,57.04)" />
-  <path d="M48 12.45L48 35.55" fill="none" stroke="black" stroke-width="2" transform="translate(47.66,57.04)" />
-  <path d="M34.89 48L11.66 48" fill="none" stroke="black" stroke-width="2" transform="translate(47.66,57.04)" />
-  <path d="M108.23 -11.55L108.23 11.55" fill="none" stroke="black" stroke-width="2" transform="translate(47.66,57.04)" />
-  <path d="M108.23 36.45L108.23 59.55" fill="none" stroke="black" stroke-width="2" transform="translate(47.66,57.04)" />
+  <path d="M11.66 0L34.89 0" fill="none" stroke="black" stroke-width="2" stroke-linecap="round" transform="translate(47.66,57.99)" />
+  <path d="M48 11.5L48 36.5" fill="none" stroke="black" stroke-width="2" stroke-linecap="round" transform="translate(47.66,57.99)" />
+  <path d="M34.89 48L11.66 48" fill="none" stroke="black" stroke-width="2" stroke-linecap="round" transform="translate(47.66,57.99)" />
+  <path d="M108.23 -12.5L108.23 12.5" fill="none" stroke="black" stroke-width="2" stroke-linecap="round" transform="translate(47.66,57.99)" />
+  <path d="M108.23 35.5L108.23 60.5" fill="none" stroke="black" stroke-width="2" stroke-linecap="round" transform="translate(47.66,57.99)" />
   <use xlink:href="#HussarBoldWeb-H" transform="matrix(0.02534227915787606 0 0 -0.02534227915787606 38 67.49556193336247)" fill="black" />
   <use xlink:href="#HussarBoldWeb-O" transform="matrix(0.02534227915787606 0 0 -0.02534227915787606 84.54281894842214 67.49556193336247)" fill="black" />
   <use xlink:href="#HussarBoldWeb-O" transform="matrix(0.02534227915787606 0 0 -0.02534227915787606 84.54281894842214 115.49556193336247)" fill="black" />
-  <use xlink:href="#HussarBoldWeb-H" transform="matrix(0.02534227915787606 0 0 -0.02534227915787606 38 115.49556193336248)" fill="black" />
+  <use xlink:href="#HussarBoldWeb-H" transform="matrix(0.02534227915787606 0 0 -0.02534227915787606 38 115.49556193336247)" fill="black" />
   <path d="M8 0Q5.57 0 4.03 2.4Q2.49 4.8 1.63 9.72Q0.77 14.64 0.39 22.49Q0 30.35 0 43.81Q0 57.18 0.38 65.11Q0.76 73.04 1.62 78.02Q2.48 83.01 4.02 85.51Q5.57 88 8 88L8 84.14Q7 84.14 6.23 83.58Q5.35 82.92 4.74 81.04Q4.05 78.96 3.62 75.25Q3.12 70.92 2.88 63.76Q2.62 56.19 2.62 44.19Q2.62 33.6 2.83 26.19Q3.05 18.78 3.55 14.07Q3.95 10.12 4.55 7.91Q5.08 5.98 5.81 4.99Q6.65 3.86 8 3.86L8 0" fill="black" transform="translate(30,36.39)" />
   <path d="M0 88Q2.43 88 3.97 85.6Q5.51 83.2 6.37 78.28Q7.23 73.36 7.61 65.51Q8 57.65 8 44.19Q8 30.82 7.62 22.89Q7.24 14.96 6.38 9.98Q5.52 4.99 3.98 2.49Q2.43 0 0 0L0 3.86Q1 3.86 1.77 4.42Q2.65 5.08 3.26 6.96Q3.95 9.04 4.38 12.75Q4.88 17.08 5.12 24.24Q5.38 31.81 5.38 43.81Q5.38 54.4 5.17 61.81Q4.95 69.22 4.45 73.93Q4.05 77.88 3.45 80.09Q2.92 82.02 2.19 83.01Q1.35 84.14 0 84.14L0 88" fill="black" transform="translate(106.77,36.39)" />
   <path d="M8 0H0V88H8V86.53H3.16V1.47H8Z" fill="black" transform="translate(20,36.39)" />
@@ -31,6 +31,6 @@
   <path d="M4.26 35.4L4.26 24.73Q4.26 13.27 5.15 7.78Q6.04 2.28 8 1.32L8 0Q5.23 1 4.04 6.85Q2.86 12.7 2.86 24.26L2.86 35.4L2.86 35.4L2.86 54.31Q2.86 60.59 2.11 63.79Q1.36 66.99 0 67.1L0 68.77Q1.33 68.88 2.09 72.1Q2.86 75.31 2.86 81.69L2.86 100.6L2.86 111.74Q2.86 123.3 4.04 129.15Q5.23 135 8 136L8 134.68Q6.04 133.72 5.15 128.22Q4.26 122.73 4.26 111.27L4.26 100.6L4.26 100.6L4.26 84.11Q4.26 76.37 3.31 72.68Q2.35 68.99 1.4 68.17L1.4 67.83Q2.34 66.99 3.25 63.5Q4.15 60.01 4.26 51.89Z" fill="black" transform="translate(0,12.39)" />
   <path d="M5.14 35.4L5.14 24.26Q5.14 12.7 3.96 6.85Q2.77 1 0 0L0 1.32Q1.96 2.28 2.85 7.78Q3.74 13.27 3.74 24.73L3.74 35.4L3.74 35.4L3.74 51.89Q3.85 60.01 4.75 63.5Q5.66 66.99 6.6 67.83L6.6 68.17Q5.65 68.99 4.69 72.68Q3.74 76.37 3.74 84.11L3.74 100.6L3.74 111.27Q3.74 122.73 2.85 128.22Q1.96 133.72 0 134.68L0 136Q2.77 135 3.96 129.15Q5.14 123.3 5.14 111.74L5.14 100.6L5.14 100.6L5.14 81.69Q5.14 75.31 5.91 72.1Q6.67 68.88 8 68.77L8 67.1Q6.64 66.99 5.89 63.79Q5.14 60.59 5.14 54.31Z" fill="black" transform="translate(176.99,12.39)" />
   <use xlink:href="#HussarBoldWeb-plus" transform="matrix(0.015205367494725636 0 0 -0.015205367494725636 184.99317659133675 18.6629160093513)" fill="black" />
-  <ellipse fill="none" stroke="black" transform="translate(176.99,12.39)" cx="12.81" cy="0" rx="5.7" ry="5.7" />
+  <ellipse fill="none" stroke="black" transform="translate(176.99,12.39)" cx="12.81" cy="0.57" rx="5.7" ry="5.7" />
   <use xlink:href="#HussarBoldWeb-three" transform="matrix(0.015205367494725636 0 0 -0.015205367494725636 184.99317659133675 154.66291600935128)" fill="black" />
 </svg>

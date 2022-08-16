@@ -26,6 +26,7 @@ export const createRingBond = (compiler: ChemCompiler, deltaPos: Int) => {
   bond.nodes = findRingNodesEx(compiler);
   bond.n = 1.0;
   bond.tx = "o";
+  bond.ext = "o";
   bond.isCycle = true;
   compiler.curAgent!.addBond(bond);
   compiler.curBond = undefined;

@@ -51,6 +51,6 @@ describe("DoubleBondAlignment", () => {
   it("Suffixes", () => {
     const expr = compile("=|=r`|=m=x=r|_qq4l_q4=||");
     expect(expr.getMessage()).toBe("");
-    expect(getAligns(expr)).toBe("..r.m.r.l...");
+    expect(getAligns(expr)).toBe("..r.mxr.l...");
   });
 });

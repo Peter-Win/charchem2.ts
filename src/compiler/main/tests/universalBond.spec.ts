@@ -76,7 +76,7 @@ describe("Universal bond", () => {
       valuePos: 2,
     });
     expect(bondX?.n).toBe(2.0);
-    expect(bondX?.style).toBe("x");
+    expect(bondX?.align).toBe("x");
     expect(bondX?.isCross()).toBe(true);
   });
   it("parseBondMultiplicity L", () => {

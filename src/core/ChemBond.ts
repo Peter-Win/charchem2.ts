@@ -5,6 +5,8 @@ import { ChemNode } from "./ChemNode";
 import { Visitor } from "./Visitor";
 import { ChemObj } from "./ChemObj";
 
+export type BondAlign = "x" | "r" | "m" | "l";
+
 export class ChemBond extends ChemObj {
   n: Double = 1.0; // multiplicity of the bond
 
@@ -31,10 +33,10 @@ export class ChemBond extends ChemObj {
 
   soft: boolean = false;
 
+  //  ~ : | I
   style: string = ""; // Строковый стиль линии. Для двойных и тройных связей каждая линия указывается отдельно
 
-  //  ~ : | I
-  align?: string; // Возможные режимы выравнивания двойной связи. x:перекрещенная, m:по центру, l:влево, r:вправо
+  align?: BondAlign; // Возможные режимы выравнивания двойной связи. x:перекрещенная, m:по центру, l:влево, r:вправо
 
   arr0: boolean = false; // Стрелка в обратную сторону
 
@@ -76,11 +78,11 @@ export class ChemBond extends ChemObj {
   }
 
   setCross() {
-    this.style = "x";
+    this.align = "x";
   }
 
   isCross() {
-    return this.style === "x";
+    return this.align === "x";
   }
 
   checkText() {
@@ -115,5 +117,9 @@ export class ChemBond extends ChemObj {
       `${bond.linearText()}${bond.nodes.map((it) => it?.index)}`;
 
     return this.nodes.length === 2 ? bondTextStd(this) : bondTextExt(this);
+  }
+
+  isVisible(): boolean {
+    return !is0(this.n) || !!this.style;
   }
 }

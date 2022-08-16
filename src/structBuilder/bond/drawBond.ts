@@ -5,20 +5,29 @@ import { Point } from "../../math/Point";
 import { clipLineByNode } from "./clipLineByNode";
 import { ChemImgProps } from "../../drawSys/ChemImgProps";
 import { getNodeInfo, NodeInfo } from "../NodeInfo";
-import { isBondVisible } from "./isBondVisible";
+import { drawBondPoly } from "./drawBondPoly";
+import { StructAnalyzer } from "../../core/StructAnalyzer";
+import { drawBezierBond } from "./drawBezierBond";
 
 interface ParamsDrawBond {
   bond: ChemBond;
   frame: FigFrame;
   props: ChemImgProps;
   nodesInfo: NodeInfo[];
+  stA: StructAnalyzer;
 }
 
-export const drawBond = ({ bond, props, frame, nodesInfo }: ParamsDrawBond) => {
-  if (!isBondVisible(bond)) return;
+export const drawBond = ({
+  bond,
+  props,
+  frame,
+  nodesInfo,
+  stA,
+}: ParamsDrawBond) => {
+  if (!bond.isVisible()) return;
   const { nodeMargin } = props;
   if (bond.nodes.length !== 2) {
-    // TODO: poly bond
+    drawBondPoly(bond, frame, props, nodesInfo);
     return;
   }
   // bond between 2 nodes
@@ -28,8 +37,8 @@ export const drawBond = ({ bond, props, frame, nodesInfo }: ParamsDrawBond) => {
   const { res: res1 } = getNodeInfo(node1, nodesInfo);
   let bondA: Point | undefined = res0.nodeFrame.org.plus(res0.center);
   const { middlePoints } = bond;
-  if (middlePoints) {
-    // TODO: curve bond
+  if (middlePoints && middlePoints.length > 0) {
+    drawBezierBond({ bond, frame, props, middlePoints, res0, res1 });
     return;
   }
   let bondB: Point | undefined = res1.nodeFrame.org.plus(res1.center);
@@ -43,7 +52,6 @@ export const drawBond = ({ bond, props, frame, nodesInfo }: ParamsDrawBond) => {
     bondB,
     frame,
     imgProps: props,
+    stA,
   });
-  // drawBondArrow(bond, 0, p0, p1);
-  // drawBondArrow(bond, 1, p0, p1);
 };

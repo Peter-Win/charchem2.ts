@@ -1,13 +1,30 @@
 import { Rect } from "../../math/Rect";
 import { Point } from "../../math/Point";
-import { getNodeCenterPos, NodeInfo } from "../NodeInfo";
+import { getNodeCenterPos, getNodeInfo, NodeInfo } from "../NodeInfo";
 import { PAgentCtx } from "./PAgentCtx";
 import { ifDef } from "../../utils/ifDef";
 
 export const findAgentCenter = (ctx: PAgentCtx): Point =>
   calcExplicitCenter(findExplicitlyCentred(ctx.nodesInfo)) ??
+  monoCycle(ctx) ??
   findDefaultCenter(ctx.nodesInfo, ctx.agentFrame.bounds) ??
   ctx.agentFrame.bounds.center;
+
+const monoCycle = (ctx: PAgentCtx): Point | undefined => {
+  const {
+    agent: { stA },
+    nodesInfo,
+  } = ctx;
+  stA.analyze();
+  if (stA.cycles.length !== 1) return undefined;
+  const cy = stA.cycles[0]!;
+  return cy.nodes
+    .reduce(
+      (sum, node) => sum.iadd(getNodeCenterPos(getNodeInfo(node, nodesInfo))),
+      new Point()
+    )
+    .scale(1 / cy.nodes.length);
+};
 
 export const findExplicitlyCentred = (allNodesInfo: NodeInfo[]): NodeInfo[] =>
   allNodesInfo.filter(({ node }) => node.bCenter);

@@ -11,7 +11,7 @@ export const processCommands = (ctx: PAgentCtx) => {
       ctx.backs.push(obj);
       return;
     }
-    const cmd = createAgentCmd(obj);
+    const cmd = createAgentCmd(obj, ctx.agent);
     if (previousCmd) cmd.onPrevious(previousCmd);
     if (cmd.canPush(ctx)) {
       ctx.cmdStack.unshift(cmd);

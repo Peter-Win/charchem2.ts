@@ -10,7 +10,7 @@ import { getNodeInfo } from "../NodeInfo";
 import { PathStyle } from "../../drawSys/AbstractSurface";
 import { FigRect } from "../../drawSys/figures/FigRect";
 import { FigEllipse } from "../../drawSys/figures/FigEllipse";
-import { is0 } from "../../math";
+import { ifDef } from "../../utils/ifDef";
 
 export const applyPadding = (
   src: Rect,
@@ -51,18 +51,14 @@ export const calcBgRect = (
     return rc ? rc.unite(rcNode) : rcNode;
   }, undefined);
 
-const createBgRect = (rc: Rect, style: PathStyle) => new FigRect(rc, style);
-
-const createBgRound = (rc: Rect, style: PathStyle) => {
-  const r = rc.center.minus(rc.A).length();
-  return new FigEllipse(rc.center, new Point(r, r), style);
-};
+const createBgRect = (rc: Rect, style: PathStyle, radius?: Point) =>
+  new FigRect(rc, style, radius);
 
 const createBgEllipse = (rc: Rect, style: PathStyle) => {
   const p0 = rc.center;
   const w = rc.width;
   const h = rc.height;
-  if (is0(w - h)) return createBgRound(rc, style);
+  // if (is0(w - h)) return createBgRound(rc, style);
   const calcAB = (c: number, p: number) => {
     const d = p * p + 4 * c * c;
     const e = (-p + Math.sqrt(d)) / (2 * c);
@@ -72,20 +68,51 @@ const createBgEllipse = (rc: Rect, style: PathStyle) => {
   };
   if (w > h) {
     const { a, b } = calcAB(w / 2, h / 2);
-    // const v = new Point(a, b);
     return new FigEllipse(p0, new Point(a, b), style);
   }
   const { a, b } = calcAB(h / 2, w / 2);
-  // const v = new Point(b, a);
   return new FigEllipse(p0, new Point(b, a), style);
+};
+
+const calcRadius = (
+  ctx: PAgentCtx,
+  rect: Rect,
+  srcNodes?: ChemNode[]
+): number => {
+  const nodes = srcNodes ?? ctx.agent.nodes;
+  const { center } = rect;
+  let maxSqr = 0;
+  nodes.forEach((node) => {
+    const ni = getNodeInfo(node, ctx.nodesInfo);
+    const rc = ni.res.nodeFrame.getRelativeBounds();
+    const cc = rc.center;
+    const p = new Point(
+      cc.x < center.x ? rc.left : rc.right,
+      cc.y < center.y ? rc.top : rc.bottom
+    );
+    maxSqr = Math.max(maxSqr, center.minus(p).lengthSqr());
+  });
+  return Math.sqrt(maxSqr);
 };
 
 export const makeBackFigure = (
   ctx: PAgentCtx,
   params: ParamsChemBackground
 ): Figure => {
-  const { nodes, isAll, padding, fill, stroke, strokeWidth, shape } = params;
+  const {
+    nodes,
+    isAll,
+    padding,
+    fill,
+    stroke,
+    strokeWidth,
+    shape,
+    borderRadius,
+  } = params;
   const { agentFrame, props } = ctx;
+  // TODO: Использование agentFrame.bounds норм для rect.
+  // Но для round это обычно плохо, т.к углы часто пустые. А круги считают углы радиусом. Поэтому получается слишком широкий отступ.
+  // Было бы лучше перебрать все узлы и найти максимальное расстояние от центра
   let rect: Rect | undefined = isAll
     ? agentFrame.bounds.clone()
     : calcBgRect(ctx, nodes);
@@ -102,9 +129,16 @@ export const makeBackFigure = (
   if (stroke) style.stroke = stroke;
   if (strokeWidth) style.strokeWidth = props.lineWidth * strokeWidth;
 
-  if (shape === "round") return createBgRound(rect, style);
+  if (shape === "round") {
+    const r = calcRadius(ctx, rect, nodes);
+    return new FigEllipse(rect.center, new Point(r, r), style);
+  }
   if (shape === "ellipse") return createBgEllipse(rect, style);
-  return createBgRect(rect, style);
+  const radius = ifDef(
+    borderRadius,
+    (it) => new Point(it * props.line, it * props.line)
+  );
+  return createBgRect(rect, style, radius);
 };
 
 export const drawBackground = (ctx: PAgentCtx) => {

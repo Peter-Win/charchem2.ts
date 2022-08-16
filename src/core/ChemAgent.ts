@@ -4,6 +4,7 @@ import { ChemNode } from "./ChemNode";
 import { ChemBond } from "./ChemBond";
 import { ChemK } from "./ChemK";
 import { Visitor } from "./Visitor";
+import { StructAnalyzer } from "./StructAnalyzer";
 
 export class ChemAgent extends ChemObj {
   nodes: ChemNode[] = [];
@@ -15,6 +16,13 @@ export class ChemAgent extends ChemObj {
   n: ChemK = new ChemK(1);
 
   part: Int = 0;
+
+  stA: StructAnalyzer;
+
+  constructor() {
+    super();
+    this.stA = new StructAnalyzer(this);
+  }
 
   addNode(node: ChemNode): ChemNode {
     this.nodes.push(node);

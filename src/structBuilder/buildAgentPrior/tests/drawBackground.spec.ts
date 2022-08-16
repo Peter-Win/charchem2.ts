@@ -1,19 +1,31 @@
 import { compile } from "../../../compiler/compile";
 import { buildAgentPrior, ResultBuildAgent } from "../buildAgentPrior";
-import { createTestImgProps, createTestSurface } from "../../tests/testEnv";
+import {
+  createTestImgProps,
+  createTestSurface,
+  saveSurface,
+} from "../../tests/testEnv";
 
 import { applyPadding, calcBgRect, makeBackFigure } from "../drawBackground";
-import { ParamsChemBackground } from "../../../core/ChemBackground";
+import {
+  ChemBackground,
+  ParamsChemBackground,
+} from "../../../core/ChemBackground";
 import { FigRect } from "../../../drawSys/figures/FigRect";
 import { Rect } from "../../../math/Rect";
+import { FigEllipse } from "../../../drawSys/figures/FigEllipse";
+import { FigFrame } from "../../../drawSys/figures/FigFrame";
+import { Point } from "../../../math/Point";
 
-const build = (formula: string): ResultBuildAgent => {
+const build = (formula: string, imgName?: string): ResultBuildAgent => {
   const expr = compile(formula);
   if (expr.error) throw expr.error;
   const agent = expr.getAgents()[0]!;
   const surface = createTestSurface();
   const imgProps = createTestImgProps(surface, 40);
-  return buildAgentPrior(agent, imgProps);
+  const res = buildAgentPrior(agent, imgProps);
+  if (imgName) saveSurface(imgName, res.agentFrame, surface);
+  return res;
 };
 
 describe("calcBgRect", () => {
@@ -81,5 +93,47 @@ describe("makeBackFigure", () => {
     expect(fig).toBeInstanceOf(FigRect);
     expect(fig.style).toEqual({ fill: "yellow" });
     expect(String(fig.bounds)).toBe(String(rc1.clone().unite(rc2)));
+  });
+  it("Around all reagent", () => {
+    const params: ParamsChemBackground = {
+      isAll: true,
+      fill: "#CCC",
+      shape: "round",
+    };
+    const fig = makeBackFigure(ctx, params) as FigEllipse;
+    expect(fig).toBeInstanceOf(FigEllipse);
+    const { bounds } = ctx.agentFrame;
+    expect(String(fig.org)).toBe(String(bounds.center));
+    expect(fig.radius.x).toBeCloseTo(fig.radius.y);
+    expect(fig.radius.x).toBeCloseTo(bounds.center.minus(bounds.A).length());
+  });
+});
+
+describe("drawBackground", () => {
+  it("isAll", () => {
+    const { agentFrame } = build("$bg(yellow,round,*)C");
+    expect(agentFrame.figures.length).toBe(2);
+    const f1 = agentFrame.figures[1] as FigFrame;
+    expect(f1).toBeInstanceOf(FigFrame);
+    expect((f1.figures[0] as FigFrame).figures[0]!).toHaveProperty("text", "C");
+    const round = agentFrame.figures[0] as FigEllipse;
+    expect(round).toBeInstanceOf(FigEllipse);
+    const frCenter = agentFrame.bounds.center;
+    expect(String(round.org)).toBe(String(frCenter));
+    expect(round.style.fill).toBe("yellow");
+  });
+  it("Border radius", () => {
+    const { ctx } = build(
+      "$bg(yellow,p:.2,r:.3)H|OH",
+      "drawBackground-borderRadius"
+    );
+    const { agent, agentFrame } = ctx;
+    const bg = agent.commands[1] as ChemBackground;
+    expect(bg).toBeInstanceOf(ChemBackground);
+    expect(bg.params.borderRadius).toBeCloseTo(0.3);
+    const figBg = agentFrame.figures[0] as FigRect;
+    expect(figBg).toBeInstanceOf(FigRect);
+    const r = ctx.props.line * 0.3;
+    expect(String(figBg.radius)).toBe(String(new Point(r, r)));
   });
 });

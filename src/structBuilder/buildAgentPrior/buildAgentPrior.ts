@@ -33,13 +33,13 @@ export const buildAgentPrior = (
   processCommands(ctx);
   ctx.clusters.uniteRest(ctx);
   drawAllBonds(ctx);
-  drawBackground(ctx);
 
   const cluster = ctx.clusters.clusters.shift();
   if (cluster) {
     cluster.frame.figures.forEach((fig) => agentFrame.addFigure(fig));
     agentFrame.update();
   }
+  drawBackground(ctx);
   const center = findAgentCenter(ctx);
 
   if (agent.n.isSpecified()) {

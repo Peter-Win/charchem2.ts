@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>CharChem 2.0 SVG features</title>
+<link href="./charchem.css" type="text/css" rel="stylesheet" />
+<style>
+#mainList {
+    display: grid; 
+    grid-template-columns: 1fr 5fr;
+}
+#mainList > div {border-bottom: thin solid silver;}
+</style>
+<script src="../lib/charchem.js"></script>
+<script>
+var all = [
+ ["Ionic equation", `H^+ + HCO3^- = CO2"|^" + H2O`],
+ ["Colors", `2$itemColor1(red)NaOH + $atomColor(blue)2H2SO4$atomColor() = $itemColor1(#F00)Na2SO4 + $color(#00F)H2"|^"`],
+ ["Reagent vertical centring", "3\\$C()</OH>|$C()`/`\\`|/   + K2Cr2O7 + 4H2SO4 -->  3\\$C()<//O>|$C()`/`\\`|/ + Cr2(SO4)3 + K2SO4 + 7H2O"],
+ ["Mineral charoite", "(K,Sr)'15-16'(Ca,Na)32[Si6O11(O,OH)6]2[Si12O18(O,OH)12]2[Si14O25(O,OH)18]2(OH,F)4*3H2O"],
+
+ ["Bond styles", `$L(1.4)-<|~S>-<|hH>-<_(A90,SI)"w">-<_(A90,w2)"w">-<_(A90,S:|)":i">-<_(A90,S|:){i:}>-<_(A90,S|I:){-w:}>-<||x"x">-<|w"v">-<|d"_">-`],
+ ["Coordination bonds", "$L(1.5)H`|vvO--vvvO<|hvH>--~v"],
+ ["Delocalized bond as ring", "/\\</>|`/`\\`|_o"],
+ ["Non-ring delocalized bond", "_(x2)\\<->`/_(x-2)`\\/_s() + /\\</>|`/`\\`|_s(S:) + -\\<->`/`-_s(S:) + $slope(45)-\\|`/`-`\\`|/_s(#1;2;5;6;1)"],
+ ["Middle points", "H2C`|H2C`|H2C_m(x2)_m(y2)_(x-2,C)"],
+ ["Auto align", "`\\\\`/||\\</>||<\\>`/<`>`\\\\`|`\\\\`/||<\\|O`|/>`/`\\\\`|<`\\>//<`|>\\"],
+
+ ["Text brackets", "(HC<-OH>)'n'|[C<=O>]'m'|{{HC<-C%N>}}'x'"],
+ ["Brackets with hard bonds", "/[<`|CH3>\\]'n'/"],
+ ["Brackets with soft bonds", "H2N-(CH2)'x'-C<//O>\\OH + CH3-CH-CH3;#2|OH --> $C()H2N-(CH2)'x'-C<//O>\\O-CH-CH3;#6|CH3 + H2O"],
+ ["Brackets", "[H|N^+<`/H><_(A75,w+)H><\\dH>]3^+[P<`||O><`/O`^-><_(A75,w+)O^-><_(A20,d+)O^->]^3-"],
+
+ ["Multiplier", "CuSO4*5H2O"],
+ ["Complex multiplier", "$ver(2.0)[$slope(45)Cu/O\\S/O`/\\O`\\`/O`\\]*5[O<`|H>|H]"],
+
+ ["Simple background", "$background(cyan)H2N\\/`|$bg(orange,round)O|\\</$bg(#FFA,ellipse,stroke:#888)COOH>|`/`\\`|"],
+ ["Background", "H2N-C<`|H><-$bg(yellow,to:1;3,padding:.2)COOH>|S|C<|$bg(to:3,rgba(0,255,255,0.4),p:.4;.2;.1)H><-NH2>`-HOOC"],
+ ["Background for agent", "`-<_(a54)HO>_q<_(a54)H3C>_q<||O>_q<_(a54)NH2>_q_(a54)$itemColor1(#C00){R}$background(#FFA,*,ellipse,p:-.5)"],
+
+ ["Invalid version", "$ver(100)H2O"],
+];
+
+window.onload = function() {
+    var mainList = document.getElementById("mainList");
+    var i, pair, row, el1, el2, ex;
+    for (i in all) {
+        pair = all[i];
+        el1 = document.createElement("div");
+        el1.innerHTML = pair[0];
+        mainList.appendChild(el1);
+        el2 = document.createElement("div");
+        el2.classList.add("echem-formula");
+        mainList.appendChild(el2);
+        ex = ChemSys.compile(pair[1]);
+        if (ex.isOk()) {
+          ChemSys.drawSvg(el2, ex);
+        } else {
+            var s = document.createElement("span");
+            el2.appendChild(s);
+            s.innerHTML = "Error";
+            s.setAttribute("title", ex.getMessage());
+            s.setAttribute("style", "color: red");
+        }
+    }
+}
+</script>
+</head>
+<body>
+  <div id="mainList"></div>
+</body>
+</html>

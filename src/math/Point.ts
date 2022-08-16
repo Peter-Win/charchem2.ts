@@ -121,6 +121,23 @@ export class Point {
     return Math.sqrt(this.lengthSqr());
   }
 
+  distSqr(p: Point): Double {
+    return p.minus(this).lengthSqr();
+  }
+
+  dist(p: Point): Double {
+    return Math.sqrt(this.distSqr(p));
+  }
+
+  normal(): Point {
+    const len = this.length();
+    return is0(len) ? new Point() : this.times(1 / len);
+  }
+
+  transpon(ccw?: boolean): Point {
+    return ccw ? new Point(this.y, -this.x) : new Point(-this.y, this.x);
+  }
+
   static get zero() {
     return staticZero;
   }

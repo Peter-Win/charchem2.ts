@@ -9,10 +9,11 @@ import { AgentCmdNode } from "./AgentCmdNode";
 import { AgentCmdSoftBond } from "./AgentCmdSoftBond";
 import { ChemMul } from "../../core/ChemMul";
 import { createAgentCmdMul } from "./AgentCmdMul";
+import { ChemAgent } from "../../core/ChemAgent";
 
-export const createAgentCmd = (obj: ChemObj): AgentCmd => {
+export const createAgentCmd = (obj: ChemObj, agent: ChemAgent): AgentCmd => {
   if (obj instanceof ChemBond) {
-    if (obj.soft) return new AgentCmdSoftBond(obj);
+    if (obj.soft) return new AgentCmdSoftBond(obj, agent);
   } else if (obj instanceof ChemBracketBegin) {
     return new AgentCmdBrOpen(obj);
   } else if (obj instanceof ChemBracketEnd) {

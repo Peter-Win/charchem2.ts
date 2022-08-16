@@ -7,10 +7,11 @@ export const drawRect = (
   surface: AbstractSurface,
   offset: Point,
   rect: Rect,
-  style: PathStyle
+  style: PathStyle,
+  radius?: Point
 ) => {
   if (surface.drawRect) {
-    surface.drawRect(offset, rect, style);
+    surface.drawRect(offset, rect, style, radius);
   } else {
     const segs: PathSeg[] = [
       { cmd: "M", pt: rect.A },

@@ -90,4 +90,37 @@ describe("Point", () => {
     expect(new Point(0, 100).length()).toBeCloseTo(100, 1);
     expect(pointFromDeg(15).times(25).length()).toBeCloseTo(25, 1);
   });
+  it("dist", () => {
+    expect(new Point(1, 0).dist(new Point(10, 0))).toBeCloseTo(9);
+  });
+  it("normal", () => {
+    expect(String(new Point().normal())).toBe(String(Point.zero));
+    expect(String(new Point(0, 1).normal())).toBe(String(new Point(0, 1)));
+    expect(String(new Point(0, 10).normal())).toBe(String(new Point(0, 1)));
+    const q2 = Math.sqrt(2) / 2;
+    expect(String(new Point(1, 1).normal())).toBe(String(new Point(q2, q2)));
+  });
+  it("transpon", () => {
+    //       | # 1, -2
+    // #-2,-1|
+    // ------*------
+    //       |    # 2,1
+    //     # |
+    //  -1,2
+    let p = new Point(2, 1);
+    p = p.transpon();
+    expect(String(p)).toBe(String(new Point(-1, 2)));
+    p = p.transpon();
+    expect(String(p)).toBe(String(new Point(-2, -1)));
+    p = p.transpon();
+    expect(String(p)).toBe(String(new Point(1, -2)));
+    p = p.transpon();
+    expect(String(p)).toBe(String(new Point(2, 1)));
+    p = p.transpon(true);
+    expect(String(p)).toBe(String(new Point(1, -2)));
+    p = p.transpon(true);
+    expect(String(p)).toBe(String(new Point(-2, -1)));
+    p = p.transpon(true);
+    expect(String(p)).toBe(String(new Point(-1, 2)));
+  });
 });

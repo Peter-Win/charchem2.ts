@@ -1,4 +1,4 @@
-import { ChemBond } from "../../core/ChemBond";
+import { BondAlign, ChemBond } from "../../core/ChemBond";
 import { Int, Char, Double } from "../../types";
 import { Point, pointFromDeg, pointFromRad } from "../../math/Point";
 import { rad2deg } from "../../math/radians";
@@ -156,7 +156,7 @@ export const parseBondMultiplicity = (
     if (getMode() === "x") {
       bond.setCross();
     } else {
-      bond.align = getMode();
+      bond.align = getMode() as BondAlign;
     }
     bond.n = 2.0;
   } else if (!value) {
@@ -170,7 +170,7 @@ const styleSuffixes = { m: 1, l: 1, r: 1 };
 
 export const parseStyle = (bond: ChemBond, value: string) => {
   if (value && value[value.length - 1]!.toLowerCase() in styleSuffixes) {
-    bond.align = value[value.length - 1]!.toLowerCase();
+    bond.align = value[value.length - 1]!.toLowerCase() as BondAlign;
     bond.style = value.slice(0, value.length - 1);
   } else {
     bond.style = value;

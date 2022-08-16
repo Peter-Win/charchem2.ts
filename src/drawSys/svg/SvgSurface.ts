@@ -1,4 +1,5 @@
 import { Point } from "../../math/Point";
+import { Rect } from "../../math/Rect";
 import {
   AbstractSurface,
   LocalFont,
@@ -14,12 +15,15 @@ import { pathToString } from "../utils/pathToString";
 import { XmlAttrs } from "../../utils/xml/xmlTypes";
 
 const pathAttrs = (style: PathStyle, org?: Point) => {
+  const { stroke, strokeWidth, join, cap } = style;
   const attrs: XmlAttrs = {};
   attrs.fill = style.fill ?? "none";
-  if (style.stroke) {
-    attrs.stroke = style.stroke;
-    if (style.strokeWidth) attrs["stroke-width"] = toa(style.strokeWidth);
+  if (stroke) {
+    attrs.stroke = stroke;
   }
+  if (strokeWidth) attrs["stroke-width"] = toa(strokeWidth);
+  if (join) attrs["stroke-linecap"] = join;
+  if (cap) attrs["stroke-linecap"] = cap;
   if (org && !org.isZero())
     attrs.transform = `translate(${toa(org.x)},${toa(org.y)})`;
   return attrs;
@@ -41,6 +45,21 @@ export abstract class SvgSurface implements AbstractSurface {
   drawPath(org: Point, path: PathSeg[], style: PathStyle): void {
     const attrs: XmlAttrs = { d: pathToString(path), ...pathAttrs(style, org) };
     this.body.push(`${drawTag("path", attrs, true)}`);
+  }
+
+  drawRect(offset: Point, rect: Rect, style: PathStyle, radius?: Point) {
+    const attrs: XmlAttrs = {
+      x: toa(rect.left),
+      y: toa(rect.top),
+      width: toa(rect.width),
+      height: toa(rect.height),
+      ...pathAttrs(style, offset),
+    };
+    if (radius) {
+      attrs.rx = toa(radius.x);
+      attrs.ry = toa(radius.y);
+    }
+    this.body.push(drawTag("rect", attrs, true));
   }
 
   drawEllipse(

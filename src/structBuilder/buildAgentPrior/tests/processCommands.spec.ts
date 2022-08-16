@@ -33,10 +33,10 @@ describe("processCommands", () => {
     const cluster1 = ctx.clusters.clusters[0]!;
     const cluster2 = ctx.clusters.clusters[1]!;
     const rc1 = new Rect(0, top, locFont.getTextWidth("H"), bottom);
-    rc1.moveXY(-rc1.width / 2, ff.capHeight / 2);
+    rc1.moveXY(-rc1.width / 2, ff.ascent / 2);
     expect(String(cluster1.frame.bounds)).toBe(String(rc1));
     const rc2 = new Rect(0, top, locFont.getTextWidth("OH"), bottom);
-    rc2.moveXY(-locFont.getTextWidth("O") / 2, ff.capHeight / 2);
+    rc2.moveXY(-locFont.getTextWidth("O") / 2, ff.ascent / 2);
     expect(String(cluster2.frame.bounds)).toBe(String(rc2));
   });
 });

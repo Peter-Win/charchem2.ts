@@ -85,7 +85,8 @@ export const parseNum = (
   value: string,
   pos: Int
 ): Double => {
-  if (!value) return 0.0;
-  const n = +value;
-  return Number.isNaN(n) ? parseNumExt(compiler, value, pos) : n;
+  const v = value.trim();
+  if (!v) return 0.0;
+  const n = +v;
+  return Number.isNaN(n) ? parseNumExt(compiler, v, pos) : n;
 };

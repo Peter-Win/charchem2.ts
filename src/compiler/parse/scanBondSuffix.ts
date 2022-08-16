@@ -97,8 +97,10 @@ const bondSuffixes: [string, Action][] = [
 ];
 
 export const scanBondSuffix = (compiler: ChemCompiler, bond: ChemBond) => {
-  const rec = bondSuffixes.find(([suffix]) => compiler.isCurPosEq(suffix));
-  if (rec) {
+  for (;;) {
+    const rec = bondSuffixes.find(([suffix]) => compiler.isCurPosEq(suffix));
+    if (!rec) break;
+
     const [suffix, action] = rec;
     action(bond);
     compiler.pos += suffix.length;

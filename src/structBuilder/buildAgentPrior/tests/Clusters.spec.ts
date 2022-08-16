@@ -36,12 +36,12 @@ describe("getClusterConnection", () => {
     const x = res.rcNodeCore.left + res.nodeFrame.org.x;
     expect(x).toBeCloseTo(k - wO / 2);
     const yBase = res.rcNodeCore.bottom + res.nodeFrame.org.y;
-    expect(yBase).toBeCloseTo(k + ff.capHeight / 2);
+    expect(yBase).toBeCloseTo(k + ff.ascent / 2);
 
     const conn = getClusterConnection(false, cluster, nodeInfo, true);
     expect(conn.x).toBe(x);
     expect(conn.yBase).toBe(yBase);
-    expect(conn.yMiddle).toBeCloseTo(yBase - ff.capHeight / 2);
+    expect(conn.yMiddle).toBeCloseTo(yBase - ff.ascent / 2);
 
     const connFrm = getClusterConnection(true, cluster, nodeInfo, true);
     expect(connFrm.x).toBe(cluster.frame.bounds.left);
@@ -55,12 +55,12 @@ describe("getClusterConnection", () => {
     const x = res.rcNodeCore.right + res.nodeFrame.org.x;
     expect(x).toBeCloseTo(k + wO / 2);
     const yBase = res.rcNodeCore.bottom + res.nodeFrame.org.y;
-    expect(yBase).toBeCloseTo(ff.capHeight / 2);
+    expect(yBase).toBeCloseTo(ff.ascent / 2);
 
     const conn = getClusterConnection(false, cluster, nodeInfo, false);
     expect(conn.x).toBe(x);
     expect(conn.yBase).toBe(yBase);
-    expect(conn.yMiddle).toBeCloseTo(yBase - ff.capHeight / 2);
+    expect(conn.yMiddle).toBeCloseTo(yBase - ff.ascent / 2);
 
     const connFrm = getClusterConnection(true, cluster, nodeInfo, false);
     expect(connFrm.x).toBe(cluster.frame.bounds.right);

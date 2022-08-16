@@ -2,20 +2,23 @@
  * Границы:
  *  Фон по-умолчанию применяется к следующему узлу, но можно указать иные узлы.
  *  Либо: весь агент
- *  фон должен захватить все указанные узлы
- *  see parseRefsList
+ *  Если функция в конце выражения или объявляется несколько подряд, то у них нет узла и их надо указать явно.
+ * фон должен захватить все указанные узлы
  * Фигура: rect (default), round, ellipse
  * r (borderRadius) для rect
  * padding
  * fill
  * stroke
  * width
- * Чтобы сократить конструкции для частого использования, можно запомнить сочетание параметров, кроме nodes
- * use: name
+ *
+ * Если формула нескольео раз использует похожий набор параметров, можно использовать макрос
  */
 
 import { ChemNode } from "../../core/ChemNode";
-import { ParamsChemBackground } from "../../core/ChemBackground";
+import {
+  ChemBackground,
+  ParamsChemBackground,
+} from "../../core/ChemBackground";
 import { Double, Int } from "../../types";
 import { ChemCompiler } from "../ChemCompiler";
 import { parseNum } from "../parse/parseNum";
@@ -26,6 +29,12 @@ export const funcBackground = (
   args: string[],
   pos: Int[]
 ) => {
+  if (compiler.background) {
+    // Возможно указать несколько фонов подряд.
+    // Тогда фоновая команда создается не дожидаясь объявления узла.
+    // Само собой, нужно корректно указывать узлы.
+    compiler.curAgent?.commands.push(new ChemBackground(compiler.background));
+  }
   compiler.background = parseBackgroundArgs(compiler, args, pos);
 };
 
@@ -39,13 +48,14 @@ export const parseBackgroundArgs = (
   const params: ParamsChemBackground = {};
   args.forEach((arg, i) => {
     const curPos = pos[i]!;
-    if (arg === "*") {
+    const argt = arg.trim();
+    if (argt === "*") {
       params.isAll = true;
     } else {
       const divPos = arg.indexOf(":");
       if (divPos < 0) {
-        if (shapeNames.has(arg)) {
-          params.shape = arg;
+        if (shapeNames.has(argt)) {
+          params.shape = argt;
         } else if (!params.fill) {
           params.fill = arg;
         }
@@ -60,18 +70,22 @@ export const parseBackgroundArgs = (
             break;
           case "fill":
           case "f":
-            params.fill = val;
+            params.fill = val.trim();
             break;
           case "stroke":
           case "s":
-            params.stroke = val;
+            params.stroke = val.trim();
             break;
           case "width":
           case "w":
             params.strokeWidth = parseNum(compiler, val, valPos);
             break;
           case "padding":
+          case "p":
             params.padding = parsePadding(compiler, val, valPos);
+            break;
+          case "r":
+            params.borderRadius = parseNum(compiler, val, valPos);
             break;
           default:
             break;

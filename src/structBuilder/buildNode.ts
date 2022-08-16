@@ -5,6 +5,7 @@ import { buildItem } from "./buildItem";
 import { Point } from "../math/Point";
 import { Rect } from "../math/Rect";
 import { drawCharge } from "./drawCharge";
+import { isEmptyNode } from "../core/isEmptyNode";
 
 export interface ResultBuildNode {
   nodeFrame: FigFrame;
@@ -16,7 +17,7 @@ export const buildNode = (
   node: ChemNode,
   imgProps: ChemImgProps
 ): ResultBuildNode | undefined => {
-  if (node.autoMode) {
+  if (node.autoMode || isEmptyNode(node)) {
     // auto node dont draw items. Example: /\/\
     return undefined;
   }

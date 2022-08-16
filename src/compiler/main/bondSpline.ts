@@ -95,6 +95,7 @@ export const createSplineBond = (compiler: ChemCompiler) => {
     : autoLocateNodes(compiler);
   bond.nodes = nodesList.nodes;
   bond.isCycle = "o" in params || nodesList.isCycle;
+  bond.ext = "s";
   compiler.curAgent!.addBond(bond);
   compiler.curBond = undefined;
 };

@@ -1,46 +1,46 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no" ?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg viewBox="0 0 697 4747" xmlns="http://www.w3.org/2000/svg" version="1.1" baseProfile="full" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ev="http://www.w3.org/2001/xml-events">
-  <path d="M428 2356Q285 2415 142.5 2680Q0 2945 0 3502L0 4687L210 4687L210 3328Q210 2869 324 2638Q438 2407 637 2399L637 2279Q434 2271 322 2041Q210 1811 210 1359L210 0L0 0L0 1185Q16 1769 151.5 2020Q287 2271 428 2331L428 2356ZZ" fill="black" transform="translate(30,30)" />
-  <path d="M458 2386L398 2326M458 2326L398 2386" fill="none" stroke="gray" stroke-width="5" transform="translate(30,30)" />
-  <path d="M172.5 2710L112.5 2650M172.5 2650L112.5 2710" fill="none" stroke="magenta" stroke-width="5" transform="translate(30,30)" />
-  <text x="202.5" y="2710" font-size="50px" fill="blue">1</text>
-  <path d="M315 2445L255 2385M315 2385L255 2445" fill="none" stroke="gray" stroke-width="5" transform="translate(30,30)" />
-  <path d="M30 3532L-30 3472M30 3472L-30 3532" fill="none" stroke="magenta" stroke-width="5" transform="translate(30,30)" />
-  <text x="60" y="3532" font-size="50px" fill="blue">2</text>
-  <path d="M30 2975L-30 2915M30 2915L-30 2975" fill="none" stroke="gray" stroke-width="5" transform="translate(30,30)" />
-  <path d="M30 4717L-30 4657M30 4657L-30 4717" fill="none" stroke="magenta" stroke-width="5" transform="translate(30,30)" />
-  <text x="60" y="4717" font-size="50px" fill="blue">3</text>
-  <path d="M240 4717L180 4657M240 4657L180 4717" fill="none" stroke="magenta" stroke-width="5" transform="translate(30,30)" />
-  <text x="270" y="4717" font-size="50px" fill="blue">4</text>
-  <path d="M240 3358L180 3298M240 3298L180 3358" fill="none" stroke="magenta" stroke-width="5" transform="translate(30,30)" />
-  <text x="270" y="3358" font-size="50px" fill="blue">5</text>
-  <path d="M354 2668L294 2608M354 2608L294 2668" fill="none" stroke="magenta" stroke-width="5" transform="translate(30,30)" />
-  <text x="384" y="2668" font-size="50px" fill="blue">6</text>
-  <path d="M240 2899L180 2839M240 2839L180 2899" fill="none" stroke="gray" stroke-width="5" transform="translate(30,30)" />
-  <path d="M667 2429L607 2369M667 2369L607 2429" fill="none" stroke="magenta" stroke-width="5" transform="translate(30,30)" />
-  <text x="697" y="2429" font-size="50px" fill="blue">7</text>
-  <path d="M468 2437L408 2377M468 2377L408 2437" fill="none" stroke="gray" stroke-width="5" transform="translate(30,30)" />
-  <path d="M667 2309L607 2249M667 2249L607 2309" fill="none" stroke="magenta" stroke-width="5" transform="translate(30,30)" />
-  <text x="697" y="2309" font-size="50px" fill="blue">8</text>
-  <path d="M352 2071L292 2011M352 2011L292 2071" fill="none" stroke="magenta" stroke-width="5" transform="translate(30,30)" />
-  <text x="382" y="2071" font-size="50px" fill="blue">9</text>
-  <path d="M464 2301L404 2241M464 2241L404 2301" fill="none" stroke="gray" stroke-width="5" transform="translate(30,30)" />
-  <path d="M240 1389L180 1329M240 1329L180 1389" fill="none" stroke="magenta" stroke-width="5" transform="translate(30,30)" />
-  <text x="270" y="1389" font-size="50px" fill="blue">10</text>
-  <path d="M240 1841L180 1781M240 1781L180 1841" fill="none" stroke="gray" stroke-width="5" transform="translate(30,30)" />
-  <path d="M240 30L180 -30M240 -30L180 30" fill="none" stroke="magenta" stroke-width="5" transform="translate(30,30)" />
-  <text x="270" y="30" font-size="50px" fill="blue">11</text>
-  <path d="M30 30L-30 -30M30 -30L-30 30" fill="none" stroke="magenta" stroke-width="5" transform="translate(30,30)" />
-  <text x="60" y="30" font-size="50px" fill="blue">12</text>
-  <path d="M30 1215L-30 1155M30 1155L-30 1215" fill="none" stroke="magenta" stroke-width="5" transform="translate(30,30)" />
-  <text x="60" y="1215" font-size="50px" fill="blue">13</text>
-  <path d="M181.5 2050L121.5 1990M181.5 1990L121.5 2050" fill="none" stroke="magenta" stroke-width="5" transform="translate(30,30)" />
-  <text x="211.5" y="2050" font-size="50px" fill="blue">14</text>
-  <path d="M46 1799L-14 1739M46 1739L-14 1799" fill="none" stroke="gray" stroke-width="5" transform="translate(30,30)" />
-  <path d="M458 2361L398 2301M458 2301L398 2361" fill="none" stroke="magenta" stroke-width="5" transform="translate(30,30)" />
-  <text x="488" y="2361" font-size="50px" fill="blue">15</text>
-  <path d="M317 2301L257 2241M317 2241L257 2301" fill="none" stroke="gray" stroke-width="5" transform="translate(30,30)" />
-  <path d="M458 2386L398 2326M458 2326L398 2386" fill="none" stroke="magenta" stroke-width="5" transform="translate(30,30)" />
-  <text x="488" y="2386" font-size="50px" fill="blue">16</text>
+<svg viewBox="0 0 702 4752" xmlns="http://www.w3.org/2000/svg" version="1.1" baseProfile="full" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ev="http://www.w3.org/2001/xml-events">
+  <path d="M428 2356Q285 2415 142.5 2680Q0 2945 0 3502L0 4687L210 4687L210 3328Q210 2869 324 2638Q438 2407 637 2399L637 2279Q434 2271 322 2041Q210 1811 210 1359L210 0L0 0L0 1185Q16 1769 151.5 2020Q287 2271 428 2331L428 2356ZZ" fill="black" transform="translate(32.5,32.5)" />
+  <path d="M458 2386L398 2326M458 2326L398 2386" fill="none" stroke="gray" stroke-width="5" transform="translate(32.5,32.5)" />
+  <path d="M172.5 2710L112.5 2650M172.5 2650L112.5 2710" fill="none" stroke="magenta" stroke-width="5" transform="translate(32.5,32.5)" />
+  <text x="205" y="2712.5" font-size="50px" fill="blue">1</text>
+  <path d="M315 2445L255 2385M315 2385L255 2445" fill="none" stroke="gray" stroke-width="5" transform="translate(32.5,32.5)" />
+  <path d="M30 3532L-30 3472M30 3472L-30 3532" fill="none" stroke="magenta" stroke-width="5" transform="translate(32.5,32.5)" />
+  <text x="62.5" y="3534.5" font-size="50px" fill="blue">2</text>
+  <path d="M30 2975L-30 2915M30 2915L-30 2975" fill="none" stroke="gray" stroke-width="5" transform="translate(32.5,32.5)" />
+  <path d="M30 4717L-30 4657M30 4657L-30 4717" fill="none" stroke="magenta" stroke-width="5" transform="translate(32.5,32.5)" />
+  <text x="62.5" y="4719.5" font-size="50px" fill="blue">3</text>
+  <path d="M240 4717L180 4657M240 4657L180 4717" fill="none" stroke="magenta" stroke-width="5" transform="translate(32.5,32.5)" />
+  <text x="272.5" y="4719.5" font-size="50px" fill="blue">4</text>
+  <path d="M240 3358L180 3298M240 3298L180 3358" fill="none" stroke="magenta" stroke-width="5" transform="translate(32.5,32.5)" />
+  <text x="272.5" y="3360.5" font-size="50px" fill="blue">5</text>
+  <path d="M354 2668L294 2608M354 2608L294 2668" fill="none" stroke="magenta" stroke-width="5" transform="translate(32.5,32.5)" />
+  <text x="386.5" y="2670.5" font-size="50px" fill="blue">6</text>
+  <path d="M240 2899L180 2839M240 2839L180 2899" fill="none" stroke="gray" stroke-width="5" transform="translate(32.5,32.5)" />
+  <path d="M667 2429L607 2369M667 2369L607 2429" fill="none" stroke="magenta" stroke-width="5" transform="translate(32.5,32.5)" />
+  <text x="699.5" y="2431.5" font-size="50px" fill="blue">7</text>
+  <path d="M468 2437L408 2377M468 2377L408 2437" fill="none" stroke="gray" stroke-width="5" transform="translate(32.5,32.5)" />
+  <path d="M667 2309L607 2249M667 2249L607 2309" fill="none" stroke="magenta" stroke-width="5" transform="translate(32.5,32.5)" />
+  <text x="699.5" y="2311.5" font-size="50px" fill="blue">8</text>
+  <path d="M352 2071L292 2011M352 2011L292 2071" fill="none" stroke="magenta" stroke-width="5" transform="translate(32.5,32.5)" />
+  <text x="384.5" y="2073.5" font-size="50px" fill="blue">9</text>
+  <path d="M464 2301L404 2241M464 2241L404 2301" fill="none" stroke="gray" stroke-width="5" transform="translate(32.5,32.5)" />
+  <path d="M240 1389L180 1329M240 1329L180 1389" fill="none" stroke="magenta" stroke-width="5" transform="translate(32.5,32.5)" />
+  <text x="272.5" y="1391.5" font-size="50px" fill="blue">10</text>
+  <path d="M240 1841L180 1781M240 1781L180 1841" fill="none" stroke="gray" stroke-width="5" transform="translate(32.5,32.5)" />
+  <path d="M240 30L180 -30M240 -30L180 30" fill="none" stroke="magenta" stroke-width="5" transform="translate(32.5,32.5)" />
+  <text x="272.5" y="32.5" font-size="50px" fill="blue">11</text>
+  <path d="M30 30L-30 -30M30 -30L-30 30" fill="none" stroke="magenta" stroke-width="5" transform="translate(32.5,32.5)" />
+  <text x="62.5" y="32.5" font-size="50px" fill="blue">12</text>
+  <path d="M30 1215L-30 1155M30 1155L-30 1215" fill="none" stroke="magenta" stroke-width="5" transform="translate(32.5,32.5)" />
+  <text x="62.5" y="1217.5" font-size="50px" fill="blue">13</text>
+  <path d="M181.5 2050L121.5 1990M181.5 1990L121.5 2050" fill="none" stroke="magenta" stroke-width="5" transform="translate(32.5,32.5)" />
+  <text x="214" y="2052.5" font-size="50px" fill="blue">14</text>
+  <path d="M46 1799L-14 1739M46 1739L-14 1799" fill="none" stroke="gray" stroke-width="5" transform="translate(32.5,32.5)" />
+  <path d="M458 2361L398 2301M458 2301L398 2361" fill="none" stroke="magenta" stroke-width="5" transform="translate(32.5,32.5)" />
+  <text x="490.5" y="2363.5" font-size="50px" fill="blue">15</text>
+  <path d="M317 2301L257 2241M317 2241L257 2301" fill="none" stroke="gray" stroke-width="5" transform="translate(32.5,32.5)" />
+  <path d="M458 2386L398 2326M458 2326L398 2386" fill="none" stroke="magenta" stroke-width="5" transform="translate(32.5,32.5)" />
+  <text x="490.5" y="2388.5" font-size="50px" fill="blue">16</text>
 </svg>

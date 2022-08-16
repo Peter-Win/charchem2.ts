@@ -5,7 +5,7 @@ import { ChemNode } from "../core/ChemNode";
 import { ChemExpr } from "../core/ChemExpr";
 import { ChemObj } from "../core/ChemObj";
 import { ChemOp } from "../core/ChemOp";
-import { ChemBond } from "../core/ChemBond";
+import { BondAlign, ChemBond } from "../core/ChemBond";
 import { ChemChargeOwner } from "../core/ChemChargeOwner";
 import { ChemComment } from "../core/ChemComment";
 import { ChemError } from "../core/ChemError";
@@ -114,7 +114,7 @@ export class ChemCompiler {
 
   varAtomColor1?: string;
 
-  varAlign?: Char;
+  varAlign?: BondAlign;
 
   centralNode: boolean = false;
 

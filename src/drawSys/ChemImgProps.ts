@@ -26,7 +26,11 @@ export class ChemImgProps {
 
   thickWidth = 0; // Толщина толстой линии
 
+  chiralWidth = 0; // Макс. толщина хиральной связи w/d
+
   lineSpace2 = 0; // Отступ между двойными линиями (между краями ##..##)
+
+  lineSpace2x = 0; // Для пересекающейся двойной связи
 
   lineSpace3 = 0; // Отсуп между тройными линиями
 
@@ -54,7 +58,7 @@ export class ChemImgProps {
 
   kw = 40; // Коэффициент для вычисления lineWidth = ceil(line/kw)
 
-  flDblAlign = 1; // Смещение двойной связи к центру, если возможно.
+  flDblAlign = true; // Смещение двойной связи к центру, если возможно.
 
   nodeMargin = -1; // Отступ химической связи для узла с текстом
 
@@ -89,9 +93,11 @@ export class ChemImgProps {
     me.horizLine = me.horizLine || me.stdStyle.font.getTextWidth("+");
 
     me.thickWidth = me.thickWidth || lineWidth * 4;
+    me.chiralWidth = me.chiralWidth || lineWidth * 6;
     me.hatch = me.hatch || lineWidth * 3;
     me.dash = me.dash || lineWidth * 3;
     me.lineSpace2 = me.lineSpace2 || lineWidth * 2;
+    me.lineSpace2x = me.lineSpace2x || lineWidth * 3;
     me.lineSpace3 = me.lineSpace3 || lineWidth * 2;
     me.arrowL = me.arrowL || line / 6;
     me.arrowD = me.arrowD || line / 10;

@@ -10,6 +10,7 @@ import { checkBranch, closeBranch } from "./branch";
 import { scanCoeff } from "../parse/scanCoeff";
 import { checkMiddlePoints } from "./middlePoint";
 import { stateAgentMid } from "../state/stateAgentMid";
+import { ChemBackground } from "../../core/ChemBackground";
 
 export const createAgent = (compiler: ChemCompiler): ChemAgent => {
   const { preComm } = compiler;
@@ -56,7 +57,13 @@ export const onCloseAgent = (compiler: ChemCompiler) => {
     checkBranch(compiler);
     finalUpdateBondsForNodes(curAgent);
     finalUpdateAutoNodes(curAgent);
+    if (compiler.background) {
+      curAgent.commands.push(new ChemBackground(compiler.background));
+    }
     compiler.background = undefined;
+    curAgent.bonds.forEach((b, i) => {
+      b.index = i;
+    });
   }
 };
 

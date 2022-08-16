@@ -1,3 +1,4 @@
+import { ifDef } from "../../utils/ifDef";
 import { Point } from "../../math/Point";
 import { Rect, updateRect } from "../../math/Rect";
 import { AbstractSurface, PathStyle } from "../AbstractSurface";
@@ -33,6 +34,9 @@ export class FigPath extends Figure {
       },
     });
     this.bounds = rc ?? new Rect();
+    ifDef(this.style.strokeWidth, (it) => {
+      this.bounds.grow(it / 2);
+    });
   }
 
   draw(offset: Point, surface: AbstractSurface): void {
