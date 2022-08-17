@@ -1,4 +1,4 @@
-import { FigHashTriangle } from "../../drawSys/figures/FigHashTriangle";
+import { FigHashTrapezoid } from "../../drawSys/figures/FigHashTrapezoid";
 import { ChemImgProps } from "../../drawSys/ChemImgProps";
 import { FigPath } from "../../drawSys/figures/FigPath";
 import { Figure } from "../../drawSys/figures/Figure";
@@ -13,14 +13,14 @@ export const wedgeBond = (
   hash: boolean
 ): Figure => {
   const { chiralWidth, lineWidth } = imgProps;
+  if (hash) {
+    return new FigHashTrapezoid(src, lineWidth, dst, chiralWidth, color, lineWidth);
+  }
   const d1 = dst.minus(src).normal();
   const left = d1.transpon(true).times(chiralWidth / 2);
   const right = d1.transpon().times(chiralWidth / 2);
   const b = dst.plus(left);
   const c = dst.plus(right);
-  if (hash) {
-    return new FigHashTriangle(src, b, c, color, lineWidth);
-  }
   const left0 = d1.transpon(true).times(lineWidth / 2);
   const right0 = d1.transpon().times(lineWidth / 2);
   const segs: PathSeg[] = [

@@ -7,6 +7,7 @@ import { FigPath } from "../../drawSys/figures/FigPath";
 import { getBondStyleWidth } from "./getBondStyleWidth";
 import { Figure } from "../../drawSys/figures/Figure";
 import { ChemBond } from "../../core/ChemBond";
+import { FigHashTrapezoid } from "../../drawSys/figures/FigHashTrapezoid";
 
 export const singleLine = (
   bond: ChemBond,
@@ -27,6 +28,10 @@ export const singleLine = (
     fig = drawWaveLine(bond, a, b, imgProps, lnStyle);
   } else if (style === ":") {
     fig = drawDashedLine(a, b, imgProps, lnStyle);
+  } else if (bond.w0 < 0 && bond.w0 === bond.w1) {
+    const {thickWidth, lineWidth} = imgProps;
+    fig = new FigHashTrapezoid(a, thickWidth, b, thickWidth, color, lineWidth);
+    fig.update();
   }
   if (!fig) {
     const segs: PathSeg[] = [
