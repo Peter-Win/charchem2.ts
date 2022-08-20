@@ -73,11 +73,14 @@ const convertComment = (text: string): string => {
   );
 
   // замена символов в квадратных скобках.
-  result = replaceLimited(result, "[", "]", (it) => specCharsB[it]);
+  result = replaceGreek(result);
   // Перевод фраз из словаря
   result = replaceLimited(result, "`", "`", (it) => Lang.findPhrase(it) ?? it);
   return result;
 };
+
+export const replaceGreek = (src: string): string =>
+  replaceLimited(src, "[", "]", (it) => specCharsB[it]);
 
 // Символы в квадратных скобках.
 // Здесь можно добавлять другие символы без снижения производительности.
