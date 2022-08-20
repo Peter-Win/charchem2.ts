@@ -87,7 +87,7 @@ describe("getClusterConnection", () => {
   });
 });
 
-xdescribe("mergeClusters", () => {
+describe("mergeClusters", () => {
   it("left to right", () => {
     const expr = compile("H-OH");
     expect(expr.getMessage()).toBe("");

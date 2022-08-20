@@ -2,8 +2,7 @@ import { Rect } from "../math/Rect";
 import { FigFrame } from "../drawSys/figures/FigFrame";
 import { ChemImgProps, TextProps } from "../drawSys/ChemImgProps";
 import { drawText } from "./drawText";
-
-export type NearPos = "LT" | "RT" | "LB" | "RB" | "CU";
+import { CoeffPos } from "../types/CoeffPos";
 
 export const drawTextNear = (
   frame: FigFrame,
@@ -11,7 +10,7 @@ export const drawTextNear = (
   text: string,
   imgProps: ChemImgProps,
   style: TextProps,
-  pos: NearPos
+  pos: CoeffPos
 ) => {
   const fig = drawText(frame, text, style);
   const figFF = fig.font.getFontFace();

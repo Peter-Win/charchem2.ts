@@ -8,7 +8,7 @@ import { createCoeff } from "./createCoeff";
 import { AgentCmdMulBridge } from "./AgentCmdMulBridge";
 
 export const createAgentCmdMul = (mul: ChemMul): AgentCmd =>
-  mul.nodes[0] ? new AgentCmdMulBridge(mul) : new AgentCmdMul(mul);
+  mul.isFirst ? new AgentCmdMul(mul) : new AgentCmdMulBridge(mul);
 
 export class AgentCmdMul extends AgentCmd {
   figure?: FigText;
@@ -48,6 +48,7 @@ export class AgentCmdMul extends AgentCmd {
       );
       frame.addFigure(figK, true);
       this.figure = figK;
+      // frame.addFigure(new FigRect(figK.getRelativeBounds(), {stroke:"red"}));
     }
     return false;
   }

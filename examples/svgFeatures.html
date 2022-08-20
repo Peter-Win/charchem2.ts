@@ -18,24 +18,26 @@ var all = [
  ["Colors", `2$itemColor1(red)NaOH + $atomColor(blue)2H2SO4$atomColor() = $itemColor1(#F00)Na2SO4 + $color(#00F)H2"|^"`],
  ["Reagent vertical centring", "3\\$C()</OH>|$C()`/`\\`|/   + K2Cr2O7 + 4H2SO4 -->  3\\$C()<//O>|$C()`/`\\`|/ + Cr2(SO4)3 + K2SO4 + 7H2O"],
  ["Mineral charoite", "(K,Sr)'15-16'(Ca,Na)32[Si6O11(O,OH)6]2[Si12O18(O,OH)12]2[Si14O25(O,OH)18]2(OH,F)4*3H2O"],
+ ["Operations", `{A} + {B} = {C} "T"->"B" {D} "top"-->"bottom" {E} "[Delta]"--|>"[Omega]" {F} <-> {G} <=> {H} "top"<==>"bottom" {K}`],
 
  ["Bond styles", `$L(1.4)-<|~S>-<|hH>-<_(A90,SI)"w">-<_(A90,w2)"w">-<_(A90,S:|)":i">-<_(A90,S|:){i:}>-<_(A90,S|I:){-w:}>-<||x"x">-<|w"v">-<|d"_">-<_(A90,d2)"=">-`],
- ["Coordination bonds", "$L(1.5)H`|vvO--vvvO<|hvH>--~v"],
  ["Delocalized bond as ring", "/\\</>|`/`\\`|_o"],
- ["Non-ring delocalized bond", "_(x2)\\<->`/_(x-2)`\\/_s() + /\\</>|`/`\\`|_s(S:) + -\\<->`/`-_s(S:) + $slope(45)-\\|`/`-`\\`|/_s(#1;2;5;6;1)"],
+ ["Non-ring delocalized bond", "_(x2)\\<->`/_(x-2)`\\/_s() + /\\</>|`/`\\`|_s(S:) + -\\<->`/`-_s(S:) + $slope(45)-\\|`/`-`\\`|/_s(#1;2;5;6;1) + $slope(60)`\\_(x-1.8)`/_(x#2;3,y%d:.6)_#1_s()_(x#-1,y-.2,N0)_(y-1.4)Fe"],
  ["Middle points", "H2C`|H2C`|H2C_m(x2)_m(y2)_(x-2)"],
+ ["Coordination bonds", "$L(1.5)H`|vvO--vvvO<|hvH>--~vO_m(A90)_m(A0)_(A-90,C)H"],
  ["Auto align of double bonds", "`\\\\`/||\\</>||<\\>`/<`>`\\\\`|`\\\\`/||<\\|O`|/>`/`\\\\`|<`\\>//<`|>\\"],
 
  ["Text brackets", "(HC<-OH>)'n'|[C<=O>]'m'|{{HC<-C%N>}}'x'"],
- ["Brackets with hard bonds", "/[<`|CH3>\\]'n'/"],
+ ["Brackets with hard bonds", "$padding(0, 0.2, 0.2, 0.1)/[<`|CH3>\\]'n'/"],
  ["Brackets with soft bonds", "H2N-(CH2)'x'-C<//O>\\OH + CH3-CH-CH3;#2|OH --> $C()H2N-(CH2)'x'-C<//O>\\O-CH-CH3;#6|CH3 + H2O"],
+ ["Small brackets", "`\\()`'q'`|N<`\\`|{X}|`/()'n'`\\{Y}>/\\N|()'p'`/_(A45)()'m'_p4N<_(y.5)H>_p4()`'o'_p4"],
  ["Brackets", "[H|N^+<`/H><_(A75,w+)H><\\dH>]3^+[P<`||O><`/O`^-><_(A75,w+)O^-><_(A20,d+)O^->]^3-"],
 
  ["Multiplier", "CuSO4*5H2O"],
  ["Complex multiplier", "$ver(2.0)[$slope(45)Cu/O\\S/O`/\\O`\\`/O`\\]*5[O<`|H>|H]"],
 
  ["Simple background", "$background(cyan)H2N\\/`|$bg(orange,round)O|\\</$bg(#FFA,ellipse,stroke:#888)COOH>|`/`\\`|"],
- ["Background", "H2N-C<`|H><-$bg(yellow,to:1;3,padding:.2)COOH>|S|C<|$bg(to:3,rgba(0,255,255,0.4),p:.4;.2;.1)H><-NH2>`-HOOC"],
+ ["Overlapped backgrounds", "H2N-C<`|H><-$bg(yellow,to:1;3,padding:.2)COOH>|S|C<|$bg(to:3,rgba(0,255,255,0.4),p:.4;.2;.1)H><-NH2>`-HOOC"],
  ["Background for agent", "`-<_(a54)HO>_q<_(a54)H3C>_q<||O>_q<_(a54)NH2>_q_(a54)$itemColor1(#C00){R}$background(#FFA,*,ellipse,p:-.5)"],
 
  ["Invalid version", "$ver(100)H2O"],

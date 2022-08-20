@@ -8,6 +8,7 @@ import {
 } from "../../tests/testEnv";
 import { buildAgentPrior } from "../buildAgentPrior";
 import { FigText } from "../../../drawSys/figures/FigText";
+import { ChemBracketBegin, ChemBracketEnd } from "../../../core/ChemBracket";
 
 describe("buildAgentPrior with brackets", () => {
   it("Text bracket connected with nodes directly", () => {
@@ -116,5 +117,40 @@ describe("buildAgentPrior with brackets", () => {
     const imgProps = createTestImgProps(surface, 40);
     const { agentFrame } = buildAgentPrior(agent, imgProps);
     saveSurface("buildAgentWithBrackets-grBrackets", agentFrame, surface);
+  });
+  it("Vertical alignment of connected brackets", () => {
+    //  +  *  + +  *  +3+
+    //  | / \ | | / \ |
+    //  +*   *+ +*   *+
+    //  0123456 7890123 - commands
+    //             1111
+    const expr = compile("[/\\][/\\]^3+");
+    expect(expr.getMessage()).toBe("");
+    const agent = expr.getAgents()[0]!;
+    const { commands } = agent;
+    expect(commands.length).toBe(14);
+    expect(commands[0]).toBeInstanceOf(ChemBracketBegin);
+    expect(commands[6]).toBeInstanceOf(ChemBracketEnd);
+    expect(commands[7]).toBeInstanceOf(ChemBracketBegin);
+    expect(commands[13]).toBeInstanceOf(ChemBracketEnd);
+
+    const surface = createTestSurface();
+    const imgProps = createTestImgProps(surface, 40);
+    const { agentFrame } = buildAgentPrior(agent, imgProps);
+    const { figures } = agentFrame;
+    expect(figures.length).toBe(14);
+    // Фигура скобки представлена фреймом, внутри которого первый элемент FigPath
+    // (Связь - FigPath, узел - пустой фрейм)
+    const bb = figures.filter(
+      (fig) => fig instanceof FigFrame && fig.figures[0] instanceof FigPath
+    );
+    expect(bb.length).toBe(4);
+    const brc0 = bb[0]!.getRelativeBounds();
+    expect(bb[1]!.getRelativeBounds().top).toBeCloseTo(brc0.top);
+    expect(bb[1]!.getRelativeBounds().bottom).toBeCloseTo(brc0.bottom);
+    // expect(bb[2]!.getRelativeBounds().top).not.toBeCloseTo(brc0.top); // границы второй скобки выше из-за заряда
+    expect(bb[2]!.getRelativeBounds().bottom).toBeCloseTo(brc0.bottom);
+    // expect(bb[3]!.getRelativeBounds().top).not.toBeCloseTo(brc0.top);
+    expect(bb[3]!.getRelativeBounds().bottom).toBeCloseTo(brc0.bottom);
   });
 });

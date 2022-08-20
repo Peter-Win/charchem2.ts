@@ -3,7 +3,7 @@ import { Point } from "../../math/Point";
 import { ChemNode } from "../../core/ChemNode";
 import { ResultBuildNode } from "../buildNode";
 import { clipLine } from "./clipLine";
-import { isNodeHidden } from "../isNodeHidden";
+import { isNodeHidden } from "../../core/isNodeHidden";
 
 export const clipLineByNode = (
   node: ChemNode,

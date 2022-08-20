@@ -23,6 +23,7 @@ export type ChemStyleId =
   | "multiplier"
   | "multiK"
   | "nodeCharge"
+  | "opComment"
   | "operation"
   | "oxidationState"
   | "radical";

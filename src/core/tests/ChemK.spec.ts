@@ -36,4 +36,11 @@ describe("ChemK", () => {
     expect(new ChemK(-0.996).toString()).toBe("-1");
     expect(new ChemK(-1.004).toString()).toBe("-1");
   });
+  it("empty", () => {
+    const k = new ChemK("");
+    expect(k.isNumber()).toBe(false);
+    expect(k.isSpecified()).toBe(false);
+    expect(String(k)).toBe("");
+    expect(k.equals("")).toBe(true);
+  });
 });

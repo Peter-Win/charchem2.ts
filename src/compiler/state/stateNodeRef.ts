@@ -26,6 +26,7 @@ const useRef = (compiler: ChemCompiler, node: ChemNode) => {
     compiler.nodesBranch.onNode(node);
   }
   compiler.curNode = node;
+  compiler.nodesBranch.onNode(node);
 };
 
 const useRefByNumber = (compiler: ChemCompiler, n: Int, startPos: Int) => {

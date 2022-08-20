@@ -19,10 +19,11 @@ import {
   ChemBackground,
   ParamsChemBackground,
 } from "../../core/ChemBackground";
-import { Double, Int } from "../../types";
+import { Int } from "../../types";
 import { ChemCompiler } from "../ChemCompiler";
 import { parseNum } from "../parse/parseNum";
 import { findNodeEx } from "../main/findNode";
+import { parsePadding } from "../parse/parsePadding";
 
 export const funcBackground = (
   compiler: ChemCompiler,
@@ -107,19 +108,5 @@ const parseNodes = (
     const node = findNodeEx(compiler, nodeDef, curPos + pos);
     curPos += nodeDef.length + 1;
     return node;
-  });
-};
-
-const parsePadding = (
-  compiler: ChemCompiler,
-  values: string,
-  pos: Int
-): Double[] => {
-  const chunks = values.split(";");
-  let curPos = 0;
-  return chunks.map((val) => {
-    const n = parseNum(compiler, val, curPos + pos);
-    curPos += val.length + 1;
-    return n;
   });
 };

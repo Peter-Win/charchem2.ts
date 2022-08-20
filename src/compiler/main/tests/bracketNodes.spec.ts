@@ -122,4 +122,14 @@ describe("Bracket nodes", () => {
     expect(commands[3]).toHaveProperty("color", "red");
     expect(commands[4]).toHaveProperty("color", "blue");
   });
+  it("padding", () => {
+    const expr = compile("$padding(.1,.4)[OH][H]");
+    expect(expr.getMessage()).toBe("");
+    const agent = expr.getAgents()[0]!;
+    const { commands } = agent;
+    expect(commands[0]).toBeInstanceOf(ChemBracketBegin);
+    expect((commands[0] as ChemBracketBegin).padding).toEqual([0.1, 0.4]);
+    expect(commands[3]).toBeInstanceOf(ChemBracketBegin);
+    expect((commands[3] as ChemBracketBegin).padding).toBeUndefined();
+  });
 });

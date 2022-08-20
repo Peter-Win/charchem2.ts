@@ -11,7 +11,7 @@ import { ChemK } from "./ChemK";
 export const bracketPairs: Record<string, string> = {
   "(": ")",
   "[": "]",
-  "{[": "]}",
+  "{{": "}}",
 };
 
 export interface CommonBracket {
@@ -35,6 +35,8 @@ export class ChemBracketBegin extends ChemObj implements CommonBracket {
   color?: string;
 
   nodes: ChemNodeOptPair = [undefined, undefined];
+
+  padding?: number[];
 
   override walk(visitor: Visitor) {
     visitor.bracketBegin?.(this);
@@ -85,5 +87,5 @@ export const getBracketsContent = (
   while (start < commands.length && commands[start] !== begin) start++;
   let stop = start;
   while (stop < commands.length && commands[stop] !== end) stop++;
-  return commands.slice(start, stop);
+  return commands.slice(start + 1, stop);
 };

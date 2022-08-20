@@ -12,7 +12,7 @@ import { PAgentCtx } from "./PAgentCtx";
 import { unwind } from "./unwind";
 import { FigText } from "../../drawSys/figures/FigText";
 import { ChemObj } from "../../core/ChemObj";
-import { getNodeInfo, NodeInfo } from "../NodeInfo";
+import { getNodeCenterPos, getNodeInfo, NodeInfo } from "../NodeInfo";
 import { ChemImgProps } from "../../drawSys/ChemImgProps";
 import { isTextBracketsCached } from "../../core/isTextBrackets";
 import { Figure } from "../../drawSys/figures/Figure";
@@ -26,10 +26,15 @@ import { getTextInternalRect } from "../getTextInternalRect";
 import { ChemCharge } from "../../core/ChemCharge";
 import { drawCharge } from "../drawCharge";
 import { AgentCmdMul } from "./AgentCmdMul";
+import { applyPadding } from "../applyPadding";
+import { ifDef } from "../../utils/ifDef";
+import { getFontHeight } from "../../drawSys/utils/fontFaceProps";
+import { isLeftCoeff } from "../../types/CoeffPos";
 
 interface ResBracket {
   figure: Figure;
-  top: number;
+  y: number;
+  rect: Rect;
 }
 
 const bracketCoeffs = (
@@ -50,7 +55,7 @@ const bracketCoeffs = (
       String(n),
       props,
       props.getStyleColored("itemCount", color),
-      "RB"
+      n.pos ?? "RB"
     );
   }
   frame.update();
@@ -73,13 +78,15 @@ const rubberBracket = (
   bracketCoeffs(frame, rect, props, bracket.color, n, charge);
   return {
     figure: frame,
-    top: rect.top,
+    y: contentRect.top,
+    rect,
   };
 };
 
 const textBracket = (
   bracket: CommonBracket,
   props: ChemImgProps,
+  contentRect: Rect,
   k?: ChemK,
   charge?: ChemCharge
 ): ResBracket => {
@@ -92,7 +99,8 @@ const textBracket = (
   bracketCoeffs(frame, rect, props, bracket.color, k, charge);
   return {
     figure: frame,
-    top,
+    y: contentRect.top - top,
+    rect,
   };
 };
 
@@ -106,6 +114,7 @@ interface ParamsDrawBracket {
   n?: ChemK;
   charge?: ChemCharge;
 }
+
 const drawBracket = ({
   bracket,
   contentRect,
@@ -115,11 +124,11 @@ const drawBracket = ({
   n,
   charge,
 }: ParamsDrawBracket): Figure => {
-  const { figure, top } = isText
-    ? textBracket(bracket, props, n, charge)
+  const { figure, y, rect } = isText
+    ? textBracket(bracket, props, contentRect, n, charge)
     : rubberBracket(isOpen, bracket, props, contentRect, n, charge);
-  const x = isOpen ? contentRect.left - figure.bounds.width : contentRect.right;
-  figure.org.set(x, contentRect.top - top);
+  const x = isOpen ? contentRect.left - rect.width : contentRect.right;
+  figure.org.set(x, y);
   return figure;
 };
 
@@ -139,8 +148,8 @@ export const makeBridge = (
       realStep = new Point(ctx.props.nodeMargin, 0);
       const { cluster: c0 } = ctx.clusters.findByNode(node0);
       const { cluster: c1 } = ctx.clusters.findByNode(node1);
-      const { bounds: b0 } = c0.frame;
-      const { bounds: b1 } = c1.frame;
+      const b0 = c0.contentRect ?? c0.frame.bounds;
+      const b1 = c1.contentRect ?? c1.frame.bounds;
       realStep.y = b0.top - b1.top + (b0.height - b1.height) / 2;
     }
     ctx.clusters.unite(ctx, src, dst, realStep, true);
@@ -170,23 +179,42 @@ const processBrackets = (
   const { begin } = cmdOpen;
   const { end } = cmdClose;
   const { nodesInfo, agent, clusters, props } = ctx;
+  const { useTextBrackets, line, lineWidth } = props;
   const beginNode = begin.nodes[1];
   const endNode = end.nodeIn;
   if (!beginNode || !endNode) return;
   const { cluster } = clusters.findByNode(beginNode);
   const beginNi = getNodeInfo(beginNode, nodesInfo);
   const endNi = getNodeInfo(endNode, nodesInfo);
-  const isText: boolean = props.useTextBrackets
+  const isText0: boolean = useTextBrackets
     ? isTextBracketsCached(begin, agent.commands)
     : false;
   const content = getBracketsContent(begin, agent.commands);
-  const contentRect = calcBracketRect(content, nodesInfo);
-  if (!contentRect) {
-    // пока не ясно, что делать с пустыми скобками
-    return;
+  let contentRect0 = calcBracketRect(content, nodesInfo);
+  if (
+    (!contentRect0 || contentRect0.isEmpty()) &&
+    content.length === 1 &&
+    content[0] instanceof ChemNode
+  ) {
+    // Пустые скобки при наличии автоузла внутри. Example: /()'n'\
+    const { font } = props.getStyle("atom");
+    const ff = font.getFontFace();
+    const h = getFontHeight(ff) / 2;
+    const p = getNodeCenterPos(getNodeInfo(content[0], nodesInfo));
+    contentRect0 = new Rect(
+      new Point(p.x - lineWidth, p.y - h),
+      new Point(p.x + lineWidth, p.y + h)
+    );
   }
+  const contentRect1 = contentRect0;
+  if (!contentRect1) return;
 
-  const xPad = isText ? 0 : props.lineWidth;
+  const contentRect =
+    ifDef(begin.padding, (p) => applyPadding(contentRect1, p, line)) ??
+    contentRect1;
+  const isText = isText0 && contentRect.height === contentRect1.height;
+
+  const xPad = isText ? 0 : lineWidth;
   if (
     cmdOpen.dstCmd instanceof AgentCmdBrOpen ||
     cmdOpen.dstCmd instanceof AgentCmdMul
@@ -216,6 +244,8 @@ const processBrackets = (
   const { charge, n } = end;
   const ch = (open: boolean): ChemCharge | undefined =>
     open === charge?.isLeft ? charge : undefined;
+  const coeff = (open: boolean): ChemK | undefined =>
+    open === isLeftCoeff(n.pos) ? n : undefined;
   const figOpen = drawBracket({
     isOpen: true,
     bracket: begin,
@@ -223,6 +253,7 @@ const processBrackets = (
     props,
     contentRect,
     nodeInfo: beginNi,
+    n: coeff(true),
     charge: ch(true),
   });
   const figClose = drawBracket({
@@ -232,15 +263,17 @@ const processBrackets = (
     props,
     contentRect,
     nodeInfo: endNi,
-    n,
+    n: coeff(false),
     charge: ch(false),
   });
+  // cluster.frame.addFigure(new FigRect(contentRect, {stroke: "magenta"}));
   cluster.frame.addFigure(figOpen, true);
   cluster.frame.addFigure(figClose, true);
   // eslint-disable-next-line no-param-reassign
   cmdOpen.figure = figOpen;
   // eslint-disable-next-line no-param-reassign
   cmdClose.figure = figClose;
+  cluster.contentRect = contentRect;
 
   if (cmdOpen.isBridge) {
     makeBridge(ctx, cmdOpen.begin);

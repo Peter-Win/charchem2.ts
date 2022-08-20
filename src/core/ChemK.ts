@@ -2,17 +2,20 @@
 // Can be number or string (abstract coefficient: C'n'H'2n+2')
 import { Double } from "../types";
 import { toa } from "../math";
+import { CoeffPos } from "../types/CoeffPos";
 
 export class ChemK {
   readonly num: Double;
 
   readonly text: string;
 
-  constructor(n: Double);
+  pos?: CoeffPos;
 
-  constructor(text: string);
+  constructor(n: Double, pos?: CoeffPos);
 
-  constructor(k: number | string) {
+  constructor(text: string, pos?: CoeffPos);
+
+  constructor(k: number | string, pos?: CoeffPos) {
     if (typeof k === "number") {
       this.num = k;
       this.text = "";
@@ -20,17 +23,18 @@ export class ChemK {
       this.text = k;
       this.num = NaN;
     }
+    this.pos = pos;
   }
 
   static readonly one = new ChemK(1);
 
   // Na2S.  Is specified for Na and not for S
   isSpecified() {
-    return !!this.text || this.num !== 1;
+    return !!this.text || (this.num !== 1 && !Number.isNaN(this.num));
   }
 
   isNumber() {
-    return !this.text;
+    return !Number.isNaN(this.num);
   }
 
   equals(k: ChemK | string | number): boolean {
@@ -47,6 +51,6 @@ export class ChemK {
   }
 
   toString() {
-    return this.text || toa(this.num);
+    return this.isNumber() ? toa(this.num) : this.text;
   }
 }

@@ -12,7 +12,7 @@ import { Figure } from "./Figure";
  *     ####
  *
  *      ##  aWidth
- *      a 
+ *      a
  * Отдельная фигура позволит менять алгоритм вывода, в зависимости от поверхности.
  * Т.к. в старых реализациях не удалось обеспечить качественное изображение при малых размерах.
  */
@@ -30,9 +30,16 @@ export class FigHashTrapezoid extends Figure {
   }
 
   update(): void {
-    const {a, aWidth, b, bWidth} = this;
-    const {dL, dR} = calcTrapezoidDir(a, b);
-    const {aL, aR, bL, bR} = calcTrapezoidPoints(a, aWidth, b, bWidth, dL, dR);
+    const { a, aWidth, b, bWidth } = this;
+    const { dL, dR } = calcTrapezoidDir(a, b);
+    const { aL, aR, bL, bR } = calcTrapezoidPoints(
+      a,
+      aWidth,
+      b,
+      bWidth,
+      dL,
+      dR
+    );
     this.bounds = new Rect(aL, aR);
     this.bounds.updatePoint(bL);
     this.bounds.updatePoint(bR);
@@ -41,7 +48,14 @@ export class FigHashTrapezoid extends Figure {
   draw(offset: Point, surface: AbstractSurface): void {
     // Пока еще нет специальных функций поверхности для вывода полосатого треугольника
     const { a, b, aWidth, bWidth, color, lineWidth } = this;
-    const { segs, style } = makeHashTrapezoidPath(a, aWidth, b, bWidth, lineWidth, color);
+    const { segs, style } = makeHashTrapezoidPath(
+      a,
+      aWidth,
+      b,
+      bWidth,
+      lineWidth,
+      color
+    );
     if (segs.length > 0) {
       surface.drawPath(this.org.plus(offset), segs, style);
     }
@@ -59,22 +73,29 @@ interface TrapezoidDir {
 const calcTrapezoidDir = (a: Point, b: Point): TrapezoidDir => {
   const dir = b.minus(a);
   const dirLen = dir.length();
-  const dir1 = is0(dirLen) ? Point.zero : dir.times(1/dirLen);
+  const dir1 = is0(dirLen) ? Point.zero : dir.times(1 / dirLen);
   const dL = dir1.transpon(true);
   const dR = dir1.transpon();
-  return {dir, dirLen, dir1, dL, dR}
-}
+  return { dir, dirLen, dir1, dL, dR };
+};
 
-const calcTrapezoidPoints = (a: Point, aWidth: number, b: Point, bWidth: number, dL: Point, dR: Point) => {
-  const aw2 = aWidth/2;
-  const bw2 = bWidth/2;
+const calcTrapezoidPoints = (
+  a: Point,
+  aWidth: number,
+  b: Point,
+  bWidth: number,
+  dL: Point,
+  dR: Point
+) => {
+  const aw2 = aWidth / 2;
+  const bw2 = bWidth / 2;
   return {
     aL: a.plus(dL.times(aw2)),
     aR: a.plus(dR.times(aw2)),
     bL: b.plus(dL.times(bw2)),
     bR: b.plus(dR.times(bw2)),
   };
-}
+};
 
 export const makeHashTrapezoidPath = (
   src: Point,
@@ -94,7 +115,7 @@ export const makeHashTrapezoidPath = (
   const maxW = dstWidth / 2;
   const minW = srcWidth / 2;
   const dW = maxW - minW;
-  const {dir, dirLen, dL, dR} = calcTrapezoidDir(src, dst);
+  const { dir, dirLen, dL, dR } = calcTrapezoidDir(src, dst);
   if (!is0(dirLen)) {
     let stripCount = Math.floor(dirLen / lineWidth);
     // если четное число, то уменьшить - ширина полос немного увеличится

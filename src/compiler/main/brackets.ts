@@ -77,6 +77,10 @@ const openBracket = (compiler: ChemCompiler, text: string, pos: Int) => {
   compiler.curAgent!.commands.push(begin);
   compiler.push(new BracketDecl(pos, begin));
   compiler.bracketsCtrl.onBracket(begin);
+  if (compiler.varPadding.length) {
+    begin.padding = compiler.varPadding;
+    compiler.varPadding = [];
+  }
   if (compiler.curBond) {
     begin.bond = compiler.curBond;
     // eslint-disable-next-line prefer-destructuring

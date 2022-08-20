@@ -17,6 +17,7 @@ export class OpDef {
 export const opsList: OpDef[] = [
   new OpDef("+"),
   new OpDef("-->", "—→", true),
+  new OpDef("--|>", "—→", true),
   new OpDef("->", "→", true),
   new OpDef("®", "→", true),
   new OpDef("→", null, true),

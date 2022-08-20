@@ -7,6 +7,12 @@ import {
 } from "../../tests/testEnv";
 import { buildAgentPrior } from "../buildAgentPrior";
 import { FigText } from "../../../drawSys/figures/FigText";
+import { ChemBracketBegin, ChemBracketEnd } from "../../../core/ChemBracket";
+import { ChemNode } from "../../../core/ChemNode";
+import { ChemMul, ChemMulEnd } from "../../../core/ChemMul";
+import { PAgentCtx } from "../PAgentCtx";
+import { processCommands } from "../processCommands";
+import { prepareNodes } from "../prepareNodes";
 
 describe("AgentCmdMul", () => {
   it("Typical multiplier with 2 nodes", () => {
@@ -52,5 +58,90 @@ describe("AgentCmdMul", () => {
     expect(figures[3]).toBeInstanceOf(FigFrame);
     expect((figures[3] as FigFrame).figures[0]).toBeInstanceOf(FigText);
     expect((figures[3] as FigFrame).figures[0]).toHaveProperty("text", "]");
+  });
+
+  it("Mul after bracket", () => {
+    const expr = compile("[H]*5O");
+    expect(expr.getMessage()).toBe("");
+    const agent = expr.getAgents()[0]!;
+    const { commands } = agent;
+    expect(commands[0]).toBeInstanceOf(ChemBracketBegin);
+
+    let chain;
+    let subChain1;
+    {
+      const cmd1 = commands[1] as ChemNode;
+      expect(cmd1).toBeInstanceOf(ChemNode);
+      expect(cmd1.index).toBe(0);
+      chain = cmd1.chain;
+      subChain1 = cmd1.subChain;
+    }
+
+    {
+      const cmd2 = commands[2] as ChemBracketEnd;
+      expect(cmd2).toBeInstanceOf(ChemBracketEnd);
+      expect(cmd2.nodes[0]?.index).toBe(0);
+      // expect(cmd2.nodes[1]?.index).toBe(1); Следующий узел не установлен из-за наличия множителя
+    }
+
+    {
+      const cmd3 = commands[3] as ChemMul;
+      expect(cmd3).toBeInstanceOf(ChemMul);
+      expect(cmd3.isFirst).toBe(false);
+      // Первого узла может не быть из-за скобок.
+      expect(cmd3.nodes[1]?.index).toBe(1); // А второй должен быть.
+    }
+
+    {
+      const cmd4 = commands[4] as ChemNode;
+      expect(cmd4).toBeInstanceOf(ChemNode);
+      expect(cmd4.chain).toBe(chain);
+      expect(cmd4.subChain).toBe(subChain1 + 1);
+    }
+
+    expect(commands[5]).toBeInstanceOf(ChemMulEnd);
+
+    const surface = createTestSurface();
+    const imgProps = createTestImgProps(surface, 40);
+    const ctx = new PAgentCtx(agent, imgProps);
+    prepareNodes(ctx);
+    processCommands(ctx);
+    expect(ctx.clusters.clusters.length).toBe(1);
+  });
+  it("Multiplier + bracket", () => {
+    const expr = compile("H*5[O]");
+    expect(expr.getMessage()).toBe("");
+    const agent = expr.getAgents()[0]!;
+    const { commands } = agent;
+    expect(commands[0]).toBeInstanceOf(ChemNode);
+
+    const cmd1 = commands[1] as ChemMul;
+    expect(cmd1).toBeInstanceOf(ChemMul);
+    expect(cmd1.nodes[0]?.index).toBe(0);
+    expect(cmd1.nodes[1]?.index).toBe(1);
+
+    expect(commands[2]).toBeInstanceOf(ChemBracketBegin);
+
+    const surface = createTestSurface();
+    const imgProps = createTestImgProps(surface, 40);
+    const { agentFrame } = buildAgentPrior(agent, imgProps);
+    // console.log(agentFrame.figures);
+    const figMulK = agentFrame.figures.find(
+      (f) =>
+        f instanceof FigFrame &&
+        f.figures[1] instanceof FigText &&
+        f.figures[1].text === "5"
+    );
+    expect(figMulK).toBeDefined();
+    const figBB = agentFrame.figures.find(
+      (f) =>
+        f instanceof FigFrame &&
+        f.figures[0] instanceof FigText &&
+        f.figures[0].text === "["
+    );
+    expect(figBB).toBeDefined();
+    expect(figMulK!.getRelativeBounds().right).toBeLessThanOrEqual(
+      figBB!.getRelativeBounds().left + 0.01
+    );
   });
 });

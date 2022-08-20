@@ -8,7 +8,7 @@ import { FigPath } from "../../drawSys/figures/FigPath";
 import { getBondColor } from "./getBondColor";
 import { ChemBond } from "../../core/ChemBond";
 import { drawBondArrow } from "./drawBondArrow";
-import { isNodeHidden } from "../isNodeHidden";
+import { isNodeHidden } from "../../core/isNodeHidden";
 
 interface ParamsBezierBond {
   bond: ChemBond;

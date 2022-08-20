@@ -1,9 +1,10 @@
+import { CoeffPos } from "../types/CoeffPos";
 import { ChemStyleId } from "../drawSys/ChemStyleId";
 import { ChemCharge } from "../core/ChemCharge";
 import { ChemImgProps } from "../drawSys/ChemImgProps";
 import { FigFrame } from "../drawSys/figures/FigFrame";
 import { Rect } from "../math/Rect";
-import { drawTextNear, NearPos } from "./drawTextNear";
+import { drawTextNear } from "./drawTextNear";
 import { FigEllipse } from "../drawSys/figures/FigEllipse";
 import { Point } from "../math/Point";
 import { getTextInternalRect } from "./getTextInternalRect";
@@ -27,7 +28,7 @@ export const drawCharge = ({
 }: ParamsDrawCharge) => {
   const realColor = color ?? imgProps.stdStyle.style.fill;
   const style = imgProps.getStyleColored(styleId, realColor);
-  const pos: NearPos = charge.isLeft ? "LT" : "RT";
+  const pos: CoeffPos = charge.isLeft ? "LT" : "RT";
   const figTxt = drawTextNear(frame, rect, charge.text, imgProps, style, pos);
   frame.updateFigure(figTxt);
   if (charge.isRound) {

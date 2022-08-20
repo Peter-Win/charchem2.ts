@@ -116,6 +116,8 @@ export class ChemCompiler {
 
   varAlign?: BondAlign;
 
+  varPadding: number[] = [];
+
   centralNode: boolean = false;
 
   curChar(): Char {

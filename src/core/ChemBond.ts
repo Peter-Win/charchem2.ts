@@ -4,6 +4,7 @@ import { is0, toa } from "../math";
 import { ChemNode } from "./ChemNode";
 import { Visitor } from "./Visitor";
 import { ChemObj } from "./ChemObj";
+import { isNodeHidden } from "./isNodeHidden";
 
 export type BondAlign = "x" | "r" | "m" | "l";
 
@@ -42,7 +43,7 @@ export class ChemBond extends ChemObj {
 
   arr1: boolean = false; // Стрелка по направлению линии
 
-  ext: string = ""; // for _o = 'o', for _s = 's'
+  ext: "" | "o" | "s" = ""; // for _o = 'o', for _s = 's'
 
   brk: boolean = false; // Устанавливается для конструкции типа -#a-#b-#c-, для связи, предшествующей существующему узлу
 
@@ -120,6 +121,19 @@ export class ChemBond extends ChemObj {
   }
 
   isVisible(): boolean {
+    if (this.isVerticalConnection()) return false;
     return !is0(this.n) || !!this.style;
+  }
+
+  /**
+   * Vertical connection of atoms without bond drawing.
+   * Most commonly used in /N<_(y-.5)H>\ or \N<_(y.5)H/>
+   */
+  isVerticalConnection(): boolean {
+    const { dir, nodes } = this;
+    if (!dir || nodes.length !== 2) return false;
+    if (!nodes[0] || isNodeHidden(nodes[0])) return false;
+    if (!nodes[1] || isNodeHidden(nodes[1])) return false;
+    return is0(dir.x) && is0(Math.abs(dir.y) - 0.5);
   }
 }

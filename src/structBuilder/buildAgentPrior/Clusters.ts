@@ -10,6 +10,7 @@ import { addAllSet } from "../../utils/addAllSet";
 export interface Cluster {
   frame: FigFrame;
   nodes: Set<number>;
+  contentRect?: Rect;
 }
 
 export const insertToCluster = (
@@ -147,6 +148,16 @@ export class Clusters {
     bAbs?: boolean
   ) {
     const { cluster: srcCluster } = this.findByNode(src.node);
+    if (!dst.node) {
+      // Вообще такого быть не должно. Но если рисовать некорректно откомпилированную формулу, то бывает.
+      // Было бы неплохо придумать более удачный способ обработки некорректных ситуаций.
+      return {
+        cluster: srcCluster,
+        srcConn: { x: 0, yMiddle: 0 } as ClusterConnection,
+        dstConn: { x: 0, yMiddle: 0 } as ClusterConnection,
+        offset: Point.zero,
+      };
+    }
     const srcNodeInfo = getNodeInfo(src.node, ctx.nodesInfo);
     const { cluster: dstCluster, clusterIndex: dstPos } = this.findByNode(
       dst.node

@@ -14,7 +14,14 @@ export const wedgeBond = (
 ): Figure => {
   const { chiralWidth, lineWidth } = imgProps;
   if (hash) {
-    return new FigHashTrapezoid(src, lineWidth, dst, chiralWidth, color, lineWidth);
+    return new FigHashTrapezoid(
+      src,
+      lineWidth,
+      dst,
+      chiralWidth,
+      color,
+      lineWidth
+    );
   }
   const d1 = dst.minus(src).normal();
   const left = d1.transpon(true).times(chiralWidth / 2);

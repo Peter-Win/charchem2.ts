@@ -5,7 +5,7 @@ import { makeTextFormula } from "../../../inspectors/makeTextFormula";
 import { compile } from "../../compile";
 import { ChemBackground } from "../../../core/ChemBackground";
 
-xdescribe("parseBackgroundArgs", () => {
+describe("parseBackgroundArgs", () => {
   it("params without keys", () => {
     const compiler = createTestCompiler("");
     const params = parseBackgroundArgs(
@@ -30,7 +30,7 @@ xdescribe("parseBackgroundArgs", () => {
   });
   it("nodes list", () => {
     const compiler = createTestCompilerWithSingleAgent("F-C<||S>-O");
-    const params = parseBackgroundArgs(compiler, ["#1;-1"], [1]);
+    const params = parseBackgroundArgs(compiler, ["to:1;-1"], [1]);
     expect(params.nodes).toBeDefined();
     expect(params.nodes!.length).toBe(2);
     expect(makeTextFormula(params.nodes![0]!)).toBe("F");

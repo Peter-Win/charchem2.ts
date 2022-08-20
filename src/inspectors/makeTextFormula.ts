@@ -175,7 +175,7 @@ export const makeTextFormula = (
 
     mul(obj) {
       if (!obj.isFirst) ctxOut(rules.mul(), obj.color);
-      ctxOut(rules.mulK(obj.n), obj.color);
+      if (obj.n.isSpecified()) ctxOut(rules.mulK(obj.n), obj.color);
     },
   });
   const nonOptimized = buildTextFromChunks(stack[0]!.chunks, rules).trim();

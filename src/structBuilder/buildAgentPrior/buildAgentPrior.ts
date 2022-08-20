@@ -42,6 +42,8 @@ export const buildAgentPrior = (
   drawBackground(ctx);
   const center = findAgentCenter(ctx);
 
+  // agentFrame.addFigure(new FigRect(agentFrame.bounds.clone(), {stroke: "red", strokeWidth: 0.5}));
+
   if (agent.n.isSpecified()) {
     const kStyle = imgProps.getStyleColored("agentK");
     const figK = new FigText(agent.n.toString(), kStyle.font, kStyle.style);
@@ -50,6 +52,7 @@ export const buildAgentPrior = (
       agentFrame.bounds.left - figK.bounds.width - imgProps.agentKSpace;
     figK.org.y = center.y - irc.center.y;
     agentFrame.addFigure(figK, true);
+    // agentFrame.addFigure(new FigRect(figK.getRelativeBounds(), {stroke: "blue", strokeWidth: 0.5}));
   }
 
   return { agentFrame, ctx, center };

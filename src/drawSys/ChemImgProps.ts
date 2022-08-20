@@ -93,16 +93,16 @@ export class ChemImgProps {
     me.horizLine = me.horizLine || me.stdStyle.font.getTextWidth("+");
 
     me.thickWidth = me.thickWidth || lineWidth * 4;
-    me.chiralWidth = me.chiralWidth || lineWidth * 6;
+    me.chiralWidth = me.chiralWidth || lineWidth * 5;
     me.hatch = me.hatch || lineWidth * 3;
     me.dash = me.dash || lineWidth * 3;
     me.lineSpace2 = me.lineSpace2 || lineWidth * 2;
     me.lineSpace2x = me.lineSpace2x || lineWidth * 3;
     me.lineSpace3 = me.lineSpace3 || lineWidth * 2;
-    me.arrowL = me.arrowL || line / 6;
-    me.arrowD = me.arrowD || line / 10;
-    me.opSpace = me.opSpace || line / 10;
-    me.agentKSpace = me.agentKSpace || lineWidth;
+    me.arrowL = me.arrowL || line / 5;
+    me.arrowD = me.arrowD || line / 9;
+    me.opSpace = me.opSpace || line / 4;
+    me.agentKSpace = me.agentKSpace || lineWidth * 2;
 
     me.bracketWidth = me.bracketWidth || lineWidth * 4;
 

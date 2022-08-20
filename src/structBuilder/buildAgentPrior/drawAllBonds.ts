@@ -5,7 +5,7 @@ import { PAgentCtx } from "./PAgentCtx";
 export const drawAllBonds = (ctx: PAgentCtx) => {
   const { agent, props, agentFrame, nodesInfo } = ctx;
   agent.commands.forEach((cmd) => {
-    if (cmd instanceof ChemBond) {
+    if (cmd instanceof ChemBond && !cmd.soft) {
       drawBond({
         bond: cmd,
         props,

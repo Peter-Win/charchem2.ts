@@ -171,4 +171,21 @@ describe("RingBond", () => {
     expect(expr.getMessage()).toBe("");
     expect(makeTextFormula(makeBrutto(expr))).toBe("C13H9Cl3");
   });
+  it("Cycle with ref", () => {
+    //    3
+    //  0---3
+    // 0|(4)|2
+    //  1---2
+    //    1
+    const expr = compile("|-`|_#1_s");
+    expect(expr.getMessage()).toBe("");
+    const agent = expr.getAgents()[0]!;
+    const { bonds } = agent;
+    expect(bonds.length).toBe(5);
+    const lb = bonds[4]!;
+    expect(lb).toBeDefined();
+    expect(lb).toHaveProperty("tx", "s");
+    expect(lb).toHaveProperty("ext", "s");
+    expect(lb.nodes.map((n) => n?.index)).toEqual([0, 1, 2, 3]);
+  });
 });
