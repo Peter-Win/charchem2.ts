@@ -40,6 +40,7 @@ export interface LocalFont {
     textLine: string,
     style: TextStyle
   ): void;
+  createScaled?(scale: number): LocalFont;
 }
 
 export interface AbstractSurface {

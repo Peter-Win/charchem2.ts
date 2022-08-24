@@ -5,6 +5,7 @@ import { RulesBase } from "./RulesBase";
 import { strMass } from "../math/massUtils";
 import { ChemCharge } from "../core/ChemCharge";
 import { ChemOp } from "../core/ChemOp";
+import { MarkupChunkType } from "../utils/markup";
 
 const opDict: Record<string, string> = {
   "-->": "->",
@@ -61,6 +62,17 @@ class RulesMhchem extends RulesBase {
   colorEnd() {
     return "}";
   }
+
+  override markupSection(type: MarkupChunkType, isOpen: boolean): string {
+    const cmd = markupDict[type];
+    if (!cmd) return "";
+    return isOpen ? `${cmd}{` : "}";
+  }
+}
+
+const markupDict: Record<string, string> = {
+  sup: "^",
+  sub: "_",
 }
 
 export const rulesMhchem = Object.freeze(new RulesMhchem());

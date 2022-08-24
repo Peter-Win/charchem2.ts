@@ -22,9 +22,9 @@ export const drawTextNear = (
     fig.org.x = rcCore.cx - fig.bounds.width * 0.5;
   }
   if (pos[1] === "T") {
-    fig.org.y = rcCore.top + figFF.capHeight * (1 - imgProps.supKY);
+    fig.org.y = rcCore.top + figFF.ascent * (1 - imgProps.supKY);
   } else if (pos[1] === "B") {
-    fig.org.y = rcCore.bottom + figFF.capHeight * imgProps.subKY;
+    fig.org.y = rcCore.bottom + figFF.ascent * imgProps.subKY;
   } else if (pos[1] === "U") {
     fig.org.y = rcCore.top + figFF.descent;
   }
