@@ -8,6 +8,7 @@ import { escapeXml } from "../utils/xml/escapeXml";
 import { ChemCharge } from "../core/ChemCharge";
 import { ChemOp } from "../core/ChemOp";
 import { ChemComment } from "../core/ChemComment";
+import { MarkupChunkType } from "../utils/markup";
 
 /**
  * Правила для формирования HTML-представления формулы
@@ -28,11 +29,11 @@ export class RulesHtml extends RulesBase {
   }
 
   comment(text: string): string {
-    return `<em>${text}</em>`;
+    return `<em>${super.comment(text)}</em>`;
   }
 
   custom(text: string): string {
-    return `<i>${text}</i>`;
+    return `<i>${super.custom(text)}</i>`;
   }
 
   itemCount(k: ChemK): string {
@@ -73,7 +74,7 @@ export class RulesHtml extends RulesBase {
 
   opComment(comm?: ChemComment): string {
     return comm
-      ? `<span class="echem-opcomment">${escapeXml(comm.text)}</span>`
+      ? `<span class="echem-opcomment">${this.useMarkup(comm.text)}</span>`
       : "";
   }
 
@@ -84,6 +85,16 @@ export class RulesHtml extends RulesBase {
   colorEnd(): string {
     return "</span>";
   }
+
+  override markupSection(type: MarkupChunkType, isOpen: boolean): string {
+    const tag = markupTagDict[type] ?? "span"; 
+    return isOpen ? `<${tag}>` : `</${tag}>`
+  }
 }
+
+const markupTagDict: Record<string, string> = {
+  "sup": "sup",
+  "sub": "sub",
+};
 
 export const rulesHtml = Object.freeze(new RulesHtml());

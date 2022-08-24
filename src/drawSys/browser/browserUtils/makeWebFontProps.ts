@@ -7,6 +7,19 @@ import { traceBox } from "./traceBox";
 import { WebFontProps } from "../WebFontProps";
 import { createLocalFontHash } from "../../utils/createLocalFontHash";
 
+export const makeCanvasFontProp = (props: {
+  fontFamily: string;
+  cssHeight: number;
+  italic: boolean;
+  bold: boolean;
+}): string => {
+  const {fontFamily, cssHeight, bold, italic} = props;
+  const fontStyleChunks = [`${cssHeight}px`, fontFamily];
+  if (bold) fontStyleChunks.unshift("bold");
+  if (italic) fontStyleChunks.unshift("italic");
+  return fontStyleChunks.join(" ");
+}
+
 /**
  * For browser only
  * @param props
@@ -22,11 +35,8 @@ export const makeWebFontProps = (props: LocalFontProps): WebFontProps => {
   const testWidth = Math.round(cssHeight / 2);
   const baseline = vOffset + cssHeight;
 
-  const fontStyleChunks = [`${cssHeight}px`, fontFamily];
   const bold = isBold(fontWeight);
-  if (bold) fontStyleChunks.unshift("bold");
-  if (italic) fontStyleChunks.unshift("italic");
-  const canvasFont = fontStyleChunks.join(" ");
+  const canvasFont = makeCanvasFontProp({fontFamily, cssHeight, bold, italic});
 
   // This code can throw exception, if run in Node or old browser.
   const canvas = document.createElement("canvas");
@@ -76,6 +86,7 @@ export const makeWebFontProps = (props: LocalFontProps): WebFontProps => {
       bbox,
     },
     canvasFont,
+    fontFamily,
     cssHeight,
     italic,
     bold,

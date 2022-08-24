@@ -25,7 +25,7 @@ describe("drawTextNear", () => {
     expect(h.bounds.B.x).toBeCloseTo(rc2.A.x);
     const blH = getBaseline(h.font.getFontFace());
     const bl2 = getBaseline(two.font.getFontFace());
-    const subItemHeight = two.font.getFontFace().capHeight;
+    const subItemHeight = two.font.getFontFace().ascent;
     expect(two.bounds.top + two.org.y + bl2 - (h.bounds.top + blH)).toBeCloseTo(
       subItemHeight * imgProps.subKY
     );
@@ -71,7 +71,7 @@ describe("drawTextNear", () => {
     const sub = drawTextNear(frame, rcMain, "2+", imgProps, style2, "RT");
     const rcSub = sub.getRelativeBounds();
     expect(rcSub.left).toBeCloseTo(rcMain.right);
-    expect(rcSub.top + getBaseline(ff2) - ff2.capHeight).toBeCloseTo(
+    expect(rcSub.top + getBaseline(ff2) - ff2.ascent).toBeCloseTo(
       rcMain.top
     );
 

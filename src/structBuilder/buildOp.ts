@@ -11,12 +11,7 @@ import { ifDef } from "../utils/ifDef";
 import { FigPath } from "../drawSys/figures/FigPath";
 import { PathSeg } from "../drawSys/path";
 import { LocalFont, PathStyle, TextStyle } from "../drawSys/AbstractSurface";
-
-interface OpCommentDef {
-  figure: Figure;
-  irc: Rect;
-}
-type OpCommentDefOpt = OpCommentDef | undefined;
+import { drawTextWithMarkup, ResultTextWithMarkup } from "./drawTextWithMarkup";
 
 interface FigDef {
   figOp: Figure;
@@ -38,13 +33,13 @@ interface ResultBuildOp {
 }
 
 export const buildOp = (op: ChemOp, props: ChemImgProps): ResultBuildOp => {
-  const comms: [OpCommentDefOpt, OpCommentDefOpt] = [
+  const comms: [ResultTextWithMarkup | undefined, ResultTextWithMarkup | undefined] = [
     ifDef(op.commentPre, (it) => buildOpComment(it, props)),
     ifDef(op.commentPost, (it) => buildOpComment(it, props)),
   ];
   const { srcText, dstText } = op;
   const commWidth = comms.reduce(
-    (width, com) => Math.max(width, com ? com.figure.bounds.width : 0),
+    (width, com) => Math.max(width, com ? com.fig.bounds.width : 0),
     0
   );
   const frame = new FigFrame();
@@ -139,25 +134,26 @@ const opDict: Record<string, (params: ParamsOpDraw) => FigDef> = {
 const addOpComment = (
   frame: FigFrame,
   opRect: Rect,
-  comm: OpCommentDef,
+  comm: ResultTextWithMarkup,
   isTop: boolean
 ): void => {
-  const { figure, irc } = comm;
-  const { bounds } = figure;
-  figure.org.set(
+  const { fig, irc } = comm;
+  const { bounds } = fig;
+  fig.org.set(
     irc.left + opRect.width / 2 - irc.width / 2,
     isTop ? -(bounds.bottom - irc.bottom) + opRect.top : opRect.bottom - irc.top
   );
-  frame.addFigure(figure, true);
+  frame.addFigure(fig, true);
 };
 
 const buildOpComment = (
   comm: ChemComment,
   props: ChemImgProps,
   color?: string
-): OpCommentDef => {
-  const { font, style } = props.getStyleColored("opComment", color);
-  const figure = new FigText(comm.text, font, style);
-  const irc = getTextInternalRect(figure);
-  return { figure, irc };
+): ResultTextWithMarkup => {
+  const tp = props.getStyleColored("opComment", color);
+  // const figure = new FigText(comm.text, font, style);
+  // const irc = getTextInternalRect(figure);
+  // return { figure, irc };
+  return drawTextWithMarkup(comm.text, props, tp);
 };

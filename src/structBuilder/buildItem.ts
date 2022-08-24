@@ -1,15 +1,17 @@
 import { ChemNodeItem } from "../core/ChemNodeItem";
 import { FigFrame } from "../drawSys/figures/FigFrame";
-import { ChemImgProps } from "../drawSys/ChemImgProps";
+import { ChemImgProps, TextProps } from "../drawSys/ChemImgProps";
 import { drawText } from "./drawText";
 import { FigText } from "../drawSys/figures/FigText";
 import { Rect } from "../math/Rect";
 import { drawTextNear } from "./drawTextNear";
 import { getTextInternalRect } from "./getTextInternalRect";
+import { Figure } from "../drawSys/figures/Figure";
+import { drawTextWithMarkup } from "./drawTextWithMarkup";
 
 interface BuildItemResult {
   itemFrame: FigFrame;
-  figText?: FigText;
+  figText?: Figure;
   rcCore?: Rect;
 }
 
@@ -20,47 +22,57 @@ export const buildItem = (
 ): BuildItemResult => {
   const itemFrame = new FigFrame();
   const itemColor = item.color ?? color;
-  const { figText } = item.walkExt({
-    figText: undefined as FigText | undefined,
-    atom(obj) {
-      this.figText = drawText(
+  const { fig, rcCore } = item.walkExt({
+    fig: undefined as Figure | undefined,
+    rcCore: undefined as Rect | undefined,
+    onText(text: string, style: TextProps) {
+      const txFig = drawText(
         itemFrame,
-        obj.id,
+        text,
         imgProps.getStyleColored("atom", item.atomColor ?? itemColor)
       );
+      this.fig = txFig;
+      this.rcCore = getTextInternalRect(txFig);
+    },
+    onMarkup(textWithMarkup: string, style: TextProps){
+      const {fig, irc} = drawTextWithMarkup(textWithMarkup, imgProps, style);
+      itemFrame.addFigure(fig, true);
+      this.fig = fig;
+      this.rcCore = irc;
+    },
+
+    atom(obj) {
+      this.onText(obj.id,
+        imgProps.getStyleColored("atom", item.atomColor ?? itemColor));
     },
     radical(obj) {
-      this.figText = drawText(
-        itemFrame,
-        obj.label,
-        imgProps.getStyleColored("radical", itemColor)
-      );
+      this.onText(obj.label,
+        imgProps.getStyleColored("radical", itemColor));
     },
     comment(obj) {
-      this.figText = drawText(
-        itemFrame,
-        obj.text,
-        imgProps.getStyleColored("comment", itemColor)
-      );
+      this.onMarkup(obj.text,
+        imgProps.getStyleColored("comment", itemColor));
+      // this.figText = drawText(
+      //   itemFrame,
+      //   obj.text,
+      //   imgProps.getStyleColored("comment", itemColor)
+      // );
     },
     custom(obj) {
-      this.figText = drawText(
-        itemFrame,
-        obj.text,
-        imgProps.getStyleColored("custom", itemColor)
-      );
+      this.onMarkup(obj.text,
+        imgProps.getStyleColored("custom", itemColor));
+      // this.figText = drawText(
+      //   itemFrame,
+      //   obj.text,
+      //   imgProps.getStyleColored("custom", itemColor)
+      // );
     },
     comma() {
-      this.figText = drawText(
-        itemFrame,
-        ",",
-        imgProps.getStyleColored("comma", itemColor)
-      );
+      this.onText(",",
+      imgProps.getStyleColored("comma", itemColor));
     },
   });
-  let rcCore: Rect | undefined;
-  if (figText) {
-    rcCore = getTextInternalRect(figText);
+  if (rcCore) {
     if (item.n.isSpecified()) {
       drawTextNear(
         itemFrame,
@@ -84,5 +96,5 @@ export const buildItem = (
     // TODO: dots, dashes
   }
   itemFrame.update();
-  return { itemFrame, figText, rcCore };
+  return { itemFrame, figText: fig, rcCore };
 };

@@ -7,12 +7,22 @@ import { drawTag } from "../../utils/xml/drawTag";
 import { escapeXml } from "../../utils/xml/escapeXml";
 import { XmlAttrs } from "../../utils/xml/xmlTypes";
 import { toa } from "../../math";
+import { scaleFontFace } from "../utils/scaleFontFace";
+import { makeCanvasFontProp } from "./browserUtils/makeWebFontProps";
 
 export class SvgWebLocalFont implements LocalFont {
   private canvas: HTMLCanvasElement;
 
   constructor(private webFontProps: WebFontProps) {
     this.canvas = document.createElement("canvas");
+  }
+
+  createScaled(scale: number): LocalFont {
+    const newProps = {...this.webFontProps};
+    newProps.cssHeight *= scale;
+    newProps.fontFace = scaleFontFace(newProps.fontFace, scale);
+    newProps.canvasFont = makeCanvasFontProp(newProps);
+    return new SvgWebLocalFont(newProps);
   }
 
   getFontFace(): CommonFontFace {

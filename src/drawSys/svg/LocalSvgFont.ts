@@ -11,6 +11,7 @@ import { SvgFont } from "../portableFonts/svgFont/SvgFont";
 import { SvgSurface } from "./SvgSurface";
 import { makeGlyphId } from "./svgUtils/makeGlyphId";
 import { drawTag } from "../../utils/xml/drawTag";
+import { scaleFontFace } from "../utils/scaleFontFace";
 
 export class LocalSvgFont implements LocalFont {
   private factory: SvgFont;
@@ -26,15 +27,16 @@ export class LocalSvgFont implements LocalFont {
     const originHeight = factory.getHeight();
     const scale = props.height / originHeight;
     this.scale = scale;
-    this.fontFace = {
-      ...factory.fontFace,
-    };
-    this.fontFace.ascent *= scale;
-    this.fontFace.descent *= scale;
-    this.fontFace.capHeight *= scale;
-    this.fontFace.xHeight *= scale;
-    const { bbox } = factory.fontFace;
-    if (bbox) this.fontFace.bbox = bbox.map((v) => v * scale) as FontFaceBBox;
+    this.fontFace = scaleFontFace(factory.fontFace, scale);
+    // this.fontFace = {
+    //   ...factory.fontFace,
+    // };
+    // this.fontFace.ascent *= scale;
+    // this.fontFace.descent *= scale;
+    // this.fontFace.capHeight *= scale;
+    // this.fontFace.xHeight *= scale;
+    // const { bbox } = factory.fontFace;
+    // if (bbox) this.fontFace.bbox = bbox.map((v) => v * scale) as FontFaceBBox;
 
     this.transform = factory.getTransform();
     this.transform.scale(scale);
