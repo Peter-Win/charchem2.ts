@@ -82,7 +82,7 @@ export class ChemImgProps {
   init() {
     // Длина связи вычисляется из высоты стандартного шрифта
     const me = this;
-    me.line = me.line || getFontHeight(me.stdStyle.font.getFontFace()) * 1.2;
+    me.line = me.line || getFontHeight(me.stdStyle.font.getFontFace()) * 1.6;
     const { line } = me;
 
     // Ширина линии определяется по длине связи с использованием коэффициента
@@ -119,5 +119,9 @@ export class ChemImgProps {
     return style.style.fill === realColor
       ? style
       : { ...style, style: { ...style.style, fill: realColor } };
+  }
+
+  static getIndexStyles(): ChemStyleId[] {
+    return ["itemCount", "itemMass", "nodeCharge", "oxidationState"];
   }
 }

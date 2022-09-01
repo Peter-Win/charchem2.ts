@@ -152,7 +152,9 @@ describe("makeTextFormula", () => {
     const expr = compile('{R^1}-"A_{123}"');
     expect(expr.getMessage()).toBe("");
     expect(makeTextFormula(expr)).toBe("R1-A123");
-    expect(makeTextFormula(expr, rulesHtml)).toBe("<i>R<sup>1</sup></i>-<em>A<sub>123</sub></em>");
+    expect(makeTextFormula(expr, rulesHtml)).toBe(
+      "<i>R<sup>1</sup></i>-<em>A<sub>123</sub></em>"
+    );
     expect(makeTextFormula(expr, rulesMhchem)).toBe("R^{1}-A_{123}");
-  })
+  });
 });

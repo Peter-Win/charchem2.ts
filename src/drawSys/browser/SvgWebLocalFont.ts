@@ -18,7 +18,7 @@ export class SvgWebLocalFont implements LocalFont {
   }
 
   createScaled(scale: number): LocalFont {
-    const newProps = {...this.webFontProps};
+    const newProps = { ...this.webFontProps };
     newProps.cssHeight *= scale;
     newProps.fontFace = scaleFontFace(newProps.fontFace, scale);
     newProps.canvasFont = makeCanvasFontProp(newProps);

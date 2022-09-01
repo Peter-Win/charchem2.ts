@@ -87,14 +87,14 @@ export class RulesHtml extends RulesBase {
   }
 
   override markupSection(type: MarkupChunkType, isOpen: boolean): string {
-    const tag = markupTagDict[type] ?? "span"; 
-    return isOpen ? `<${tag}>` : `</${tag}>`
+    const tag = markupTagDict[type] ?? "span";
+    return isOpen ? `<${tag}>` : `</${tag}>`;
   }
 }
 
 const markupTagDict: Record<string, string> = {
-  "sup": "sup",
-  "sub": "sub",
+  sup: "sup",
+  sub: "sub",
 };
 
 export const rulesHtml = Object.freeze(new RulesHtml());

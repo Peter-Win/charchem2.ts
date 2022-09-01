@@ -2,7 +2,6 @@ import { ChemNodeItem } from "../core/ChemNodeItem";
 import { FigFrame } from "../drawSys/figures/FigFrame";
 import { ChemImgProps, TextProps } from "../drawSys/ChemImgProps";
 import { drawText } from "./drawText";
-import { FigText } from "../drawSys/figures/FigText";
 import { Rect } from "../math/Rect";
 import { drawTextNear } from "./drawTextNear";
 import { getTextInternalRect } from "./getTextInternalRect";
@@ -26,50 +25,38 @@ export const buildItem = (
     fig: undefined as Figure | undefined,
     rcCore: undefined as Rect | undefined,
     onText(text: string, style: TextProps) {
-      const txFig = drawText(
-        itemFrame,
-        text,
-        imgProps.getStyleColored("atom", item.atomColor ?? itemColor)
-      );
+      const txFig = drawText(itemFrame, text, style);
       this.fig = txFig;
       this.rcCore = getTextInternalRect(txFig);
     },
-    onMarkup(textWithMarkup: string, style: TextProps){
-      const {fig, irc} = drawTextWithMarkup(textWithMarkup, imgProps, style);
-      itemFrame.addFigure(fig, true);
-      this.fig = fig;
+    onMarkup(textWithMarkup: string, style: TextProps) {
+      const { fig: figM, irc } = drawTextWithMarkup(
+        textWithMarkup,
+        imgProps,
+        style
+      );
+      itemFrame.addFigure(figM, true);
+      this.fig = figM;
       this.rcCore = irc;
     },
 
     atom(obj) {
-      this.onText(obj.id,
-        imgProps.getStyleColored("atom", item.atomColor ?? itemColor));
+      this.onText(
+        obj.id,
+        imgProps.getStyleColored("atom", item.atomColor ?? itemColor)
+      );
     },
     radical(obj) {
-      this.onText(obj.label,
-        imgProps.getStyleColored("radical", itemColor));
+      this.onText(obj.label, imgProps.getStyleColored("radical", itemColor));
     },
     comment(obj) {
-      this.onMarkup(obj.text,
-        imgProps.getStyleColored("comment", itemColor));
-      // this.figText = drawText(
-      //   itemFrame,
-      //   obj.text,
-      //   imgProps.getStyleColored("comment", itemColor)
-      // );
+      this.onMarkup(obj.text, imgProps.getStyleColored("comment", itemColor));
     },
     custom(obj) {
-      this.onMarkup(obj.text,
-        imgProps.getStyleColored("custom", itemColor));
-      // this.figText = drawText(
-      //   itemFrame,
-      //   obj.text,
-      //   imgProps.getStyleColored("custom", itemColor)
-      // );
+      this.onMarkup(obj.text, imgProps.getStyleColored("custom", itemColor));
     },
     comma() {
-      this.onText(",",
-      imgProps.getStyleColored("comma", itemColor));
+      this.onText(",", imgProps.getStyleColored("comma", itemColor));
     },
   });
   if (rcCore) {

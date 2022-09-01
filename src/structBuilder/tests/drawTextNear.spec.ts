@@ -71,9 +71,7 @@ describe("drawTextNear", () => {
     const sub = drawTextNear(frame, rcMain, "2+", imgProps, style2, "RT");
     const rcSub = sub.getRelativeBounds();
     expect(rcSub.left).toBeCloseTo(rcMain.right);
-    expect(rcSub.top + getBaseline(ff2) - ff2.ascent).toBeCloseTo(
-      rcMain.top
-    );
+    expect(rcSub.top + getBaseline(ff2) - ff2.ascent).toBeCloseTo(rcMain.top);
 
     rcMain.B.x = rcSub.B.x;
     imgProps.supKY = 1;

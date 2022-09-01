@@ -1,15 +1,6 @@
-import { CommonFontFace, BBoxIndex } from "../CommonFontFace";
+import { CommonFontFace } from "../CommonFontFace";
 
-export const getBaseline = ({ bbox, ascent }: CommonFontFace): number => {
-  const top = bbox && bbox[BBoxIndex.top];
-  return top || ascent;
-};
+export const getBaseline = ({ ascent }: CommonFontFace): number => ascent;
 
-export const getFontHeight = ({
-  bbox,
-  ascent,
-  descent,
-}: CommonFontFace): number => {
-  const boxHeight = bbox && bbox[BBoxIndex.top] - bbox[BBoxIndex.bottom];
-  return boxHeight || ascent - descent;
-};
+export const getFontHeight = ({ ascent, descent }: CommonFontFace): number =>
+  ascent - descent;

@@ -4,6 +4,7 @@ import { ChemNode } from "../../core/ChemNode";
 import { AgentCmd } from "./AgentCmd";
 import { AgentCmdBrClose, makeBridge } from "./AgentCmdBrClose";
 import { PAgentCtx } from "./PAgentCtx";
+import { getNodeInfo } from "../NodeInfo";
 
 export class AgentCmdNode extends AgentCmd {
   br?: CommonBracket;
@@ -13,7 +14,15 @@ export class AgentCmdNode extends AgentCmd {
   }
 
   override canPush(ctx: PAgentCtx): boolean {
-    if (this.br) makeBridge(ctx, this.br, new Point());
+    if (this.br) {
+      const n0 = this.br.nodes[0];
+      const step = new Point();
+      if (n0) {
+        const ni0 = getNodeInfo(n0, ctx.nodesInfo);
+        step.y = ni0.res.nodeFrame.org.y + ni0.res.center.y;
+      }
+      makeBridge(ctx, this.br, true, step);
+    }
     return false;
   }
 

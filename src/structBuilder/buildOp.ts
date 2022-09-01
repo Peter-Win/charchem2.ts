@@ -33,7 +33,10 @@ interface ResultBuildOp {
 }
 
 export const buildOp = (op: ChemOp, props: ChemImgProps): ResultBuildOp => {
-  const comms: [ResultTextWithMarkup | undefined, ResultTextWithMarkup | undefined] = [
+  const comms: [
+    ResultTextWithMarkup | undefined,
+    ResultTextWithMarkup | undefined
+  ] = [
     ifDef(op.commentPre, (it) => buildOpComment(it, props)),
     ifDef(op.commentPost, (it) => buildOpComment(it, props)),
   ];
@@ -152,8 +155,5 @@ const buildOpComment = (
   color?: string
 ): ResultTextWithMarkup => {
   const tp = props.getStyleColored("opComment", color);
-  // const figure = new FigText(comm.text, font, style);
-  // const irc = getTextInternalRect(figure);
-  // return { figure, irc };
   return drawTextWithMarkup(comm.text, props, tp);
 };

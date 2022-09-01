@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no" ?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg viewBox="0 0 132.4640931582182 105.35989204189079" xmlns="http://www.w3.org/2000/svg" version="1.1" baseProfile="full" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ev="http://www.w3.org/2001/xml-events">
+<svg viewBox="0 0 209.07999999999998 112.5" xmlns="http://www.w3.org/2000/svg" version="1.1" baseProfile="full" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ev="http://www.w3.org/2001/xml-events">
   <defs>
     <path id="HussarBoldWeb-H" d="M248 331v-331h-188v825h188v-329h266v329h188v-825h-188v331h-266z" />
     <path id="HussarBoldWeb-two" d="M363 681c-90 0 -147 -157 -147 -157l-157 76s80 240 304 240c283 0 320 -186 320 -290c0 -193 -291 -385 -291 -385h306v-165h-643v47s425 351 425 503c0 30 -7 131 -117 131z" />
     <path id="HussarBoldWeb-O" d="M23 413c0 241 189 427 416 427c229 0 415 -186 415 -427s-178 -428 -415 -428c-244 0 -416 187 -416 428zM226 413c0 -123 59 -246 213 -246c150 0 212 123 212 246s-66 246 -212 246c-145 0 -213 -123 -213 -246z" />
   </defs>
-  <use xlink:href="#HussarBoldWeb-H" transform="matrix(0.06335569789469016 0 0 -0.06335569789469016 0 77.76215003896375)" fill="#333" />
-  <use xlink:href="#HussarBoldWeb-two" transform="matrix(0.038013418736814096 0 0 -0.038013418736814096 48.2770417957539 92.01718206526904)" fill="#333" />
-  <use xlink:href="#HussarBoldWeb-O" transform="matrix(0.06335569789469016 0 0 -0.06335569789469016 76.90114610457492 77.76215003896375)" fill="#333" />
-  <path d="M0 0H132.46M0 -77.76V27.6" fill="none" stroke="magenta" transform="translate(0,77.76)" />
+  <use xlink:href="#HussarBoldWeb-H" transform="matrix(0.1 0 0 -0.1 0 75)" fill="#333" />
+  <use xlink:href="#HussarBoldWeb-two" transform="matrix(0.06 0 0 -0.06 76.2 97.5)" fill="#333" />
+  <use xlink:href="#HussarBoldWeb-O" transform="matrix(0.1 0 0 -0.1 121.38 75)" fill="#333" />
+  <path d="M0 0H209.08M0 -75V37.5" fill="none" stroke="magenta" transform="translate(0,75)" />
 </svg>

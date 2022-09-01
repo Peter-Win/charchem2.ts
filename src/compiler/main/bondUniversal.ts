@@ -183,9 +183,21 @@ export const setBondProperties = (
   params: BondParams
 ) => {
   ifDef(params.N, (it) => parseBondMultiplicity(compiler, bond, it));
-  if (params.h) {
-    bond.soft = true;
-  }
+  ifDef(params.h, (it) => {
+    bond.soft = true; // <- this feature of ver 0.0
+    // h+, h- : feature of ver 2.0
+    const connection = (sign: -1 | 1) => {
+      bond.n = 0;
+      if (bond.dir && bond.dir.x === 0) {
+        bond.dir.x = sign * 0.02;
+      }
+    };
+    if (it.value === "+") {
+      connection(1);
+    } else if (it.value === "-") {
+      connection(-1);
+    }
+  });
   ifDef(params.T, (it) => {
     bond.tx = it.value;
   });

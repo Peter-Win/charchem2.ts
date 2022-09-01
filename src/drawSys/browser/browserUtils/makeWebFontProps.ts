@@ -13,12 +13,12 @@ export const makeCanvasFontProp = (props: {
   italic: boolean;
   bold: boolean;
 }): string => {
-  const {fontFamily, cssHeight, bold, italic} = props;
+  const { fontFamily, cssHeight, bold, italic } = props;
   const fontStyleChunks = [`${cssHeight}px`, fontFamily];
   if (bold) fontStyleChunks.unshift("bold");
   if (italic) fontStyleChunks.unshift("italic");
   return fontStyleChunks.join(" ");
-}
+};
 
 /**
  * For browser only
@@ -36,7 +36,12 @@ export const makeWebFontProps = (props: LocalFontProps): WebFontProps => {
   const baseline = vOffset + cssHeight;
 
   const bold = isBold(fontWeight);
-  const canvasFont = makeCanvasFontProp({fontFamily, cssHeight, bold, italic});
+  const canvasFont = makeCanvasFontProp({
+    fontFamily,
+    cssHeight,
+    bold,
+    italic,
+  });
 
   // This code can throw exception, if run in Node or old browser.
   const canvas = document.createElement("canvas");
