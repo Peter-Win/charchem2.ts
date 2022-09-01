@@ -10,6 +10,7 @@ import {
 import { parseKern } from "./utils/parseKern";
 import { kernKey } from "./kernKey";
 import { Matrix2x3 } from "../../../math/Matrix2x3";
+import { adjustFontFace } from "./utils/adjustFontFace";
 
 export class SvgFont {
   readonly fontFace: CommonFontFace;
@@ -122,9 +123,10 @@ export class SvgFont {
     if (!fontFace) {
       throw new Error("FontFace not found");
     }
+
     return new SvgFont(
       fontId,
-      fontFace,
+      adjustFontFace(fontFace, codeMap),
       glyphs,
       codeMap,
       nameMap,

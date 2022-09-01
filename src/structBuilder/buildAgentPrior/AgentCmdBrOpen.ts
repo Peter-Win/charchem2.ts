@@ -7,6 +7,8 @@ import { AgentCmdBridge } from "./AgentCmdBridge";
 export class AgentCmdBrOpen extends AgentCmd {
   isBridge: boolean = false;
 
+  withBracket: boolean = false;
+
   figure?: Figure;
 
   constructor(public readonly begin: ChemBracketBegin) {
@@ -34,6 +36,7 @@ export class AgentCmdBrOpen extends AgentCmd {
       // eslint-disable-next-line prefer-destructuring
       this.begin.nodes[0] = cmd.end.nodes[0];
       this.isBridge = true;
+      this.withBracket = true;
     } else {
       const [n1, n2] = this.begin.nodes;
       if (n1?.subChain !== n2?.subChain) {

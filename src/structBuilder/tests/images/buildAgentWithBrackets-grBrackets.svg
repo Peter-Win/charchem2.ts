@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no" ?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg viewBox="0 0 195.50768821393953 160" xmlns="http://www.w3.org/2000/svg" version="1.1" baseProfile="full" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ev="http://www.w3.org/2001/xml-events">
+<svg viewBox="0 0 234.40533333333332 192" xmlns="http://www.w3.org/2000/svg" version="1.1" baseProfile="full" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ev="http://www.w3.org/2001/xml-events">
   <defs>
     <path id="HussarBoldWeb-H" d="M248 331v-331h-188v825h188v-329h266v329h188v-825h-188v331h-266z" />
     <path id="HussarBoldWeb-O" d="M23 413c0 241 189 427 416 427c229 0 415 -186 415 -427s-178 -428 -415 -428c-244 0 -416 187 -416 428zM226 413c0 -123 59 -246 213 -246c150 0 212 123 212 246s-66 246 -212 246c-145 0 -213 -123 -213 -246z" />
@@ -8,29 +8,29 @@
     <path id="HussarBoldWeb-three" d="M205 587l-148 72s42 181 273 181c157 0 271 -100 271 -240c0 -68 -28 -120 -73 -155c64 -39 105 -102 105 -189c0 -158 -129 -271 -306 -271c-254 0 -310 203 -310 203l174 85s11 -126 135 -126c69 0 119 39 119 109c0 71 -53 121 -119 121c-20 0 -36 -6 -36 -6v123h41
  c50 0 99 44 99 104c0 53 -49 91 -102 91c-104 0 -123 -102 -123 -102z" />
   </defs>
-  <path d="M11.66 0L34.89 0" fill="none" stroke="black" stroke-width="2" stroke-linecap="round" transform="translate(47.66,58.56)" />
-  <path d="M48 11.5L48 36.5" fill="none" stroke="black" stroke-width="2" stroke-linecap="round" transform="translate(47.66,58.56)" />
-  <path d="M34.89 48L11.66 48" fill="none" stroke="black" stroke-width="2" stroke-linecap="round" transform="translate(47.66,58.56)" />
-  <path d="M108.23 -12.5L108.23 12.5" fill="none" stroke="black" stroke-width="2" stroke-linecap="round" transform="translate(47.66,58.56)" />
-  <path d="M108.23 35.5L108.23 60.5" fill="none" stroke="black" stroke-width="2" stroke-linecap="round" transform="translate(47.66,58.56)" />
-  <use xlink:href="#HussarBoldWeb-H" transform="matrix(0.02534227915787606 0 0 -0.02534227915787606 38 68.06576321441467)" fill="black" />
-  <use xlink:href="#HussarBoldWeb-O" transform="matrix(0.02534227915787606 0 0 -0.02534227915787606 84.54281894842214 68.06576321441467)" fill="black" />
-  <use xlink:href="#HussarBoldWeb-O" transform="matrix(0.02534227915787606 0 0 -0.02534227915787606 84.54281894842214 116.06576321441467)" fill="black" />
-  <use xlink:href="#HussarBoldWeb-H" transform="matrix(0.02534227915787606 0 0 -0.02534227915787606 38 116.06576321441469)" fill="black" />
-  <path d="M8 0Q5.57 0 4.03 2.4Q2.49 4.8 1.63 9.72Q0.77 14.64 0.39 22.49Q0 30.35 0 43.81Q0 57.18 0.38 65.11Q0.76 73.04 1.62 78.02Q2.48 83.01 4.02 85.51Q5.57 88 8 88L8 84.14Q7 84.14 6.23 83.58Q5.35 82.92 4.74 81.04Q4.05 78.96 3.62 75.25Q3.12 70.92 2.88 63.76Q2.62 56.19 2.62 44.19Q2.62 33.6 2.83 26.19Q3.05 18.78 3.55 14.07Q3.95 10.12 4.55 7.91Q5.08 5.98 5.81 4.99Q6.65 3.86 8 3.86L8 0" fill="black" transform="translate(30,36.96)" />
-  <path d="M0 88Q2.43 88 3.97 85.6Q5.51 83.2 6.37 78.28Q7.23 73.36 7.61 65.51Q8 57.65 8 44.19Q8 30.82 7.62 22.89Q7.24 14.96 6.38 9.98Q5.52 4.99 3.98 2.49Q2.43 0 0 0L0 3.86Q1 3.86 1.77 4.42Q2.65 5.08 3.26 6.96Q3.95 9.04 4.38 12.75Q4.88 17.08 5.12 24.24Q5.38 31.81 5.38 43.81Q5.38 54.4 5.17 61.81Q4.95 69.22 4.45 73.93Q4.05 77.88 3.45 80.09Q2.92 82.02 2.19 83.01Q1.35 84.14 0 84.14L0 88" fill="black" transform="translate(106.77,36.96)" />
-  <path d="M8 0H0V88H8V86.53H3.16V1.47H8Z" fill="black" transform="translate(20,36.96)" />
-  <path d="M0 0H8V88H0V86.53H4.84V1.47H0Z" fill="black" transform="translate(116.77,36.96)" />
-  <path d="M8 0H0V88H8V86.53H3.16V1.47H8Z" fill="black" transform="translate(10,36.96)" />
-  <path d="M0 0H8V88H0V86.53H4.84V1.47H0Z" fill="black" transform="translate(126.77,36.96)" />
-  <use xlink:href="#HussarBoldWeb-H" transform="matrix(0.02534227915787606 0 0 -0.02534227915787606 146.2251788214573 44.06576321441469)" fill="black" />
-  <use xlink:href="#HussarBoldWeb-O" transform="matrix(0.02534227915787606 0 0 -0.02534227915787606 144.76799776987943 92.06576321441469)" fill="black" />
-  <use xlink:href="#HussarBoldWeb-H" transform="matrix(0.02534227915787606 0 0 -0.02534227915787606 146.2251788214573 140.0657632144147)" fill="black" />
-  <path d="M8 0H0V136H8V134.53H3.16V1.47H8Z" fill="black" transform="translate(136.77,12.96)" />
-  <path d="M0 0H8V136H0V134.53H4.84V1.47H0Z" fill="black" transform="translate(166.99,12.96)" />
-  <path d="M4.26 35.4L4.26 24.73Q4.26 13.27 5.15 7.78Q6.04 2.28 8 1.32L8 0Q5.23 1 4.04 6.85Q2.86 12.7 2.86 24.26L2.86 35.4L2.86 35.4L2.86 54.31Q2.86 60.59 2.11 63.79Q1.36 66.99 0 67.1L0 68.77Q1.33 68.88 2.09 72.1Q2.86 75.31 2.86 81.69L2.86 100.6L2.86 111.74Q2.86 123.3 4.04 129.15Q5.23 135 8 136L8 134.68Q6.04 133.72 5.15 128.22Q4.26 122.73 4.26 111.27L4.26 100.6L4.26 100.6L4.26 84.11Q4.26 76.37 3.31 72.68Q2.35 68.99 1.4 68.17L1.4 67.83Q2.34 66.99 3.25 63.5Q4.15 60.01 4.26 51.89Z" fill="black" transform="translate(0,12.96)" />
-  <path d="M5.14 35.4L5.14 24.26Q5.14 12.7 3.96 6.85Q2.77 1 0 0L0 1.32Q1.96 2.28 2.85 7.78Q3.74 13.27 3.74 24.73L3.74 35.4L3.74 35.4L3.74 51.89Q3.85 60.01 4.75 63.5Q5.66 66.99 6.6 67.83L6.6 68.17Q5.65 68.99 4.69 72.68Q3.74 76.37 3.74 84.11L3.74 100.6L3.74 111.27Q3.74 122.73 2.85 128.22Q1.96 133.72 0 134.68L0 136Q2.77 135 3.96 129.15Q5.14 123.3 5.14 111.74L5.14 100.6L5.14 100.6L5.14 81.69Q5.14 75.31 5.91 72.1Q6.67 68.88 8 68.77L8 67.1Q6.64 66.99 5.89 63.79Q5.14 60.59 5.14 54.31Z" fill="black" transform="translate(176.99,12.96)" />
-  <use xlink:href="#HussarBoldWeb-plus" transform="matrix(0.015205367494725636 0 0 -0.015205367494725636 184.99317659133675 18.6629160093513)" fill="black" />
-  <ellipse fill="none" stroke="black" transform="translate(176.99,12.96)" cx="12.81" cy="0" rx="5.7" ry="5.7" />
-  <use xlink:href="#HussarBoldWeb-three" transform="matrix(0.015205367494725636 0 0 -0.015205367494725636 184.99317659133675 154.6629160093513)" fill="black" />
+  <path d="M15.55 0L46.41 0" fill="none" stroke="black" stroke-width="2" stroke-linecap="round" transform="translate(51.55,56.89)" />
+  <path d="M64 17.56L64 46.44" fill="none" stroke="black" stroke-width="2" stroke-linecap="round" transform="translate(51.55,56.89)" />
+  <path d="M46.41 64L15.55 64" fill="none" stroke="black" stroke-width="2" stroke-linecap="round" transform="translate(51.55,56.89)" />
+  <path d="M133.18 -14.44L133.18 14.44" fill="none" stroke="black" stroke-width="2" stroke-linecap="round" transform="translate(51.55,56.89)" />
+  <path d="M133.18 49.56L133.18 78.44" fill="none" stroke="black" stroke-width="2" stroke-linecap="round" transform="translate(51.55,56.89)" />
+  <use xlink:href="#HussarBoldWeb-H" transform="matrix(0.035555555555555556 0 0 -0.035555555555555556 38 72.44444444444441)" fill="black" />
+  <use xlink:href="#HussarBoldWeb-O" transform="matrix(0.035555555555555556 0 0 -0.035555555555555556 99.95555555555555 72.44444444444441)" fill="black" />
+  <use xlink:href="#HussarBoldWeb-O" transform="matrix(0.035555555555555556 0 0 -0.035555555555555556 99.95555555555555 136.4444444444444)" fill="black" />
+  <use xlink:href="#HussarBoldWeb-H" transform="matrix(0.035555555555555556 0 0 -0.035555555555555556 38 136.44444444444443)" fill="black" />
+  <path d="M8 0Q5.57 0 4.03 2.84Q2.49 5.67 1.63 11.48Q0.77 17.3 0.39 26.58Q0 35.87 0 51.78Q0 67.57 0.38 76.94Q0.76 86.31 1.62 92.21Q2.48 98.1 4.02 101.05Q5.57 104 8 104L8 99.44Q7 99.44 6.23 98.77Q5.35 97.99 4.74 95.77Q4.05 93.32 3.62 88.93Q3.12 83.81 2.88 75.36Q2.62 66.4 2.62 52.22Q2.62 39.71 2.83 30.95Q3.05 22.19 3.55 16.63Q3.95 11.96 4.55 9.34Q5.08 7.06 5.81 5.9Q6.65 4.56 8 4.56L8 0" fill="black" transform="translate(30,41.33)" />
+  <path d="M0 104Q2.43 104 3.97 101.16Q5.51 98.33 6.37 92.52Q7.23 86.7 7.61 77.42Q8 68.13 8 52.22Q8 36.43 7.62 27.06Q7.24 17.69 6.38 11.79Q5.52 5.9 3.98 2.95Q2.43 0 0 0L0 4.56Q1 4.56 1.77 5.23Q2.65 6.01 3.26 8.23Q3.95 10.68 4.38 15.07Q4.88 20.19 5.12 28.64Q5.38 37.6 5.38 51.78Q5.38 64.29 5.17 73.05Q4.95 81.81 4.45 87.37Q4.05 92.04 3.45 94.66Q2.92 96.94 2.19 98.1Q1.35 99.44 0 99.44L0 104" fill="black" transform="translate(131.14,41.33)" />
+  <path d="M8 0H0V104H8V102.53H3.16V1.47H8Z" fill="black" transform="translate(20,41.33)" />
+  <path d="M0 0H8V104H0V102.53H4.84V1.47H0Z" fill="black" transform="translate(141.14,41.33)" />
+  <path d="M8 0H0V104H8V102.53H3.16V1.47H8Z" fill="black" transform="translate(10,41.33)" />
+  <path d="M0 0H8V104H0V102.53H4.84V1.47H0Z" fill="black" transform="translate(151.14,41.33)" />
+  <use xlink:href="#HussarBoldWeb-H" transform="matrix(0.035555555555555556 0 0 -0.035555555555555556 171.1822222222222 40.444444444444436)" fill="black" />
+  <use xlink:href="#HussarBoldWeb-O" transform="matrix(0.035555555555555556 0 0 -0.035555555555555556 169.13777777777779 104.44444444444443)" fill="black" />
+  <use xlink:href="#HussarBoldWeb-H" transform="matrix(0.035555555555555556 0 0 -0.035555555555555556 171.1822222222222 168.44444444444443)" fill="black" />
+  <path d="M8 0H0V168H8V166.53H3.16V1.47H8Z" fill="black" transform="translate(161.14,9.33)" />
+  <path d="M0 0H8V168H0V166.53H4.84V1.47H0Z" fill="black" transform="translate(200.32,9.33)" />
+  <path d="M4.26 43.73L4.26 30.55Q4.26 16.39 5.15 9.61Q6.04 2.82 8 1.63L8 0Q5.23 1.24 4.04 8.46Q2.86 15.69 2.86 29.97L2.86 43.73L2.86 43.73L2.86 67.08Q2.86 74.85 2.11 78.8Q1.36 82.75 0 82.89L0 84.95Q1.33 85.09 2.09 89.06Q2.86 93.03 2.86 100.92L2.86 124.27L2.86 138.03Q2.86 152.31 4.04 159.54Q5.23 166.76 8 168L8 166.37Q6.04 165.18 5.15 158.39Q4.26 151.61 4.26 137.45L4.26 124.27L4.26 124.27L4.26 103.91Q4.26 94.34 3.31 89.78Q2.35 85.23 1.4 84.21L1.4 83.79Q2.34 82.75 3.25 78.44Q4.15 74.13 4.26 64.09Z" fill="black" transform="translate(0,9.33)" />
+  <path d="M5.14 43.73L5.14 29.97Q5.14 15.69 3.96 8.46Q2.77 1.24 0 0L0 1.63Q1.96 2.82 2.85 9.61Q3.74 16.39 3.74 30.55L3.74 43.73L3.74 43.73L3.74 64.09Q3.85 74.13 4.75 78.44Q5.66 82.75 6.6 83.79L6.6 84.21Q5.65 85.23 4.69 89.78Q3.74 94.34 3.74 103.91L3.74 124.27L3.74 137.45Q3.74 151.61 2.85 158.39Q1.96 165.18 0 166.37L0 168Q2.77 166.76 3.96 159.54Q5.14 152.31 5.14 138.03L5.14 124.27L5.14 124.27L5.14 100.92Q5.14 93.03 5.91 89.06Q6.67 85.09 8 84.95L8 82.89Q6.64 82.75 5.89 78.8Q5.14 74.85 5.14 67.08Z" fill="black" transform="translate(210.32,9.33)" />
+  <use xlink:href="#HussarBoldWeb-plus" transform="matrix(0.021333333333333333 0 0 -0.021333333333333333 218.32 18.66666666666666)" fill="black" />
+  <ellipse fill="none" stroke="black" transform="translate(210.32,9.33)" cx="14.75" cy="0" rx="9.33" ry="9.33" />
+  <use xlink:href="#HussarBoldWeb-three" transform="matrix(0.021333333333333333 0 0 -0.021333333333333333 218.32 186.66666666666669)" fill="black" />
 </svg>

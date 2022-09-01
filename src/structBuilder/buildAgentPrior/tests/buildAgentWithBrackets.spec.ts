@@ -9,6 +9,8 @@ import {
 import { buildAgentPrior } from "../buildAgentPrior";
 import { FigText } from "../../../drawSys/figures/FigText";
 import { ChemBracketBegin, ChemBracketEnd } from "../../../core/ChemBracket";
+import { ChemNode } from "../../../core/ChemNode";
+import { makeTextFormula } from "../../../inspectors/makeTextFormula";
 
 describe("buildAgentPrior with brackets", () => {
   it("Text bracket connected with nodes directly", () => {
@@ -148,9 +150,52 @@ describe("buildAgentPrior with brackets", () => {
     const brc0 = bb[0]!.getRelativeBounds();
     expect(bb[1]!.getRelativeBounds().top).toBeCloseTo(brc0.top);
     expect(bb[1]!.getRelativeBounds().bottom).toBeCloseTo(brc0.bottom);
-    // expect(bb[2]!.getRelativeBounds().top).not.toBeCloseTo(brc0.top); // границы второй скобки выше из-за заряда
     expect(bb[2]!.getRelativeBounds().bottom).toBeCloseTo(brc0.bottom);
-    // expect(bb[3]!.getRelativeBounds().top).not.toBeCloseTo(brc0.top);
     expect(bb[3]!.getRelativeBounds().bottom).toBeCloseTo(brc0.bottom);
+  });
+
+  it("Direct connection", () => {
+    //  |
+    //  N(CH2)3F
+    //  234  56 :commands
+    const expr = compile("|N(CH2)3Cl");
+    expect(expr.getMessage()).toBe("");
+    const agent = expr.getAgents()[0]!;
+    const { commands } = agent;
+    expect(commands[2]).toBeInstanceOf(ChemNode);
+    const n2 = commands[2] as ChemNode;
+    expect(makeTextFormula(n2)).toBe("N");
+    expect(commands[3]).toBeInstanceOf(ChemBracketBegin);
+    const bb = commands[3] as ChemBracketBegin;
+    expect(commands[4]).toBeInstanceOf(ChemNode);
+    const n4 = commands[4] as ChemNode;
+    expect(makeTextFormula(n4)).toBe("CH2");
+    expect(commands[5]).toBeInstanceOf(ChemBracketEnd);
+    const be = commands[5] as ChemBracketEnd;
+    expect(commands[6]).toBeInstanceOf(ChemNode);
+    const n6 = commands[6] as ChemNode;
+    expect(makeTextFormula(n6)).toBe("Cl");
+    expect(bb.nodes[0]).toBe(n2);
+    expect(bb.nodes[1]).toBe(n4);
+    expect(be.nodes[0]).toBe(n4);
+    expect(be.nodes[1]).toBe(n6);
+
+    const surface = createTestSurface();
+    const imgProps = createTestImgProps(surface, 40);
+    const { agentFrame } = buildAgentPrior(agent, imgProps);
+    saveSurface("buildAgentWithBrackets-nch2cl", agentFrame, surface);
+    const { figures } = agentFrame;
+    // console.log(figures);
+    // Все узлы, кроме первого (автоматического), рисуются фигурой: фрейм и внутри один или два фрейма с текстом
+    const txNodeFrames = figures.filter(
+      (topFig) =>
+        topFig instanceof FigFrame &&
+        topFig.figures.length > 0 &&
+        topFig.figures.every((fig) => fig instanceof FigFrame)
+    );
+    expect(txNodeFrames.length).toBe(3);
+    // console.log(txNodeFrames[0]!.getRelativeBounds().toString());
+    // console.log(txNodeFrames[1]!.getRelativeBounds().toString());
+    // console.log(txNodeFrames[2]!.getRelativeBounds().toString());
   });
 });

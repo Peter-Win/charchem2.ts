@@ -88,7 +88,7 @@ export class RulesBase {
   useMarkup(text: string): string {
     const topChunk = parseMarkup(text);
     let result = "";
-    markupFlat(topChunk, ({phase, chunk}) => {
+    markupFlat(topChunk, ({ phase, chunk }) => {
       if (typeof chunk === "string") {
         result += chunk;
       } else if (phase === "open" || phase === "close") {

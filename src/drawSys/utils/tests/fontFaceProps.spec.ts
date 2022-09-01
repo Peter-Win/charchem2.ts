@@ -35,11 +35,11 @@ const poorDef = `<font-face units-per-em="2048" ascent="1536" descent="-512" />`
 const poorFontFace = fontFaceFromDef(poorDef);
 
 it("getBaseline", () => {
-  expect(getBaseline(richFontFace)).toBe(1119);
+  expect(getBaseline(richFontFace)).toBeCloseTo(780);
   expect(getBaseline(poorFontFace)).toBe(1536);
 });
 
 it("getFontHeight", () => {
-  expect(getFontHeight(richFontFace)).toBe(1119 + 245);
+  expect(getFontHeight(richFontFace)).toBe(780 + 220);
   expect(getFontHeight(poorFontFace)).toBe(1536 + 512);
 });

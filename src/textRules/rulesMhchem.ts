@@ -73,6 +73,6 @@ class RulesMhchem extends RulesBase {
 const markupDict: Record<string, string> = {
   sup: "^",
   sub: "_",
-}
+};
 
 export const rulesMhchem = Object.freeze(new RulesMhchem());

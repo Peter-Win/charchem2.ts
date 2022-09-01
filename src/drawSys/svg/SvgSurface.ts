@@ -40,6 +40,7 @@ export abstract class SvgSurface implements AbstractSurface {
 
   setSize(size: Point) {
     this.size = size.clone();
+    this.clear();
   }
 
   drawPath(org: Point, path: PathSeg[], style: PathStyle): void {
@@ -90,6 +91,11 @@ export abstract class SvgSurface implements AbstractSurface {
 
   exportText(options?: SvgExportOptions): string {
     return buildSvgText(this.size, this.defs, this.body, options ?? {});
+  }
+
+  clear() {
+    this.defs = {};
+    this.body.length = 0;
   }
 
   private size: Point = new Point();

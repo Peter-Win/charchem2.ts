@@ -135,16 +135,18 @@ const drawBracket = ({
 export const makeBridge = (
   ctx: PAgentCtx,
   bracket: CommonBracket,
+  isSrcBracket: boolean,
   step?: Point
 ) => {
   const [node0, node1] = bracket.nodes;
   if (node0 && node1) {
-    const src = { node: node0, allBox: true };
+    const src = { node: node0, allBox: isSrcBracket };
     const dst = { node: node1, allBox: true };
     let realStep: Point;
     if (step) {
       realStep = step;
     } else {
+      // Стыковка скобки со скобкой. Выравнивание пропорционально высоте содержимого кластеров
       realStep = new Point(ctx.props.nodeMargin, 0);
       const { cluster: c0 } = ctx.clusters.findByNode(node0);
       const { cluster: c1 } = ctx.clusters.findByNode(node1);
@@ -276,7 +278,13 @@ const processBrackets = (
   cluster.contentRect = contentRect;
 
   if (cmdOpen.isBridge) {
-    makeBridge(ctx, cmdOpen.begin);
+    let step: Point | undefined;
+    const n0 = cmdOpen.begin.nodes[0];
+    if (n0 && !cmdOpen.withBracket) {
+      const ni0 = getNodeInfo(n0, nodesInfo);
+      step = new Point(0, ni0.res.nodeFrame.org.y + ni0.res.center.y);
+    }
+    makeBridge(ctx, cmdOpen.begin, cmdOpen.withBracket, step);
   }
 };
 

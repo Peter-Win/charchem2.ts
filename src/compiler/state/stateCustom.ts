@@ -1,6 +1,5 @@
 import { CompilerState } from "../ChemCompiler";
 import { addNodeItem } from "../main/addNodeItem";
-import { scanTo } from "../parse/scan";
 import { ChemRadical } from "../../core/ChemRadical";
 import { ChemCustom } from "../../core/ChemCustom";
 import { scanPostItem } from "../parse/scanPostItem";

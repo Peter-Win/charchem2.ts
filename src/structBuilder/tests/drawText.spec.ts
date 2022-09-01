@@ -1,6 +1,7 @@
 import { FigFrame } from "../../drawSys/figures/FigFrame";
 import { createTestStyle, createTestSurface } from "./testEnv";
 import { drawText } from "../drawText";
+import { Rect } from "../../math/Rect";
 
 it("drawText", () => {
   const frame = new FigFrame();
@@ -13,7 +14,10 @@ it("drawText", () => {
   expect(fig.font).toBe(style.font);
   expect(fig.style).toBe(style.style);
   expect(fig.org.toString()).toBe("(0, 0)");
-  expect(fig.bounds.toString()).toBe("{0, -15.55, 41.42, 4.45}");
+  const { ascent, descent } = fig.font.getFontFace();
+  const w = fig.font.getTextWidth("COOH");
+  const rcExpected = new Rect(0, -ascent, w, -descent);
+  expect(fig.bounds.toString()).toBe(rcExpected.toString());
   expect(frame.bounds).not.toBe(fig.bounds);
   expect(frame.bounds).toEqual(fig.bounds);
 });

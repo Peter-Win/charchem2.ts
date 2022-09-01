@@ -9,15 +9,15 @@ import { standaloneExportOptions } from "../standaloneExportOptions";
 
 const expectedImage = `<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg viewBox="0 0 147.02817427885378 120" xmlns="http://www.w3.org/2000/svg" version="1.1" baseProfile="full" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ev="http://www.w3.org/2001/xml-events">
+<svg viewBox="0 0 220.5 120" xmlns="http://www.w3.org/2000/svg" version="1.1" baseProfile="full" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ev="http://www.w3.org/2001/xml-events">
   <defs>
     <path id="HussarBoldWeb-one" d="M29 487v186l235 152h89v-825h-188v575z" />
     <path id="HussarBoldWeb-plus" d="M393 158h-153v180h-180v153h180v180h153v-180h180v-153h-180v-180z" />
   </defs>
-  <rect x="10" y="10" width="127.02817427885377" height="100" fill="none" stroke="brown" stroke-width="1" />
-  <use xlink:href="#HussarBoldWeb-one" transform="matrix(0.06335569789469016 0 0 -0.06335569789469016 10 87.76215003896375)" fill="blue" />
-  <use xlink:href="#HussarBoldWeb-plus" transform="matrix(0.06335569789469016 0 0 -0.06335569789469016 53.462008755757445 87.76215003896375)" fill="blue" />
-  <use xlink:href="#HussarBoldWeb-one" transform="matrix(0.06335569789469016 0 0 -0.06335569789469016 110.86227104834673 87.76215003896375)" fill="blue" />
+  <rect x="10" y="10" width="200.5" height="100" fill="none" stroke="brown" stroke-width="1" />
+  <use xlink:href="#HussarBoldWeb-one" transform="matrix(0.1 0 0 -0.1 10 85)" fill="blue" />
+  <use xlink:href="#HussarBoldWeb-plus" transform="matrix(0.1 0 0 -0.1 78.60000000000001 85)" fill="blue" />
+  <use xlink:href="#HussarBoldWeb-one" transform="matrix(0.1 0 0 -0.1 169.20000000000002 85)" fill="blue" />
   <path d="M0 87.7H147" stroke="black" stroke-width="1" fill="none" />
 </svg>`;
 

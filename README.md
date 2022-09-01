@@ -6,6 +6,8 @@ System to describe the chemical formulas for WEB
 Features of 2.0
 - Braces by {{OH}} (+)
 - $background()  (...)
+- extended markup in comments "H_4N^+"-->
+- _(h+), _(h-)
 
 Problems:
 - It is possible to insert unsafe code in HTML formula view by Text and Custom items.
