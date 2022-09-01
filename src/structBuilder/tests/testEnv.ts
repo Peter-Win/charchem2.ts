@@ -74,6 +74,8 @@ const testFont = `<?xml version="1.0" standalone="no"?>
 <missing-glyph horiz-adv-x="500" d="M50 0v500h400v-500h-400zM100 50h300v400h-300v-400z" />
 <glyph glyph-name="C" unicode="C" horiz-adv-x="753" 
  d="M499 170c96 0 162 51 162 51l80 -160s-92 -76 -271 -76c-233 0 -447 190 -447 426c0 237 213 429 447 429c179 0 271 -76 271 -76l-80 -160s-66 51 -162 51c-189 0 -272 -132 -272 -242c0 -111 83 -243 272 -243z" />
+<glyph glyph-name="F" unicode="F" horiz-adv-x="567" 
+ d="M537 825v-165h-289v-164h267v-165h-267v-331h-188v825h477z" />
 <glyph glyph-name="H" unicode="H" horiz-adv-x="762" 
  d="M248 331v-331h-188v825h188v-329h266v329h188v-825h-188v331h-266z" />
 <glyph glyph-name="I" unicode="I" horiz-adv-x="308" 
@@ -111,6 +113,8 @@ d="M386 347v-94c-43 0 -70 -19 -70 -65v-267c0 -83 -31 -181 -159 -181h-97v128h40c3
 <glyph glyph-name="equal" unicode="=" horiz-adv-x="633" d="M60 611h513v-153h-513v153zM60 371h513v-153h-513v153z" />
 
 
+<glyph glyph-name="f" unicode="f" horiz-adv-x="523" 
+ d="M125 585v37c0 150 73 253 201 253c90 0 146 -46 146 -46l-62 -125s-24 14 -53 14c-45 0 -55 -30 -55 -101v-32h118v-135h-118v-450h-177v450h-74v135h74z" />
 <glyph glyph-name="g" unicode="g" horiz-adv-x="683" 
  d="M37 -126l145 71c19 -31 62 -66 139 -66c49 0 125 29 125 120v38c-38 -42 -98 -52 -168 -52c-150 0 -255 121 -255 271s105 272 255 272c68 0 123 -22 165 -61h3v46h177v-527c0 -172 -127 -261 -302 -261c-107 0 -230 24 -284 149zM211 256c0 -70 48 -120 120 -120
  c69 0 119 50 119 120c0 71 -53 121 -119 121c-67 0 -120 -50 -120 -121z" />
