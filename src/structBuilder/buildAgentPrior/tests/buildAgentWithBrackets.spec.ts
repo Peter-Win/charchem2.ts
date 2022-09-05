@@ -92,12 +92,11 @@ describe("buildAgentPrior with brackets", () => {
     expect(bracketFrames).toHaveLength(4);
     const src = bracketFrames[1]!.getRelativeBounds();
     const dst = bracketFrames[2]!.getRelativeBounds();
-    // В новой реализации привязка к базовой линии связующих узлов
-    // expect(src.top - (dst.height - src.height) / 2).toBeCloseTo(dst.top);
-    // expect(src.bottom + (dst.height - src.height) / 2).toBeCloseTo(dst.bottom);
+    expect(src.top - (dst.height - src.height) / 2).toBeCloseTo(dst.top);
+    expect(src.bottom + (dst.height - src.height) / 2).toBeCloseTo(dst.bottom);
     // Теперь выходной узел первой скобки N находится на одном уровне с входным узлом второй скобки C
     // А высота второй скобки отличается на стандартную длину связи
-    expect(src.top - imgProps.line).toBeCloseTo(dst.top);
+    // expect(src.top - imgProps.line).toBeCloseTo(dst.top);
   });
   it("Brackets with hard bonds", () => {
     const expr = compile("Cl/[\\\\<|Cl>]4/\\Cl");

@@ -124,12 +124,10 @@ export const makeHashTrapezoidPath = (
     const desiredStep = lineWidth + hatch;
     const stripCount = Math.floor(hatchLen / desiredStep);
     const dStep = dir1.times(lineWidth);
-    // const realStep = hatchLen / stripCount;
     for (let i = 0; i <= stripCount; i++) {
       const t1 = i / stripCount;
-      // const t2 = t1 + lineWidth; // (i + 1) / stripCount;
       const p0 = src.plus(dir.times(t1));
-      const p1 = p0.plus(dStep); // src.plus(dir.times(t2));
+      const p1 = p0.plus(dStep);
       const w1 = minW + (i * dW) / stripCount;
       const w2 = minW + ((i + 1) * dW) / stripCount;
       const p0L = p0.plus(dL.times(w1));

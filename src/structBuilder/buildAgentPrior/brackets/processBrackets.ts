@@ -137,31 +137,29 @@ const drawBracket = ({
 export const makeBridge = (
   ctx: PAgentCtx,
   bracket: CommonBracket,
-  isSrcBracket: boolean,
-  step?: Point
+  isSrcBracket: boolean
 ) => {
   const [node0, node1] = bracket.nodes;
   if (node0 && node1) {
     const src = { node: node0, allBox: isSrcBracket };
     const dst = { node: node1, allBox: true };
-    let realStep: Point;
-    if (step) {
-      realStep = step;
-    } else {
+    let dy = 0;
+    let flAbs = false;
+    if (isSrcBracket) {
       // Стыковка скобки со скобкой. Выравнивание пропорционально высоте содержимого кластеров
-      realStep = new Point(ctx.props.nodeMargin, 0);
       const { cluster: c0 } = ctx.clusters.findByNode(node0);
       const { cluster: c1 } = ctx.clusters.findByNode(node1);
       const b0 = c0.contentRect ?? c0.frame.bounds;
       const b1 = c1.contentRect ?? c1.frame.bounds;
-      realStep.y = b0.top - b1.top + (b0.height - b1.height) / 2;
+      dy = b0.top - b1.top + (b0.height - b1.height) / 2;
+      flAbs = true;
     }
     ctx.clusters.unite(
       ctx,
       src,
       dst,
-      new Point(ctx.props.bracketSpace, 0),
-      false
+      new Point(ctx.props.bracketSpace, dy),
+      flAbs
     );
   }
 };
@@ -276,7 +274,6 @@ export const processBrackets = (
     n: coeff(false),
     charge: ch(false),
   });
-  // cluster.frame.addFigure(new FigRect(contentRect, {stroke: "magenta"}));
   cluster.frame.addFigure(figOpen, true);
   cluster.frame.addFigure(figClose, true);
 
@@ -287,17 +284,15 @@ export const processBrackets = (
   cluster.contentRect = contentRect;
 
   if (cmdOpen.isBridge) {
-    let step: Point | undefined;
-    const n0 = cmdOpen.begin.nodes[0];
-    if (n0 && !cmdOpen.withBracket) {
-      const ni0 = getNodeInfo(n0, nodesInfo);
-      let { y } = ni0.res.nodeFrame.org; // Это базовая линия
-      y += ni0.res.center.y;
-      if (!isText) {
-        y += ni0.res.center.y;
-      }
-      step = new Point(props.bracketSpace, y);
-    }
-    makeBridge(ctx, cmdOpen.begin, cmdOpen.withBracket, step);
+    // const n0 = cmdOpen.begin.nodes[0];
+    // if (n0 && !cmdOpen.withBracket) {
+    //   const ni0 = getNodeInfo(n0, nodesInfo);
+    //   let { y } = ni0.res.nodeFrame.org; // Это базовая линия
+    //   y += ni0.res.center.y;
+    //   if (!isText) {
+    //     y += ni0.res.center.y;
+    //   }
+    // }
+    makeBridge(ctx, cmdOpen.begin, cmdOpen.withBracket);
   }
 };

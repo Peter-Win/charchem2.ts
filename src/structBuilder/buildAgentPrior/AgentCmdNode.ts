@@ -22,7 +22,7 @@ export class AgentCmdNode extends AgentCmd {
         const ni0 = getNodeInfo(n0, ctx.nodesInfo);
         step.y = ni0.res.nodeFrame.org.y + ni0.res.center.y;
       }
-      makeBridge(ctx, this.br, true, step);
+      makeBridge(ctx, this.br, true);
     }
     return false;
   }
