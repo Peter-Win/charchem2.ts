@@ -125,7 +125,6 @@ describe("AgentCmdMul", () => {
     const surface = createTestSurface();
     const imgProps = createTestImgProps(surface, 40);
     const { agentFrame } = buildAgentPrior(agent, imgProps);
-    // console.log(agentFrame.figures);
     const figMulK = agentFrame.figures.find(
       (f) =>
         f instanceof FigFrame &&
@@ -143,5 +142,37 @@ describe("AgentCmdMul", () => {
     expect(figMulK!.getRelativeBounds().right).toBeLessThanOrEqual(
       figBB!.getRelativeBounds().left + 0.01
     );
+  });
+  it("Empty node + multiplier", () => {
+    // Correct image for C-O*3H
+    // Problem in C-{}*3H
+    const expr = compile("C-{}*3H");
+    expect(expr.getMessage()).toBe("");
+    const agent = expr.getAgents()[0]!;
+    const surface = createTestSurface();
+    const imgProps = createTestImgProps(surface, 40);
+    const { agentFrame } = buildAgentPrior(agent, imgProps);
+    saveSurface("AgentCmdMul-emptyNode-mul", agentFrame, surface);
+    // Фрейм для атома C
+    const frC = agentFrame.figures.find(fr => 
+      fr instanceof FigFrame &&   // фрейм узла
+      fr.figures.length === 1 &&
+      fr.figures[0] instanceof FigFrame && // фрейм элемента узла
+      fr.figures[0].figures.length === 1 &&
+      fr.figures[0].figures[0] instanceof FigText && // текст C
+      fr.figures[0].figures[0].text === "C"
+    );
+    expect(frC).toBeDefined();
+    // Фрейм множителя содержит две текстовых фигуры: символ множителя и коэффициент
+    const frMul = agentFrame.figures.find(fr => 
+      fr instanceof FigFrame &&
+      fr.figures.length === 2
+    );
+    expect(frMul).toBeDefined();
+    // Важно, чтобы по высоте они должны совпасть (т.к. используется одинаковый шрифт)
+    const rcC = frC!.getRelativeBounds();
+    const rcMul = frMul!.getRelativeBounds();
+    expect(rcC.top).toBeCloseTo(rcMul.top);
+    expect(rcC.bottom).toBeCloseTo(rcMul.bottom);
   });
 });

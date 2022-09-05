@@ -46,7 +46,13 @@ export class AgentCmdMulBridge extends AgentCmdBridge {
       { node: dstNode!, allBox: isNextBox },
       new Point(bridgeFrame.bounds.right, 0)
     );
-    bridgeFrame.org.set(srcConn.x, srcConn.yBase ?? srcConn.yMiddle);
+    let y = srcConn.yBase;
+    if (y === undefined) {
+      // Такая ситуация возможна если перед множителем пустой узел.
+      // Например, гидрохлорид с нетекстовой левой частью: C-{}*5HCl
+      y = srcConn.yMiddle + mFont.getFontFace().ascent / 2;
+    }
+    bridgeFrame.org.set(srcConn.x, y);
     cluster.frame.addFigure(bridgeFrame, true);
   }
 }
