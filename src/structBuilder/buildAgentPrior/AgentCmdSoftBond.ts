@@ -1,3 +1,4 @@
+import { ifDef } from "../../utils/ifDef";
 import { ChemAgent } from "../../core/ChemAgent";
 import { ChemBond } from "../../core/ChemBond";
 import { Point } from "../../math/Point";
@@ -27,14 +28,24 @@ export class AgentCmdSoftBond extends AgentCmdBridge {
     );
     const [srcNode, dstNode] = this.bond.nodes;
     const step = dst.minus(src);
-    const { cluster, srcConn } = ctx.clusters.unite(
-      ctx,
-      { node: srcNode!, allBox: !!this.srcCmd },
-      { node: dstNode!, allBox: !!this.dstCmd },
-      step
-    );
+    const { cluster, srcConn, dstConn, srcNodeInfo, dstNodeInfo } =
+      ctx.clusters.unite(
+        ctx,
+        { node: srcNode!, allBox: !!this.srcCmd },
+        { node: dstNode!, allBox: !!this.dstCmd },
+        step
+      );
     if (bond.isVisible()) {
-      const connPt = new Point(srcConn.x, srcConn.yMiddle);
+      const y =
+        ifDef(srcConn.yBase, (srcBase) =>
+          ifDef(dstConn.yBase, () => {
+            if (!srcNodeInfo || !dstNodeInfo) return undefined;
+            const srcH = srcNodeInfo.res.rcNodeCore.height ?? 0;
+            const dstH = dstNodeInfo.res.rcNodeCore.height ?? 0;
+            return srcBase - Math.min(srcH / 2, dstH / 2);
+          })
+        ) ?? srcConn.yMiddle;
+      const connPt = new Point(srcConn.x, y);
       bondA.iadd(connPt);
       bondB.iadd(connPt);
       drawBondAB({ bond, bondA, bondB, frame: cluster.frame, imgProps, stA });

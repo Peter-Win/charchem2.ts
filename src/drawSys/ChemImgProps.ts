@@ -64,6 +64,8 @@ export class ChemImgProps {
 
   bracketWidth = 0; // Ширина скобки
 
+  bracketSpace = 0; // Шаг между соседними скобками )( или ][ или )[
+
   useTextBrackets: boolean = true;
 
   constructor(
@@ -94,7 +96,7 @@ export class ChemImgProps {
 
     me.thickWidth = me.thickWidth || lineWidth * 4;
     me.chiralWidth = me.chiralWidth || lineWidth * 5;
-    me.hatch = me.hatch || lineWidth * 3;
+    me.hatch = me.hatch || lineWidth * 2;
     me.dash = me.dash || lineWidth * 3;
     me.lineSpace2 = me.lineSpace2 || lineWidth * 2;
     me.lineSpace2x = me.lineSpace2x || lineWidth * 3;
@@ -105,6 +107,7 @@ export class ChemImgProps {
     me.agentKSpace = me.agentKSpace || lineWidth * 2;
 
     me.bracketWidth = me.bracketWidth || lineWidth * 4;
+    me.bracketSpace = me.bracketSpace || lineWidth * 2;
 
     if (me.nodeMargin < 0) me.nodeMargin = me.lineWidth || 1;
   }

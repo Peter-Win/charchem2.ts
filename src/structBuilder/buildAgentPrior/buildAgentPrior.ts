@@ -52,7 +52,6 @@ export const buildAgentPrior = (
       agentFrame.bounds.left - figK.bounds.width - imgProps.agentKSpace;
     figK.org.y = center.y - irc.center.y;
     agentFrame.addFigure(figK, true);
-    // agentFrame.addFigure(new FigRect(figK.getRelativeBounds(), {stroke: "blue", strokeWidth: 0.5}));
   }
 
   return { agentFrame, ctx, center };

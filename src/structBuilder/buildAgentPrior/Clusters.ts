@@ -76,6 +76,11 @@ export const getClusterConnection = (
   return { x, yMiddle, yBase };
 };
 
+const isBothBaseline = (
+  srcConn: ClusterConnection,
+  dstConn: ClusterConnection
+) => srcConn.yBase !== undefined && dstConn.yBase !== undefined;
+
 export const calcOffset = (
   srcConn: ClusterConnection,
   dstConn: ClusterConnection,
@@ -83,7 +88,9 @@ export const calcOffset = (
 ) =>
   new Point(
     srcConn.x - dstConn.x + step.x,
-    srcConn.yMiddle - dstConn.yMiddle + step.y
+    (isBothBaseline(srcConn, dstConn)
+      ? srcConn.yBase! - dstConn.yBase!
+      : srcConn.yMiddle - dstConn.yMiddle) + step.y
   );
 
 export const calcOffsetAbs = (c0: Cluster, c1: Cluster, step: Point): Point =>
@@ -184,7 +191,14 @@ export class Clusters {
     }
     mergeClusters(srcCluster, dstCluster, offset);
     this.clusters.splice(dstPos, 1);
-    return { cluster: srcCluster, srcConn, dstConn, offset };
+    return {
+      cluster: srcCluster,
+      srcConn,
+      dstConn,
+      offset,
+      srcNodeInfo,
+      dstNodeInfo,
+    };
   }
 
   uniteRest(ctx: PAgentCtx) {

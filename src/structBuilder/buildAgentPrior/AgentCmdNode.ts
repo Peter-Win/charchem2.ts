@@ -2,9 +2,10 @@ import { Point } from "../../math/Point";
 import { CommonBracket } from "../../core/ChemBracket";
 import { ChemNode } from "../../core/ChemNode";
 import { AgentCmd } from "./AgentCmd";
-import { AgentCmdBrClose, makeBridge } from "./AgentCmdBrClose";
+import { AgentCmdBrClose } from "./AgentCmdBrClose";
 import { PAgentCtx } from "./PAgentCtx";
 import { getNodeInfo } from "../NodeInfo";
+import { makeBridge } from "./brackets/processBrackets";
 
 export class AgentCmdNode extends AgentCmd {
   br?: CommonBracket;

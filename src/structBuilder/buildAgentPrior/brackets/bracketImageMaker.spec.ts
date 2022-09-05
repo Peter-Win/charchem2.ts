@@ -1,16 +1,16 @@
 import fs from "fs";
 import path from "path";
-import { FigFrame } from "../../drawSys/figures/FigFrame";
-import { createTestSurface, saveSurface } from "../tests/testEnv";
-import { parsePath } from "../../drawSys/utils/parsePath";
-import { tracePath } from "../../drawSys/utils/tracePath";
-import { Point } from "../../math/Point";
-import { PathSeg } from "../../drawSys/path";
-import { FigPath } from "../../drawSys/figures/FigPath";
-import { Rect, updateRect } from "../../math/Rect";
-import { Figure } from "../../drawSys/figures/Figure";
-import { AbstractSurface } from "../../drawSys/AbstractSurface";
-import { SvgSurface } from "../../drawSys/svg/SvgSurface";
+import { FigFrame } from "../../../drawSys/figures/FigFrame";
+import { createTestSurface, saveSurface } from "../../tests/testEnv";
+import { parsePath } from "../../../drawSys/utils/parsePath";
+import { tracePath } from "../../../drawSys/utils/tracePath";
+import { Point } from "../../../math/Point";
+import { PathSeg } from "../../../drawSys/path";
+import { FigPath } from "../../../drawSys/figures/FigPath";
+import { Rect, updateRect } from "../../../math/Rect";
+import { Figure } from "../../../drawSys/figures/Figure";
+import { AbstractSurface } from "../../../drawSys/AbstractSurface";
+import { SvgSurface } from "../../../drawSys/svg/SvgSurface";
 
 const g = {
   parenLeft: `M739 -435q-170 0 -277.5 51t-167.5 155.5t-87 271.5t-27 453q0 284 26.5 452.5t86.5 274.5t168 159t278 53v-82q-70 0 -124 -12q-61 -14 -104 -54q-48 -44 -78 -123q-35 -92 -52 -244q-18 -161 -18 -416q0 -225 15 -382.5t50 -257.5q28 -84 70 -131q37 -41 88 -62
@@ -179,7 +179,7 @@ it("bracketImgMaker", () => {
   });
   dstDataText += "    ]\n}";
   const fileName = path.normalize(
-    path.join(__dirname, "..", "..", "..", "rubbers", "figure.txt")
+    path.join(__dirname, "..", "..", "..", "..", "rubbers", "figure.txt")
   );
   fs.writeFileSync(fileName, dstDataText);
   saveSurface("bracketImgMaker", frame, surface);

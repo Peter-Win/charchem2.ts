@@ -24,7 +24,8 @@ export class FigHashTrapezoid extends Figure {
     public readonly b: Point,
     public readonly bWidth: number,
     public readonly color: string,
-    public readonly lineWidth: number
+    public readonly lineWidth: number,
+    public readonly hatch: number
   ) {
     super();
   }
@@ -47,13 +48,14 @@ export class FigHashTrapezoid extends Figure {
 
   draw(offset: Point, surface: AbstractSurface): void {
     // Пока еще нет специальных функций поверхности для вывода полосатого треугольника
-    const { a, b, aWidth, bWidth, color, lineWidth } = this;
+    const { a, b, aWidth, bWidth, color, lineWidth, hatch } = this;
     const { segs, style } = makeHashTrapezoidPath(
       a,
       aWidth,
       b,
       bWidth,
       lineWidth,
+      hatch,
       color
     );
     if (segs.length > 0) {
@@ -103,6 +105,7 @@ export const makeHashTrapezoidPath = (
   dst: Point,
   dstWidth: number,
   lineWidth: number,
+  hatch: number,
   color: string
 ) => {
   // Алгоритм, дающий качественное изображение на больших размерах. Использует заливку.
@@ -115,17 +118,18 @@ export const makeHashTrapezoidPath = (
   const maxW = dstWidth / 2;
   const minW = srcWidth / 2;
   const dW = maxW - minW;
-  const { dir, dirLen, dL, dR } = calcTrapezoidDir(src, dst);
-  if (!is0(dirLen)) {
-    let stripCount = Math.floor(dirLen / lineWidth);
-    // если четное число, то уменьшить - ширина полос немного увеличится
-    // eslint-disable-next-line no-bitwise
-    if ((stripCount & 1) === 0) stripCount--;
-    for (let i = 0; i < stripCount; i += 2) {
+  const { dir, dir1, dirLen, dL, dR } = calcTrapezoidDir(src, dst);
+  if (dirLen >= lineWidth) {
+    const hatchLen = dirLen - lineWidth;
+    const desiredStep = lineWidth + hatch;
+    const stripCount = Math.floor(hatchLen / desiredStep);
+    const dStep = dir1.times(lineWidth);
+    // const realStep = hatchLen / stripCount;
+    for (let i = 0; i <= stripCount; i++) {
       const t1 = i / stripCount;
-      const t2 = (i + 1) / stripCount;
+      // const t2 = t1 + lineWidth; // (i + 1) / stripCount;
       const p0 = src.plus(dir.times(t1));
-      const p1 = src.plus(dir.times(t2));
+      const p1 = p0.plus(dStep); // src.plus(dir.times(t2));
       const w1 = minW + (i * dW) / stripCount;
       const w2 = minW + ((i + 1) * dW) / stripCount;
       const p0L = p0.plus(dL.times(w1));

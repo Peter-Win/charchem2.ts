@@ -3,6 +3,7 @@ import { FigPath } from "../../../drawSys/figures/FigPath";
 import { compile } from "../../../compiler/compile";
 import {
   createTestImgProps,
+  createTestStyle,
   createTestSurface,
   saveSurface,
 } from "../../tests/testEnv";
@@ -68,12 +69,13 @@ describe("buildAgentPrior with brackets", () => {
   });
   it("Connecting two brackets of different heights", () => {
     //          ┌ H ┐
-    // ┌   H   ┐│ | │
-    // │   |   ││ O │
-    // │   N   ││ | │
-    // │ H   H ││ C │
-    // └       ┘│ | │
-    //          └ O ┘
+    //          │ | │
+    // ┌   H   ┐│ O │
+    // │   |   ││ | │
+    // │   N   ││ C │
+    // │ H   H ││ | │
+    // └       ┘└ O ┘
+    //
     const expr = compile("(H|N<`/H><\\H>)[C<`|O`|H><||O>]");
     expect(expr.getMessage()).toBe("");
     const agent = expr.getAgents()[0]!;
@@ -81,17 +83,21 @@ describe("buildAgentPrior with brackets", () => {
     const imgProps = createTestImgProps(surface, 40);
     const { agentFrame } = buildAgentPrior(agent, imgProps);
     saveSurface("buildAgentWithBrackets-b2b", agentFrame, surface);
-    const brFrames = agentFrame.figures.filter(
+    const bracketFrames = agentFrame.figures.filter(
       (fig) =>
         fig instanceof FigFrame &&
         fig.figures.length === 1 &&
         fig.figures[0] instanceof FigPath
     );
-    expect(brFrames).toHaveLength(4);
-    const src = brFrames[1]!.getRelativeBounds();
-    const dst = brFrames[2]!.getRelativeBounds();
-    expect(src.top - (dst.height - src.height) / 2).toBeCloseTo(dst.top);
-    expect(src.bottom + (dst.height - src.height) / 2).toBeCloseTo(dst.bottom);
+    expect(bracketFrames).toHaveLength(4);
+    const src = bracketFrames[1]!.getRelativeBounds();
+    const dst = bracketFrames[2]!.getRelativeBounds();
+    // В новой реализации привязка к базовой линии связующих узлов
+    // expect(src.top - (dst.height - src.height) / 2).toBeCloseTo(dst.top);
+    // expect(src.bottom + (dst.height - src.height) / 2).toBeCloseTo(dst.bottom);
+    // Теперь выходной узел первой скобки N находится на одном уровне с входным узлом второй скобки C
+    // А высота второй скобки отличается на стандартную длину связи
+    expect(src.top - imgProps.line).toBeCloseTo(dst.top);
   });
   it("Brackets with hard bonds", () => {
     const expr = compile("Cl/[\\\\<|Cl>]4/\\Cl");
@@ -197,5 +203,20 @@ describe("buildAgentPrior with brackets", () => {
     // console.log(txNodeFrames[0]!.getRelativeBounds().toString());
     // console.log(txNodeFrames[1]!.getRelativeBounds().toString());
     // console.log(txNodeFrames[2]!.getRelativeBounds().toString());
+  });
+
+  it("Text brackets with different font sizes", () => {
+    const expr = compile("[Hg{F}]");
+    expect(expr.getMessage()).toBe("");
+    const agent = expr.getAgents()[0]!;
+    const surface = createTestSurface();
+    const imgProps = createTestImgProps(surface, 40, "black", (props) => {
+      // eslint-disable-next-line no-param-reassign
+      props.styles.custom = createTestStyle(surface, 50);
+      // eslint-disable-next-line no-param-reassign
+      props.styles.bracket = createTestStyle(surface, 30);
+    });
+    const { agentFrame } = buildAgentPrior(agent, imgProps);
+    saveSurface("buildAgentWithBrackets-HR", agentFrame, surface);
   });
 });
