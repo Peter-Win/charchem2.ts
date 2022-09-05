@@ -154,19 +154,19 @@ describe("AgentCmdMul", () => {
     const { agentFrame } = buildAgentPrior(agent, imgProps);
     saveSurface("AgentCmdMul-emptyNode-mul", agentFrame, surface);
     // Фрейм для атома C
-    const frC = agentFrame.figures.find(fr => 
-      fr instanceof FigFrame &&   // фрейм узла
-      fr.figures.length === 1 &&
-      fr.figures[0] instanceof FigFrame && // фрейм элемента узла
-      fr.figures[0].figures.length === 1 &&
-      fr.figures[0].figures[0] instanceof FigText && // текст C
-      fr.figures[0].figures[0].text === "C"
+    const frC = agentFrame.figures.find(
+      (fr) =>
+        fr instanceof FigFrame && // фрейм узла
+        fr.figures.length === 1 &&
+        fr.figures[0] instanceof FigFrame && // фрейм элемента узла
+        fr.figures[0].figures.length === 1 &&
+        fr.figures[0].figures[0] instanceof FigText && // текст C
+        fr.figures[0].figures[0].text === "C"
     );
     expect(frC).toBeDefined();
     // Фрейм множителя содержит две текстовых фигуры: символ множителя и коэффициент
-    const frMul = agentFrame.figures.find(fr => 
-      fr instanceof FigFrame &&
-      fr.figures.length === 2
+    const frMul = agentFrame.figures.find(
+      (fr) => fr instanceof FigFrame && fr.figures.length === 2
     );
     expect(frMul).toBeDefined();
     // Важно, чтобы по высоте они должны совпасть (т.к. используется одинаковый шрифт)
