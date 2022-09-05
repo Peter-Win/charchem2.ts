@@ -20,6 +20,6 @@
   <use xlink:href="#HussarBoldWeb-parenleft" transform="matrix(0.035555555555555556 0 0 -0.035555555555555556 33.36888888888889 80.55555555555556)" fill="black" />
   <use xlink:href="#HussarBoldWeb-parenright" transform="matrix(0.035555555555555556 0 0 -0.035555555555555556 117.62844444444444 80.55555555555556)" fill="black" />
   <use xlink:href="#HussarBoldWeb-three" transform="matrix(0.021333333333333333 0 0 -0.021333333333333333 131.95733333333334 89.88888888888889)" fill="black" />
-  <use xlink:href="#HussarBoldWeb-C" transform="matrix(0.035555555555555556 0 0 -0.035555555555555556 150.144 59.22222222222223)" fill="black" />
-  <use xlink:href="#HussarBoldWeb-l" transform="matrix(0.035555555555555556 0 0 -0.035555555555555556 176.91733333333335 59.22222222222223)" fill="black" />
+  <use xlink:href="#HussarBoldWeb-C" transform="matrix(0.035555555555555556 0 0 -0.035555555555555556 150.144 80.55555555555556)" fill="black" />
+  <use xlink:href="#HussarBoldWeb-l" transform="matrix(0.035555555555555556 0 0 -0.035555555555555556 176.91733333333335 80.55555555555556)" fill="black" />
 </svg>

@@ -137,7 +137,8 @@ const drawBracket = ({
 export const makeBridge = (
   ctx: PAgentCtx,
   bracket: CommonBracket,
-  isSrcBracket: boolean
+  isSrcBracket: boolean,
+  isDstBracket: boolean
 ) => {
   const [node0, node1] = bracket.nodes;
   if (node0 && node1) {
@@ -145,7 +146,7 @@ export const makeBridge = (
     const dst = { node: node1, allBox: true };
     let dy = 0;
     let flAbs = false;
-    if (isSrcBracket) {
+    if (isSrcBracket && isDstBracket) {
       // Стыковка скобки со скобкой. Выравнивание пропорционально высоте содержимого кластеров
       const { cluster: c0 } = ctx.clusters.findByNode(node0);
       const { cluster: c1 } = ctx.clusters.findByNode(node1);
@@ -284,15 +285,6 @@ export const processBrackets = (
   cluster.contentRect = contentRect;
 
   if (cmdOpen.isBridge) {
-    // const n0 = cmdOpen.begin.nodes[0];
-    // if (n0 && !cmdOpen.withBracket) {
-    //   const ni0 = getNodeInfo(n0, nodesInfo);
-    //   let { y } = ni0.res.nodeFrame.org; // Это базовая линия
-    //   y += ni0.res.center.y;
-    //   if (!isText) {
-    //     y += ni0.res.center.y;
-    //   }
-    // }
-    makeBridge(ctx, cmdOpen.begin, cmdOpen.withBracket);
+    makeBridge(ctx, cmdOpen.begin, cmdOpen.withBracket, !isText);
   }
 };
