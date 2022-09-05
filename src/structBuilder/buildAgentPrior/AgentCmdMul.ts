@@ -48,7 +48,6 @@ export class AgentCmdMul extends AgentCmd {
       );
       frame.addFigure(figK, true);
       this.figure = figK;
-      // frame.addFigure(new FigRect(figK.getRelativeBounds(), {stroke:"red"}));
     }
     return false;
   }

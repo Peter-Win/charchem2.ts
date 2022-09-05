@@ -12,7 +12,7 @@ export const wedgeBond = (
   color: string,
   hash: boolean
 ): Figure => {
-  const { chiralWidth, lineWidth } = imgProps;
+  const { chiralWidth, lineWidth, hatch } = imgProps;
   if (hash) {
     return new FigHashTrapezoid(
       src,
@@ -20,7 +20,8 @@ export const wedgeBond = (
       dst,
       chiralWidth,
       color,
-      lineWidth
+      lineWidth,
+      hatch
     );
   }
   const d1 = dst.minus(src).normal();

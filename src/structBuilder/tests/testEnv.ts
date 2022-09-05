@@ -24,7 +24,9 @@ export const createTestStyle = (
 export const createTestImgProps = (
   surface: AbstractSurface,
   height: number,
-  fill = "black"
+  // eslint-disable-next-line default-param-last
+  fill = "black",
+  preInit?: (imgProps: ChemImgProps) => void
 ) => {
   const imgProps = new ChemImgProps(createTestStyle(surface, height, fill));
   const smallStyle = createTestStyle(surface, height * 0.6, fill);
@@ -32,6 +34,7 @@ export const createTestImgProps = (
   imgProps.styles.itemMass = smallStyle;
   imgProps.styles.nodeCharge = smallStyle;
   imgProps.styles.oxidationState = smallStyle;
+  if (preInit) preInit(imgProps);
   imgProps.init();
   return imgProps;
 };

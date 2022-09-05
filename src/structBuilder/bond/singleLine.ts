@@ -29,8 +29,16 @@ export const singleLine = (
   } else if (style === ":") {
     fig = drawDashedLine(a, b, imgProps, lnStyle);
   } else if (bond.w0 < 0 && bond.w0 === bond.w1) {
-    const { thickWidth, lineWidth } = imgProps;
-    fig = new FigHashTrapezoid(a, thickWidth, b, thickWidth, color, lineWidth);
+    const { thickWidth, lineWidth, hatch } = imgProps;
+    fig = new FigHashTrapezoid(
+      a,
+      thickWidth,
+      b,
+      thickWidth,
+      color,
+      lineWidth,
+      hatch
+    );
     fig.update();
   }
   if (!fig) {
