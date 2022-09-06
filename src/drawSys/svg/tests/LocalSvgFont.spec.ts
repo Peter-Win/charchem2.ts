@@ -71,7 +71,10 @@ describe("LocalSvgFont", () => {
     surface.addFigure(
       `<path d="M0 87.7H147" stroke="black" stroke-width="1" fill="none" />`
     );
-    const image = surface.exportText({...standaloneExportOptions, excludeVerInfo: true});
+    const image = surface.exportText({
+      ...standaloneExportOptions,
+      excludeVerInfo: true,
+    });
     expect(image).toBe(expectedImage);
   });
 });

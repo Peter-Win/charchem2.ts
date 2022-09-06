@@ -29,7 +29,9 @@ describe("SvgSurface", () => {
 </svg>`
     );
     // full case
-    expect(surface.exportText({...standaloneExportOptions, excludeVerInfo: true})).toBe(
+    expect(
+      surface.exportText({ ...standaloneExportOptions, excludeVerInfo: true })
+    ).toBe(
       `<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
 <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" version="1.1" baseProfile="full" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ev="http://www.w3.org/2001/xml-events">
@@ -46,7 +48,7 @@ describe("SvgSurface", () => {
       {}
     );
     // short case
-    expect(surface.exportText({excludeVerInfo: true})).toBe(
+    expect(surface.exportText({ excludeVerInfo: true })).toBe(
       `<svg viewBox="0 0 110 110" xmlns="http://www.w3.org/2000/svg">
   <path d="M10 10H90V90H10L10 10" fill="none" transform="translate(10,10)" />
 </svg>`

@@ -45,7 +45,7 @@ export const saveSurface = (
 ) => {
   frame.update();
   renderTopFrame(frame, surface);
-  const svgText = surface.exportText(standaloneExportOptions);
+  const svgText = surface.exportText({...standaloneExportOptions, excludeVerInfo: true});
   const fullName = `${__dirname}/images/${shortFileName}.svg`;
   // eslint-disable-next-line no-console
   fs.promises.writeFile(fullName, svgText).catch((e) => console.error(e));
