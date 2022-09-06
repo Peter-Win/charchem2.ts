@@ -15,10 +15,10 @@ export const createTestSurface = (fontFactory?: SvgFont): SvgSurfacePortable =>
 export const createTestStyle = (
   surface: AbstractSurface,
   height: number,
-  fill = "black"
+  fill?: string
 ): TextProps => ({
   font: surface.getFont({ family: "", height }),
-  style: { fill },
+  style: { fill: fill || "black" },
 });
 
 export const createTestImgProps = (
@@ -30,10 +30,9 @@ export const createTestImgProps = (
 ) => {
   const imgProps = new ChemImgProps(createTestStyle(surface, height, fill));
   const smallStyle = createTestStyle(surface, height * 0.6, fill);
-  imgProps.styles.itemCount = smallStyle;
-  imgProps.styles.itemMass = smallStyle;
-  imgProps.styles.nodeCharge = smallStyle;
-  imgProps.styles.oxidationState = smallStyle;
+  ChemImgProps.getIndexStyles().forEach((id) => {
+    imgProps.styles[id] = smallStyle;
+  });
   if (preInit) preInit(imgProps);
   imgProps.init();
   return imgProps;

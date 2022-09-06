@@ -29,6 +29,7 @@ const drawMarkup = ({
 }: ParamsDrawMarkup): ResultTextWithMarkup => {
   const irc = new Rect(0, -font.getFontFace().ascent, 0, 0);
   const fig = new FigFrame();
+  fig.label = "markup";
   let xSup = 0;
   let xSub = 0;
   const updateX = () => {

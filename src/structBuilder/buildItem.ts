@@ -16,11 +16,10 @@ interface BuildItemResult {
 
 export const buildItem = (
   item: ChemNodeItem,
-  imgProps: ChemImgProps,
-  color: string
+  imgProps: ChemImgProps
 ): BuildItemResult => {
   const itemFrame = new FigFrame();
-  const itemColor = item.color ?? color;
+  itemFrame.label = "item";
   const { fig, rcCore } = item.walkExt({
     fig: undefined as Figure | undefined,
     rcCore: undefined as Rect | undefined,
@@ -43,20 +42,20 @@ export const buildItem = (
     atom(obj) {
       this.onText(
         obj.id,
-        imgProps.getStyleColored("atom", item.atomColor ?? itemColor)
+        imgProps.getStyleColored("atom", item.atomColor ?? item.color)
       );
     },
     radical(obj) {
-      this.onText(obj.label, imgProps.getStyleColored("radical", itemColor));
+      this.onText(obj.label, imgProps.getStyleColored("radical", item.color));
     },
     comment(obj) {
-      this.onMarkup(obj.text, imgProps.getStyleColored("comment", itemColor));
+      this.onMarkup(obj.text, imgProps.getStyleColored("comment", item.color));
     },
     custom(obj) {
-      this.onMarkup(obj.text, imgProps.getStyleColored("custom", itemColor));
+      this.onMarkup(obj.text, imgProps.getStyleColored("custom", item.color));
     },
     comma() {
-      this.onText(",", imgProps.getStyleColored("comma", itemColor));
+      this.onText(",", imgProps.getStyleColored("comma", item.color));
     },
   });
   if (rcCore) {
@@ -66,7 +65,7 @@ export const buildItem = (
         rcCore,
         item.n.toString(),
         imgProps,
-        imgProps.getStyleColored("itemCount", itemColor),
+        imgProps.getStyleColored("itemCount", item.color),
         "RB"
       );
     }
@@ -76,7 +75,7 @@ export const buildItem = (
         rcCore,
         item.charge.text,
         imgProps,
-        imgProps.getStyleColored("oxidationState", itemColor),
+        imgProps.getStyleColored("oxidationState", item.color),
         "CU"
       );
     }

@@ -75,6 +75,7 @@ export class ChemImgProps {
     width: number = 0
   ) {
     this.stdStyle = stdStyle;
+    if (!this.stdStyle.style.fill) this.stdStyle.style.fill = "black";
     this.line = line;
     this.horizLine = hline;
     this.lineWidth = width;
@@ -117,13 +118,17 @@ export class ChemImgProps {
   }
 
   getStyleColored(styleName: ChemStyleId, color?: string): TextProps {
-    const realColor = color ?? this.stdStyle.style.fill;
     const style = this.getStyle(styleName);
-    return style.style.fill === realColor
-      ? style
-      : { ...style, style: { ...style.style, fill: realColor } };
+    if (!color || style.style.fill === color) {
+      return style;
+    }
+    return {
+      ...style,
+      style: { ...style.style, fill: color },
+    };
   }
 
+  // Стили, требующие уменьшения.
   static getIndexStyles(): ChemStyleId[] {
     return ["itemCount", "itemMass", "nodeCharge", "oxidationState"];
   }
