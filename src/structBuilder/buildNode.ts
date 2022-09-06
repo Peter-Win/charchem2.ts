@@ -22,13 +22,13 @@ export const buildNode = (
     return undefined;
   }
   const nodeFrame = new FigFrame();
-  const nodeColor = node.color ?? imgProps.stdStyle.style.fill;
+  nodeFrame.label = "node";
   const centerItem = node.getCenterItem();
   let x = 0;
   let center: Point | undefined;
   let rcNodeCore: Rect | undefined;
   node.items.forEach((item) => {
-    const { itemFrame, rcCore } = buildItem(item, imgProps, nodeColor);
+    const { itemFrame, rcCore } = buildItem(item, imgProps);
     itemFrame.org.x = x;
     nodeFrame.addFigure(itemFrame);
     if (rcCore) {
@@ -54,7 +54,7 @@ export const buildNode = (
       frame: nodeFrame,
       rect: rcNodeCore,
       imgProps,
-      color: nodeColor,
+      color: node.color,
     });
   }
 

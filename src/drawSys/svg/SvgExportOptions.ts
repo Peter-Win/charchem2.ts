@@ -8,4 +8,5 @@ export interface SvgExportOptions {
   width?: string;
   height?: string;
   metadata?: string;
+  excludeVerInfo?: boolean;
 }

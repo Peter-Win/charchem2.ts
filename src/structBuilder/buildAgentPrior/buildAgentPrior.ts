@@ -42,10 +42,8 @@ export const buildAgentPrior = (
   drawBackground(ctx);
   const center = findAgentCenter(ctx);
 
-  // agentFrame.addFigure(new FigRect(agentFrame.bounds.clone(), {stroke: "red", strokeWidth: 0.5}));
-
   if (agent.n.isSpecified()) {
-    const kStyle = imgProps.getStyleColored("agentK");
+    const kStyle = imgProps.getStyle("agentK");
     const figK = new FigText(agent.n.toString(), kStyle.font, kStyle.style);
     const irc = getTextInternalRect(figK);
     figK.org.x =

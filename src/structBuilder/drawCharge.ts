@@ -26,8 +26,7 @@ export const drawCharge = ({
   color,
   styleId = "nodeCharge",
 }: ParamsDrawCharge) => {
-  const realColor = color ?? imgProps.stdStyle.style.fill;
-  const style = imgProps.getStyleColored(styleId, realColor);
+  const style = imgProps.getStyleColored(styleId, color);
   const pos: CoeffPos = charge.isLeft ? "LT" : "RT";
   const figTxt = drawTextNear(frame, rect, charge.text, imgProps, style, pos);
   frame.updateFigure(figTxt);
@@ -39,7 +38,7 @@ export const drawCharge = ({
     bounds.move(figTxt.org);
     const r = Math.max(bounds.width, figTxt.font.getFontFace().ascent) * 0.5;
     const figR = new FigEllipse(bounds.center, new Point(r, r), {
-      stroke: realColor,
+      stroke: style.style.fill,
     });
     frame.addFigure(figR, true);
   }

@@ -6,6 +6,8 @@ import { Figure } from "./Figure";
 export class FigFrame extends Figure {
   figures: Figure[] = [];
 
+  label?: string;
+
   addFigure(fig: Figure, update?: boolean) {
     this.figures.push(fig);
     if (update) this.updateFigure(fig);
