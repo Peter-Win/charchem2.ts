@@ -32,6 +32,10 @@ export class RulesBase {
     return k.toString();
   }
 
+  bracketCount(k: ChemK): string {
+    return this.itemCount(k);
+  }
+
   itemMass(mass: Double): string {
     return strMass(mass);
   }
@@ -43,6 +47,10 @@ export class RulesBase {
 
   nodeCharge(charge: ChemCharge): string {
     return charge.text;
+  }
+
+  bracketCharge(charge: ChemCharge): string {
+    return this.nodeCharge(charge);
   }
 
   operation(op: ChemOp): string {

@@ -36,11 +36,11 @@ export class ChemImgProps {
 
   subKY = 0.5; // Разница между низом подстрочного символа и низом объекта В долях xHeight подстрочного символа!
 
-  bracketSubKY = 0.3; // Аналогично subKY, но для скобок
+  bracketSubKY = 0.7; // Аналогично subKY, но для скобок
 
   supKY = 0.5; // Разница между верхом надстрочного символа и верхом объекта В долях xHeight символа!
 
-  bracketSupKY = 0.3; // Аналогично supKY, но для скобок
+  bracketSupKY = 0.7; // Аналогично supKY, но для скобок
 
   hatch = 0; // абсолютное расстояние между штрихами в изображении связи типа /d (z<0) -- see getHatch()
 
@@ -130,6 +130,13 @@ export class ChemImgProps {
 
   // Стили, требующие уменьшения.
   static getIndexStyles(): ChemStyleId[] {
-    return ["itemCount", "itemMass", "nodeCharge", "oxidationState"];
+    return [
+      "itemCount",
+      "itemMass",
+      "nodeCharge",
+      "oxidationState",
+      "bracketCharge",
+      "bracketCount",
+    ];
   }
 }

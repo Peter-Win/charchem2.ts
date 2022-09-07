@@ -12,6 +12,8 @@ export const createRulesList = (rules: RulesHtml) => {
     ["itemCount", rules.itemCount(k)],
     ["itemMass", rules.itemMass(9)],
     ["nodeCharge", rules.nodeCharge(new ChemCharge("9", 9))],
+    ["bracketCharge", rules.bracketCharge(new ChemCharge("9", 9))],
+    ["bracketCount", rules.bracketCount(k)],
   ];
   return list;
 };

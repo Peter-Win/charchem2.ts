@@ -18,7 +18,14 @@ describe("drawTextNear", () => {
     const frame = new FigFrame();
     const h = drawText(frame, "H", style1);
     const rcH = getTextInternalRect(h);
-    const two = drawTextNear(frame, rcH, "2", imgProps, style2, "RB");
+    const two = drawTextNear({
+      frame,
+      rcCore: rcH,
+      text: "2",
+      imgProps,
+      style: style2,
+      pos: "RB",
+    });
     expect(two.text).toBe("2");
     expect(frame.figures).toHaveLength(2);
     const rc2 = two.getRelativeBounds();
@@ -38,7 +45,14 @@ describe("drawTextNear", () => {
     const frame = new FigFrame();
     const o = drawText(frame, "O", style1);
     const rcO = getTextInternalRect(o);
-    const ox = drawTextNear(frame, rcO, "+2", imgProps, style2, "CU");
+    const ox = drawTextNear({
+      frame,
+      rcCore: rcO,
+      text: "+2",
+      imgProps,
+      style: style2,
+      pos: "CU",
+    });
     const rcOx = ox.getRelativeBounds();
     expect(o.bounds.cx).toBeCloseTo(rcOx.cx);
     expect(rcO.top + ox.font.getFontFace().descent).toBeCloseTo(
@@ -53,7 +67,14 @@ describe("drawTextNear", () => {
     const frame = new FigFrame();
     const main = drawText(frame, "Hg", style1);
     const rcMain = getTextInternalRect(main);
-    const sub = drawTextNear(frame, rcMain, "32", imgProps, style2, "LB");
+    const sub = drawTextNear({
+      frame,
+      rcCore: rcMain,
+      text: "32",
+      imgProps,
+      style: style2,
+      pos: "LB",
+    });
     const rcSub = sub.getRelativeBounds();
     expect(rcSub.right).toBeCloseTo(0);
   });
@@ -68,14 +89,28 @@ describe("drawTextNear", () => {
     const main = drawText(frame, "Hg", style1);
     const rcMain = getTextInternalRect(main);
     imgProps.supKY = 0;
-    const sub = drawTextNear(frame, rcMain, "2+", imgProps, style2, "RT");
+    const sub = drawTextNear({
+      frame,
+      rcCore: rcMain,
+      text: "2+",
+      imgProps,
+      style: style2,
+      pos: "RT",
+    });
     const rcSub = sub.getRelativeBounds();
     expect(rcSub.left).toBeCloseTo(rcMain.right);
     expect(rcSub.top + getBaseline(ff2) - ff2.ascent).toBeCloseTo(rcMain.top);
 
     rcMain.B.x = rcSub.B.x;
     imgProps.supKY = 1;
-    const sub2 = drawTextNear(frame, rcMain, "3+", imgProps, style2, "RT");
+    const sub2 = drawTextNear({
+      frame,
+      rcCore: rcMain,
+      text: "3+",
+      imgProps,
+      style: style2,
+      pos: "RT",
+    });
     const rcSub2 = sub2.getRelativeBounds();
     expect(rcSub2.top + getBaseline(ff2)).toBeCloseTo(rcMain.top);
   });

@@ -52,7 +52,7 @@ export const makeWebFontProps = (props: LocalFontProps): WebFontProps => {
   ctx.fillStyle = "#FFF";
   ctx.textBaseline = "alphabetic";
   ctx.font = canvasFont;
-  const m = ctx.measureText("lj");
+  const m = ctx.measureText("[lj");
   const mZ = ctx.measureText("Z");
   const mz = ctx.measureText("z");
 

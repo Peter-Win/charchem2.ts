@@ -1,5 +1,19 @@
 const path = require('path');
+const fs = require('fs');
 const {CleanWebpackPlugin,} = require('clean-webpack-plugin');
+
+// version update
+try {
+  const sver = fs.readFileSync(path.join(__dirname, "version.json"))
+  const ver = JSON.parse(sver)
+  if (Array.isArray(ver)) {
+    const text = `export default [${ver.join(', ')}];`;
+    fs.writeFileSync(path.join(__dirname, "src", "version.ts.tmp"), text)
+  }
+} catch (e) {
+  console.error(e);
+}
+
 module.exports = {
   entry: './src/index.ts',
   output: {

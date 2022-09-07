@@ -4,7 +4,7 @@ import { ChemCharge } from "../core/ChemCharge";
 import { ChemImgProps } from "../drawSys/ChemImgProps";
 import { FigFrame } from "../drawSys/figures/FigFrame";
 import { Rect } from "../math/Rect";
-import { drawTextNear } from "./drawTextNear";
+import { drawTextNear, NearTextType } from "./drawTextNear";
 import { FigEllipse } from "../drawSys/figures/FigEllipse";
 import { Point } from "../math/Point";
 import { getTextInternalRect } from "./getTextInternalRect";
@@ -16,6 +16,7 @@ interface ParamsDrawCharge {
   imgProps: ChemImgProps;
   color?: string;
   styleId?: ChemStyleId;
+  type?: NearTextType;
 }
 
 export const drawCharge = ({
@@ -25,10 +26,19 @@ export const drawCharge = ({
   imgProps,
   color,
   styleId = "nodeCharge",
+  type,
 }: ParamsDrawCharge) => {
   const style = imgProps.getStyleColored(styleId, color);
   const pos: CoeffPos = charge.isLeft ? "LT" : "RT";
-  const figTxt = drawTextNear(frame, rect, charge.text, imgProps, style, pos);
+  const figTxt = drawTextNear({
+    frame,
+    rcCore: rect,
+    text: charge.text,
+    imgProps,
+    style,
+    pos,
+    type,
+  });
   frame.updateFigure(figTxt);
   if (charge.isRound) {
     // Плюс в круге обычно выглядит нормально. Но минус обычно находится ниже середины.

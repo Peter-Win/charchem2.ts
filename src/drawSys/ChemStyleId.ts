@@ -15,6 +15,8 @@ export type ChemStyleId =
   | "agentK"
   | "atom"
   | "bracket"
+  | "bracketCharge"
+  | "bracketCount"
   | "comma"
   | "comment"
   | "custom"
