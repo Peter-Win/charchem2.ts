@@ -8,7 +8,7 @@ try {
   const ver = JSON.parse(sver)
   if (Array.isArray(ver)) {
     const text = `export default [${ver.join(', ')}];`;
-    fs.writeFileSync(path.join(__dirname, "src", "version.ts.tmp"), text)
+    fs.writeFileSync(path.join(__dirname, "src", "version.ts"), text)
   }
 } catch (e) {
   console.error(e);
