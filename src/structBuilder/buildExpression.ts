@@ -37,5 +37,6 @@ export const buildExpression = (
       frame.addFigure(einfo.frame, true);
     }
   });
+  frame.bounds.grow(1); // Небольшое поле позволяет скрыть недостатки определения границ. Иначе отсекаются края.
   return { frame };
 };

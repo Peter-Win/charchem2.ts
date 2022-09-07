@@ -60,24 +60,24 @@ export const buildItem = (
   });
   if (rcCore) {
     if (item.n.isSpecified()) {
-      drawTextNear(
-        itemFrame,
+      drawTextNear({
+        frame: itemFrame,
         rcCore,
-        item.n.toString(),
+        text: item.n.toString(),
         imgProps,
-        imgProps.getStyleColored("itemCount", item.color),
-        "RB"
-      );
+        style: imgProps.getStyleColored("itemCount", item.color),
+        pos: "RB",
+      });
     }
     if (item.charge) {
-      drawTextNear(
-        itemFrame,
+      drawTextNear({
+        frame: itemFrame,
         rcCore,
-        item.charge.text,
+        text: item.charge.text,
         imgProps,
-        imgProps.getStyleColored("oxidationState", item.color),
-        "CU"
-      );
+        style: imgProps.getStyleColored("oxidationState", item.color),
+        pos: "CU",
+      });
     }
     // TODO: dots, dashes
   }

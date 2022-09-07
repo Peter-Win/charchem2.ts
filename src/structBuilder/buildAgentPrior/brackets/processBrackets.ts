@@ -41,17 +41,26 @@ const bracketCoeffs = (
   charge?: ChemCharge
 ) => {
   if (charge) {
-    drawCharge({ charge, frame, rect, imgProps: props, color });
-  }
-  if (n && n.isSpecified()) {
-    drawTextNear(
+    drawCharge({
+      charge,
       frame,
       rect,
-      String(n),
-      props,
-      props.getStyleColored("itemCount", color),
-      n.pos ?? "RB"
-    );
+      imgProps: props,
+      color,
+      styleId: "bracketCharge",
+      type: "bracket",
+    });
+  }
+  if (n && n.isSpecified()) {
+    drawTextNear({
+      frame,
+      rcCore: rect,
+      text: String(n),
+      imgProps: props,
+      style: props.getStyleColored("bracketCount", color),
+      pos: n.pos ?? "RB",
+      type: "bracket",
+    });
   }
   frame.update();
 };
