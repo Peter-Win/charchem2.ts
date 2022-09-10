@@ -6,6 +6,9 @@ export const isTextFormula = (chemObj: ChemObj): boolean => {
     bond(obj) {
       this.isStop = !obj.isText;
     },
+    itemPre(obj) {
+      this.isStop = !!obj.dots;
+    },
   });
   return !visitor.isStop;
 };

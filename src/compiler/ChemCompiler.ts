@@ -1,7 +1,9 @@
+import { CoeffPosOrAngle } from "../types/CoeffPos";
 import { Int, Double, Char } from "../types";
 import { LangParams } from "../lang/Lang";
 import { ChemAgent } from "../core/ChemAgent";
 import { ChemNode } from "../core/ChemNode";
+import { LewisDot } from "../core/ChemNodeItem";
 import { ChemExpr } from "../core/ChemExpr";
 import { ChemObj } from "../core/ChemObj";
 import { ChemOp } from "../core/ChemOp";
@@ -119,6 +121,16 @@ export class ChemCompiler {
   varPadding: number[] = [];
 
   centralNode: boolean = false;
+
+  varDots?: LewisDot[] = undefined;
+
+  varPos?: CoeffPosOrAngle = undefined;
+
+  eject<K extends "varPos" | "varDots">(key: K): ChemCompiler[K] {
+    const v = this[key];
+    this[key] = undefined;
+    return v;
+  }
 
   curChar(): Char {
     return this.text[this.pos]!;

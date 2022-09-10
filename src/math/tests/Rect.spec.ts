@@ -85,4 +85,19 @@ describe("Rect", () => {
     r.grow(0, -1);
     expect(String(r)).toBe("{-1, 0, 21, 11}");
   });
+
+  it("clip", () => {
+    expect(
+      new Rect(0, 0, 20, 10).clip(new Point(10, 5), new Point(100, 5))
+    ).toEqual({ inside: true, a: new Point(10, 5), b: new Point(20, 5) });
+    expect(
+      new Rect(0, 0, 20, 10).clip(new Point(-10, 3), new Point(30, 7))
+    ).toEqual({ inside: true, a: new Point(0, 4), b: new Point(20, 6) });
+    expect(
+      new Rect(0, 0, 20, 10).clip(new Point(0, -10), new Point(0, 100))
+    ).toEqual({ inside: true, a: new Point(0, 0), b: new Point(0, 10) });
+    expect(
+      new Rect(0, 0, 20, 10).clip(new Point(0, -1), new Point(100, -10))
+    ).toEqual({ inside: false, a: new Point(0, -1), b: new Point(100, -10) });
+  });
 });

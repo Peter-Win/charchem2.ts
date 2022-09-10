@@ -68,6 +68,8 @@ export class ChemImgProps {
 
   useTextBrackets: boolean = true;
 
+  electronDotD = 0; // Диаметр точки для структур Льюиса
+
   constructor(
     stdStyle: TextProps,
     line: number = 0,
@@ -109,6 +111,7 @@ export class ChemImgProps {
 
     me.bracketWidth = me.bracketWidth || lineWidth * 4;
     me.bracketSpace = me.bracketSpace || lineWidth * 2;
+    me.electronDotD = me.electronDotD || lineWidth * 3;
 
     if (me.nodeMargin < 0) me.nodeMargin = me.lineWidth || 1;
   }

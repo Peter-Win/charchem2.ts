@@ -10,10 +10,12 @@ import {
   funcItemColor1,
 } from "./funcColor";
 import { funcDblAlign } from "./funcDblAlign";
+import { funcDots } from "./funcDots";
 import { funcL } from "./funcL";
 import { funcM } from "./funcM";
 import { funcnM } from "./funcnM";
 import { funcPadding } from "./funcPadding";
+import { funcPos } from "./funcPos";
 import { funcSlope } from "./funcSlope";
 import { funcVer } from "./funcVer";
 
@@ -27,12 +29,14 @@ export const funcsDict: Record<string, ChemFunc> = {
   C: funcC,
   color: funcColor,
   dblAlign: funcDblAlign,
+  dots: funcDots,
   itemColor: funcItemColor,
   itemColor1: funcItemColor1,
   L: funcL,
   M: funcM,
   nM: funcnM,
   padding: funcPadding,
+  pos: funcPos,
   slope: funcSlope,
   ver: funcVer,
 };

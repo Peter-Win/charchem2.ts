@@ -8,6 +8,8 @@ import { Point } from "./Point";
 import { Double } from "../types";
 import { is0, toa } from "./index";
 
+/* eslint-disable no-bitwise */
+
 export class Rect {
   readonly A: Point;
 
@@ -136,7 +138,62 @@ export class Rect {
     this.A.scale(k);
     this.B.scale(k);
   }
+
+  clip(a: Point, b: Point): { inside: boolean; a: Point; b: Point } {
+    let { x: x1, y: y1 } = a;
+    let { x: x2, y: y2 } = b;
+    const { left, right, top, bottom } = this;
+
+    const makeOutcodes = (x: number, y: number): number =>
+      mkMask(0, x < left) |
+      mkMask(1, y < top) |
+      mkMask(2, x > right) |
+      mkMask(3, y > bottom);
+    let ocu1 = makeOutcodes(x1, y1);
+    let ocu2 = makeOutcodes(x2, y2);
+    let inside = (ocu1 | ocu2) === 0;
+    let outside = (ocu1 & ocu2) !== 0;
+    let isSwap = false;
+    while (!outside && !inside) {
+      // swap endpoints if necessary so that (x1,y1) needs to be clipped
+      if (ocu1 === 0) {
+        [x1, x2] = [x2, x1];
+        [y1, y2] = [y2, y1];
+        [ocu1, ocu2] = [ocu2, ocu1];
+        isSwap = !isSwap;
+      }
+      if (isMask(0, ocu1)) {
+        // clip left
+        y1 += ((y2 - y1) * (left - x1)) / (x2 - x1);
+        x1 = left;
+      } else if (isMask(1, ocu1)) {
+        // clip above
+        x1 += ((x2 - x1) * (top - y1)) / (y2 - y1);
+        y1 = top;
+      } else if (isMask(2, ocu1)) {
+        // clip right
+        y1 += ((y2 - y1) * (right - x1)) / (x2 - x1);
+        x1 = right;
+      } else if (isMask(3, ocu1)) {
+        // clip below
+        x1 += ((x2 - x1) * (bottom - y1)) / (y2 - y1);
+        y1 = bottom;
+      }
+      ocu1 = makeOutcodes(x1, y1);
+      inside = (ocu1 | ocu2) === 0; // update
+      outside = (ocu1 & ocu2) !== 0; //  4-bit codes
+    }
+    const p1 = new Point(x1, y1);
+    const p2 = new Point(x2, y2);
+    return { inside, a: isSwap ? p2 : p1, b: isSwap ? p1 : p2 };
+  }
 }
+
+const mkMask = (pos: 0 | 1 | 2 | 3, val: boolean): number =>
+  val ? 1 << pos : 0;
+
+const isMask = (pos: 0 | 1 | 2 | 3, code: number): boolean =>
+  !!(code & (1 << pos));
 
 export const updateRect = (pt: Point, srcRect?: Rect): Rect => {
   if (!srcRect) return new Rect(pt, pt);

@@ -27,6 +27,7 @@ export const createAgent = (compiler: ChemCompiler): ChemAgent => {
   compiler.curWidth = 0;
   compiler.centralNode = false;
   compiler.varPadding = [];
+  compiler.varDots = undefined;
   compiler.nodesBranch.onSubChain();
   compiler.bracketsCtrl.clear();
   return agent;
