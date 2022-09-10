@@ -19,6 +19,8 @@ export const addNodeItem = (
   item.atomColor = getAtomColor(compiler);
   item.atomNum = compiler.varAtomNumber;
   item.bCenter = compiler.getAltFlag();
+  item.dots = compiler.varDots;
+  compiler.varDots = undefined;
   compiler.varAtomNumber = undefined;
   getNodeForced(compiler, false).items.push(item);
   return item;

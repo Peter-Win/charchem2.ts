@@ -29,11 +29,11 @@ export const buildNode = (
   let rcNodeCore: Rect | undefined;
   node.items.forEach((item) => {
     const { itemFrame, rcCore } = buildItem(item, imgProps);
-    itemFrame.org.x = x;
+    itemFrame.org.x = x - itemFrame.bounds.left;
     nodeFrame.addFigure(itemFrame);
     if (rcCore) {
       const irc = rcCore.clone();
-      irc.moveXY(x, 0);
+      irc.moveXY(itemFrame.org.x, 0);
       if (item === centerItem) {
         center = irc.center;
       }

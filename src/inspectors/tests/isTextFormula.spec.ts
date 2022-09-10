@@ -23,4 +23,8 @@ describe("IsTextFormula", () => {
     expect(isTextFormula(compile("-|"))).toBe(false);
     expect(isTextFormula(compile("//\\"))).toBe(false);
   });
+  it("dots", () => {
+    expect(isTextFormula(compile("HOH"))).toBe(true);
+    expect(isTextFormula(compile("H$dots(0)OH"))).toBe(false);
+  });
 });

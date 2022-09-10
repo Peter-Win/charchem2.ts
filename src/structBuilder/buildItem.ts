@@ -7,6 +7,10 @@ import { drawTextNear } from "./drawTextNear";
 import { getTextInternalRect } from "./getTextInternalRect";
 import { Figure } from "../drawSys/figures/Figure";
 import { drawTextWithMarkup } from "./drawTextWithMarkup";
+import { drawLewisShell } from "./drawLewisShell";
+import { FigEllipse } from "../drawSys/figures/FigEllipse";
+import { Point } from "../math/Point";
+import { LocalFont } from "../drawSys/AbstractSurface";
 
 interface BuildItemResult {
   itemFrame: FigFrame;
@@ -20,6 +24,8 @@ export const buildItem = (
 ): BuildItemResult => {
   const itemFrame = new FigFrame();
   itemFrame.label = "item";
+  const { color, dots } = item;
+  let itemFont: LocalFont | undefined;
   const { fig, rcCore } = item.walkExt({
     fig: undefined as Figure | undefined,
     rcCore: undefined as Rect | undefined,
@@ -27,8 +33,10 @@ export const buildItem = (
       const txFig = drawText(itemFrame, text, style);
       this.fig = txFig;
       this.rcCore = getTextInternalRect(txFig);
+      itemFont = style.font;
     },
     onMarkup(textWithMarkup: string, style: TextProps) {
+      itemFont = style.font;
       const { fig: figM, irc } = drawTextWithMarkup(
         textWithMarkup,
         imgProps,
@@ -79,7 +87,24 @@ export const buildItem = (
         pos: "CU",
       });
     }
-    // TODO: dots, dashes
+    if (dots) {
+      const rc = rcCore.clone();
+      if (itemFont) {
+        rc.B.y -= (itemFont as LocalFont).getFontFace().descent;
+        rc.B.y -= imgProps.lineWidth;
+      }
+      const radius = imgProps.electronDotD / 2;
+      const pr = new Point(radius, radius);
+      rc.grow(imgProps.lineWidth + radius);
+      drawLewisShell(rc, dots, imgProps, ({ p, color: dotColor }) => {
+        const figDot = new FigEllipse(p, pr, {
+          fill: dotColor || color || imgProps.stdStyle.style.fill,
+        });
+        figDot.bounds.grow(imgProps.lineWidth);
+        itemFrame.addFigure(figDot);
+      });
+    }
+    // TODO: dashes
   }
   itemFrame.update();
   return { itemFrame, figText: fig, rcCore };

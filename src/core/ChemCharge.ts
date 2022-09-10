@@ -1,3 +1,4 @@
+import { CoeffPos } from "../types/CoeffPos";
 import { Double } from "../types";
 import { romanNum } from "../utils/romanNum";
 
@@ -9,6 +10,8 @@ export class ChemCharge {
   readonly isLeft: boolean; // ⁺N
 
   readonly isRound: boolean; // A sign of drawing a charge inside a circle
+
+  pos?: CoeffPos | number; // relative position of charge from $pos()
 
   constructor(text: string, value: Double, isLeft = false, isRound = false) {
     this.text = text;
