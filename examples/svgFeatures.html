@@ -10,6 +10,14 @@
     grid-template-columns: 1fr 5fr;
 }
 #mainList > div {border-bottom: thin solid silver;}
+#srcBox {
+  position: fixed;
+  bottom: 0; left: 0; right: 0; 
+  background-color: #EEE;
+}
+#srcEd { width: 100%; }
+.feature-item { cursor:pointer; }
+.feature-item:hover { background: #DDD;}
 </style>
 <script src="../lib/charchem.js"></script>
 <script>
@@ -58,9 +66,16 @@ var all = [
 window.onload = function() {
     var mainList = document.getElementById("mainList");
     var i, pair, row, el1, el2, ex;
+    function handler(elem, formula) {
+      elem.addEventListener("click", function(){
+        var ed = document.getElementById("srcEd");
+        ed.value = formula;
+      })
+    }
     for (i in all) {
         pair = all[i];
         el1 = document.createElement("div");
+        el1.setAttribute("class", "feature-item");
         el1.innerHTML = pair[0];
         mainList.appendChild(el1);
         el2 = document.createElement("div");
@@ -76,11 +91,15 @@ window.onload = function() {
             s.setAttribute("title", ex.getMessage());
             s.setAttribute("style", "color: red");
         }
+        handler(el1, pair[1]);
     }
 }
 </script>
 </head>
 <body>
   <div id="mainList"></div>
+  <div id="srcBox">
+    <input type="text" id="srcEd" readonly />
+  </div>
 </body>
 </html>

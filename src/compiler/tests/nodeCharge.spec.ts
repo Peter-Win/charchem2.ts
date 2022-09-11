@@ -4,13 +4,13 @@ import { makeBrutto } from "../../inspectors/makeBrutto";
 import { ChemExpr } from "../../core/ChemExpr";
 import { ChemNode } from "../../core/ChemNode";
 
-const getNodes = (expr: ChemExpr): ChemNode[] => 
+const getNodes = (expr: ChemExpr): ChemNode[] =>
   expr.walkExt({
     nodes: [] as ChemNode[],
     nodePre(obj) {
       this.nodes.push(obj);
     },
-  }).nodes
+  }).nodes;
 
 describe("NodeCharge", () => {
   it("PotassiumFerrate", () => {
@@ -61,7 +61,7 @@ describe("NodeCharge", () => {
     expect(node.charge!.isLeft).toBe(true);
     expect(node.charge!.pos).toBe("LB");
     expect(makeTextFormula(node)).toBe("+H");
-  })
+  });
   it("Using angle in left side", () => {
     const expr = compile("H$pos(150)^+");
     expect(expr.getMessage()).toBe("");
@@ -72,5 +72,5 @@ describe("NodeCharge", () => {
     expect(node.charge!.isLeft).toBe(true);
     expect(node.charge!.pos).toBe(150);
     expect(makeTextFormula(node)).toBe("+H");
-  })
+  });
 });
