@@ -29,14 +29,13 @@ export const drawCharge = ({
   type,
 }: ParamsDrawCharge) => {
   const style = imgProps.getStyleColored(styleId, color);
-  const pos: CoeffPos = charge.isLeft ? "LT" : "RT";
   const figTxt = drawTextNear({
     frame,
     rcCore: rect,
     text: charge.text,
     imgProps,
     style,
-    pos,
+    pos: charge.pos ?? "RT",
     type,
   });
   frame.updateFigure(figTxt);

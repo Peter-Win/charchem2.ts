@@ -1,6 +1,6 @@
 import { createCharge } from "../ChemCharge";
 
-const stdCh = { isLeft: false, isRound: false };
+const stdCh = { pos: "RT", isRound: false };
 
 describe("createCharge", () => {
   it("plus", () => {
@@ -21,7 +21,7 @@ describe("createCharge", () => {
       ...stdCh,
     });
     const four = createCharge("++++");
-    expect(four).toBeNull();
+    expect(four).toBeUndefined();
   });
 
   it("minus", () => {
@@ -44,7 +44,7 @@ describe("createCharge", () => {
       ...stdCh,
     });
     const four = createCharge("----");
-    expect(four).toBeNull();
+    expect(four).toBeUndefined();
   });
 
   it("left signed", () => {
@@ -81,7 +81,7 @@ describe("createCharge", () => {
       text: "12+",
       value: 12.0,
     });
-    expect(createCharge("2--")).toBeNull();
+    expect(createCharge("2--")).toBeUndefined();
   });
 
   it("round", () => {
@@ -109,6 +109,6 @@ describe("createCharge", () => {
       text: "V",
       value: 5,
     });
-    expect(createCharge("x")).toBeNull();
+    expect(createCharge("x")).toBeUndefined();
   });
 });

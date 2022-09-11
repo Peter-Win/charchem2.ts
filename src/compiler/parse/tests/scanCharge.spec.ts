@@ -6,7 +6,7 @@ describe("scanCharge", () => {
     const c = createTestCompiler("O^2--");
     c.pos += 2;
     expect(c.curChar()).toBe("2");
-    const charge = scanCharge(c, false);
+    const charge = scanCharge(c);
     expect(charge).toBeDefined();
     expect(charge?.value).toBe(-2.0);
     expect(charge?.text).toBe("2-");
@@ -17,7 +17,7 @@ describe("scanCharge", () => {
     const c = createTestCompiler("O^+-");
     c.pos += 2;
     expect(c.curChar()).toBe("+");
-    const charge = scanCharge(c, false);
+    const charge = scanCharge(c);
     expect(charge).toBeDefined();
     expect(charge!.value).toBe(1.0);
     expect(charge!.text).toBe("+");
@@ -27,7 +27,7 @@ describe("scanCharge", () => {
     const c = createTestCompiler("O^-+");
     c.pos += 2;
     expect(c.curChar()).toBe("-");
-    const charge = scanCharge(c, false);
+    const charge = scanCharge(c);
     expect(charge).toBeDefined();
     expect(charge!.value).toBe(-1.0);
     expect(charge!.text).toBe("-");
@@ -37,7 +37,7 @@ describe("scanCharge", () => {
     const c = createTestCompiler("O^----");
     c.pos += 2;
     expect(c.curChar()).toBe("-");
-    const charge = scanCharge(c, false);
+    const charge = scanCharge(c);
     expect(charge).toBeDefined();
     expect(charge!.value).toBe(-3.0);
     expect(charge!.text).toBe("---");
@@ -46,14 +46,14 @@ describe("scanCharge", () => {
   it("NoCharge", () => {
     const c = createTestCompiler("O^--");
     expect(c.curChar()).toBe("O");
-    const charge = scanCharge(c, false);
+    const charge = scanCharge(c);
     expect(charge).toBeUndefined();
   });
   it("NoChargeLast", () => {
     const c = createTestCompiler("O^--");
     c.pos = 5;
     expect(c.isFinish()).toBe(true);
-    const charge = scanCharge(c, false);
+    const charge = scanCharge(c);
     expect(charge).toBeUndefined();
   });
 });

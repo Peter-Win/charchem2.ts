@@ -1,23 +1,20 @@
-import { CoeffPos } from "../types/CoeffPos";
+
+import { CoeffPos, CoeffPosOrAngle, isLeftCoeffA } from "../types/CoeffPos";
 import { Double } from "../types";
 import { romanNum } from "../utils/romanNum";
 
 export class ChemCharge {
-  readonly text: string; // Text description, for example: '2+'
 
-  readonly value: Double; // number value, for example: 2
+  get isLeft(): boolean { // ⁺N
+    return isLeftCoeffA(this.pos);
+  }
 
-  readonly isLeft: boolean; // ⁺N
-
-  readonly isRound: boolean; // A sign of drawing a charge inside a circle
-
-  pos?: CoeffPos | number; // relative position of charge from $pos()
-
-  constructor(text: string, value: Double, isLeft = false, isRound = false) {
-    this.text = text;
-    this.value = value;
-    this.isLeft = isLeft;
-    this.isRound = isRound;
+  constructor(
+    public readonly text: string, // Text description, for example: '2+'
+    public readonly value: Double, // number value, for example: 2
+    public readonly pos: CoeffPosOrAngle = "RT", // relative position of charge from $pos()
+    public readonly isRound: boolean = false // A sign of drawing a charge inside a circle
+  ) {
   }
 }
 
@@ -34,28 +31,28 @@ const pluses = new Set(["+", "++", "+++"]);
  */
 export const createCharge = (
   chargeDescr: string,
-  isLeft = false
-): ChemCharge | null => {
-  if (chargeDescr === "") return null;
+  pos: CoeffPosOrAngle = "RT"
+): ChemCharge | undefined => {
+  if (chargeDescr === "") return undefined;
   const text = chargeDescr // Replace similar characters
     .replace("–", "-") // \u2013
     .replace("−", "-"); // \u2212
   // One or more minuses:	O^--
-  if (minuses.has(text)) return new ChemCharge(text, -text.length, isLeft);
+  if (minuses.has(text)) return new ChemCharge(text, -text.length, pos);
   // One or more pluses: Zn^++
-  if (pluses.has(text)) return new ChemCharge(text, text.length, isLeft);
+  if (pluses.has(text)) return new ChemCharge(text, text.length, pos);
   // A number with a plus or minus front: S^+6, O^-2
-  if (leftSigned.test(text)) return new ChemCharge(text, +text, isLeft);
+  if (leftSigned.test(text)) return new ChemCharge(text, +text, pos);
   // A number with plus or minus behind: Ca^2+, PO4^3-
   if (rightSigned.test(text))
     return new ChemCharge(
       text,
       +`${text.slice(-1)}${text.slice(0, -1)}`,
-      isLeft
+      pos
     );
-  if (text === "+o") return new ChemCharge("+", 1.0, isLeft, true);
-  if (text === "-o") return new ChemCharge("-", -1.0, isLeft, true);
+  if (text === "+o") return new ChemCharge("+", 1.0, pos, true);
+  if (text === "-o") return new ChemCharge("-", -1.0, pos, true);
   const v = romanNum[text];
-  if (v) return new ChemCharge(text.toUpperCase(), v, isLeft);
-  return null;
+  if (v) return new ChemCharge(text.toUpperCase(), v, pos);
+  return undefined;
 };

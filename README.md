@@ -4,10 +4,13 @@
 System to describe the chemical formulas for WEB
 
 Features of 2.0
-- Braces by {{OH}} (+)
-- $background()  (...)
+- Braces by {{OH}}
+- $padding() for brackets: $padding(0.1)[N<`|H><`/H><\H>]
+- $background():  N<`|$background(orange,round)H><`/H><\H>
 - extended markup in comments "H_4N^+"-->
 - _(h+), _(h-)
+- $pos() for charge position: \N$pos(-90)^+/O`/|O^-
+- New operation arrow --|>
 
 Problems:
 - It is possible to insert unsafe code in HTML formula view by Text and Custom items.
