@@ -1,4 +1,3 @@
-import { CoeffPos } from "../types/CoeffPos";
 import { ChemStyleId } from "../drawSys/ChemStyleId";
 import { ChemCharge } from "../core/ChemCharge";
 import { ChemImgProps } from "../drawSys/ChemImgProps";

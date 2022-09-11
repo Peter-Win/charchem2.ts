@@ -1,11 +1,10 @@
-
-import { CoeffPos, CoeffPosOrAngle, isLeftCoeffA } from "../types/CoeffPos";
+import { CoeffPosOrAngle, isLeftCoeffA } from "../types/CoeffPos";
 import { Double } from "../types";
 import { romanNum } from "../utils/romanNum";
 
 export class ChemCharge {
-
-  get isLeft(): boolean { // ⁺N
+  get isLeft(): boolean {
+    // ⁺N
     return isLeftCoeffA(this.pos);
   }
 
@@ -14,8 +13,7 @@ export class ChemCharge {
     public readonly value: Double, // number value, for example: 2
     public readonly pos: CoeffPosOrAngle = "RT", // relative position of charge from $pos()
     public readonly isRound: boolean = false // A sign of drawing a charge inside a circle
-  ) {
-  }
+  ) {}
 }
 
 const leftSigned = /(^|(^[-+]))\d+$/;
@@ -45,11 +43,7 @@ export const createCharge = (
   if (leftSigned.test(text)) return new ChemCharge(text, +text, pos);
   // A number with plus or minus behind: Ca^2+, PO4^3-
   if (rightSigned.test(text))
-    return new ChemCharge(
-      text,
-      +`${text.slice(-1)}${text.slice(0, -1)}`,
-      pos
-    );
+    return new ChemCharge(text, +`${text.slice(-1)}${text.slice(0, -1)}`, pos);
   if (text === "+o") return new ChemCharge("+", 1.0, pos, true);
   if (text === "-o") return new ChemCharge("-", -1.0, pos, true);
   const v = romanNum[text];
