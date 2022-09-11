@@ -3,6 +3,8 @@ import { Int } from "../../types";
 import { ChemCompiler } from "../ChemCompiler";
 import { parseNum } from "../parse/parseNum";
 
+// В случае использования угла не действуют supKX и subKX
+
 export const funcPos = (compiler: ChemCompiler, args: string[], pos: Int[]) => {
   const arg = args[0];
   if (!arg) return;

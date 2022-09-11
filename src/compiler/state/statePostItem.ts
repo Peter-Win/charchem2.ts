@@ -16,7 +16,7 @@ export const statePostItem: CompilerState = (compiler) => {
   if (compiler.curChar() === "(") {
     const bracketPos = compiler.pos;
     compiler.pos++;
-    const charge = scanCharge(compiler, false);
+    const charge = scanCharge(compiler);
     if (charge && compiler.curChar() === ")") {
       item.charge = charge;
       return compiler.setState(statePostItem, 1);

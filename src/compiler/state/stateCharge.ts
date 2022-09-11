@@ -9,8 +9,9 @@ export const stateCharge: CompilerState = (compiler) => {
     compiler.error("Expected node declaration before charge", { pos: pos - 1 });
   // Наличие ` перед объявлением заряда означает, что заряд нужно вывести слева
   const isLeft = compiler.getAltFlag();
+  const varPos = compiler.eject("varPos");
   chargeOwner.charge =
-    scanCharge(compiler, isLeft) ??
+    scanCharge(compiler, varPos ?? (isLeft ? "LT" : "RT")) ??
     compiler.error("Invalid charge declaration", { pos });
   return compiler.setState(stateAgentMid);
 };
