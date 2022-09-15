@@ -6,7 +6,10 @@ import { ElemList } from "../core/ElemList";
  * Не учитываются коэффициенты агентов.
  * Не имеет смысла для выражений, имеющих более одного агента.
  */
-export const makeElemList = (chemObj: ChemObj): ElemList => {
+export const makeElemList = (
+  chemObj: ChemObj,
+  ignoreAgentK: boolean = false
+): ElemList => {
   const stack: ElemList[] = [new ElemList()];
   const push = () => {
     stack.unshift(new ElemList());
@@ -22,7 +25,7 @@ export const makeElemList = (chemObj: ChemObj): ElemList => {
       push();
     },
     agentPost(obj) {
-      pop(obj.n.num);
+      pop(ignoreAgentK ? 1 : obj.n.num);
     },
 
     nodePost(obj) {

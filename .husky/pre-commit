@@ -3,3 +3,4 @@
 
 yarn lint:fix
 yarn test
+git add -A

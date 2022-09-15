@@ -89,4 +89,12 @@ describe("makeBrutto", () => {
     ]);
     expect(makeTextFormula(makeBrutto(expr), rulesCharChem)).toBe("C5H5N");
   });
+  it("ignoreAgentK", () => {
+    const expr = compile("2H");
+    expect(expr.getMessage()).toBe("");
+    const bruttoNetto = makeBrutto(expr, true);
+    expect(makeTextFormula(bruttoNetto)).toBe("H");
+    const bruttoFull = makeBrutto(expr);
+    expect(makeTextFormula(bruttoFull)).toBe("H2");
+  });
 });

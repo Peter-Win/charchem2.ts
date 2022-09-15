@@ -11,12 +11,15 @@ import { makeChargeText } from "../core/makeChargeText";
 import { ElemList } from "../core/ElemList";
 import { makeElemList } from "./makeElemList";
 
-export const makeBrutto = (expr: ChemObj): ChemExpr => {
+export const makeBrutto = (
+  expr: ChemObj,
+  ignoreAgentK: boolean = false
+): ChemExpr => {
   const result = new ChemExpr();
   const agent = new ChemAgent();
   result.entities.push(agent);
   const node = agent.addNode(new ChemNode());
-  const elemList: ElemList = makeElemList(expr);
+  const elemList: ElemList = makeElemList(expr, ignoreAgentK);
   elemList.sortByHill();
   elemList.list.forEach((elemRec) => {
     const item = elemRec.elem ?? new ChemCustom(elemRec.id);
