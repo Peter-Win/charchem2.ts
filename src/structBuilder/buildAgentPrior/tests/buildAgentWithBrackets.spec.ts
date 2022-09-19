@@ -1,3 +1,4 @@
+import { PathSegPt } from "../../../drawSys/path";
 import { FigFrame } from "../../../drawSys/figures/FigFrame";
 import { FigPath } from "../../../drawSys/figures/FigPath";
 import { compile } from "../../../compiler/compile";
@@ -217,5 +218,54 @@ describe("buildAgentPrior with brackets", () => {
     });
     const { agentFrame } = buildAgentPrior(agent, imgProps);
     saveSurface("buildAgentWithBrackets-HR", agentFrame, surface);
+  });
+
+  it("Wrong space", () => {
+    //           nodes   problem  right side
+    //   H -(O)  0 -(1)  H-  (O)  (O)  -H
+    //       |       |        |    |
+    //   F - +   3 - 2      F-+    +-F
+    // H - first subchain, rest - next subchain
+    // PS: Same case for right side: F`-`|(O)-H
+    const expr = compile("H-(O)|`-F");
+    expect(expr.getMessage()).toBe("");
+    const agent = expr.getAgents()[0]!;
+    const surface = createTestSurface();
+    const imgProps = createTestImgProps(surface, 40);
+    const { agentFrame } = buildAgentPrior(agent, imgProps);
+    saveSurface("buildAgentWithBrackets-softSpace", agentFrame, surface);
+    // bond |: vert line (112.94, 17.56) to (112.94, 64)
+    // bond `-: ltr horiz line (112.94, 64) to (59.83, 64)
+    // H: Frame>Frame>Text
+    // O: Frame>Frame>Text
+    // auto node: Frame. bounds: {0, 0, 0, 0} , org: (112.94, 64)
+    // R: Frame>Frame>Frame>Text
+    // (: Frame>Text. org=(83.02, 15.56)
+    // ): Frame>Text
+    // soft bond -: horiz line (15.55, 0) to (38.05, 0)
+    const figSoftBonds = agentFrame.figures.filter(
+      (f) =>
+        f instanceof FigPath &&
+        f.segs.length === 2 &&
+        f.segs[0]!.cmd === "M" &&
+        f.segs[1]!.cmd === "L" &&
+        (f.segs[0] as PathSegPt).pt.x < (f.segs[1] as PathSegPt).pt.x
+    );
+    expect(figSoftBonds.length).toBe(1);
+    const figBrackets = agentFrame.figures.filter(
+      (f) =>
+        f instanceof FigFrame &&
+        f.figures.length === 1 &&
+        f.figures[0] instanceof FigText
+    );
+    expect(figBrackets.length).toBe(2);
+    const figSoftBond = figSoftBonds[0] as FigPath;
+    const figOpenBr = figBrackets[0]!;
+    const { strokeWidth = 1 } = figSoftBond.style;
+    expect(
+      figSoftBond.getRelativeBounds().right +
+        imgProps.nodeMargin -
+        strokeWidth / 2
+    ).toBeCloseTo(figOpenBr.getRelativeBounds().left);
   });
 });

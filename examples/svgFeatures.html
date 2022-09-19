@@ -8,6 +8,7 @@
 #mainList {
     display: grid; 
     grid-template-columns: 1fr 5fr;
+    margin-bottom: 2rem;
 }
 #mainList > div {border-bottom: thin solid silver;}
 #srcBox {
@@ -19,7 +20,7 @@
 .feature-item { cursor:pointer; }
 .feature-item:hover { background: #DDD;}
 </style>
-<script src="../lib/charchem.js"></script>
+<script src="../lib/charchem2.js"></script>
 <script>
 var all = [
  ["Ionic equation", `H^+ + HCO3^- = CO2"|^" + H2O`],
@@ -41,6 +42,7 @@ var all = [
  ["Small brackets", "`\\()`'q'`|N<`\\`|{X}|`/()'n'`\\{Y}>/\\N|()'p'`/_(A45)()'m'_p4N<_(y.5)H>_p4()`'o'_p4"],
  ["Connected brackets", "[H|N^+<`/H><_(A75,w+)H><\\dH>]3^+[P<`||O><`/O`^-><_(A75,w+)O^-><_(A20,d+)O^->]^3-"],
  ["Brackets and reverse connection", "P<_(A160,d+)N_(h-)(CH3)2><_(A110,L1.3,w+)N_(h-)(CH3)2>\\N(CH3)2"],
+ ["Bracket inside the cluster", "H-(O)'n'|`-F + F`-`|(O)'m'-H"],
 
  ["Multiplier", "CuSO4*5H2O"],
  ["Complex multiplier", "$ver(2.0)[$slope(45)Cu/O\\S/O`/\\O`\\`/O`\\]*5[O<`|H>|H]"],
@@ -72,6 +74,10 @@ window.onload = function() {
         ed.value = formula;
       })
     }
+    var cfg = {
+      nonText: true,
+      drawSysId: "canvas",
+    };
     for (i in all) {
         pair = all[i];
         el1 = document.createElement("div");
@@ -83,7 +89,7 @@ window.onload = function() {
         mainList.appendChild(el2);
         ex = ChemSys.compile(pair[1]);
         if (ex.isOk()) {
-          ChemSys.drawSvg(el2, ex);
+          ChemSys.draw(el2, ex, cfg);
         } else {
             var s = document.createElement("span");
             el2.appendChild(s);

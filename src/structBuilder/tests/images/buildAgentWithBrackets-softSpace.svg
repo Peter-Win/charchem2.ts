@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg viewBox="0 0 113.43999999999998 104.00000000000001" xmlns="http://www.w3.org/2000/svg" version="1.1" baseProfile="full" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ev="http://www.w3.org/2001/xml-events">
+  <defs>
+    <path id="HussarBoldWeb-H" d="M248 331v-331h-188v825h188v-329h266v329h188v-825h-188v331h-266z" />
+    <path id="HussarBoldWeb-O" d="M23 413c0 241 189 427 416 427c229 0 415 -186 415 -427s-178 -428 -415 -428c-244 0 -416 187 -416 428zM226 413c0 -123 59 -246 213 -246c150 0 212 123 212 246s-66 246 -212 246c-145 0 -213 -123 -213 -246z" />
+    <path id="HussarBoldWeb-F" d="M537 825v-165h-289v-164h267v-165h-267v-331h-188v825h477z" />
+    <path id="HussarBoldWeb-parenleft" d="M345 -211l-115 -49s-175 211 -175 557c0 356 189 578 189 578l115 -49s-141 -171 -141 -529c0 -338 127 -508 127 -508z" />
+    <path id="HussarBoldWeb-parenright" d="M173 -260l-115 49s127 170 127 508c0 358 -141 529 -141 529l115 49s189 -222 189 -578c0 -346 -175 -557 -175 -557z" />
+  </defs>
+  <path d="M69.97 17.56L69.97 64" fill="none" stroke="black" stroke-width="2" stroke-linecap="round" transform="translate(13.55,15.56)" />
+  <path d="M69.97 64L18.05 64" fill="none" stroke="black" stroke-width="2" stroke-linecap="round" transform="translate(13.55,15.56)" />
+  <use xlink:href="#HussarBoldWeb-H" transform="matrix(0.035555555555555556 0 0 -0.035555555555555556 0 31.11111111111111)" fill="black" />
+  <use xlink:href="#HussarBoldWeb-O" transform="matrix(0.035555555555555556 0 0 -0.035555555555555556 67.92888888888888 31.11111111111111)" fill="black" />
+  <use xlink:href="#HussarBoldWeb-F" transform="matrix(0.035555555555555556 0 0 -0.035555555555555556 9.439999999999998 95.11111111111113)" fill="black" />
+  <use xlink:href="#HussarBoldWeb-parenleft" transform="matrix(0.035555555555555556 0 0 -0.035555555555555556 53.599999999999994 31.11111111111111)" fill="black" />
+  <use xlink:href="#HussarBoldWeb-parenright" transform="matrix(0.035555555555555556 0 0 -0.035555555555555556 99.1111111111111 31.11111111111111)" fill="black" />
+  <path d="M15.55 0L38.05 0" fill="none" stroke="black" stroke-width="2" stroke-linecap="round" transform="translate(13.55,15.56)" />
+</svg>

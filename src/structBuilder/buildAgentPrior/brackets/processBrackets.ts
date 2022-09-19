@@ -153,6 +153,7 @@ export const makeBridge = (
   if (node0 && node1) {
     const src = { node: node0, allBox: isSrcBracket };
     const dst = { node: node1, allBox: true };
+    const sign = ctx.rtlNodes.has(node0.index) ? -1 : 1;
     let dy = 0;
     let flAbs = false;
     if (isSrcBracket && isDstBracket) {
@@ -168,7 +169,7 @@ export const makeBridge = (
       ctx,
       src,
       dst,
-      new Point(ctx.props.bracketSpace, dy),
+      new Point(sign * ctx.props.bracketSpace, dy),
       flAbs
     );
   }
@@ -286,6 +287,14 @@ export const processBrackets = (
   });
   cluster.frame.addFigure(figOpen, true);
   cluster.frame.addFigure(figClose, true);
+
+  // const brc = figOpen.getRelativeBounds();
+  // brc.unite(figClose.getRelativeBounds());
+  // cluster.frame.addFigure(new FigRect(brc, {stroke: "brown"}));
+
+  // Для вложенных скобок внешние переписывают внутренние.
+  beginNi.left = figOpen;
+  endNi.right = figClose;
 
   // eslint-disable-next-line no-param-reassign
   cmdOpen.figure = figOpen;

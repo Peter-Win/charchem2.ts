@@ -126,7 +126,9 @@ export const mergeBonds = (
   oldBond.n += newBond.n;
   compiler.curNode = newNode;
   compiler.curBond = oldBond;
-  // TODO: Возможно, здесь стоило бы пометить newBond, что его нельзя корректировать
+  // узел фиксируется, чтобы его не сместило при автокоррекции
+  newNode.fixed = true;
+  newBond.isAuto = false;
   newBond.soft = false;
   newBond.nodes[1] = newNode;
   compiler.chainSys.addBond(newBond);

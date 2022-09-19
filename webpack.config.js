@@ -18,7 +18,7 @@ module.exports = {
   entry: './src/index.ts',
   output: {
     path: path.resolve(__dirname, 'lib'),
-    filename: 'charchem.js',
+    filename: 'charchem2.js',
     publicPath: '/',
   },
   plugins: [

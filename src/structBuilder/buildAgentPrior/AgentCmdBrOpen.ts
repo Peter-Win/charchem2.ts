@@ -24,11 +24,7 @@ export class AgentCmdBrOpen extends AgentCmd {
     // Если перед началом скобки стоит мост или любая скобка,
     // То предыдущая команда должна на выходе стыковаться с текущей на входе
     // -(, [(, ](
-    if (
-      cmd instanceof AgentCmdBridge ||
-      cmd instanceof AgentCmdBrOpen
-      // cmd instanceof AgentCmdBrClose
-    ) {
+    if (cmd instanceof AgentCmdBridge || cmd instanceof AgentCmdBrOpen) {
       // eslint-disable-next-line no-param-reassign
       cmd.dstCmd = this;
       this.srcCmd = cmd;

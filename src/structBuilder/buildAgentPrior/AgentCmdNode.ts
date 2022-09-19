@@ -6,6 +6,7 @@ import { AgentCmdBrClose } from "./AgentCmdBrClose";
 import { PAgentCtx } from "./PAgentCtx";
 import { getNodeInfo } from "../NodeInfo";
 import { makeBridge } from "./brackets/processBrackets";
+import { ifDef } from "../../utils/ifDef";
 
 export class AgentCmdNode extends AgentCmd {
   br?: CommonBracket;
@@ -15,6 +16,11 @@ export class AgentCmdNode extends AgentCmd {
   }
 
   override canPush(ctx: PAgentCtx): boolean {
+    // Если первая связь узла идет справа налево, то вносим узел в соответствующее множество
+    const bonds = Array.from(this.node.bonds);
+    ifDef(bonds[0]?.dir, (it) => {
+      if (it.x < 0) ctx.rtlNodes.add(this.node.index);
+    });
     if (this.br) {
       const n0 = this.br.nodes[0];
       const step = new Point();
