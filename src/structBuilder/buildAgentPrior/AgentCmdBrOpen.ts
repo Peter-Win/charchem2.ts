@@ -63,6 +63,14 @@ export class AgentCmdBrOpen extends AgentCmd {
     } else {
       if (cmd instanceof AgentCmdNode) {
         this.prevText = true;
+        // Если у узла одна связь, то проверить направление
+        const { node } = cmd;
+        if (node.bonds.size === 1) {
+          const nodeBond = Array.from(node.bonds)[0]!;
+          ifDef(nodeBond.dir, (dir) => {
+            if (dir.x < 0) this.checkRtl(ctx, node);
+          });
+        }
       }
       const [n1, n2] = this.begin.nodes;
       if (n1?.subChain !== n2?.subChain) {

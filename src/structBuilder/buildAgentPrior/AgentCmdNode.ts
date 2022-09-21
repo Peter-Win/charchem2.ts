@@ -33,8 +33,6 @@ export class AgentCmdNode extends AgentCmd {
 
   override onPrevious(cmd: AgentCmd): void {
     if (cmd instanceof AgentCmdBrClose) {
-      // const { end } = cmd;
-      // this.br = end;
       this.prevBracket = cmd;
     }
   }
