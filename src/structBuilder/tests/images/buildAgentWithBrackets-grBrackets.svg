@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no" ?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg viewBox="0 0 228.40533333333332 199.4666666666667" xmlns="http://www.w3.org/2000/svg" version="1.1" baseProfile="full" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ev="http://www.w3.org/2001/xml-events">
+<svg viewBox="0 0 236.40533333333332 199.4666666666667" xmlns="http://www.w3.org/2000/svg" version="1.1" baseProfile="full" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ev="http://www.w3.org/2001/xml-events">
   <defs>
     <path id="HussarBoldWeb-H" d="M248 331v-331h-188v825h188v-329h266v329h188v-825h-188v331h-266z" />
     <path id="HussarBoldWeb-O" d="M23 413c0 241 189 427 416 427c229 0 415 -186 415 -427s-178 -428 -415 -428c-244 0 -416 187 -416 428zM226 413c0 -123 59 -246 213 -246c150 0 212 123 212 246s-66 246 -212 246c-145 0 -213 -123 -213 -246z" />
@@ -11,8 +11,8 @@
   <path d="M15.55 0L46.41 0" fill="none" stroke="black" stroke-width="2" stroke-linecap="round" transform="translate(51.55,60.62)" />
   <path d="M64 17.56L64 46.44" fill="none" stroke="black" stroke-width="2" stroke-linecap="round" transform="translate(51.55,60.62)" />
   <path d="M46.41 64L15.55 64" fill="none" stroke="black" stroke-width="2" stroke-linecap="round" transform="translate(51.55,60.62)" />
-  <path d="M127.18 -14.44L127.18 14.44" fill="none" stroke="black" stroke-width="2" stroke-linecap="round" transform="translate(51.55,60.62)" />
-  <path d="M127.18 49.56L127.18 78.44" fill="none" stroke="black" stroke-width="2" stroke-linecap="round" transform="translate(51.55,60.62)" />
+  <path d="M135.18 -14.44L135.18 14.44" fill="none" stroke="black" stroke-width="2" stroke-linecap="round" transform="translate(51.55,60.62)" />
+  <path d="M135.18 49.56L135.18 78.44" fill="none" stroke="black" stroke-width="2" stroke-linecap="round" transform="translate(51.55,60.62)" />
   <use xlink:href="#HussarBoldWeb-H" transform="matrix(0.035555555555555556 0 0 -0.035555555555555556 38 76.17777777777775)" fill="black" />
   <use xlink:href="#HussarBoldWeb-O" transform="matrix(0.035555555555555556 0 0 -0.035555555555555556 99.95555555555555 76.17777777777775)" fill="black" />
   <use xlink:href="#HussarBoldWeb-O" transform="matrix(0.035555555555555556 0 0 -0.035555555555555556 99.95555555555555 140.17777777777775)" fill="black" />
@@ -23,14 +23,14 @@
   <path d="M0 0H8V104H0V102.53H4.84V1.47H0Z" fill="black" transform="translate(141.14,45.07)" />
   <path d="M8 0H0V104H8V102.53H3.16V1.47H8Z" fill="black" transform="translate(10,45.07)" />
   <path d="M0 0H8V104H0V102.53H4.84V1.47H0Z" fill="black" transform="translate(151.14,45.07)" />
-  <use xlink:href="#HussarBoldWeb-H" transform="matrix(0.035555555555555556 0 0 -0.035555555555555556 165.1822222222222 44.17777777777777)" fill="black" />
-  <use xlink:href="#HussarBoldWeb-O" transform="matrix(0.035555555555555556 0 0 -0.035555555555555556 163.13777777777779 108.17777777777778)" fill="black" />
-  <use xlink:href="#HussarBoldWeb-H" transform="matrix(0.035555555555555556 0 0 -0.035555555555555556 165.1822222222222 172.17777777777775)" fill="black" />
-  <path d="M8 0H0V168H8V166.53H3.16V1.47H8Z" fill="black" transform="translate(155.14,13.07)" />
-  <path d="M0 0H8V168H0V166.53H4.84V1.47H0Z" fill="black" transform="translate(194.32,13.07)" />
+  <use xlink:href="#HussarBoldWeb-H" transform="matrix(0.035555555555555556 0 0 -0.035555555555555556 173.1822222222222 44.17777777777777)" fill="black" />
+  <use xlink:href="#HussarBoldWeb-O" transform="matrix(0.035555555555555556 0 0 -0.035555555555555556 171.13777777777779 108.17777777777778)" fill="black" />
+  <use xlink:href="#HussarBoldWeb-H" transform="matrix(0.035555555555555556 0 0 -0.035555555555555556 173.1822222222222 172.17777777777775)" fill="black" />
+  <path d="M8 0H0V168H8V166.53H3.16V1.47H8Z" fill="black" transform="translate(163.14,13.07)" />
+  <path d="M0 0H8V168H0V166.53H4.84V1.47H0Z" fill="black" transform="translate(202.32,13.07)" />
   <path d="M4.26 43.73L4.26 30.55Q4.26 16.39 5.15 9.61Q6.04 2.82 8 1.63L8 0Q5.23 1.24 4.04 8.46Q2.86 15.69 2.86 29.97L2.86 43.73L2.86 43.73L2.86 67.08Q2.86 74.85 2.11 78.8Q1.36 82.75 0 82.89L0 84.95Q1.33 85.09 2.09 89.06Q2.86 93.03 2.86 100.92L2.86 124.27L2.86 138.03Q2.86 152.31 4.04 159.54Q5.23 166.76 8 168L8 166.37Q6.04 165.18 5.15 158.39Q4.26 151.61 4.26 137.45L4.26 124.27L4.26 124.27L4.26 103.91Q4.26 94.34 3.31 89.78Q2.35 85.23 1.4 84.21L1.4 83.79Q2.34 82.75 3.25 78.44Q4.15 74.13 4.26 64.09Z" fill="black" transform="translate(0,13.07)" />
-  <path d="M5.14 43.73L5.14 29.97Q5.14 15.69 3.96 8.46Q2.77 1.24 0 0L0 1.63Q1.96 2.82 2.85 9.61Q3.74 16.39 3.74 30.55L3.74 43.73L3.74 43.73L3.74 64.09Q3.85 74.13 4.75 78.44Q5.66 82.75 6.6 83.79L6.6 84.21Q5.65 85.23 4.69 89.78Q3.74 94.34 3.74 103.91L3.74 124.27L3.74 137.45Q3.74 151.61 2.85 158.39Q1.96 165.18 0 166.37L0 168Q2.77 166.76 3.96 159.54Q5.14 152.31 5.14 138.03L5.14 124.27L5.14 124.27L5.14 100.92Q5.14 93.03 5.91 89.06Q6.67 85.09 8 84.95L8 82.89Q6.64 82.75 5.89 78.8Q5.14 74.85 5.14 67.08Z" fill="black" transform="translate(204.32,13.07)" />
-  <use xlink:href="#HussarBoldWeb-plus" transform="matrix(0.021333333333333333 0 0 -0.021333333333333333 212.32 18.666666666666664)" fill="black" />
-  <ellipse fill="none" stroke="black" transform="translate(204.32,13.07)" cx="14.75" cy="-3.73" rx="9.33" ry="9.33" />
-  <use xlink:href="#HussarBoldWeb-three" transform="matrix(0.021333333333333333 0 0 -0.021333333333333333 212.32 194.13333333333333)" fill="black" />
+  <path d="M5.14 43.73L5.14 29.97Q5.14 15.69 3.96 8.46Q2.77 1.24 0 0L0 1.63Q1.96 2.82 2.85 9.61Q3.74 16.39 3.74 30.55L3.74 43.73L3.74 43.73L3.74 64.09Q3.85 74.13 4.75 78.44Q5.66 82.75 6.6 83.79L6.6 84.21Q5.65 85.23 4.69 89.78Q3.74 94.34 3.74 103.91L3.74 124.27L3.74 137.45Q3.74 151.61 2.85 158.39Q1.96 165.18 0 166.37L0 168Q2.77 166.76 3.96 159.54Q5.14 152.31 5.14 138.03L5.14 124.27L5.14 124.27L5.14 100.92Q5.14 93.03 5.91 89.06Q6.67 85.09 8 84.95L8 82.89Q6.64 82.75 5.89 78.8Q5.14 74.85 5.14 67.08Z" fill="black" transform="translate(212.32,13.07)" />
+  <use xlink:href="#HussarBoldWeb-plus" transform="matrix(0.021333333333333333 0 0 -0.021333333333333333 220.32 18.666666666666664)" fill="black" />
+  <ellipse fill="none" stroke="black" transform="translate(212.32,13.07)" cx="14.75" cy="-3.73" rx="9.33" ry="9.33" />
+  <use xlink:href="#HussarBoldWeb-three" transform="matrix(0.021333333333333333 0 0 -0.021333333333333333 220.32 194.13333333333333)" fill="black" />
 </svg>

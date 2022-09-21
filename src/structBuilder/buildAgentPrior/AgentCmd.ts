@@ -14,5 +14,5 @@ export class AgentCmd {
   postExec(ctx: PAgentCtx): void {}
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function, @typescript-eslint/no-unused-vars, class-methods-use-this
-  onPrevious(cmd: AgentCmd): void {}
+  onPrevious(cmd: AgentCmd, ctx: PAgentCtx): void {}
 }

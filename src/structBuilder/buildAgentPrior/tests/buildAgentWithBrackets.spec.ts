@@ -25,49 +25,69 @@ describe("buildAgentPrior with brackets", () => {
     saveSurface("buildAgentWithBrackets-b2n", agentFrame, surface);
     const { figures } = agentFrame;
     expect(figures.length).toBe(5);
-    expect(figures[0]).toBeInstanceOf(FigFrame);
-    expect((figures[0] as FigFrame).figures[0]).toBeInstanceOf(FigFrame);
-    expect(
-      ((figures[0] as FigFrame).figures[0] as FigFrame).figures[0]
-    ).toHaveProperty("text", "H");
-    expect(
-      ((figures[0] as FigFrame).figures[0] as FigFrame).figures[1]
-    ).toHaveProperty("text", "3");
-    expect((figures[0] as FigFrame).figures[1]).toBeInstanceOf(FigFrame);
-    expect(
-      ((figures[0] as FigFrame).figures[1] as FigFrame).figures[0]
-    ).toHaveProperty("text", "C");
-    expect(figures[1]).toBeInstanceOf(FigFrame);
-    expect((figures[1] as FigFrame).figures[0]).toBeInstanceOf(FigFrame);
-    expect(
-      ((figures[1] as FigFrame).figures[0] as FigFrame).figures[0]
-    ).toHaveProperty("text", "C");
-    expect(
-      ((figures[1] as FigFrame).figures[1] as FigFrame).figures[0]
-    ).toHaveProperty("text", "H");
-    expect(
-      ((figures[1] as FigFrame).figures[1] as FigFrame).figures[1]
-    ).toHaveProperty("text", "2");
-    expect(figures[2]).toBeInstanceOf(FigFrame);
-    expect((figures[2] as FigFrame).figures[0]).toBeInstanceOf(FigText);
-    expect((figures[2] as FigFrame).figures[0]).toHaveProperty("text", "(");
-    expect((figures[3] as FigFrame).figures[0]).toHaveProperty("text", ")");
-    expect((figures[3] as FigFrame).figures[1]).toHaveProperty("text", "4");
-    expect(
-      ((figures[4] as FigFrame).figures[0] as FigFrame).figures[0]
-    ).toHaveProperty("text", "N");
-    expect(
-      ((figures[4] as FigFrame).figures[1] as FigFrame).figures[0]
-    ).toHaveProperty("text", "H");
-    expect(
-      ((figures[4] as FigFrame).figures[1] as FigFrame).figures[1]
-    ).toHaveProperty("text", "2");
-    const { top } = figures[0]!.getRelativeBounds();
-    expect(figures[1]!.getRelativeBounds().top).toBe(top);
-    expect(figures[2]!.getRelativeBounds().top).toBe(top);
-    expect(figures[3]!.getRelativeBounds().top).toBe(top);
-    expect(figures[4]!.getRelativeBounds().top).toBe(top);
+    const figNode0 = figures[0] as FigFrame;
+    expect(figNode0).toBeInstanceOf(FigFrame);
+    expect(figNode0.figures[0]).toBeInstanceOf(FigFrame);
+    expect((figNode0.figures[0] as FigFrame).figures[0]).toHaveProperty(
+      "text",
+      "H"
+    );
+    expect((figNode0.figures[0] as FigFrame).figures[1]).toHaveProperty(
+      "text",
+      "3"
+    );
+    expect(figNode0.figures[1]).toBeInstanceOf(FigFrame);
+    expect((figNode0.figures[1] as FigFrame).figures[0]).toHaveProperty(
+      "text",
+      "C"
+    );
+
+    const figNode1 = figures[1] as FigFrame;
+    expect(figNode1).toBeInstanceOf(FigFrame);
+    expect(figNode1.figures[0]).toBeInstanceOf(FigFrame);
+    expect((figNode1.figures[0] as FigFrame).figures[0]).toHaveProperty(
+      "text",
+      "C"
+    );
+    expect((figNode1.figures[1] as FigFrame).figures[0]).toHaveProperty(
+      "text",
+      "H"
+    );
+    expect((figNode1.figures[1] as FigFrame).figures[1]).toHaveProperty(
+      "text",
+      "2"
+    );
+
+    const figBrOpen = figures[2] as FigFrame;
+    expect(figBrOpen).toBeInstanceOf(FigFrame);
+    expect(figBrOpen.figures[0]).toBeInstanceOf(FigText);
+    expect(figBrOpen.figures[0]).toHaveProperty("text", "(");
+
+    const figBrClose = figures[3] as FigFrame;
+    expect(figBrClose.figures[0]).toHaveProperty("text", ")");
+    expect(figBrClose.figures[1]).toHaveProperty("text", "4");
+
+    const figNodeLast = figures[4] as FigFrame;
+    expect(figNodeLast).toBeInstanceOf(FigFrame);
+    expect((figNodeLast.figures[0] as FigFrame).figures[0]).toHaveProperty(
+      "text",
+      "N"
+    );
+    expect((figNodeLast.figures[1] as FigFrame).figures[0]).toHaveProperty(
+      "text",
+      "H"
+    );
+    expect((figNodeLast.figures[1] as FigFrame).figures[1]).toHaveProperty(
+      "text",
+      "2"
+    );
+    const { top } = figNode0.getRelativeBounds();
+    expect(figNode1.getRelativeBounds().top).toBe(top);
+    expect(figBrOpen.getRelativeBounds().top).toBe(top);
+    expect(figBrClose.getRelativeBounds().top).toBe(top);
+    expect(figNodeLast.getRelativeBounds().top).toBe(top);
   });
+
   it("Connecting two brackets of different heights", () => {
     //          ┌ H ┐
     //          │ | │
@@ -99,6 +119,7 @@ describe("buildAgentPrior with brackets", () => {
     // А высота второй скобки отличается на стандартную длину связи
     // expect(src.top - imgProps.line).toBeCloseTo(dst.top);
   });
+
   it("Brackets with hard bonds", () => {
     const expr = compile("Cl/[\\\\<|Cl>]4/\\Cl");
     expect(expr.getMessage()).toBe("");
@@ -108,6 +129,7 @@ describe("buildAgentPrior with brackets", () => {
     const { agentFrame } = buildAgentPrior(agent, imgProps);
     saveSurface("buildAgentWithBrackets-hard", agentFrame, surface);
   });
+
   it("Text braces", () => {
     const expr = compile("{{Hg(ClO3)2}}");
     expect(expr.getMessage()).toBe("");
@@ -117,6 +139,7 @@ describe("buildAgentPrior with brackets", () => {
     const { agentFrame } = buildAgentPrior(agent, imgProps);
     saveSurface("buildAgentWithBrackets-textBraces", agentFrame, surface);
   });
+
   it("Graphic brackets", () => {
     const expr = compile("{{[[(H_p4O_p4O_p4H)]][H|O|H]}}3^+o");
     expect(expr.getMessage()).toBe("");
@@ -126,6 +149,7 @@ describe("buildAgentPrior with brackets", () => {
     const { agentFrame } = buildAgentPrior(agent, imgProps);
     saveSurface("buildAgentWithBrackets-grBrackets", agentFrame, surface);
   });
+
   it("Vertical alignment of connected brackets", () => {
     //  +  *  + +  *  +3+
     //  | / \ | | / \ |
@@ -267,5 +291,79 @@ describe("buildAgentPrior with brackets", () => {
         imgProps.nodeMargin -
         strokeWidth / 2
     ).toBeCloseTo(figOpenBr.getRelativeBounds().left);
+  });
+
+  const findTextBracket = (agentFrame: FigFrame, bracketText: string) =>
+    agentFrame.figures.find(
+      (f) =>
+        f instanceof FigFrame &&
+        f.figures.length === 1 &&
+        f.figures[0] instanceof FigText &&
+        f.figures[0].text === bracketText
+    );
+
+  it("GraphTextConnection", () => {
+    // Bug: Если текстовая скобка идет после графической, где последняя связь ltr, то текстовая оказывается справа.
+    // Но влиять на направление должна не внутренняя, а внешняя связь
+    // Expected:    In Bug
+    // ┌     ┐          ┌     ┐
+    // │   | │          │   | │
+    // │ H-O │(Hg)  (Hg)│ H-O │
+    // └     ┘          └     ┘
+    // reason: invalid direction from internal soft bond O`-H
+    //
+    //
+    const expr = compile("[|O`-H](Hg)");
+    expect(expr.getMessage()).toBe("");
+    const agent = expr.getAgents()[0]!;
+    const surface = createTestSurface();
+    const imgProps = createTestImgProps(surface, 40);
+    const { agentFrame } = buildAgentPrior(agent, imgProps);
+    saveSurface("buildAgentWithBrackets-GrTxConn", agentFrame, surface);
+    // Find all graphic brackets
+    const grBrackets = agentFrame.figures.filter(
+      (f) =>
+        f instanceof FigFrame &&
+        f.figures.length === 1 &&
+        f.figures[0] instanceof FigPath &&
+        f.figures[0].segs.length > 2
+    );
+    expect(grBrackets.length).toBe(2);
+    const grClose = grBrackets[1]!;
+    // Find open text bracket
+    const txOpen = findTextBracket(agentFrame, "(");
+    expect(txOpen).toBeDefined();
+    expect(txOpen!.getRelativeBounds().left).toBeGreaterThan(
+      grClose.getRelativeBounds().right
+    );
+  });
+
+  it("ltrTxtBrackets", () => {
+    // H`-[O](CH2-O-CH2){F}  =>  {F}(CH2-O-CH2)[O]-H
+    const expr = compile("H`-[O](CH2-O-CH2){{F}}");
+    expect(expr.getMessage()).toBe("");
+    const agent = expr.getAgents()[0]!;
+    const surface = createTestSurface();
+    const imgProps = createTestImgProps(surface, 40);
+    const { agentFrame, ctx } = buildAgentPrior(agent, imgProps);
+    saveSurface("buildAgentWithBrackets-ltrTxt", agentFrame, surface);
+    // console.log("ctx.rtlNodes", ctx.rtlNodes)
+    expect(Array.from(ctx.rtlNodes)).toEqual([1, 4, 5]);
+    const openFirst = findTextBracket(agentFrame, "[");
+    expect(openFirst).toBeDefined();
+    const closeFirst = findTextBracket(agentFrame, "]");
+    expect(closeFirst).toBeDefined();
+    const openSecond = findTextBracket(agentFrame, "(");
+    expect(openSecond).toBeDefined();
+    const closeSecond = findTextBracket(agentFrame, ")");
+    expect(closeSecond).toBeDefined();
+    const closeThird = findTextBracket(agentFrame, "}");
+    expect(closeThird).toBeDefined();
+    const openFirstLeft = openFirst!.getRelativeBounds().left;
+    const closeSecondRight = closeSecond!.getRelativeBounds().right;
+    expect(closeSecondRight).toBeLessThan(openFirstLeft); // ")" < "["
+    const openSecondLeft = openSecond!.getRelativeBounds().left;
+    const closeThirdRight = closeThird!.getRelativeBounds().right;
+    expect(closeThirdRight).toBeLessThan(openSecondLeft); // "}" < "("
   });
 });

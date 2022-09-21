@@ -103,8 +103,13 @@ export const calcOffset = (
       : srcConn.yMiddle - dstConn.yMiddle) + step.y
   );
 
-export const calcOffsetAbs = (c0: Cluster, c1: Cluster, step: Point): Point =>
-  new Point(c0.frame.bounds.right - c1.frame.bounds.left + step.x, step.y);
+export const calcOffsetAbs = (c0: Cluster, c1: Cluster, step: Point): Point => {
+  const dx =
+    step.x >= 0
+      ? c0.frame.bounds.right - c1.frame.bounds.left
+      : c0.frame.bounds.left - c1.frame.bounds.right;
+  return new Point(dx + step.x, step.y);
+};
 
 export const mergeClusters = (
   srcCluster: Cluster,
