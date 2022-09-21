@@ -8,6 +8,7 @@ import { parseNum } from "../parse/parseNum";
   UTDBLRutdblr for pairs of points top, bottom, left and right
   ! = all 8 positions
   (L) = :O, (Lb) = .O, (R) = O:, (LR) = :O:, (LbRb) = .O., (T) = (U) = Ö 
+  LR = !UD
  2. Compatible for 1.0
   List of angles
   (22,-22) = O:
@@ -18,16 +19,17 @@ import { parseNum } from "../parse/parseNum";
 
 // Цвета по приоритетности (при отрисовке): цвет точки, цвет атома, цвет элемента, дефолтный цвет
 
-const rxCompact = /^([LR][dbtu]?|[UTDB][lr]?)+$/;
+const rxCompact = /^!?([LR][dbtu]?|[UTDB][lr]?)+$/;
 
 export const splitDotPositions = (descr: string): number[] => {
   //    5  6  U=T
   // L 4 ## 7  R
   //   3 ## 0
   //    2  1  B=D
-  if (descr === "!") return [0, 1, 2, 3, 4, 5, 6, 7];
+  // if (descr === "!") return [0, 1, 2, 3, 4, 5, 6, 7];
   const result: number[] = [];
-  let i = 0;
+  const isRev = descr[0] === "!";
+  let i = isRev ? 1 : 0;
   const check2 = (match: string, n: number) => {
     if (match.indexOf(descr[i]!) >= 0) {
       result.push(n);
@@ -52,7 +54,14 @@ export const splitDotPositions = (descr: string): number[] => {
       checkEx("r", 1, "l", 2);
     }
   }
-  return result;
+  if (!isRev) {
+    return result;
+  }
+  const revSet = result.reduce((acc, n) => {
+    acc.delete(n);
+    return acc;
+  }, new Set([0, 1, 2, 3, 4, 5, 6, 7]));
+  return Array.from(revSet);
 };
 
 interface ResDotArgDirs {

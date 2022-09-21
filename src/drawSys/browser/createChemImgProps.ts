@@ -14,7 +14,7 @@ const findComputedStyle: FnComputedStyle =
   ((element: Element) => element.currentStyle);
 
 export const createChemImgProps = (
-  owner: HTMLElement,
+  owner: Element,
   surface: AbstractSurface
 ): ChemImgProps => {
   // Система доступа к откомпилированным свойствам DOM-объектов. Используется отрисовщиком

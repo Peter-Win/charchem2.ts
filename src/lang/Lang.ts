@@ -1,7 +1,7 @@
 import { baseDictEn } from "./baseDictEn";
 import { baseDictRu } from "./baseDictRu";
 
-type LocalDict = Record<string, string>;
+export type LocalDict = Record<string, string>;
 export type LangParams = Record<string, string | number>;
 
 export class Lang {
@@ -45,8 +45,19 @@ export class Lang {
 
   private static enDict: LocalDict = baseDictEn;
 
-  private static dict: Record<string, LocalDict> = {
+  static dict: Record<string, LocalDict> = {
     en: Lang.enDict,
     ru: Lang.ruDict,
   };
+
+  static addDict(globalDictUpdates: Record<string, LocalDict>) {
+    const { dict } = Lang;
+    Object.entries(globalDictUpdates).forEach(([locale, locDict]) => {
+      if (!dict[locale]) {
+        dict[locale] = locDict;
+      } else {
+        dict[locale] = { ...dict[locale], ...locDict };
+      }
+    });
+  }
 }

@@ -272,4 +272,20 @@ describe("autoCorrection", () => {
     expect(points[8]).toBe(String(new Point(0.5, -q32)));
     expect(points[9]).toBe(String(new Point(1.5, -q32)));
   });
+  it("Prevent correction of a fixed node", () => {
+    //      0
+    //  3    *         2
+    //     *  *    *
+    //         1       Связи 3-1 и 1-4 вроде должны автооткорректироваться.
+    //     *           Но узел 1 уже фиксирован.
+    //  4              Поэтому корректируется только 1-4 и получает угол 120°
+    const expr = compile("_(A60)/; \\#2`/");
+    expect(expr.getMessage()).toBe("");
+    const agent = expr.getAgents()[0]!;
+    const { bonds } = agent;
+    const angles = bonds.map(({ dir }) =>
+      Math.round(dir?.polarAngleDeg() ?? 0)
+    );
+    expect(angles).toEqual([60, -30, 30, 120]);
+  });
 });

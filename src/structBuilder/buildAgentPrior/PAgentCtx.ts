@@ -17,6 +17,8 @@ export class PAgentCtx {
 
   readonly backs: ChemBackground[] = [];
 
+  readonly rtlNodes: Set<number> = new Set(); // Для определения направления стыковки без связей
+
   constructor(
     public readonly agent: ChemAgent,
     public readonly props: ChemImgProps

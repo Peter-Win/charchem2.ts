@@ -147,28 +147,28 @@ export const makeBridge = (
   ctx: PAgentCtx,
   bracket: CommonBracket,
   isSrcBracket: boolean,
-  isDstBracket: boolean
+  isBothText: boolean
 ) => {
   const [node0, node1] = bracket.nodes;
   if (node0 && node1) {
     const src = { node: node0, allBox: isSrcBracket };
     const dst = { node: node1, allBox: true };
+    const sign = ctx.rtlNodes.has(node0.index) ? -1 : 1;
     let dy = 0;
-    let flAbs = false;
-    if (isSrcBracket && isDstBracket) {
+    const flAbs = !isBothText;
+    if (flAbs) {
       // Стыковка скобки со скобкой. Выравнивание пропорционально высоте содержимого кластеров
       const { cluster: c0 } = ctx.clusters.findByNode(node0);
       const { cluster: c1 } = ctx.clusters.findByNode(node1);
       const b0 = c0.contentRect ?? c0.frame.bounds;
       const b1 = c1.contentRect ?? c1.frame.bounds;
       dy = b0.top - b1.top + (b0.height - b1.height) / 2;
-      flAbs = true;
     }
     ctx.clusters.unite(
       ctx,
       src,
       dst,
-      new Point(ctx.props.bracketSpace, dy),
+      new Point(sign * ctx.props.bracketSpace, dy),
       flAbs
     );
   }
@@ -231,6 +231,8 @@ export const processBrackets = (
     ifDef(begin.padding, (p) => applyPadding(contentRect1, p, line)) ??
     contentRect1;
   const isText = isText0 && contentRect.height === contentRect1.height;
+  // eslint-disable-next-line no-param-reassign
+  cmdClose.isRealText = isText;
 
   const xPad = isText ? 0 : lineWidth;
   if (
@@ -287,6 +289,10 @@ export const processBrackets = (
   cluster.frame.addFigure(figOpen, true);
   cluster.frame.addFigure(figClose, true);
 
+  // Для вложенных скобок внешние переписывают внутренние.
+  beginNi.left = figOpen;
+  endNi.right = figClose;
+
   // eslint-disable-next-line no-param-reassign
   cmdOpen.figure = figOpen;
   // eslint-disable-next-line no-param-reassign
@@ -294,6 +300,8 @@ export const processBrackets = (
   cluster.contentRect = contentRect;
 
   if (cmdOpen.isBridge) {
-    makeBridge(ctx, cmdOpen.begin, cmdOpen.withBracket, !isText);
+    const isBothText =
+      isText && (!!cmdOpen?.prevBracket?.isRealText || !!cmdOpen.prevText);
+    makeBridge(ctx, cmdOpen.begin, !!cmdOpen.prevBracket, isBothText);
   }
 };

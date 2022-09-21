@@ -1,4 +1,4 @@
-import { Lang } from "../Lang";
+import { Lang, LocalDict } from "../Lang";
 
 it("Lang", () => {
   const key = "Expected [must] instead of [have]";
@@ -12,4 +12,27 @@ it("Lang", () => {
   expect(Lang.tr(key, params, "ru-RU")).toBe(
     "Требуется 1 вместо 22 в позиции 5"
   );
+});
+
+describe("Lang.addDict", () => {
+  let originalDict: Record<string, LocalDict>;
+  beforeAll(() => {
+    originalDict = { ...Lang.dict };
+  });
+  afterAll(() => {
+    Lang.dict = originalDict;
+  });
+  it("new dictionary", () => {
+    expect(Lang.tr("H", {}, "it")).toBe("Hydrogen");
+    expect(Lang.tr("He", {}, "it")).toBe("Helium");
+    Lang.addDict({ it: { H: "Idrogeno" } });
+    expect(Lang.tr("H", {}, "it")).toBe("Idrogeno");
+    Lang.addDict({ it: { He: "Elio" } });
+    expect(Lang.tr("He", {}, "it")).toBe("Elio");
+  });
+  it("append existing dictionary", () => {
+    expect(Lang.tr("Me", {}, "en")).toBe("Me");
+    Lang.addDict({ en: { Me: "Methyl" } });
+    expect(Lang.tr("Me", {}, "en")).toBe("Methyl");
+  });
 });

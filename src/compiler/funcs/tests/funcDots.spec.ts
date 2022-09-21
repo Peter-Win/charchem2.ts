@@ -10,6 +10,7 @@ import { ChemNodeItem } from "../../../core/ChemNodeItem";
 describe("funcDots", () => {
   it("splitCompact", () => {
     expect(splitDotPositions("!")).toEqual([0, 1, 2, 3, 4, 5, 6, 7]);
+    expect(splitDotPositions("!R").sort()).toEqual([1, 2, 3, 4, 5, 6]);
     expect(splitDotPositions("R")).toEqual([0, 7]);
     expect(splitDotPositions("Rb")).toEqual([0]);
     expect(splitDotPositions("Rd")).toEqual([0]);

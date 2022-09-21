@@ -6,6 +6,7 @@ import { Point } from "../../math/Point";
 import { PAgentCtx } from "./PAgentCtx";
 import { Rect } from "../../math/Rect";
 import { addAllSet } from "../../utils/addAllSet";
+import { ifDef } from "../../utils/ifDef";
 
 export interface Cluster {
   frame: FigFrame;
@@ -73,6 +74,15 @@ export const getClusterConnection = (
   } else if (x === undefined) {
     x = getNodeCenterPos(nodeInfo).x;
   }
+  if (isLeft) {
+    ifDef(nodeInfo.left, (it) => {
+      x = it.getRelativeBounds().left;
+    });
+  } else {
+    ifDef(nodeInfo.right, (it) => {
+      x = it.getRelativeBounds().right;
+    });
+  }
   return { x, yMiddle, yBase };
 };
 
@@ -93,8 +103,13 @@ export const calcOffset = (
       : srcConn.yMiddle - dstConn.yMiddle) + step.y
   );
 
-export const calcOffsetAbs = (c0: Cluster, c1: Cluster, step: Point): Point =>
-  new Point(c0.frame.bounds.right - c1.frame.bounds.left + step.x, step.y);
+export const calcOffsetAbs = (c0: Cluster, c1: Cluster, step: Point): Point => {
+  const dx =
+    step.x >= 0
+      ? c0.frame.bounds.right - c1.frame.bounds.left
+      : c0.frame.bounds.left - c1.frame.bounds.right;
+  return new Point(dx + step.x, step.y);
+};
 
 export const mergeClusters = (
   srcCluster: Cluster,
@@ -178,6 +193,7 @@ export class Clusters {
       srcNodeInfo,
       !leftToRight
     );
+
     const dstConn = getClusterConnection(
       dst.allBox,
       dstCluster,

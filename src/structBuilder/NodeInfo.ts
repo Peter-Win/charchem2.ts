@@ -1,3 +1,4 @@
+import { Figure } from "../drawSys/figures/Figure";
 import { ChemNode } from "../core/ChemNode";
 import { Point } from "../math/Point";
 import { ResultBuildNode } from "./buildNode";
@@ -5,6 +6,8 @@ import { ResultBuildNode } from "./buildNode";
 export interface NodeInfo {
   node: ChemNode;
   res: ResultBuildNode;
+  left?: Figure;
+  right?: Figure;
 }
 
 /**

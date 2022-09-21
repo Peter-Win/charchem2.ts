@@ -9,6 +9,8 @@ import { processBrackets } from "./brackets/processBrackets";
 export class AgentCmdBrClose extends AgentCmd {
   figure?: Figure;
 
+  isRealText?: boolean;
+
   constructor(public readonly end: ChemBracketEnd) {
     super();
   }

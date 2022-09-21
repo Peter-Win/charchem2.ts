@@ -1,3 +1,4 @@
+import { WebFontCache } from "../drawSys/browser/WebFontCache";
 import { ChemExpr } from "../core/ChemExpr";
 import { SvgWebSurface } from "../drawSys/browser/SvgWebSurface";
 import { createChemImgProps } from "../drawSys/browser/createChemImgProps";
@@ -9,9 +10,13 @@ import { buildExpression } from "../structBuilder/buildExpression";
  * @param owner HTML element. The content will be completely replaced by the SVG image.
  * @param expr
  */
-export const renderFormulaSvg = (owner: HTMLElement, expr: ChemExpr) => {
+export const renderFormulaSvg = (
+  owner: Element,
+  expr: ChemExpr,
+  fontPropsCache?: WebFontCache
+) => {
   if (!document) return;
-  const surface = new SvgWebSurface();
+  const surface = new SvgWebSurface(fontPropsCache);
   const props = createChemImgProps(owner, surface);
   const { frame } = buildExpression(expr, props);
   renderTopFrame(frame, surface);
