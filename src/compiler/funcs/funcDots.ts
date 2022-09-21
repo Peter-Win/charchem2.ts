@@ -26,7 +26,6 @@ export const splitDotPositions = (descr: string): number[] => {
   // L 4 ## 7  R
   //   3 ## 0
   //    2  1  B=D
-  // if (descr === "!") return [0, 1, 2, 3, 4, 5, 6, 7];
   const result: number[] = [];
   const isRev = descr[0] === "!";
   let i = isRev ? 1 : 0;
