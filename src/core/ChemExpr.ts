@@ -4,6 +4,9 @@ import { Visitor } from "./Visitor";
 import { ChemAgent } from "./ChemAgent";
 import { getErrorMessage } from "./ChemError";
 import { calcMass } from "../inspectors/calcMass";
+import { makeTextFormula } from "../inspectors/makeTextFormula";
+import { rulesHtml } from "../textRules/rulesHtml";
+import { isTextFormula } from "../inspectors/isTextFormula";
 
 export class ChemExpr extends ChemObj {
   error?: Error;
@@ -57,5 +60,23 @@ export class ChemExpr extends ChemObj {
    */
   mass(applyK: boolean = true): Double[] {
     return this.getAgents().map((it) => calcMass(it, applyK));
+  }
+
+  /**
+   * This method has been added for compatibility with previous versions.
+   * It is recommended to explicitly use function makeTextFormula.
+   * @deprecated
+   */
+  html(): string {
+    return makeTextFormula(this, rulesHtml);
+  }
+
+  /**
+   * This method has been added for compatibility with previous versions.
+   * It is recommended to explicitly use function isTextFormula.
+   * @deprecated
+   */
+  isLinear(): boolean {
+    return isTextFormula(this);
   }
 }
