@@ -128,7 +128,8 @@ export const calcBondDirection = (
     ifDef(params.A, (it) =>
       fromAngle(parseNum(compiler, it.value, it.valuePos))
     ) ??
-    new Point();
+    ifDef(params.L, () => fromAngle(0)) ??
+    new Point(0, 0);
 
   ifDef(params.x, (it) => {
     dir.x += parseAxisCoordinate(compiler, true, it.value, it.valuePos);

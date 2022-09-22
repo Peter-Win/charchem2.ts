@@ -14,7 +14,13 @@ import { ChemMul } from "../core/ChemMul";
  * - Запятая: (Ca,Mg)SO4
  */
 export const isAbstract = (chemObj: ChemObj): boolean => {
-  const visitor = new IsAbstractVisitor();
+  const visitor = new IsAbstractVisitor(true);
+  chemObj.walk(visitor);
+  return visitor.isStop;
+};
+
+export const isAbstractCoeffs = (chemObj: ChemObj): boolean => {
+  const visitor = new IsAbstractVisitor(false);
   chemObj.walk(visitor);
   return visitor.isStop;
 };
@@ -23,6 +29,8 @@ const isAbsK = (k?: ChemK): boolean => (k ? !k.isNumber() : false);
 
 class IsAbstractVisitor implements Visitor {
   isStop: boolean = false;
+
+  constructor(private useItems: boolean) {}
 
   agentPre(obj: ChemAgent) {
     this.isStop = isAbsK(obj.n);
@@ -41,10 +49,14 @@ class IsAbstractVisitor implements Visitor {
   }
 
   custom() {
-    this.isStop = true;
+    if (this.useItems) {
+      this.isStop = true;
+    }
   }
 
   comma() {
-    this.isStop = true;
+    if (this.useItems) {
+      this.isStop = true;
+    }
   }
 }
