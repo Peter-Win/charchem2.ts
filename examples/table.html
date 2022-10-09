@@ -1,0 +1,27 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>Periodic Table demo</title>
+        <link href="charchem.css" rel="stylesheet" />
+        <script src="../lib/charchem2.js"></script>
+
+        <style type="text/css">
+            #Table2 .name, #Table2 .mass, #Table2 .number {display:none;}
+            #Table2 .id { font-size:12px; font-weight:100;}
+        </style>        
+        <script>
+            window.addEventListener("load", function() {
+                var rules = Object.assign({}, ChemSys.TblRules.Std, {
+                    flGroups: true,
+                    flPeriods: true,
+                });
+                var mtDom = document.getElementById("Table1")
+                if (mtDom) mtDom.innerHTML = ChemSys.drawTable(rules);
+            })
+        </script>
+    </head>
+    <body>
+        <div id="Table1"></div>
+    </body>
+</html>

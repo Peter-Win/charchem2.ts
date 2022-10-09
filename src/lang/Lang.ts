@@ -1,3 +1,4 @@
+import { ifDef } from "../utils/ifDef";
 import { baseDictEn } from "./baseDictEn";
 import { baseDictRu } from "./baseDictRu";
 
@@ -11,6 +12,8 @@ export class Lang {
    * Examples: en, ru - internal languages; zh, zh-TW - external (by addDict)
    */
   static curLang: string = "en";
+
+  static navLang: string | undefined = undefined;
 
   /**
    * Translate phrase
@@ -60,4 +63,26 @@ export class Lang {
       }
     });
   }
+}
+
+if (typeof window !== "undefined") {
+  Lang.navLang = (
+    navigator.language ||
+    // @ts-ignore
+    navigator.browserLanguage ||
+    // @ts-ignore
+    navigator.userLanguage ||
+    "en"
+  ).toLowerCase();
+
+  ifDef(Lang.navLang, (navLang) => {
+    if (navLang in Lang.dict) {
+      Lang.curLang = navLang;
+    } else if (navLang.indexOf("-") >= 0) {
+      const loc = navLang.split("-")[0]!;
+      if (loc in Lang.dict) {
+        Lang.curLang = loc;
+      }
+    }
+  });
 }
