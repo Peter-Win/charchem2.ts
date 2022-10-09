@@ -13,16 +13,7 @@ export class Lang {
    */
   static curLang: string = "en";
 
-  static navLang = ifDef(window?.navigator, (nav) =>
-    (
-      nav.language ||
-      // @ts-ignore
-      nav.browserLanguage ||
-      // @ts-ignore
-      nav.userLanguage ||
-      "en"
-    ).toLowerCase()
-  );
+  static navLang: string | undefined = undefined;
 
   /**
    * Translate phrase
@@ -74,13 +65,24 @@ export class Lang {
   }
 }
 
-ifDef(Lang.navLang, (navLang) => {
-  if (navLang in Lang.dict) {
-    Lang.curLang = navLang;
-  } else if (navLang.indexOf("-") >= 0) {
-    const loc = navLang.split("-")[0];
-    if (loc in Lang.dict) {
-      Lang.curLang = loc;
+if (typeof window !== "undefined") {
+  Lang.navLang = (
+    navigator.language ||
+    // @ts-ignore
+    navigator.browserLanguage ||
+    // @ts-ignore
+    navigator.userLanguage ||
+    "en"
+  ).toLowerCase();
+
+  ifDef(Lang.navLang, (navLang) => {
+    if (navLang in Lang.dict) {
+      Lang.curLang = navLang;
+    } else if (navLang.indexOf("-") >= 0) {
+      const loc = navLang.split("-")[0]!;
+      if (loc in Lang.dict) {
+        Lang.curLang = loc;
+      }
     }
-  }
-});
+  });
+}

@@ -33,10 +33,7 @@ export const findCategory = (
     });
   }
   let cat = GrpCache.get(table)![item] ?? "";
-  // if (!locale || !(locale in Lang.dict)) locale=Lang.curLang;
-  // if (!(locale in Lang.dict)) locale='en';
   cat = cat.replace(/-/g, " ").replace(/_/g, "-");
   cat = Lang.tr(cat, {}, locale);
-  // }
   return cat;
 };
