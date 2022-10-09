@@ -1,3 +1,4 @@
+import { ChemAgent } from "../core/ChemAgent";
 import { compile } from "../compiler/compile";
 import { ChemExpr } from "../core/ChemExpr";
 import { isTextFormula } from "../inspectors/isTextFormula";
@@ -9,12 +10,12 @@ import { renderFormulaSvg } from "./renderFormulaSvg";
 
 export const renderFormulaCfg = (
   owner: Element,
-  exprOrCode: ChemExpr | string,
+  exprOrCode: ChemExpr | ChemAgent | string,
   config: AutoCompileConfig
 ): void => {
   const expr =
     typeof exprOrCode === "string" ? compile(exprOrCode) : exprOrCode;
-  if (!expr.isOk()) {
+  if (expr instanceof ChemExpr && !expr.isOk()) {
     owner.classList?.add("echem-error");
     owner.setAttribute("title", expr.getMessage());
   } else {

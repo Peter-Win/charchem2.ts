@@ -1,3 +1,4 @@
+import { ifDef } from "../utils/ifDef";
 import { baseDictEn } from "./baseDictEn";
 import { baseDictRu } from "./baseDictRu";
 
@@ -11,6 +12,17 @@ export class Lang {
    * Examples: en, ru - internal languages; zh, zh-TW - external (by addDict)
    */
   static curLang: string = "en";
+
+  static navLang = ifDef(window?.navigator, (nav) =>
+    (
+      nav.language ||
+      // @ts-ignore
+      nav.browserLanguage ||
+      // @ts-ignore
+      nav.userLanguage ||
+      "en"
+    ).toLowerCase()
+  );
 
   /**
    * Translate phrase
@@ -61,3 +73,14 @@ export class Lang {
     });
   }
 }
+
+ifDef(Lang.navLang, (navLang) => {
+  if (navLang in Lang.dict) {
+    Lang.curLang = navLang;
+  } else if (navLang.indexOf("-") >= 0) {
+    const loc = navLang.split("-")[0];
+    if (loc in Lang.dict) {
+      Lang.curLang = loc;
+    }
+  }
+});
