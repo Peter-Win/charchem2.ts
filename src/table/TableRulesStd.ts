@@ -1,3 +1,7 @@
+/**
+ * IUPAC Periodic Table of the Elements
+ * https://iupac.org/what-we-do/periodic-table-of-elements/
+ */
 import { fallingNumbers } from "./fallingNumbers";
 import { categoryProps } from "./tableCategories";
 import { TableRules } from "./TableRules";

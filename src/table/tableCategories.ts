@@ -5,8 +5,17 @@ export type TCategories = Record<string, string>;
 export const categoryBlock: TCategories = {
   s_block: "H,Na,K,Rb,Cs,Fr",
   p_block: "B,Al,Ga,In,Tl,Nh",
-  d_block: "Sc,Y,Lu,Lr",
+  d_block: "Sc,Y,Hf,Rf",
   f_block: "La,Ac",
+};
+
+// La and Ac in d-blocks
+export const categoryBlockDLa: TCategories = {
+  s_block: "H,Na,K,Rb,Cs,Fr",
+  p_block: "B,Al,Ga,In,Tl,Nh",
+  d_block: "Sc,Y,La,Hf,Ac,Rf",
+  f_block: "Ce",
+  f2_block: "Th",
 };
 
 // по свойствам

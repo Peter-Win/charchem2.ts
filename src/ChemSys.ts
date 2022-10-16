@@ -14,10 +14,12 @@ import { drawPeriodicTable } from "./table/drawPeriodicTable";
 import { documentCompile } from "./browser/documentCompile";
 import { tableRulesStd } from "./table/TableRulesStd";
 import { tableRulesWide } from "./table/TableRulesWide";
+import { tableRulesEasyChemistry } from "./table/TableRulesEasyChemistry";
 import { TableRules } from "./table/TableRules";
 import { tableRulesShort } from "./table/TableRulesShort";
 import {
   categoryBlock,
+  categoryBlockDLa,
   categoryProps,
   TCategories,
 } from "./table/tableCategories";
@@ -91,9 +93,11 @@ export const ChemSys = Object.freeze({
     Std: tableRulesStd,
     Wide: tableRulesWide,
     Short: tableRulesShort,
+    EasyChemistry: tableRulesEasyChemistry,
   },
   TblCategory: {
     block: categoryBlock,
+    blockDLa: categoryBlockDLa,
     props: categoryProps,
   },
   drawTag(tag: string, attrs: XmlAttrs, content?: string | number): string {
