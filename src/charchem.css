@@ -42,6 +42,27 @@
 .chem-element.Noble-gases {background-color:#C0FFFF;}
 .chem-element.Unknown-props {background-color:#E8E8E8;}
 
+/* Easy chemistry style https://chemistry-easy.ru/ */
+.easy-chem-table { color: #231a1d; }
+.easy-chem-table .chem-element.s_block { background-color: #d2748e;}
+.easy-chem-table .chem-element.p_block { background-color: #f6dd5f;}
+.easy-chem-table .chem-element.d_block { background-color: #7fc1db;}
+.easy-chem-table .chem-element.f_block { background-color: #c3d9b3;}
+.easy-chem-table .chem-element.f2_block { background-color: #9cbd86;}
+.easy-chem-table .chem-element .element-box .id { grid-area: id; font-size: 150%; font-weight: 200; text-align: left; }
+.easy-chem-table .element-box .number { grid-area: number; font-size: 105%; text-align: right; }
+.easy-chem-table .element-box .name { grid-area: name; font-size: 58%; text-align: left; color: inherit; }
+.easy-chem-table .element-box .mass { grid-area: mass; font-size: 85%; text-align: left; color: inherit; padding: 2px 0;}
+.easy-chem-table .element-box {
+    display: grid;
+    grid-template-areas: 
+        "id number"
+        "mass mass"
+        "name name";
+    grid-template-columns: 1fr auto;
+    grid-template-rows: auto;
+}
+.easy-chem-table .chem-element.mtbl-note { width: auto; }
 
 .echem-formula {font-family: Cambria, Times, Serif}
 .echem-formula b {font-weight: normal; padding-right: 0.15em;}

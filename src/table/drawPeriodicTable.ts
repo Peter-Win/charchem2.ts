@@ -4,6 +4,7 @@ import { ifDef } from "../utils/ifDef";
 import { CellRender } from "./CellRender";
 import { Category, TableConfigItemExt, TableRules, TCell } from "./TableRules";
 import { tableRulesStd } from "./TableRulesStd";
+import { drawTag } from "../utils/xml/drawTag";
 
 export const drawPeriodicTable = (rules: TableRules = tableRulesStd) => {
   const {
@@ -137,13 +138,20 @@ export const drawPeriodicTable = (rules: TableRules = tableRulesStd) => {
       };
     });
   }
+  // Безусловные подписи
+  ifDef(rules.hardNotes, (list) =>
+    list.forEach(({ text, x, y, tblN = 0, cls }) => {
+      const curTable = actualTables[tblN]!;
+      cells[tblN]![y + curTable.y1]![x + curTable.x1] = { text, cls };
+    })
+  );
 
   // Финальный рендер
   let s = "";
   cells.forEach((curTable, n) => {
-    s += rules.beginTable
-      ? rules.beginTable(n, rules)
-      : '<table class="mentable">';
+    s +=
+      ifDef(rules.beginTable, (beginTable) => beginTable(n, rules)) ??
+      drawTag("table", { class: rules.tableCls || "mentable" });
     curTable.forEach((row) => {
       s += "<tr>";
       for (const c of row) {
@@ -155,7 +163,13 @@ export const drawPeriodicTable = (rules: TableRules = tableRulesStd) => {
           if (c.rowspan) s += ` rowspan="${c.rowspan}"`;
           s += ">";
           if (c.elem) {
+            if (rules.elementBoxCls) {
+              s += drawTag("div", { class: rules.elementBoxCls });
+            }
             s += cellRender.draw(c.elem);
+            if (rules.elementBoxCls) {
+              s += "</div>";
+            }
           } else if (c.text) s += c.text;
           s += "</td>";
         }

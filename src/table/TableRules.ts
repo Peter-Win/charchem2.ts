@@ -40,15 +40,24 @@ export interface ParamsTableCallback {
   rules: TableRules;
 }
 
+export interface HardNote {
+  text: string;
+  x: number;
+  y: number;
+  tblN?: number;
+  cls?: string;
+}
+
 export interface TableRules {
   flGroups?: boolean;
   flPeriods?: boolean;
-  flLanAct?: boolean;
+  flLanAct?: boolean; // Labels for lanthanides and actinides.
   tables: TableConfigItem[];
   category?: Category;
   categoryExt?: Category[];
   points: Record<string, [number, number, number?]>;
   notes?: Record<string, [number, number]>;
+  hardNotes?: HardNote[];
   drawPeriods?(params: ParamsTableCallback): void;
   drawGroups?(params: ParamsTableCallback): void;
   pre?(params: ParamsTableCallback): void;
@@ -56,6 +65,8 @@ export interface TableRules {
   beginTable?(tableNumber: number, rules: TableRules): string; // default value: '<table class="mentable">'
   groupIds?: string[];
   groupCls?: string;
+  tableCls?: string; // default value: mentable
+  elementBoxCls?: string;
   cellFields?: (CellRenderField | FieldRenderFn)[];
   cellRender?: CellRender;
 }
