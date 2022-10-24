@@ -2,7 +2,7 @@ import { WebFontCache } from "../drawSys/browser/WebFontCache";
 import { AutoCompileConfig, DrawSysId, DrawSysIds } from "./AutoCompileConfig";
 import { documentCompile } from "./documentCompile";
 
-const fontPropsCache = new WebFontCache();
+export const fontPropsCache = new WebFontCache();
 
 export const autoCompile = () => {
   if (!document) return;

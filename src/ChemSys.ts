@@ -28,6 +28,10 @@ import { ChemAgent } from "./core/ChemAgent";
 import { XmlAttrs } from "./utils/xml/xmlTypes";
 import { drawTag } from "./utils/xml/drawTag";
 import { escapeXml } from "./utils/xml/escapeXml";
+import { calcCharge } from "./inspectors/calcCharge";
+import { roundMass } from "./math/massUtils";
+import { makeFormulaSvgText } from "./browser/renderFormulaSvg";
+import { WebFontCache } from "./drawSys/browser/WebFontCache";
 
 export const ChemSys = Object.freeze({
   addDict(globalDict: Record<string, LocalDict>) {
@@ -52,6 +56,14 @@ export const ChemSys = Object.freeze({
   ): boolean {
     renderFormulaCfg(owner, exprOrCode, config ?? {});
     return true;
+  },
+  makeSVG(
+    exprOrCode: ChemExpr | ChemAgent | string,
+    fontPropsCache?: WebFontCache
+  ): string {
+    const expr =
+      typeof exprOrCode === "string" ? compile(exprOrCode) : exprOrCode;
+    return makeFormulaSvgText(expr, fontPropsCache);
   },
   makeBruttoKey(src: ChemObj | string): string {
     return makeBruttoKey(src);
@@ -80,6 +92,12 @@ export const ChemSys = Object.freeze({
   calcMass(chemObj: ChemObj, applyAgentK?: boolean): number {
     return calcMass(chemObj, applyAgentK);
   },
+  roundMass(mass: number): number {
+    return roundMass(mass);
+  },
+  calcCharge(chemObj: ChemObj): number {
+    return calcCharge(chemObj);
+  },
   findElem(id: string): ChemAtom | undefined {
     return findElement(id);
   },
@@ -104,5 +122,8 @@ export const ChemSys = Object.freeze({
     return content === undefined
       ? drawTag(tag, attrs, true)
       : `${drawTag(tag, attrs)}${escapeXml(String(content))}</${tag}>`;
+  },
+  esc(content: string | number): string {
+    return escapeXml(String(content));
   },
 });
