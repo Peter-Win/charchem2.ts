@@ -5,6 +5,7 @@ import { createChemImgProps } from "../drawSys/browser/createChemImgProps";
 import { renderTopFrame } from "../drawSys/figures/renderTopFrame";
 import { ChemAgent } from "../core/ChemAgent";
 import { buildFrame } from "../structBuilder/buildFrame";
+import { standaloneExportOptions } from "../drawSys/svg/standaloneExportOptions";
 
 /**
  * Make a local SVG image for the specified expression on the given HTML element.
@@ -16,7 +17,7 @@ export const renderFormulaSvg = (
   expr: ChemExpr | ChemAgent,
   fontPropsCache?: WebFontCache
 ) => {
-  if (!document) return;
+  if (typeof document === "undefined") return;
   const surface = new SvgWebSurface(fontPropsCache);
   const props = createChemImgProps(owner, surface);
   const frame = buildFrame(expr, props);
@@ -27,4 +28,28 @@ export const renderFormulaSvg = (
     width: `${bounds.width}px`,
     height: `${bounds.height}px`,
   });
+};
+
+export const makeFormulaSvgText = (
+  expr: ChemExpr | ChemAgent,
+  fontPropsCache?: WebFontCache
+) => {
+  if (typeof document === "undefined") return "";
+  const tmp = document.createElement("div");
+  tmp.setAttribute("class", "echem-formula");
+  try {
+    document.body.append(tmp);
+    const surface = new SvgWebSurface(fontPropsCache);
+    const props = createChemImgProps(tmp, surface);
+    const frame = buildFrame(expr, props);
+    renderTopFrame(frame, surface);
+    const { bounds } = frame;
+    return surface.exportText({
+      ...standaloneExportOptions,
+      width: `${bounds.width}px`,
+      height: `${bounds.height}px`,
+    });
+  } finally {
+    tmp.remove();
+  }
 };
