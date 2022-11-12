@@ -11,6 +11,10 @@ import { drawLewisShell } from "./drawLewisShell";
 import { FigEllipse } from "../drawSys/figures/FigEllipse";
 import { Point } from "../math/Point";
 import { LocalFont } from "../drawSys/AbstractSurface";
+import { ChemStyleId } from "../drawSys/ChemStyleId";
+import { CoeffPos } from "../types/CoeffPos";
+import { locateAtomNumber } from "../inspectors/locateAtomNumber";
+import { ifDef } from "../utils/ifDef";
 
 interface BuildItemResult {
   itemFrame: FigFrame;
@@ -24,7 +28,7 @@ export const buildItem = (
 ): BuildItemResult => {
   const itemFrame = new FigFrame();
   itemFrame.label = "item";
-  const { color, dots } = item;
+  const { color } = item;
   let itemFont: LocalFont | undefined;
   const { fig, rcCore } = item.walkExt({
     fig: undefined as Figure | undefined,
@@ -67,26 +71,27 @@ export const buildItem = (
     },
   });
   if (rcCore) {
-    if (item.n.isSpecified()) {
+    const drawIndex = (value: unknown, styleName: ChemStyleId, pos: CoeffPos) =>
       drawTextNear({
         frame: itemFrame,
         rcCore,
-        text: item.n.toString(),
+        text: String(value),
         imgProps,
-        style: imgProps.getStyleColored("itemCount", item.color),
-        pos: "RB",
+        style: imgProps.getStyleColored(styleName, item.color),
+        pos,
       });
+
+    const { atomNum, n, charge, mass, dots } = item;
+    if (n.isSpecified()) {
+      drawIndex(n.toString(), "itemCount", "RB");
     }
-    if (item.charge) {
-      drawTextNear({
-        frame: itemFrame,
-        rcCore,
-        text: item.charge.text,
-        imgProps,
-        style: imgProps.getStyleColored("oxidationState", item.color),
-        pos: "CU",
-      });
+    if (charge) {
+      drawIndex(charge.text, "oxidationState", "CU");
     }
+    ifDef(mass, (it) => drawIndex(it, "itemMass", "LT"));
+    ifDef(atomNum, (it) =>
+      drawIndex(it >= 0 ? it : locateAtomNumber(item), "atomNumber", "LB")
+    );
     if (dots) {
       const rc = rcCore.clone();
       if (itemFont) {

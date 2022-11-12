@@ -21,7 +21,7 @@ export class ChemNodeItem extends ChemObj {
 
   // Special mass.
   // If specified, then ignore mass of sub object
-  mass: Double = 0.0;
+  mass?: Double;
 
   atomNum?: Int; // признак вывода атомного номера (для ядерных реакций).
 

@@ -1,10 +1,10 @@
-import { Int } from "../types";
 import { ChemObj } from "../core/ChemObj";
 import { RulesBase } from "../textRules/RulesBase";
 import { ChemCharge } from "../core/ChemCharge";
 import { ifDef } from "../utils/ifDef";
 import { compile } from "../compiler/compile";
 import { rulesText } from "../textRules/rulesText";
+import { locateAtomNumber } from "./locateAtomNumber";
 
 interface Chunk {
   text: string;
@@ -24,16 +24,6 @@ class StackItem {
     }
   }
 }
-
-const locateAtomNumber = (item: ChemObj): Int => {
-  let num = 0;
-  item.walk({
-    atom(obj) {
-      num = obj.n;
-    },
-  });
-  return num;
-};
 
 /**
  * Сформировать текстовое представление химической формулы.
@@ -125,9 +115,9 @@ export const makeTextFormula = (
       if (rawAtomNum) {
         // Вывести двухэтажную конструкцию: масса/атомный номер слева от элемента
         const atomNum = rawAtomNum >= 0 ? rawAtomNum : locateAtomNumber(obj);
-        ctxOut(rules.itemMassAndNum(obj.mass, atomNum), itemColor);
-      } else if (obj.mass !== 0.0) {
-        ctxOut(rules.itemMass(obj.mass), itemColor);
+        ctxOut(rules.itemMassAndNum(obj.mass || 0, atomNum), itemColor);
+      } else {
+        ifDef(obj.mass, (mass) => ctxOut(rules.itemMass(mass), itemColor));
       }
     },
 

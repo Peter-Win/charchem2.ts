@@ -1,5 +1,6 @@
 import { Double } from "../types";
 import { ChemObj } from "../core/ChemObj";
+import { ifDef } from "../utils/ifDef";
 /**
  * Вычисление массы указанного химического объекта.
  * @param chemObj Любой химический объект (выражение, агент, узел и т.п.)
@@ -61,10 +62,10 @@ export const calcMass = (
       push();
     },
     itemPost(obj) {
-      if (obj.mass !== 0.0) {
-        // явно указанная масса $M() более приоритетна, чем вычисленная
-        stack[0] = obj.mass;
-      }
+      // явно указанная масса $M() более приоритетна, чем вычисленная
+      ifDef(obj.mass, (mass) => {
+        stack[0] = mass;
+      });
       pop(() => obj.n.num);
     },
 

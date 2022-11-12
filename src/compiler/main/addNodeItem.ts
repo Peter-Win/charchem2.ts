@@ -4,6 +4,7 @@ import { ChemNodeItem } from "../../core/ChemNodeItem";
 import { getNodeForced } from "./node";
 import { closeItem } from "./item";
 import { getAtomColor, getItemColor } from "./colors";
+import { ifDef } from "../../utils/ifDef";
 
 export const addNodeItem = (
   compiler: ChemCompiler,
@@ -11,10 +12,10 @@ export const addNodeItem = (
 ): ChemNodeItem => {
   closeItem(compiler);
   const item = new ChemNodeItem(subObj);
-  if (compiler.varMass !== 0.0) {
-    item.mass = compiler.varMass;
-    compiler.varMass = 0.0;
-  }
+  ifDef(compiler.varMass, (it) => {
+    item.mass = it;
+    compiler.varMass = undefined;
+  });
   item.color = getItemColor(compiler);
   item.atomColor = getAtomColor(compiler);
   item.atomNum = compiler.varAtomNumber;

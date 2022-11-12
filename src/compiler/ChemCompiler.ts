@@ -102,7 +102,7 @@ export class ChemCompiler {
 
   varLength: Double = 1.0;
 
-  varMass: Double = 0.0; // special mass for next element - $M()
+  varMass?: Double; // special mass for next element - $M()
 
   varAtomNumber?: Int; // number in $nM(mass, number)
 
