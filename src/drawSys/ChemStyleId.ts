@@ -8,12 +8,13 @@
  *      #    #   #  |  # #     #      #           #   #
  *     ####  #   #  |  #  #    #      |       92   ###   3
  *                  |                 |        |         |
- *              multiplier         operation         itemMass
+ *              multiplier         operation atomNumber itemMass
  * multiK - coeff after multiplier
  */
 export type ChemStyleId =
   | "agentK"
   | "atom"
+  | "atomNumber"
   | "bracket"
   | "bracketCharge"
   | "bracketCount"

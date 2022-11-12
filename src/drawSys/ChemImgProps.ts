@@ -134,12 +134,13 @@ export class ChemImgProps {
   // Стили, требующие уменьшения.
   static getIndexStyles(): ChemStyleId[] {
     return [
+      "atomNumber",
+      "bracketCharge",
+      "bracketCount",
       "itemCount",
       "itemMass",
       "nodeCharge",
       "oxidationState",
-      "bracketCharge",
-      "bracketCount",
     ];
   }
 }

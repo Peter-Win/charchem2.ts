@@ -23,7 +23,7 @@ export const createAgent = (compiler: ChemCompiler): ChemAgent => {
     addNodeItem(compiler, preComm);
   }
   compiler.references = {};
-  compiler.varMass = 0.0;
+  compiler.varMass = undefined;
   compiler.curWidth = 0;
   compiler.centralNode = false;
   compiler.varPadding = [];
