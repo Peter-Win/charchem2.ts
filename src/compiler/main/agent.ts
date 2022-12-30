@@ -13,6 +13,7 @@ import { stateAgentMid } from "../state/stateAgentMid";
 import { ChemBackground } from "../../core/ChemBackground";
 
 export const createAgent = (compiler: ChemCompiler): ChemAgent => {
+  let { pos } = compiler;
   const { preComm } = compiler;
   closeEntity(compiler);
   const agent = new ChemAgent();
@@ -20,6 +21,7 @@ export const createAgent = (compiler: ChemCompiler): ChemAgent => {
   compiler.curAgent = agent;
   onCreateEntity(compiler, agent);
   if (preComm) {
+    pos = compiler.eject("preCommPos") ?? pos;
     addNodeItem(compiler, preComm);
   }
   compiler.references = {};
@@ -30,6 +32,9 @@ export const createAgent = (compiler: ChemCompiler): ChemAgent => {
   compiler.varDots = undefined;
   compiler.nodesBranch.onSubChain();
   compiler.bracketsCtrl.clear();
+  if (compiler.srcMap) {
+    compiler.entityBegin = pos;
+  }
   return agent;
 };
 
@@ -66,6 +71,7 @@ export const onCloseAgent = (compiler: ChemCompiler) => {
     curAgent.bonds.forEach((b, i) => {
       b.index = i;
     });
+    compiler.addSrcMapItem(curAgent, compiler.entityBegin);
   }
 };
 

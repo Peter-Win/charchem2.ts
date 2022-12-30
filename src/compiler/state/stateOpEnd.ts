@@ -7,5 +7,8 @@ export const stateOpEnd: CompilerState = (compiler) => {
     compiler.pos++;
     compiler.curOp!.commentPost = createComment(compiler);
   }
+  if (compiler.curOp) {
+    compiler.addSrcMapItem(compiler.curOp, compiler.eject("entityBegin"));
+  }
   return compiler.setState(stateBegin);
 };
