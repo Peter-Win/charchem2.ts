@@ -1,3 +1,4 @@
+import { SrcMapItem } from "../compiler/sourceMap/SrcMapItem";
 import { Double } from "../types";
 import { ChemObj } from "./ChemObj";
 import { Visitor } from "./Visitor";
@@ -19,6 +20,8 @@ export class ChemExpr extends ChemObj {
 
   // Entities: reagents and operations
   entities: ChemObj[] = [];
+
+  srcMap?: SrcMapItem[];
 
   // Check for success. If false, then an error.
   isOk(): boolean {

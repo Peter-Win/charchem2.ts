@@ -40,6 +40,10 @@ export const createChemOp = (compiler: ChemCompiler, def: OpDef) => {
   const op = new ChemOp(def.src, def.opCode(), def.div);
   op.color = compiler.varColor;
   op.commentPre = preComm;
+  if (compiler.srcMap) {
+    compiler.entityBegin =
+      compiler.eject("preCommPos") ?? compiler.pos - def.src.length;
+  }
   onCreateEntity(compiler, op);
   compiler.curOp = op;
   if (def.div) {

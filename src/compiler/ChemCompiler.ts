@@ -22,14 +22,23 @@ import { stateBegin } from "./state/stateBegin";
 import { prepareText } from "./parse/prepareText";
 import { BracketsCtrl } from "./main/BracketsCtrl";
 import { ParamsChemBackground } from "../core/ChemBackground";
+import { ChemCompilerOptions } from "./ChemCompilerOptions";
+import { SrcMapItem } from "./sourceMap/SrcMapItem";
 
 export type CompilerState = (c: ChemCompiler) => Int;
 
 export class ChemCompiler {
   readonly srcText: string;
 
-  constructor(srcText: string) {
+  readonly options: ChemCompilerOptions;
+
+  constructor(srcText: string, options?: ChemCompilerOptions) {
     this.srcText = srcText;
+    this.options = options ?? {};
+    if (this.options.srcMap) {
+      this.srcMap = [];
+      this.expr.srcMap = this.srcMap;
+    }
   }
 
   readonly expr = new ChemExpr();
@@ -37,6 +46,8 @@ export class ChemCompiler {
   text = "";
 
   pos = 0;
+
+  srcMap?: SrcMapItem[];
 
   curState: CompilerState = stateBegin;
 
@@ -57,6 +68,8 @@ export class ChemCompiler {
   elementStartPos: Int = 0;
 
   preComm?: ChemComment;
+
+  preCommPos?: number;
 
   readonly chainSys = new ChainSys(this);
 
@@ -126,7 +139,11 @@ export class ChemCompiler {
 
   varPos?: CoeffPosOrAngle = undefined;
 
-  eject<K extends "varPos" | "varDots">(key: K): ChemCompiler[K] {
+  entityBegin?: number;
+
+  eject<K extends "varPos" | "varDots" | "entityBegin" | "preCommPos">(
+    key: K
+  ): ChemCompiler[K] {
     const v = this[key];
     this[key] = undefined;
     return v;
@@ -175,6 +192,13 @@ export class ChemCompiler {
   setState(newState: CompilerState, deltaPos: Int = 0): Int {
     this.curState = newState;
     return deltaPos;
+  }
+
+  addSrcMapItem(obj: ChemObj, begin?: number) {
+    const { srcMap, pos: end } = this;
+    if (begin !== undefined && srcMap) {
+      srcMap.push({ begin, end, obj });
+    }
   }
 }
 
