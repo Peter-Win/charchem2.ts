@@ -1,4 +1,5 @@
-import { Lang, LocalDict } from "../Lang";
+import { LocalDict } from "../LangTypes";
+import { Lang } from "../Lang";
 
 it("Lang", () => {
   const key = "Expected [must] instead of [have]";

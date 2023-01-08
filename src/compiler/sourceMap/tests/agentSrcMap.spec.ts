@@ -1,5 +1,5 @@
-import { compile } from "../compile";
-import { getSrcItemsForObject } from "./getSrcItemsForObject";
+import { compile } from "../../compile";
+import { getSrcItemsForObject } from "../getSrcItemsForObject";
 
 describe("agentSrcMap", () => {
   it("default", () => {
@@ -66,5 +66,41 @@ describe("agentSrcMap", () => {
     expect(d.length).toBe(1);
     expect(d[0]!.begin).toBe(0);
     expect(d[0]!.end).toBe(23);
+  });
+
+  it("agents with coefficients", () => {
+    //                     1         2         3
+    //           012345678901234567890123456789012
+    const src = `6HNO3 + Cr2O3 = 2Cr(NO3)3 + 3H2O`;
+    const expr = compile(src, { srcMap: true });
+    expect(expr.getMessage()).toBe("");
+    const { srcMap } = expr;
+    expect(srcMap).toBeDefined();
+    const agents = expr.getAgents();
+    expect(agents.length).toBe(4);
+
+    const c0 = getSrcItemsForObject(agents[0]!, srcMap);
+    expect(c0.length).toBe(2);
+    expect(c0[0]?.begin).toBe(0);
+    expect(c0[0]?.end).toBe(1);
+    expect(c0[0]?.part).toBe("agentK");
+    expect(c0[1]?.begin).toBe(1);
+    expect(c0[1]?.end).toBe(5);
+    expect(c0[1]?.part).toBeUndefined();
+
+    const c1 = getSrcItemsForObject(agents[1]!, srcMap);
+    expect(c1.length).toBe(1);
+    expect(c1[0]?.begin).toBe(8);
+    expect(c1[0]?.end).toBe(13);
+    expect(c1[0]?.part).toBeUndefined();
+
+    const c2 = getSrcItemsForObject(agents[2]!, srcMap);
+    expect(c2.length).toBe(2);
+    expect(c2[0]?.begin).toBe(16);
+    expect(c2[0]?.end).toBe(17);
+    expect(c2[0]?.part).toBe("agentK");
+    expect(c2[1]?.begin).toBe(17);
+    expect(c2[1]?.end).toBe(25);
+    expect(c2[1]?.part).toBeUndefined();
   });
 });

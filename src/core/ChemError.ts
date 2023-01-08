@@ -1,7 +1,7 @@
-import { LangParams, Lang } from "../lang/Lang";
+import { LangParams, Lang } from "../lang";
 
 export class ChemError extends Error {
-  private readonly msgId: string;
+  readonly msgId: string;
 
   readonly params?: LangParams;
 

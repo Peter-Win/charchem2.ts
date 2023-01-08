@@ -51,7 +51,7 @@ export class ElemList {
     return rec.elem ? this.findAtom(rec.elem) : this.findCustom(rec.id);
   }
 
-  private addElemRec(rec: ElemRecord): ElemList {
+  private addElemRec(rec: ElemRecord): this {
     const foundRec = this.findRec(rec);
     if (!foundRec) {
       this.list.push(rec);
@@ -61,29 +61,29 @@ export class ElemList {
     return this;
   }
 
-  addElemById(id: string, n: Double = 1.0): ElemList {
+  addElemById(id: string, n: Double = 1.0): this {
     return this.addElemRec(new ElemRecord(id, n, false));
   }
 
-  addAtom(atom: ChemAtom, n: Double = 1.0) {
+  addAtom(atom: ChemAtom, n: Double = 1.0): this {
     return this.addElemRec(new ElemRecord(atom, n));
   }
 
-  addElem(elem: ElemRecord, n: Double = 1.0) {
+  addElem(elem: ElemRecord, n: Double = 1.0): this {
     return this.addElemRec(new ElemRecord(elem, n));
   }
 
-  addCustom(text: string, n: Double = 1.0) {
+  addCustom(text: string, n: Double = 1.0): this {
     return this.addElemRec(new ElemRecord(text, n, true));
   }
 
-  addList(srcList: ElemList): ElemList {
+  addList(srcList: ElemList): this {
     srcList.list.forEach((it) => this.addElem(it));
     this.charge += srcList.charge;
     return this;
   }
 
-  addRadical(radical?: ChemRadical) {
+  addRadical(radical?: ChemRadical): this {
     return radical ? this.addList(radical.items) : this;
   }
 

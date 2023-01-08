@@ -7,9 +7,12 @@ import { stateAgentIn } from "./stateAgentIn";
 export const stateAgent: CompilerState = (compiler) => {
   const agent = createAgent(compiler);
 
-  // TODO: Пока нет множителей, используем упрощенное предположение, что коэффициент только один
   ifDef(scanCoeff(compiler), (coeff) => {
     agent.n = coeff;
+    if (compiler.srcMap) {
+      compiler.addSrcMapItem(agent, compiler.entityBegin, "agentK");
+      compiler.entityBegin = compiler.pos;
+    }
   });
 
   return compiler.setState(stateAgentIn);

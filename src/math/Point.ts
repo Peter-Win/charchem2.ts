@@ -18,12 +18,12 @@ export class Point {
     this.y = y;
   }
 
-  set(x: Double, y: Double) {
+  set(x: Double, y: Double): void {
     this.x = x;
     this.y = y;
   }
 
-  setPt(src: Point) {
+  setPt(src: Point): void {
     this.x = src.x;
     this.y = src.y;
   }
@@ -50,19 +50,19 @@ export class Point {
     return new Point(this.x + pt.x, this.y + pt.y);
   }
 
-  add(deltaX: Double, deltaY: Double) {
+  add(deltaX: Double, deltaY: Double): this {
     this.x += deltaX;
     this.y += deltaY;
     return this;
   }
 
-  iadd(pt: Point): Point {
+  iadd(pt: Point): this {
     this.x += pt.x;
     this.y += pt.y;
     return this;
   }
 
-  isub(pt: Point): Point {
+  isub(pt: Point): this {
     this.x -= pt.x;
     this.y -= pt.y;
     return this;
@@ -82,18 +82,18 @@ export class Point {
     return new Point(k * this.x, k * this.y);
   }
 
-  scale(k: Double): Point {
+  scale(k: Double): this {
     this.x *= k;
     this.y *= k;
     return this;
   }
 
-  mini(pt: Point) {
+  mini(pt: Point): void {
     this.x = Math.min(this.x, pt.x);
     this.y = Math.min(this.y, pt.y);
   }
 
-  maxi(pt: Point) {
+  maxi(pt: Point): void {
     this.x = Math.max(this.x, pt.x);
     this.y = Math.max(this.y, pt.y);
   }
