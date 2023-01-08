@@ -24,6 +24,10 @@ export class ChemAgent extends ChemObj {
     this.stA = new StructAnalyzer(this);
   }
 
+  setCoeff(k: ChemK | number) {
+    this.n = typeof k === "number" ? new ChemK(k) : k;
+  }
+
   addNode(node: ChemNode): ChemNode {
     this.nodes.push(node);
     this.commands.push(node);

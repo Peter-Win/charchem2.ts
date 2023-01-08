@@ -82,4 +82,12 @@ export class ChemExpr extends ChemObj {
   isLinear(): boolean {
     return isTextFormula(this);
   }
+
+  static createWithError(error: Error, src: string) {
+    const expr = new ChemExpr();
+    expr.error = error;
+    expr.src0 = src;
+    expr.src = src;
+    return expr;
+  }
 }

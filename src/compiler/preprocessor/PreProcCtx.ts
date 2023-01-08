@@ -1,6 +1,6 @@
 import { Int } from "../../types";
 import { ChemError } from "../../core/ChemError";
-import { LangParams } from "../../lang/Lang";
+import { LangParams } from "../../lang";
 
 export class PreProcCtx {
   src: string = "";

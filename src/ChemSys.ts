@@ -6,7 +6,7 @@ import { ChemObj } from "./core/ChemObj";
 import { getVersion, getVersionStr } from "./getVersion";
 import { makeBruttoKey } from "./inspectors/makeBruttoKey";
 import { isAbstract } from "./inspectors/isAbstract";
-import { Lang, LangParams, LocalDict } from "./lang/Lang";
+import { Lang, LangParams, LocalDict } from "./lang";
 import { calcMass } from "./inspectors/calcMass";
 import { ChemAtom } from "./core/ChemAtom";
 import { findElement } from "./core/PeriodicTable";
@@ -32,6 +32,7 @@ import { calcCharge } from "./inspectors/calcCharge";
 import { roundMass } from "./math/massUtils";
 import { makeFormulaSvgText } from "./browser/renderFormulaSvg";
 import { WebFontCache } from "./drawSys/browser/WebFontCache";
+import { ChemEquation } from "./equation/ChemEquation";
 
 export const ChemSys = Object.freeze({
   addDict(globalDict: Record<string, LocalDict>) {
@@ -125,5 +126,21 @@ export const ChemSys = Object.freeze({
   },
   esc(content: string | number): string {
     return escapeXml(String(content));
+  },
+
+  /**
+   * Solving a chemical equation
+   * @param equation example: "H2 + O2 = H2O"
+   * @returns Its recommended to use result.isOk() or getMessage() to check a result expression.
+   *   You can use result.src and result.getAgents() to get results of equalize
+   */
+  equalize(equation: string): ChemExpr {
+    const eq = new ChemEquation();
+    eq.initBySrc(equation);
+    eq.solve();
+    if (!eq.isSolved()) {
+      return ChemExpr.createWithError(eq.makeError(), equation);
+    }
+    return eq.getExpr()!;
   },
 });

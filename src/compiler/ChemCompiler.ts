@@ -1,6 +1,6 @@
 import { CoeffPosOrAngle } from "../types/CoeffPos";
 import { Int, Double, Char } from "../types";
-import { LangParams } from "../lang/Lang";
+import { LangParams } from "../lang";
 import { ChemAgent } from "../core/ChemAgent";
 import { ChemNode } from "../core/ChemNode";
 import { LewisDot } from "../core/ChemNodeItem";
@@ -23,7 +23,7 @@ import { prepareText } from "./parse/prepareText";
 import { BracketsCtrl } from "./main/BracketsCtrl";
 import { ParamsChemBackground } from "../core/ChemBackground";
 import { ChemCompilerOptions } from "./ChemCompilerOptions";
-import { SrcMapItem } from "./sourceMap/SrcMapItem";
+import { SrcMapItem, SpecPart } from "./sourceMap";
 
 export type CompilerState = (c: ChemCompiler) => Int;
 
@@ -194,10 +194,10 @@ export class ChemCompiler {
     return deltaPos;
   }
 
-  addSrcMapItem(obj: ChemObj, begin?: number) {
+  addSrcMapItem(obj: ChemObj, begin?: number, part?: SpecPart) {
     const { srcMap, pos: end } = this;
     if (begin !== undefined && srcMap) {
-      srcMap.push({ begin, end, obj });
+      srcMap.push({ begin, end, obj, part });
     }
   }
 }

@@ -1,4 +1,4 @@
-import { getVersionStr } from "./getVersion";
+import { getVersionStr } from "../getVersion";
 
 it("getVersionStr", () => {
   const ver = getVersionStr();

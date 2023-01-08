@@ -1,9 +1,8 @@
 import { ifDef } from "../utils/ifDef";
 import { baseDictEn } from "./baseDictEn";
 import { baseDictRu } from "./baseDictRu";
-
-export type LocalDict = Record<string, string>;
-export type LangParams = Record<string, string | number>;
+import { LocalDict, LangParams } from "./LangTypes";
+import { replaceLangParams } from "./replaceLangParams";
 
 export class Lang {
   /**
@@ -32,12 +31,7 @@ export class Lang {
     const finalDict: LocalDict = curDict ?? Lang.enDict;
     // find phrase
     const text = finalDict[key] ?? key;
-    // parameters
-    const paramsList = params ? Object.entries(params) : [];
-    return paramsList.reduce(
-      (acc, [name, val]) => acc.replace(`[${name}]`, String(val)),
-      text
-    );
+    return replaceLangParams({ text, params, langId, tr: Lang.tr });
   }
 
   static findPhrase(key: string): string | undefined {

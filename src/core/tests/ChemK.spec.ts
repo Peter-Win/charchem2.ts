@@ -43,4 +43,12 @@ describe("ChemK", () => {
     expect(String(k)).toBe("");
     expect(k.equals("")).toBe(true);
   });
+  it("isInt", () => {
+    expect(new ChemK(0).isInt()).toBe(true);
+    expect(new ChemK(1).isInt()).toBe(true);
+    expect(new ChemK(-1).isInt()).toBe(true);
+    expect(new ChemK(1.5).isInt()).toBe(false);
+    expect(new ChemK(-1.5).isInt()).toBe(false);
+    expect(new ChemK("1").isInt()).toBe(false);
+  });
 });
