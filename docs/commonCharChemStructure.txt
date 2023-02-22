@@ -1,0 +1,1 @@
+"Source"_(A90,L%d:3,>)"Expression"<_(A90,L4,>)"Inspectors"<_(A155,L%d,>)"calcMass"><_(A130,L%d,>)"calcCharge"><_(A90,L3.5,>)"makeTextFormula"<_(A150,L%d,>)"html"><_(A120,L%d,>)"text"><_(A90,L%d,>)"RTF"><_(A60,L%d,>)"BB"><_(A30,L%d,>)"CharChem">><_(A25,L%d,>)"makeBrutto"><_(A40,L3.5,>)"isTextFormula">><_(A140,L%d,>)"structBuilder"><_(A50,L%d,>)"equation"><_(A15,L4,>)"graph">
