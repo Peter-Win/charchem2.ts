@@ -1,0 +1,1111 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Синяя книга</title>
+    <link href="../static/charchem.css" rel="stylesheet" />
+    <script src="../lib/charchem2.js"></script>
+    <style>
+        .framed {border: thin solid gray; padding: 0.5em 1em;}
+        .subtitle {margin: 0 0 1rem 0;}
+        .fig {text-align: center;}
+        .columns {
+          display: flex;
+          flex-direction: row;
+          gap: 2em;
+          justify-content: center;
+        }
+        .columns > div {
+          text-align: center;
+        }
+        .row-block {
+          display: flex; 
+          flex-direction: row; 
+          flex-wrap: wrap; 
+          gap: 2em; 
+          align-items: baseline; 
+          justify-content: center;
+        }
+        .two-auto-cols {
+          display: grid;
+          grid-template-columns: auto auto;
+          column-gap: 2em;
+          row-gap: 0.5em;
+          justify-content: center;
+          align-items: center;
+        }
+        .two-auto-cols .echem-formula {text-align: center;}
+    </style>
+  </head>
+  <body class="echem-auto-compile">
+
+    <h2>P-14.0 INTRODUCTION</h2>
+    <p>
+      Правила, описанные в этом разделе, имеют общее применение для именования типов соединений и отдельных соединений.
+      Им необходимо внимательно следовать, чтобы составить предпочтительные имена IUPAC (<b>PIN</b>), а также имена для общего использования.
+    </p>
+
+    <h3>P-14.1 BONDING NUMBER</h3>
+    <p>
+      Концепция стандартного валентного состояния атома является фундаментальной для органической номенклатуры. 
+      Поскольку большинство названий органических соединений получают путем формального обмена атомов водорода исходной структуры 
+      на другие атомы или группы, необходимо точно знать, сколько атомов водорода подразумевается для скелетных атомов исходной структуры.
+      Например, относится ли название фосфана к PH<sub>3</sub> или PH<sub>5</sub>?
+      Это проблема, когда элемент может находиться более чем в одном валентном состоянии; 
+      в таких случаях стандартное состояние обычно не указывается, но любое другое состояние валентности отмечается указанием соответствующего номера связи.
+      Более подробная информация приведена в публикации «Обработка переменной валентности в органической номенклатуре (лямбда-конвенция)» (ссылка 13). 
+      В настоящих Рекомендациях это соглашение называется просто «λ-соглашение».
+    </p>
+
+    <h4>P-14.1.1 Definition.</h4>
+    <p>
+      Число связи «n» скелетного атома представляет собой сумму общего количества эквивалентов связи (валентных связей) 
+      этого скелетного атома с соседними скелетными атомами, если таковые имеются, в исходном гидриде и числа атомов водорода.
+    </p>
+    <div class="two-auto-cols">
+        <div class="echem-formula">H2S</div>
+        <div>для S, n = 2</div>
+        <div class="echem-formula">H6S</div>
+        <div>для S, n = 6</div>
+        <div class="echem-formula">(C6H5)3PH2</div>
+        <div>для P, n = 5</div>
+        <div class="echem-formula">N\\|`//`\`||/</div>
+        <div>для N, n = 3</div>
+    </div>
+    <p>
+      <b>P-14.1.2</b> 
+      Стандартные номера соединений. Число связей скелетного атома является стандартным, если оно имеет значение, указанное в таблице. 1.3.
+    </p>
+    <div style="display: grid; grid-template-columns: repeat(6, auto); justify-content: center; text-align: center; column-gap: 2em;">
+      <b>Standard bonding number (n)</b>  <b style="grid-column: span 5;">Element</b>
+      <p>3</p>  <p>B</p> <p>Al</p> <p>Ga</p> <p>In</p> <p>Tl</p>
+      <p>4</p>  <p>C</p> <p>Si</p> <p>Ge</p> <p>Sn</p> <p>Pb</p>
+      <p>3</p>  <p>N</p> <p>P</p>  <p>As</p> <p>Sb</p> <p>Bi</p>
+      <p>2</p>  <p>O</p> <p>S</p>  <p>Se</p> <p>Te</p> <p>Po</p>
+      <p>1</p>  <p>F</p> <p>Cl</p> <p>Br</p> <p>I</p> <p>At</p>
+    </div>
+
+    <h4>P-14.1.3 Nonstandard bonding numbers</h4>
+    <p>
+      Нестандартное число связей <b>нейтрального</b> скелетного атома исходного гидрида обозначается символом «λ<sup><i>n</i></sup>», 
+      указанным вместе с соответствующим локантом. 
+      Обратите внимание, что буква «<i>n</i>» в символе «λ<sup><i>n</i></sup>» выделена курсивом, 
+      а числа в конкретном символе, например, «λ<sup>4</sup>», нет 
+      (об использовании выделенной курсивом «<i>n</i>» в символе «λ<sup><i>n</i></sup>» 
+      см. Общие правила для символов в физических величинах, раздел 1.3 в ссылке 14).
+    </p>
+    <div class="fig">
+      <div class="echem-formula">CH3-SH5</div>
+      <div class="subtitle"><b>methyl-λ<sup>6</sup>-sulfane</b> (PIN)</div>
+      <div class="echem-formula">(C5H5)3PH2</div>
+      <div class="subtitle"><b>triphenyl-λ<sup>5</sup>-phosphane</b> (PIN)</div>
+      <div class="echem-formula">
+        H_(y.5)S@:n(n,a,L:0.6)(*_(A&a,L&L,N0)$itemColor1(gray)"&n"*)@(1,-30)\\@n(2,-30)|N@n(3,-30)`//`\`||/
+      </div>
+      <div class="subtitle"><b>1λ<sup>4</sup>,3-thiazine</b> (PIN) </div>
+    </div>
+
+    <h3>P-14.3 LOCANTS</h3>
+
+    <h4>P-14.3.1 Types of locants</h4>
+    <p>
+      Традиционными типами локантов являются арабские числа, например, 1, 2, 3; локанты со штрихами, например, 1<i>'</i>, 1<i>'''</i>, 2<i>''</i>; 
+      локанты, включающие строчную латинскую букву, например, 3а, 3б; выделенные курсивом латинские буквы, например, <i>О</i>, <i>N</i>, <i>P</i>; 
+      Греческие буквы, например, «α-, β-, γ-» и составные локанты, например, «1(10)» и «5(17)».
+    </p>
+    <p>
+      Локанты <i>o</i>, <i>m</i>, <i>p</i> больше не рекомендуются; числовые локанты «1,2-», «1,3-» и «1,4-» должны использоваться в замещающих именах. 
+      Однако в качестве исключения три изомера ксилола и крезола по-прежнему признаются как <i>о</i>-, <i>m</i>- и <i>p</i>-ксилол, а также <i>o</i>-, <i>m</i>- и <i>p</i>-крезол в общей номенклатуре ИЮПАК (см. P-22.1.3 и Р-63.1.1.2). 
+      Префиксы <i>o</i>-, <i>m</i>- и <i>p</i>-толил по-прежнему используются в общей номенклатуре (см. P-29.6.2.3). Замена не допускается.
+    </p>
+    <p>
+      Композитные локанты, например, 3<sup>2</sup>, 2a<sup>1</sup>, <i>N</i><sup>2′</sup> и <i>O</i><sup>3</sup>
+  были разработаны в последние годы для различных целей и включены в настоящие рекомендации. 
+      Они используются в номенклатуре фанов для обозначения позиций в амплификантах (см. P-26.4.3); 
+      для нумерации в кольцевых сборках (см. P-28.3); для обозначения внутренних положений в системах с плавлеными кольцами (см. P-25.3.3.3); 
+      и в дескрипторах фон Байера для спирокольцевых систем (см. P-24.2.2). 
+      Они также используются в номенклатуре стероидов (ссылка 16 и P-101.7.1.1), тетрапиррола (ссылка 17) и аминокислот и пептидов (ссылка 18 и P-103.2.1)).
+    </p>
+    <p>
+      Штрихи добавляются, чтобы различать один и тот же локант в одной и той же или разных частях структуры, например, 1′,
+      2′′, <i>N</i>′ и α′. В локантах, состоящих из двух или более символов, к основному символу обычно добавляются штрихи. 
+      Например, в локантах, включающих строчную латинскую букву, используемых в слитых кольцах, после арабского числа добавляются штрихи, например, 3′a и 2′a<sup>1</sup>; 
+      этот формат следует принципу, согласно которому в локантах для позиций сплавления в системе слитых колец буква следует за предыдущим периферийным локантом. 
+      Для составных локантов, используемых в номенклатуре фанов, следует за локантом суператома, как в 2′<sup>3</sup> и 2′<sup>3a</sup>. 
+      В мультипликативной номенклатуре штрихи могут стоять сразу после локанта буквы, например <i>N</i>′<sup>4</sup> 
+      или после составного буквенного локанта, такого как <i>N</i><sup>2′</sup>.
+    </p>
+
+    <h4>P-14.3.2 Положение локантов</h4>
+    <p>Локанты (цифры и/или буквы) помещаются непосредственно перед той частью имени, к которой они относятся, за исключением случаев с традиционными сокращенными именами, когда локанты помещаются перед их именами.</p>
+    <div class="fig">
+      <div class="echem-formula">
+        CH3@:n(n,a,L:0.6)(*_(A&a,L&L,N0)$itemColor1(gray)"&n"*)@(6,-90)-CH2@n(5,-90)-CH2@n(4,-90)-CH@n(3,-90)=CH@n(2,-90)-CH3@n(1,-90)
+      </div>
+      <div class="subtitle">
+        <b>hex-2-ene</b> (PIN) (not 2-hexene)
+      </div>
+      <div class="echem-formula">
+        OH|@:n(n,a,L:0.5)(*_(A&a,L&L,N0)$itemColor1(gray)"&n"*)@(1,-30)\@n(2,-30)||`/`\`|/
+      </div>
+      <div class="subtitle">
+        <b>cyclohex-2-en-1-ol</b> (PIN) (not 2-cyclohexen-1-ol)
+      </div>
+      <div class="echem-formula">
+        @:n(n,a,L:0.5)(*_(A&a,L&L,N0)$itemColor1(gray)"&n"*)@(2,30)|`//`\`/`\\`|//\|`|/@n(1,-90)\\/(*_q4~*)_p4~
+      </div>
+      <div class="subtitle">
+        <b>naphthalen-2-yl</b> (preferred prefix) <br />
+        2-naphthyl (contracted name) <br />
+        (not naphth-2-yl)
+      </div>
+    </div>
+
+    <h4>P-14.3.3 Цитирование локантов</h4>
+    <p>
+      В предпочтительных названиях IUPAC, если какие-либо локанты необходимы для определения структуры родительской структуры или единицы структуры, 
+      как это определено соответствующими включающими знаками, тогда все локанты должны быть указаны для родительской структуры или этой структурной единицы. 
+      Например, пропуск локанта «1» в 2-хлорэтаноле, хотя и допустим в общем использовании, не допускается в предпочтительных названиях IUPAC, 
+      поэтому название 2-хлорэтан-1-ол является PIN. 
+      А в следующем примере, 1-phenyl-2-(phenyldiazenyl)-2-(phenylhydrazinylidene)ethan-1-one (PIN), 
+      заместители не используются для структурных единиц, указанных в скобках, даже если для этих заместителей используются заместители исходной структуры этанона. 
+      Кроме того, в предпочтительных мультипликативных названиях IUPAC и в предпочтительных названиях IUPAC для ансамблей колец всегда цитируются локанты, 
+      например, 1,1'-оксидибензол (P-15.3.1.3) и 1,1'-бифенил (P-28.2.1).
+    </p>
+
+    <h4>P-14.3.4 Отсутствие локантов</h4>
+    <p>
+      Широко распространена практика пропуска локантов при отсутствии двусмысленности. 
+      Однако для абсолютной ясности в предпочтительных именах IUPAC необходимо предписывать, когда допустимо опущение локантов.
+    </p>
+    <p>
+      Локанты опущены в предпочтительных именах IUPAC в следующих случаях.
+    </p>
+    <p>
+      <b>P-14.3.4.1</b>
+       Терминальные локанты не указываются в названиях моно- и дикарбоновых кислот, полученных из ациклических углеводородов, 
+       и соответствующих им ацилгалогенидов, амидов, гидразидов, нитрилов, сложных эфиров, альдегидов, амидинов, амидразонов, гидразидинов и амидоксимов, 
+       если они незамещены или замещены по атомам углерода.
+    </p>
+    <div class="fig">
+      <div class="echem-formula">HOOC-CH2-CH2-COOH</div>
+      <div class="subtitle"><b>butanedioic acid</b> (PIN)</div>
+      <div class="echem-formula">HOOC-CH2-CH(Cl)-COOH</div>
+      <div class="subtitle"><b>chlorobutanedioic acid</b> (PIN)</div>
+      <div class="echem-formula">CH3-CH2-CH2-CH2-CO-{}</div>
+      <div class="subtitle"><b>pentanoyl</b> (preferred prefix)</div>
+      <div class="echem-formula">H2N-CO-CH(CH3)-CO-NH2</div>
+      <div class="subtitle"><b>2-methylpropanediamide</b> (PIN)</div>
+      <div class="echem-formula">CH3-NH-CO-CH2-CO-NH-CH3</div>
+      <div class="subtitle"><b><i>N</i><sup>1</sup>,<i>N</i><sup>3</sup>-dimethylpropanediamide</b> (PIN) <br />
+        (not <i>N</i><sup>1</sup>,<i>N</i><sup>3</sup>-dimethylpropane-1,3-diamide)</div>
+    </div>
+
+    <p><b>P-14.3.4.2</b> Локант «1» опущен:</p>
+    <ol type="a">
+      <li>
+        в замещенных одноядерных исходных гидридах;
+        <div class="fig">
+          <div  class="echem-formula">CH3Cl</div>
+          <div class="subtitle"><b>chloromethane</b> (PIN)</div>
+          <div class="echem-formula">SiH2Cl2</div>
+          <div class="subtitle"><b>dichlorosilane</b> (from silane, a preselected name)</div>
+          <div class="echem-formula">(CH3)3Al</div>
+          <div class="subtitle">trimethylalumane</div>
+        </div>
+      </li>
+      <li>
+        в монозамещенных однородных цепочках, состоящих только из двух одинаковых атомов;
+        <div class="fig">
+          <div class="echem-formula">CH3-CH2-OH</div>
+          <div class="subtitle"><b>ethanol</b> (PIN)</div>
+          <div class="echem-formula">NH2-NH-Cl</div>
+          <div class="subtitle"><b>chlorohydrazine</b> (from hydrazine, a preselected name)</div>
+          <div class="echem-formula">NH2-NH-{}</div>
+          <div class="subtitle"><b>hydrazinyl</b> (preselected prefix) (not hydrazin-1-yl)</div>
+        </div>
+      </li>
+      <li>
+        в монозамещенных гомогенных моноциклических кольцах;
+        <div class="fig">
+          <div class="echem-formula">|`/`\`|/\/SH</div>
+          <div class="subtitle"><b>cyclohexanethiol</b> (PIN)</div>
+          <div class="echem-formula">|`//`\`||/\\/Br</div>
+          <div class="subtitle"><b>bromobenzene</b> (PIN)</div>
+        </div>
+      </li>
+      <li>
+        в незамещенных двуядерных и трехъядерных алкенах и алкинах и мононенасыщенных циклоалкенах и циклоалкинах;
+        аналогично в незамещенных мононенасыщенных соединениях, состоящих из однородных цепей, содержащих элементы групп 13, 14, 15 и 16 (B, C, N, O), 
+        и соответствующих мононенасыщенных циклических соединениях.
+        <div class="fig">
+          <div class="echem-formula">CH2=CH2</div>
+          <div class="subtitle"><b>ethene</b> (PIN)</div>
+          <div class="echem-formula">CH%CH</div>
+          <div class="subtitle"><b>acetylene</b> (PIN)</div>
+          <div class="echem-formula">CH3-CH=CH2</div>
+          <div class="subtitle"><b>propene</b> (PIN)</div>
+          <div class="echem-formula">NH=NH</div>
+          <div class="subtitle"><b>diazene</b> (preselected name)</div>
+          <div class="echem-formula">SiH%SiH</div>
+          <div class="subtitle"><b>disilyne</b> (preselected name)</div>
+          <div class="echem-formula">H2N-N=NH</div>
+          <div class="subtitle"><b>triazene</b> (preselected name)</div>
+        </div>
+      </li>
+    </ol>
+    <p>
+      <b>P-14.3.4.3</b> Локант опущен в монозамещенных симметричных исходных гидридах или исходных соединениях, где имеется только один вид замещаемого водорода.
+      <div class="fig">
+        <div class="echem-formula">CH3-NH-CO-NH2</div>
+        <div class="subtitle"><b>methylurea</b> (PIN)</div>
+        <div class="echem-formula">Cl-SiH2-O-SiH3</div>
+        <div class="subtitle"><b>chlorodisiloxane</b> (from disiloxane, a preselected name)</div>
+        <div class="echem-formula">
+          Cl|\||`/|\(*/`||`\*)||`/`\\`|/`/`\`|l/\`\`|/`/`\`//|\|`/(*|\\/*)`\\`|//
+        </div>
+        <div class="subtitle">
+          <b>chlorocoronene</b> (PIN)
+        </div>
+        <div class="echem-formula">
+          |`//N`\`||/N\\/COOH
+        </div>
+        <div class="subtitle"><b>pyrazinecarboxylic acid</b> (PIN)</div>
+        <div class="echem-formula">HOOC-CH(*`|Cl*)-COOH</div>
+        <div class="subtitle"><b>chloropropanedioic acid</b> (PIN)<br />
+          chloromalonic acid
+        </div>
+      </div>
+    </p>
+
+    <p>
+      <p>P-14.3.4.4</p> 
+      Локанты опускаются, если изомер не может быть получен путем перемещения суффиксов и/или префиксов (если есть) из их позиции в другую 
+      или путем их замены между двумя разными позициями.
+    </p>
+    <div class="fig">
+      <div class="echem-formula">CH3-CH=N-NH-{}</div>
+      <div class="subtitle"><b>ethylidenehydrazinyl</b> (preferred prefix) (not 2-ethylidenehydrazin-1-yl)</div>
+      <div class="echem-formula">HC%Si-Si%C-CH3</div>
+      <div class="subtitle"><b>ethylidyne(methylidyne)disilane</b>
+        (not 1-ethylidyne-2-methylidynedisilane)</div>
+      <div class="echem-formula">`/`\\`|//\||\CH||HSi-Si(*`||CH/\\/`||`\`//|*)-{}</div>
+      <div class="subtitle">
+        <b>dibenzylidenedisilanyl</b> (preferred prefix) <br />
+        (not 1,2-dibenzylidenedisilan-1-yl)
+      </div>
+      <div class="echem-formula">H2C=P-O-PH-O-P=CH-CH3</div>
+      <div class="subtitle">
+        <b>ethylidene(methylidene)triphosphoxane</b> (PIN)<br />
+        (not 1-ethylidene-5-methylidenetriphosphoxane)
+      </div>
+      <div class="echem-formula">H2Si=N-NH-Cl</div>
+      <div class="subtitle">
+        <b>chloro(silylidene)hydrazine</b> (preselected name)<br />
+        (not 1-chloro-2-silylidenehydrazine)
+      </div>
+      <div class="echem-formula">Br-S-S-CH3</div>
+      <div class="subtitle">
+        <b>(bromodisulfanyl)methane</b> (PIN) <br />
+        (not bromo(methyl)disulfane see P-63.3.1; 
+        not 1-bromo-2-methyldisulfane)
+      </div>
+      <div class="echem-formula">O=C=CH-{}</div>
+      <div class="subtitle"><b>oxoethenyl</b> (preferred prefix)</div>
+      <div class="echem-formula">Cl-N=N-{}</div>
+      <div class="subtitle"><b>chlorodiazenyl</b> (preferred prefix)</div>
+      <div class="echem-formula">
+        N@:n(n,a,L:0.6)(*_(A&a,L&L,N0)$itemColor1(gray)"&n"*)@(4,120)_qN@n(3,60)_qqN@n(2,0)_qN(*_(y-.5)H*)@n(1,90)_q@n(5,180,0.4)_qq
+      </div>
+      <div class="subtitle">
+        <b>1<i>H</i>-tetrazole</b> (PIN) (not 1<i>H</i>-1,2,3,4-tetrazole)
+      </div>
+    </div>
+    <p>В следующих примерах необходимы локанты</p>
+    <div class="fig">
+      <div class="echem-formula">CH3-CH2-CH||SiH-Si(*`||CH-CH3*)-{}</div>
+      <div class="subtitle">
+        <b>1-ethylidene-2-propylidenedisilan-1-yl</b> (preferred prefix)<br />
+        (путем замены двух групп заместителей другим изомером генерируется, т. е. 2-ethylidene-1-propylidenedisilan-1-yl)
+      </div>
+      <div class="echem-formula">CH3-CH=SiH-SiH2-Cl</div>
+      <div class="subtitle">
+        <b>1-chloro-2-ethylidenedisilane</b> (PIN) <br />
+        (another isomer is generated by moving the Cl atom 
+        to the other Si atom, i.e., 1-chloro-1-ethylidenedisilane)
+      </div>
+      <div class="echem-formula">Cl-CH=CH-{}</div>
+      <div class="subtitle">
+        <b>2-chloroethen-1-yl</b> (preferred prefix)<br />
+        2-chlorovinyl
+      </div>
+    </div>
+    <p>
+      В виде исключения локант не опускается из propan-2-one, butan-2-one, prop-2-enoic acid and prop-2-ynoic acid, хотя однозначно без локанта.
+    </p>
+    <p><b>P-14.3.4.5</b>
+      Все заместители опущены в соединениях или группах заместителей, в которых все замещаемые положения полностью замещены или модифицированы, 
+      например, гидро, таким же образом. 
+      За исключением атомов водорода, присоединенных к атомам халькогена, например, в кислотах, спиртах и к атомам углерода формильных групп (альдегидов), 
+      все атомы водорода считаются замещаемыми.
+    </p>
+    <p>В случае частичной замены или модификации должны быть указаны все числовые префиксы. Префикс «per-» больше не рекомендуется.</p>
+    <div class="fig">
+      <div class="echem-formula">|`/`\`|/\/\|`/`\</div>
+      <div class="subtitle"><b>decahydronaphthalene</b> (PIN)</div>
+      <div class="echem-formula">CF3-CF2-C`|NF|-NF2</div>
+      <div class="subtitle"><b>octafluoropropanimidamide</b> (PIN)</div>
+      <div class="echem-formula">
+        CF3@:n(n,a,L:0.6)(*_(A&a,L&L,N0)$itemColor1(gray)"&n"*)@(4,-90)-CF2@n(3,-90)-CF2@n(2,-90)-COOH@n(1,-90)
+      </div>
+      <div class="subtitle"><b>heptafluorobutanoic acid</b> (PIN)</div>
+      <div class="echem-formula">CF3-CF2-CH2-OH</div>
+      <div class="subtitle"><b>2,2,3,3,3-pentafluoropropan-1-ol</b> (PIN)</div>
+      <div class="echem-formula">
+        /@:b(a)(*_(A&a,L.5)(*_(a-90,L.5,~)*)_(a90,L.5,~)*)@(-90)\\@b(-30)|@b(30)`//@b(90)`\@b(150)`||@b(-150)
+      </div>
+      <div class="subtitle"><b>benzenehexayl</b> (preferred prefix)</div>
+      <div class="echem-formula">Cl|\|`//`\`||/\_q6CF2-CF3</div>
+      <div class="subtitle"><b>1-chloro-2-(pentafluoroethyl)benzene</b> (PIN)</div>
+      <div class="echem-formula">F2N-CO-NF2</div>
+      <div class="subtitle"><b>tetrafluorourea</b> (PIN)</div>
+      <div class="echem-formula">
+        Cl-@:n(n,a,L:0.6)(*_(A&a,L&L,N0)$itemColor1(gray)"&n"*)@(4,-50,0.4)`|O@n(1,-90)_p4O@n(2,-90)|O@n(3,90)_p4|Cl
+      </div>
+      <div class="subtitle"><b>dichlorotrioxetane</b> (PIN)</div>
+    </div>
+
+    <p>
+      <b>P-14.3.4.6</b> Все локанты опущены для исходных соединений, если все замещаемые атомы водорода имеют один и тот же локант.
+    </p>
+    <div class="fig">
+      <div class="echem-formula">F2CH-COOH</div>
+      <div class="subtitle"><b>difluoroacetic acid</b> (PIN) (not 2,2-difluoroacetic acid)</div>
+      <div class="echem-formula">
+        Cl-C@:n(n,a,L:0.6)(*_(A&a,L&L,N0)$itemColor1(gray)"&n"*)@(4,-50)`|O@n(1,-90)_p4O@n(2,-90)|O@n(3,90)_p4_(y.5)H
+      </div>
+      <div class="subtitle">
+        <b>chlorotrioxetane</b> (PIN) (not 4-chloro-1,2,3-trioxetane)
+      </div>
+    </div>
+
+    <h4>P-14.3.5 Наименьший набор локантов</h4>
+    <p>
+      Наименьший набор локантов определяется как набор, который при почленном сравнении с другими наборами локантов, 
+      каждый из которых указан в порядке возрастания значения, имеет самый низкий член в первой точке различия; 
+      например, набор локантов «2,3,5,8» меньше, чем «3,4,6,8» и «2,4,5,7».
+    </p>
+    <p>
+      Локанты со штрихами располагаются сразу после соответствующих локантов без штрихов в наборе, расположенном в порядке возрастания;
+      локанты, состоящие из цифры и строчной буквы со штрихами или без них, как 4a и 4′a (не 4a′), помещаются
+      сразу после соответствующего числового локанта, за которым следуют локанты с надстрочными индексами.
+    </p>
+    <p>
+      Локанты курсивных заглавных и строчных букв ниже, чем локанты греческих букв, которые, в свою очередь, ниже, чем цифры.
+    </p>
+    <p class="row-block">
+      <span>2 &lt; 2′</span>
+      <span>3 &lt; 3a</span> 
+      <span>8a &lt; 8b</span> 
+      <span>4′ &lt; 4a</span> 
+      <span>4a &lt; 4′a</span>
+      <span>1<sup>2</sup> &lt; 1<sup>3</sup></span>
+      <span>1<sup>4</sup> &lt; 2′</span>
+      <span>3a &lt; 3a<sup>1</sup></span>
+    </p>
+    <p class="row-block">
+      <span>1,1,1,4,2 &lt; 1,1,4,4,2</span>
+      <span>1,1′,2′,1′′,3′′,1′′′ &lt; 1,1′,3′,1′′,2′′,1′′′</span>
+      <span><i>N</i>,α,1,2 &lt; 1,2,4,6</span>
+    </p>
+    <p>
+      <b>Примечание:</b> Следует отметить исключение в области номенклатуры каротиноидов, где используется 5,8,5',8'-, а не 5,5',8,8'- (см. P-101.5.2); 
+      последний будет рекомендован для систематической замещающей номенклатуры
+    </p>
+
+    <!--  -->
+    <h3>P-14.4 NUMBERING</h3>
+    <p>
+        При появлении нескольких структурных признаков в циклических и ациклических соединениях им приписывают низкие локанты в
+        в порядке убывания старшинства:
+    </p>
+    <div class="framed">
+        В рекомендации 1979 г. (ссылка 1) были внесены два важных изменения:
+        <ol type="1">
+            <li>гетероатомы в цепочках теперь считаются частью исходного гидрида; как таковые, они имеют старшинство над
+                суффиксы для нумерации как для гетероатомов в кольцах;</li>
+            <li>префиксы hydro/dehydro теперь классифицируются как отделяемые префиксы, но не входят в категорию
+                отрывные приставки в алфавитном порядке; они цитируются непосредственно перед названием исходного гидрида [см. пункт (е) ниже].</li>
+        </ol>
+    </div>
+    <ol type="a">
+        <li>
+      фиксированная нумерация в цепочках, кольцах или кольцевых системах, 
+        т. е. при фиксированной нумерации системы, например в пуриновых, антраценовых и фенантреновых, 
+        эта нумерация должна использоваться как в PINах, так и в общей номенклатуре.<br />
+      Примеры:
+      <div class="fig">
+        <div class="echem-formula">
+            CH3@:n(n)(*_(y-.8,N0)$itemColor1(gray)&quot;&n&quot;*)@(1)-S@n(2)-CH2@n(3)-CH2@n(4)-O@n(5)-CH2@n(6)-CH2@n(7)-S@n(8)-CH2@n(9)-CH2@n(10)-SiH2@n(11)-CH2@n(12)-CH2@n(13)-COOH@n(14)
+        </div>
+        <div class="subtitle">5-oxa-2,8-dithia-11-silatetradecan-14-oic acid (PIN)</div>
+        <div class="echem-formula">
+            @:n(n,a,L:0.6)(*_(A&a,L&L,N0)$itemColor1(gray)"&n"*)@(1,-90)\\@n(2,-30)|@n(3,30)`//@n(4,90)`\@n(4a,90)`/@n(5,90)`\\@n(6,150)`|@n(7,-150)//@n(8,-90)\|`|@n(8a,-90)/
+        </div>
+        <div class="subtitle">naphthalene (PIN)</div>
+        <div class="echem-formula">
+            /@:n(n,a,L:0.6)(*_(A&a,L&L,N0)$itemColor1(gray)"&n"*)@(1,-90)\\@n(2,-30)|@n(3,30)`//@n(4,90)`\`//N@n(5,90)`\`/@n(6,90)`\\@n(7,150)`|@n(8,-150)//@n(9,-90)\|`|/N@n(10,-90)\\|
+        </div>
+        <div class="subtitle">phenazine (PIN)</div>
+        <div class="echem-formula">
+            CN`|`\`/`\`/`\`|/\/\/\GeH2|`/
+        </div>
+        <div class="subtitle">1-germacyclotetradecane-3-carbonitrile (PIN)</div>
+      </div>
+      </li>
+      <li>
+        указанный водород для незамещенных соединений; может потребоваться более высокий локант в другой позиции, чтобы
+разместить замещающий суффикс в соответствии со структурным признаком (d);<br />
+Примеры:
+        <div class="fig">
+            <div class="echem-formula">
+                @:n(n,a,L:0.6)(*_(A&a,L&L,N0)$itemColor1(gray)"&n"*)@(1,-150)/@n(2,-90)\\@n(3,-30)|\@n(4,30)|`//`\<`|/\/OH>`//`\`||/\`\`|
+            </div>
+            <div class="subtitle">1<i>H</i>-phenalen-4-ol (PIN)</div>
+            <div class="echem-formula">
+                HOOC\/O\|`//`\`||
+            </div>
+            <div class="subtitle">2<i>H</i>-pyran-6-carboxylic acid (PIN)
+            </div>
+            <div class="echem-formula">
+                `|_pp@:n(n,a,L:0.4)(*_(A&a,L&L,N0)$itemColor1(gray)"&n"*)@(1,-90)_p@n(2,0)_pp@n(3,90)_p`//@n(4,90)`\@n(5,-30)`/O/`|//\
+            </div>
+            <div class="subtitle">5H-inden-5-one (PIN)</div>
+        </div>
+      </li>
+      <li>
+        основные характеристические группы и свободные валентности (суффиксы);<br />
+        Примеры:
+        <div class="fig">
+            <div class="echem-formula">
+                COOH|@:n(n,a,L:0.6)(*_(A&a,L&L,N0)$itemColor1(gray)&quot;&n&quot;*)@(1,-30)\\@n(2,-30)|&lt;\Cl&gt;`//&lt;|Cl&gt;`\`/`\\@n(6,-150)&lt;`/HOOC&gt;`|//\|`|/
+            </div>
+            <div class="subtitle">3,4-dichloronaphthalene-1,6-dicarboxylic acid (PIN)</div>
+            <div class="echem-formula">
+              @:n(n,a,L:0.4)(*_(A&a,L&L,N0)$itemColor1(gray)&quot;&n&quot;*)@(1,-90)\\&lt;{}/&lt;_q4~{}&gt;_p4~{}&gt;@n(2,30)|`//`\`/`\\@n(6,-150)&lt;`/HOOC&gt;`|//\|`|/
+            </div>
+            <div class="subtitle">6-carboxynaphthalen-2-yl (preferred prefix)</div>
+            <div class="echem-formula">
+              @:n(n,a,L:0.4)(*_(A&a,L&L,N0)$itemColor1(gray)"&n"*)@(1,60)`/@n(2,60)`=`\/-\-NH2
+            </div>
+            <div class="subtitle">cyclohex-2-en-1-amine (PIN)</div>
+            <div class="echem-formula">
+              @:n(n,a,L:0.4)(*_(A&a,L&L,N0)$itemColor1(gray)&quot;&n&quot;*)@(1,60)`/@n(2,60)`-@n(3,120)`\\/-\-{}&lt;`|~{}&gt;|~{}
+            </div>
+            <div class="subtitle">cyclohex-3-en-1-yl (preferred prefix)</div>
+        </div>
+      </li>
+      <li>
+        «добавленный указанный водород» (в соответствии со структурой соединения и в соответствии с дальнейшими
+замена);<br />
+        Примеры:
+        <div class="fig">
+          <div class="echem-formula">
+            @:n(n,a,L:0.4)(*_(A&a,L&L,N0)$itemColor1(gray)"&n"*)@(1,-30)\@n(2,-30)|@n(3,30)`/@n(4,90)`\`/`\\`|//\|`|/`||O
+          </div>
+          <div class="subtitle">3,4-dihydronaphthalen-1(2H)-one (PIN)</div>
+          <div class="echem-formula">
+            @:n(n,a,L:0.4)(*_(A&a,L&L,N0)$itemColor1(gray)"&n"*)@(1,-150)/@n(2,90)`|O|\O@n(3,30,0.6)|@n(4,30)`/||@n(5,30)`/@n(6,-90)|O`|`\`/O@n(7,90,0.7)`\@n(8,150)`|@n(9,-150)/@n(10,-90)\|`|/`|c|\
+          </div>
+          <div class="subtitle">
+            9,10-dihydro-2<i>H</i>,4<i>H</i>-benzo[1,2-<i>b</i>:4,3-<i>c</i>′]dipyran-2,6(8<i>H</i>)-dione (PIN)
+          </div>
+        </div>
+      </li>
+      <li>
+        saturation/unsaturation;
+        <ol type="i">
+          <li>младшие локанты даны префиксам hydro/dehydro (см. первый пример и P-31.2.2) и окончаниям «ene» и «yne»;</li>
+          <li>низкие локанты отдаются сначала кратным связям в виде набора, а затем двойным связям (см. второй и третий примеры
+          и P-31.1.1.1);</li>
+        </ol>
+        Примеры:
+        <div class="fig">
+          <div class="echem-formula">
+            @:n(n,a,L:0.4)(*_(A&a,L&L,N0)$itemColor1(gray)"&n"*)@(1,-90)\@n(2,-30)|@n(3,30)`/@n(4,90)`\`/`\\@n(6,90,0.6)(*`/F*)`|//\|r`|/
+          </div>
+          <div>6-fluoro-1,2,3,4-tetrahydronaphthalene (PIN)</div>
+          <div class="echem-formula">
+            `/`\`|/@:n(n,a,L:0.4)(*_(A&a,L&L,N0)$itemColor1(gray)"&n"*)@(1,-90)\\|@n(3,-30)\Br
+          </div>
+          <div class="subtitle">3-bromocyclohex-1-ene (PIN)</div>
+          <div class="echem-formula">
+            HC@:n(n,a,L:0.6)(*_(A&a,L&L,N0)$itemColor1(gray)"&n"*)@(5,-90)%C@n(4,-90)-CH@n(3,90)(*`|OH*)-C@n(2,-90)(*|CH3*)=CH2@n(1,-90)
+          </div>
+          <div class="subtitle">2-methylpent-1-en-4-yn-3-ol (PIN) <br />
+            (not 4-methylpent-4-en-1-yn-3-ol)</div>
+        </div>
+      </li>
+      <li>
+        detachable alphabetized prefixes, all considered together in a series of increasing numerical order;<br />
+        Примеры:
+        <div class="fig">
+          <div class="echem-formula">
+            `|_p@:n(n,a,L:0.5)(*_(A&a,L&L,N0)$itemColor1(gray)"&n"*)@(1,-90)_pp@n(2,-70)(*-COOH*)_p_pp`|0_qq7@n(8,-120)(*_(a64)OH*)_q7_qq7_q7@n(5,80)(*_(a64)Br*)_qq7@n(4,30)(*_(a64)CH3*)_q7
+          </div>
+          <div class="subtitle">5-bromo-8-hydroxy-4-methylazulene-2-carboxylic acid (PIN)<br />
+            (the locant set ‘4,5,8’ is lower than ‘4,7,8’)</div>
+        </div>
+      </li>
+      <li>
+        <a id="P14.4g">#</a>
+        самые низкие локанты для заместителя, указанного первым в качестве префикса в названии;<br />
+        Примеры:
+        <div class="fig">
+          <div class="echem-formula">
+            HOOC@:n(n,a,L:0.6)(*_(A&a,L&L,N0)$itemColor1(gray)"&n"*)@(1,-90)-CH2@n(2,-90)-CH2@n(3,-90)-CH@n(4,90)(*`|H3C*)-CH@n(5,90)(*`|NO2*)-CH2@n(6,-90)-CH2@n(7,-90)-COOH@n(8,-90)
+          </div>
+          <div class="subtitle">4-methyl-5-nitrooctanedioic acid (PIN)</div>
+          <div class="echem-formula">
+            @:n(n,a,L:0.4)(*_(A&a,L&L,N0)$itemColor1(gray)"&n"*)@(1,-30)\\@n(2,-30)|@n(3,30)`//@n(4,30)(*|NO2*)`\`/`\\`|//\|`|/`|CH3
+          </div>
+          <div class="subtitle">1-methyl-4-nitronaphthalene (PIN) <br />
+            (not 4-methyl-1-nitronaphthalene)</div>
+        </div>
+      </li>
+      <li>
+        Когда необходим выбор между одним и тем же скелетным атомом в разных валентных состояниях, тот, который находится в нестандартном
+валентному состоянию присваивается нижний локант. Если необходим дальнейший выбор между одним и тем же скелетным атомом в двух или более
+нестандартные валентные состояния, состояние с более высокой валентностью назначается более низким локантом;<br />
+        Примеры:
+        <div class="fig">
+          <div class="echem-formula">
+            `||_p7S@:n(n,a,L:0.6)(*_(A&a,L&L,N0)$itemColor1(gray)"&n"*)@(1,90)(*_(y-.5)H*)_pp7@n(2,120)_p7_pp7_p7S@n(5,-90)_p7`/`\\`|//\
+          </div>
+          <div class="subtitle"><b>1λ<sup>4</sup>,5-benzodithiepine</b> (PIN)</div>
+          <div class="echem-formula">
+            `|0_p7O@:n(n,a,L:0.6)(*_(A&a,L&L,N0)$itemColor1(gray)"&n"*)@(1,90)_p7_p7_p7SH4@n(4,-120)_p7_p7`-`|0(*-*)_q7S(*_(y-.5)H2*)@n(12,120)_q7_q7_q7_q7_q7
+          </div>
+          <div class="subtitle"><b>1-oxa-4λ<sup>6</sup>,12λ<sup>4</sup>-dithiacyclotetradecane</b> (PIN)</div>
+          <div class="echem-formula">
+            H2P-CH2@:n(n,a,L:0.6)(*_(A&a,L&L,N0)$itemColor1(gray)"&n"*)@(3,-90)-CH@n(2,90)(*-OH*)`|CH2@n(1,-90)-PH4
+          </div>
+          <div class="subtitle">
+            <b>1-(λ<sup>5</sup>-phosphanyl)-3-phosphanylpropan-2-ol</b> (PIN)<br />
+            (λ<sup>5</sup>-phosphanyl is cited before phosphanyl and is given the lower locant)
+          </div>
+        </div>
+      </li>
+      <li>
+        Когда есть выбор между эквивалентными нумерациями в изотопно-немодифицированном соединении, начальная точка
+и направление нумерации аналогичного изотопно-замещенного соединения выбирают так, чтобы давать наименьшую
+локанты к модифицированным атомам или группам, рассматриваемым вместе как набор в порядке возрастания номеров. Если выбор все еще
+остается, нижний локант отдается нуклиду с более высоким атомным номером. В случае разных нуклидов одного и того же
+элемент, нижний локант отнесен к нуклиду с более высоким массовым числом;<br />
+        Примеры:
+        <div class="fig">
+          <div class="echem-formula">
+            CH3@:n(n,a,L:0.7)(*_(A&a,L&L,N0)$itemColor1(gray)"&n"*)@(1,-90)-$M(14)CH2@n(2, -90)-CH2@n(3,-90)-CH3@n(4,-90)
+          </div>
+          <div class="subtitle"><b>(2-<sup>14</sup>C)butane</b> (PIN)<br />
+            [not (3-<sup>14</sup>C)butane]</div>
+            <div class="echem-formula">
+              CH3@:n(n,a,L:0.7)(*_(A&a,L&L,N0)$itemColor1(gray)"&n"*)@(4,-90)-$M(14)CH2@n(3, -90)-C$M(2)H2@n(2,-90)-CH3@n(1,-90)
+            </div>
+            <div class="subtitle"><b>(3-<sup>14</sup>C,2,2-<sup>2</sup>H<sub>2</sub>)butane</b> (PIN)<br />
+              [not (2-<sup>14</sup>C,3,3-<sup>2</sup>H<sub>2</sub>)butane]
+            </div>
+            <div class="echem-formula">
+              CH3@:n(n,a,L:0.7)(*_(A&a,L&L,N0)$itemColor1(gray)"&n"*)@(1,-90)-$M(14)CH2@n(2, -90)-CH$M(2)H@n(3,-90)-CH3@n(4,-90)
+            </div>
+            <div class="subtitle">
+              <b>(2-<sup>14</sup>C,3-<sup>2</sup>H<sub>1</sub>)butane</b> (PIN) <br />
+              [not (3-<sup>14</sup>C,2-<sup>2</sup>H<sub>1</sub>)butane]
+            </div>
+            <div class="echem-formula">
+              OH|@:n(n,a,L:0.5)(*_(A&a,L&L,N0)$itemColor1(gray)"&n"*)@(1,-150)\\|@n(3,-40)(*\$M(3)H*)`//`\`||/
+            </div>
+            <div class="subtitle"><b>(3-<sup>3</sup>H)phenol</b> (PIN)</div>
+            <div class="echem-formula">
+              $L(1.1)CH2$M(2)H@:n(n,a,L:0.7)(*_(A&a,L&L,N0)$itemColor1(gray)"&n"*)@(1,-90)_(A120)C@n(2,-100)(*`\dH*)(*`/wHO*)(*_(y.8,N0)"R"*)_(A60)CH3@n(3,90)
+            </div>
+            <div class="subtitle">
+              <b>(2<i>R</i>)-(1-<sup>2</sup>H<sub>1</sub>)propan-2-ol</b> (PIN)
+            </div>
+            <div class="echem-formula">
+              $L(1.1)CH2$M(131)I@:n(n,a,L:0.7)(*_(A&a,L&L,N0)$itemColor1(gray)"&n"*)@(1,-90)_(A120)C@n(2,-100)(*`\dH*)(*`/wHO*)(*_(y.8,N0)"R"*)_(A60)CH2I@n(3,90)
+            </div>
+            <div class="subtitle">
+              <b>(2<i>R</i>)-1-(<sup>131</sup>I)iodo-3-iodopropan-2-ol</b> (PIN) (see P-82.2.2.1)
+            </div>
+            <div class="echem-formula">
+              $L(1.4)H3C@:n(n,a,L:0.7)(*_(A&a,L&L,N0)$itemColor1(gray)"&n"*)@(1,-90)\C@n(2,-90)(*_(A125,d+,L%s:1.1)H*)(*_(A60,w+)$M(3)H*)@n(S,100)/CH2@n(3,-90)\C(*_(A125,d+,L%s)H*)(*_(A60,w+)$M(2)H*)@n(R,100)@n(4,-90)/CH3@n(5,-90)
+            </div>
+            <div class="subtitle">
+              <b>(2<i>S</i>,4<i>R</i>)-(4-<sup>2</sup>H<sub>1</sub>,2-<sup>3</sup>H<sub>1</sub>)pentane</b> (PIN) <br />
+              [not (2<i>R</i>,4<i>S</i>)-(2-<sup>2</sup>H<sub>1</sub>,4-<sup>3</sup>H<sub>1</sub>)pentane; <br />
+              isotopic modifications have seniority for low locants over stereodescriptors described in (j) below]
+            </div>
+        </div>
+      </li>
+      <li>
+        Когда есть выбор для нижних локантов, связанных с наличием стереогенных центров или стереоизомеров, нижние
+        локант присваивается CIP-стереодескрипторам Z, R, M и r (псевдоасимметрия), которые предпочтительнее E, S, P и s,
+        соответственно, которые предпочтительнее не-CIP-стереодескрипторов cis, trans или r (ссылка), c и t (см. P-91.2 для
+        CIP и не-CIP стереодескрипторы).<br />
+        Примеры:
+        <div class="fig">
+          <div class="echem-formula">
+            $L(1.2)$slope(60)HOOC@:n(n,a,L:0.7)(*_(A&a,L&L,N0)$itemColor1(gray)"&n"*)@(7,-90)\C@n(6,-80)@n(E,45,$32)(*`/H*)==C@n(5,-100)(*/H*)_(A30)CH2@n(4,-90)_(A-30)C@n(3,-80)(*`\H*)@n(Z,45,0.8)==C@n(2,-100)(*/H*)\COOH@n(1,-80)
+          </div>
+          <div class="subtitle">
+            <b>(2<i>Z</i>,5<i>E</i>)-hepta-2,5-dienedioic acid</b> (PIN)<br />
+            (the chain is numbered by assigning the low locant to the ‘Z’ double bond)
+          </div>
+          <div class="echem-formula">
+            $L(1.2)$slope(60)H3C\C(*`/H*)==C@:n(n,a,L:0.7)(*_(A&a,L&L,N0)$itemColor1(gray)"&n"*)@(4,-120)@n(E,135,0.9)(*/C@n(5,-80)(*`\H*)==C@n(6,-100)@n(E,135,0.9)(*_(A30)H*)/CH3@n(7,-90)*)\C@n(3,-80)(*`/H*)==C@n(2,-90)@n(Z,135,0.9)(*\H*)_(A-30)CH3@n(1,90)
+          </div>
+          <div class="subtitle">
+            <b>(2<i>Z</i>,4<i>E</i>,5<i>E</i>)-4-ethylidenehepta-2,5-diene</b> (PIN) <br />
+            (low locants are assigned to the longest chain, then to the ‘Z’ double bond)
+          </div>
+          <div class="echem-formula">
+            `-_p8_p8_p8_p8/\@:n(n,a,L:0.5)(*_(A&a,L&L,N0)$itemColor1(gray)"&n"*)@(4,-60)@n(E,135,0.7)||@n(3,-30)_(A50)@n(2,-10)@n(Z,170,0.7)_pp6@n(1,45)_p6_#1
+          </div>
+          <div class="subtitle">
+            <b>(1<i>Z</i>,3<i>E</i>)-cyclododeca-1,3-diene</b> (PIN)
+          </div>
+          <div class="echem-formula">
+            _(x%a:1.2)@:n(n,a,L:0.5)(*_(A&a,L&L,N0)$itemColor1(gray)"&n"*)@(3,45)_q@n(2,160)@:f(r,rw,l,lw,i)(*_(a84,&rw+)&r*)(*_(a24,&lw+)&l*)(*_(a54,L1.4,N0)$itemColor1(gray)"&i"*)@(H,w,Br,d,R)_q@n(1,90)@f(H,d,Br,w,R)_q@n(5,-170)_q@n(4,-60)@f(Cl,w,H,d) =
+            _(x%a)@n(4,-120)@f(H,d,Cl,w)_q@n(3,-10)_q@n(2,90)@f(Br,w,H,d,S)_q@n(1,30)@f(Br,d,H,w,S)_q@n(5,120)          
+          </div>
+          <div class="title">
+            <b><i>rel</i>-(1<i>R</i>,2<i>R</i>)-1,2-dibromo-4-chlorocyclopentane</b> (PIN) <br />
+            1<i>r</i>,2<i>t</i>-dibromo-4<i>c</i>-chlorocyclopentane <br />
+(the preferred IUPAC name is denoted by CIP stereodescriptors; 
+in the second name, the relative configuration is expressed by the 
+non-CIP stereodescriptors ‘1r,2t,4c’ rather than ‘1r,2t,4t’, 
+because a ‘cis’ arrangement, denoted by ‘c’, has priority 
+over a ‘trans’ arrangement, denoted by ‘t’, in position ‘4’)
+          </div>
+          <div class="echem-formula">
+            $L(1.4)H3C@:n(n,a,L:0.7)(*_(A&a,L&L,N0)$itemColor1(gray)"&n"*)@(1,-90)\C@n(2,-90)(*_(A125,d+,L%s:1.1)F*)(*_(A60,w+)H*)@n(R,90)/CH2@n(3,-90)\C(*_(A125,d+,L%s)F*)(*_(A60,w+)H*)@n(S,90)@n(4,-90)/CH3@n(5,-90)
+          </div>
+          <div class="subtitle">
+            <b>(2<i>R</i>,4<i>S</i>)-2,4-difluoropentane</b> (PIN)
+          </div>
+          <div class="echem-formula">
+            $slope(30)$L(1.1)H3C-C`H2/C(*_(A-120,w+)H3C*)(*_(A-60,d+)H*)@:n(n,a,L:0.5)(*_(A&a,L&L,N0)$itemColor1(gray)"&n"*)@(R,90,0.7)\@n(1,-90)||\//`|@n(3,-90)(*`\\`/*)/C@n(S,90,0.7)(*_(A-120,w+)H3C*)(*_(A-60,d+)H*)\CH2-CH3
+          </div>
+          <div class="subtitle">
+            <b>1-[(2<i>R</i>)-butan-2-yl]-3-[(2<i>S</i>)-butan-2-yl]benzene</b> (PIN)
+          </div>
+          <div class="echem-formula">
+            $L(1.3)$slope(35)H3C@:n(n,a,L:0.7)(*_(A&a,L&L,N0)$itemColor1(gray)"&n"*)@(11,-90)\C@n(10,150)@:h(h,a)(*_(A&a,L1.14)&h*)@(H,90)//C@n(9,90)@h(H,-90)\C@n(8,-90)(*_(A120,w+)HO*)(*_(A60,d+)H*)/CH2@n(7,-90)\CH2@n(6,90)/CH2@n(5,-90)\C@n(4,-70)(*_(A120,w+)HO*)(*_(A60,d+)H*)/C@n(3,90)@h(H,-90)\\C@n(2,-90)@h(H,-30)@h(CH3@n(1,90),90)
+          </div>
+          <div class="subtitle">
+            <b>(2<i>Z</i>,4<i>S</i>,8<i>R</i>,9<i>E</i>)-undeca-2,9-diene-4,8-diol</b> (PIN) <br />
+(the choice is between ‘E’ and ‘Z’ for position ‘2’, not between ‘R’ and ‘S’ for position ‘4’)
+          </div>
+          <div class="columns">
+            <div class="fig">
+              <div class="echem-formula">
+                $L(1.1)@:n(n,a,L:0.4)(*_(A&a,L&L,N0)$itemColor1(gray)"&n"*)@(s,-135)`/`\`|@n(s,30)@:b(a,w,t)(*_(A&a,&w+)&t*)@(180,w,H3C)@b(-120,d,H)/\|@b(0,d,H)_(A60,w+)C@n(2,45,0.6)@b(150,,NC)@b(90,,CN)_(x2)C@n(1,135,0.6)@b(90,,CN)@b(30,,CN)_(A-60,w-)@n(r,-30)@b(180,d,H)`|/\@n(r,150)@b(-60,w,H)@b(0,d,CH3)|`/`\
+              </div>
+              <b>I</b>
+            </div>
+            <div class="fig">
+              <div class="echem-formula">
+                $L(1.1)@:n(n,a,L:0.6)(*_(A&a,L&L,N0)$itemColor1(gray)"&n"*)@;`/`\`|@:b(a,w,t)(*_(A&a,&w+)&t*)@(180,w,H3C)@b(-120,d,H)/@n(cis,-90)\|@b(0,d,H)_(A60,w+)C@n(2,45)@b(150,,NC)@b(90,,CN)_(x2)C@n(1,135)@b(90,,CN)@b(30,,CN)_(A-60,w-)@b(180,d,H)`|/@n(trans,-90)\@b(-60,w,H)@b(0,d,CH3)|`/`\
+              </div>
+              <b>II</b>
+            </div>
+          </div>
+          <div class="subtitle columns">
+            <ol type="I">
+              <li>
+                <b>1-[(1<i>r</i>,4<i>r</i>)-4-methylcyclohexyl]-2-[(1<i>s</i>,4<i>s</i>)-4-methylcyclohexyl]ethane-1,1,2,2-tetracarbonitrile</b> (PIN) <br />
+                (the substituent denoted by the ‘r’ stereodescriptor receives the lowest locant, ‘1’; <br />
+                the use of CIP stereodescriptors generates the preferred IUPAC name)
+              </li>
+              <li>
+                <b>1-(<i>cis</i>-4-methylcyclohexyl)-2-(<i>trans</i>-4-methylcyclohexyl)ethane-1,1,2,2-tetracarbonitrile</b><br />
+                (the ‘cis’ substituent receives the lowest locant, ‘1’) 
+              </li>
+            </ol>
+          </div>
+          <div class="echem-formula">
+            $L(1.1)C@:n(n,a,L:0.6)(*_(A&a,L&L,N0)$itemColor1(gray)"&n"*)@(1,90)@:b(a,w,t)(*_(A&a,&w+)&t*)@(150,w,Cl)@b(-150,d,H)@:c(a,t)@n(&t,&a,1)@(-70,M)=C@n(2,90)=C@n(3,100)@b(60,,H)/H2C@n(4,80)-CH2@n(5,-100)/C@n(6,-80)@b(-120,,H)=C@n(7,90)=C@n(8,90)@c(-110,P)@b(-30,d,Cl)@b(30,w,H)
+          </div>
+          <div class="subtitle"><b>(1<i>M</i>,6<i>P</i>)-1,8-dichloroocta-1,2,6,7-tetraene</b> (PIN)</div>
+        </div>
+      </li>
+    </ol>
+
+    <h3>P-14.5 ALPHANUMERICAL ORDER</h3>
+    <p>Алфавитно-цифровой порядок обычно называют «алфавитным порядком». Поскольку эти принципы упорядочения включают в себя упорядочение как букв, так и цифр, в строгом смысле его лучше всего назвать «буквенно-цифровым порядком», чтобы передать сообщение о том, что задействованы как буквы, так и цифры.</p>
+    <p>Алфавитно-цифровой порядок используется для установления порядка цитирования отделяемых префиксов заместителей (не отделяемых префиксов насыщения, гидро и дегидро) и нумерации цепи, кольца или системы колец, когда возможен выбор.</p>
+    <p>
+      Алфавитно-цифровой порядок применяется в органической номенклатуре следующим образом. 
+      Некурсивные латинские буквы считаются первыми, если только они не используются в качестве локантов или части составного или составного локанта, 
+      например, «N» или «4a» (см. P-14.3), или в изотопном дескрипторе. 
+      Когда все латинские буквы идентичны, сравнивается набор локантов для всех начальных локантов для первичных заместителей, 
+      то есть локантов, стоящих перед первой латинской буквой каждого первичного заместителя. 
+      Наиболее предпочтительно отсутствие локантов, за которыми следуют локанты курсивных латинских букв, локанты греческих букв (как в союзных именах), 
+      если таковые имеются, и арабские цифры в порядке от низшего к высшему. 
+      Таким образом, предпочтительный порядок буквенно-цифрового порядка следующий: некурсивные латинские буквы &gt; курсивные буквы &gt; греческие буквы.
+    </p>
+    <p>Для сортировки неалфавитно-цифровых символов см. P-14.6.</p>
+    <p>
+      В этих подразделах принципы алфавитно-цифрового порядка не включают греческие буквы (за исключением конъюнктивных имен) или изотопные или стереохимические дескрипторы.
+    </p>
+    <p><b>P-14.5.1</b>
+      Простые префиксы (т. е. те, которые описывают атомы и незамещенные заместители) расположены в алфавитном порядке;
+при необходимости затем вставляются мультипликативные префиксы, которые не изменяют уже установленный алфавитный порядок.
+    </p>
+    <div class="fig">
+      <div class="echem-formula">
+        CH3_(A150)@:n(n,a,L:0.5)(*_(A&a,L&L,N0)$itemColor1(gray)"&n"*)@(1,180)`\`-`/\-/_(A30)CH2-CH3
+      </div>
+      <div class="subtitle"><b>1-ethyl-1-methylcyclohexane</b> (PIN)</div>
+      <div class="echem-formula">
+        H3C-@:n(n,a,L:0.5)(*_(A&a,L&L,N0)$itemColor1(gray)"&n"*)@(4,0)/-\@n(1,180)(*`/`-`\*)-CH2-CH3
+      </div>
+      <div class="subtitle">
+        <b>1-ethyl-4-methylcyclohexane</b> (PIN) <br />
+        [for numbering, <a href="#P14.4g">see P-14.4 (g)</a>]
+      </div>
+      <div class="echem-formula">
+        `/`-`\/-\-CBr2@:n(n,a,L:0.6)(*_(A&a,L&L,N0)$itemColor1(gray)"&n"*)@(3,-90)-CH2@n(2,-90)-COOH@n(1,-90)
+      </div>
+      <div class="subtitle">
+        <b>3,3-dibromo-3-cyclohexylpropanoic acid</b> (PIN) <br />
+        (not 3-cyclohexyl-3,3-dibromopropanoic acid)
+      </div>
+      <div class="echem-formula">
+        CH3@:n(n,a,L:0.7)(*_(A&a,L&L,N0)$itemColor1(gray)"&n"*)@(1,-90)-[CH2@n(2-4,-70,0.8)]3-C@n(5,-120)-CH2@n(6,-90)-CH2@n(7,-90)-CH2@n(8,-90)-[CH2@n(9-30,-70,0.8)]22-CH3@n(31,-90); CH3-CH2-CH(*-CH3*)_(y-1.3)#C_(y-1.8)CH2-CH2-CH2-CH3
+      </div>
+      <div class="subtitle">
+        <b>5-(butan-2-yl)-5-butylhentriacontane</b> (PIN) <br />
+        [butyl is not treated as butan-1-yl; for the use of enclosing marks, see P-16.5.1.2]
+      </div>
+      <div class="echem-formula">
+        `/`-`\(*`-HO*)/-\(*_(A30)CH2-CH2-CH2-CH3*)_(A-30)C(CH3)3
+      </div>
+      <div class="subtitle">
+        <b>4-butyl-4-tert-butylcyclohexan-1-ol</b> (PIN)
+      </div>
+      <div class="echem-formula">
+        CH3|@:n(n,a,L:0.5)(*_(A&a,L&L,N0)$itemColor1(gray)"&n"*)@(1,-30)\@n(2,30)|`//@n(4,150)(*|CH3*)`\`/@n(5,150)(*|Cl*)`\\`|//@n(8,-39)(*`|Cl*)\|`|/\/Cl
+      </div>
+      <div class="subtitle">
+        <b>2,5,8-trichloro-1,4-dimethylnaphthalene</b> (PIN) <br />
+        [not 1,4-dimethyl-2,5,8-trichloronaphthalene; <br />
+        ‘trichloro’ is cited before ‘dimethyl’ as ‘chloro’ is earlier alphabetically than ‘methyl’] <br />
+        [not 1,4,6-trichloro-5,8-dimethylnaphthalene; <br />
+        the locant set ‘1,2,4,5,8’ is lower than ‘1,4,5,6,8’ (see P-14.3.5)]
+      </div>
+    </div>
+    <p><b>P-14.5.2</b>
+      Название префикса заместителя считается начинающимся с первой буквы его полного названия.
+      <div class="fig">
+        <div class="echem-formula">
+          CH3@:n(n,a,L:0.7)(*_(A&a,L&L,N0)$itemColor1(gray)"&n"*)@(1,-90)-[CH2]4-CH2@n(8,-90)-CH:a@n(7,-90)-CH2-CH@n(5,-90)(*|CH2-CH3*)-[CH2]3-CH3@n(1,-90);
+          CH3-CH2-CH(*|F*)-CH(*|F*)`|#a
+        </div>
+        <div class="subtitle">
+          <b>7-(1,2-difluorobutyl)-5-ethyltridecane</b> (PIN) <br />
+          [not 5-ethyl-7-(1,2-difluorobutyl)tridecane; <br />
+          the compound substituent name in the PIN starts with ‘d’, and ‘d’ is earlier alphabetically than ‘e’]
+        </div>
+        <div class="echem-formula">
+          CH3@:n(n,a,L:0.55)(*_(A&a,L&L,N0)$itemColor1(gray)"&n"*)@(1,-90)-[CH2]5-CH:a@n(7,90)-CH2-CH@n(5,-90)(*|CH2-CH3*)-CH2-CH2-CH2-CH3@n(1,-90);
+          #a_(y-1.4)H2C-CH(*`|CH3*)-CH2-CH(*`|CH3*)-CH3
+        </div>
+        <div>
+          <b>7-(2,4-dimethylpentyl)-5-ethyltridecane</b> (PIN);<br />
+          (‘dimethylpentyl’ begins with ‘d’ that precedes ‘e’ in alphabetical order) 
+        </div>
+      </div>
+    </p>
+    <p>
+      <b>P-14.5.3</b>
+      Когда требуется алфавитно-цифровой порядок, а латинские буквы не позволяют определить порядок цитирования, рассматриваются буквы, выделенные курсивом.
+    </p>
+    <div class="fig">
+      <div class="echem-formula">
+        CH3-C`H2_(A-30)CH(*`|CH3*)\@:n(n,a,L:0.45)(*_(A&a,L&L,N0)$itemColor1(gray)"&n"*)@(1,150)||\//`|@n(3,30)(*`\\@n(2,-90)`/*)/C(CH3)3
+      </div>
+      <div class="subtitle">
+        3-<i>tert</i>-butyl-1-(1-methylpropyl)benzene <br />
+        <b>1-(butan-2-yl)-3-<i>tert</i>-butylbenzene</b> (PIN) <br />
+        (for use of enclosing marks, see P-16.5.1.2) <br />
+        [not 1-sec-butyl-3-tert-butylbenzene]
+      </div>
+      <div class="echem-formula">
+        @:n(n,a,L:0.55)(*_(A&a,L&L,N0)$itemColor1(gray)"&n"*)@(3,30)|`//N@n(1,90)`\`||@n(5,150)(*`\_(a54,N2)_q_qq_q(*_q*)_pp6_p6_p6(*_pp6_p6*)_q_qq_q_qq*)/\\/_(a-54)_pp_p_p(*_pp*)_q6_qq6_q6_q6(*_qq6*)_p_pp_p_pp
+      </div>
+      <div class="subtitle">
+        <b>3-(<i>as</i>-indacen-3-yl)-5-(<i>s</i>-indacen-1-yl)pyridine</b> (PIN) <br />
+        [not 5-<i>s</i>-indacen-1-yl-3-<i>as</i>-indacen-3-ylpyridine]
+      </div>
+    </div>
+    <p>
+      И аналогично, naphtho[1,2-<i>f</i>]quinolin-2-yl в алфавитно-цифровом порядке находится перед naphtho[1,2-<i>g</i>]quinolin-1-yl (‘f’ перед ‘g’).
+    </p>
+    <p>
+      <b>P-14.5.4</b>
+      When two or more prefixes consist of identical Roman letters, priority for order of citation is given to the 
+      group that contains the lowest locant(s) at the first point of difference.
+    </p>
+    <div class="fig">
+      <div class="echem-formula">
+        CH3-CH2-CH(*`|CH3*)-C`H-@:n(n,a,L:0.45)(*_(A&a,L&L,N0)$itemColor1(gray)"&n"*)@(4,-120)/=\@n(1,-60)(*`//`-`\\*)-NH-CH2-CH2-CH(*`|CH3*)-CH3
+      </div>
+      <div class="subtitle">
+        <b>4-(2-methylbutyl)-<i>N</i>-(3-methylbutyl)aniline</b> (PIN) <br />
+        4-(2-methylbutyl)-<i>N</i>-(3-methylbutyl)benzenamine <br />
+        (for ordering the substituents ‘2’ is lower than ‘3’;<br /> 
+        the fact that ‘N’ is lower than ‘4’ is irrelevant)
+      </div>
+      <div class="echem-formula">
+        H3C/CH(*`|Cl*)\@:n(n,a,L:0.45)(*_(A&a,L&L,N0)$itemColor1(gray)"&n"*)@(6,150)|@n(5,90)`|/\\|(*`//`\_(A150)C`H2`-CH2`-Cl*)_q_qq@n(2,0)_qN@n(1,90)(*_(y-.5)H*)_q
+      </div>
+      <div class="subtitle">
+        <b>6-(1-chloroethyl)-5-(2-chloroethyl)-1<i>H</i>-indole</b> (PIN) <br />
+        (the locant ‘1’ is lower than ‘2’)
+      </div>
+      <div class="echem-formula">
+        H3C\CH(*|CH2-CH2-CH3*)/`||/\\(*|`//`\*)_(A-30)CH(*`|CH2-CH3*)-CH2-CH3
+      </div>
+      <div class="subtitle">
+        <b>1-(pentan-2-yl)-4-(pentan-3-yl)benzene</b> (PIN) <br />
+        (the locant ‘2’ is lower than ‘3’; for the use of enclosing marks, see P-16.5.1.2)
+      </div>
+      <div class="echem-formula">
+        |_q_q(*_q_q*)(*/C(CH3)2-CH2-CH2-CH3*)\C(*|CH2-CH3*)(CH3)-CH2-CH3
+      </div>
+      <div class="subtitle">
+        <b>1-(2-methylpentan-2-yl)-1-(3-methylpentan-3-yl)cyclopentane</b> (PIN) <br />
+        [not 1-(3-methylpentan-3-yl)-1-(2-methylpentan-2-yl)cyclopentane;
+        the locant set ‘2,2’ is lower than ‘3,3’]
+      </div>
+      <div class="echem-formula">
+        |_q_q(*_q_q*)(*/CH(CH3)-CH(CH3)-CH2-CH3*)_(A30)$color(darkmagenta)CH(*|CH2-CH3*)-CH(CH3)-CH3
+      </div>
+      <div class="subtitle">
+        <b>1-(<span style="color:darkmagenta">2-methylpentan-3-yl</span>)-1-(3-methylpentan-2-yl)cyclopentane</b> (PIN) <br />
+        [not 1-(3-methylpentan-2-yl)-1-(2-methylpentan-3-yl)cyclopentane; 
+        the locant set ‘2,3’ is lower than ‘3,2’]
+      </div>
+    </div>
+
+    <h3>P-14.6 NONALPHANUMERICAL ORDER</h3>
+    <p>
+      Алфавитно-цифровой порядок решает практически все проблемы упорядочения органических имен. 
+      Однако иногда встречаются имена, в которых буквенно-цифровая нумерация символов идентична. 
+      В таких случаях другие символы, такие как окружающие знаки или знаки препинания, необходимо сравнивать 
+      с буквами и/или цифрами или друг с другом, чтобы выбрать предпочтительное имя IUPAC.
+      Буквы или цифры всегда предпочтительнее любых других символов. 
+      При необходимости порядок приоритета для других символов следующий, они перечислены в порядке убывания приоритета: 
+      фигурные скобки > квадратные скобки > круглые скобки > точки > запятые > точки с запятой > двоеточия > дефисы.
+    </p>
+    <p>
+      <b>Примечание.</b> 
+      Предыдущие рекомендации не содержали правил выбора предпочтительного имени, кроме упорядочения буквенно-цифровых символов. 
+      Для соединений, буквенно-цифровые характеристики которых не приводят к уникальному имени, 
+      необходимо упорядочивать неалфавитно-цифровые символы, такие как запятые, окружающие знаки и т. д. 
+      Вышеприведенный абзац предоставляет эту информацию.
+    </p>
+    <div class="fig">
+      <div class="echem-formula">
+        @:n(n,a,L:0.5)(*_(A&a,L&L,N0)$itemColor1(gray)"&n"*)@(1,-45)`|_p_p@n(3,180)(*_(A-30)SiH2-CH2-NH2*)(*_(A30)SiH(*|NH2*)-CH3*)_p_p_(a-54)HO
+      </div>
+      <div class="subtitle">
+        <b>3-[amino(methyl)silyl]-3-[(aminomethyl)silyl]cyclopentan-1-ol</b> (PIN) <br />
+        {not 3-[<span style="color: blue; font-weight: bold;">(</span>aminomethyl)silyl]-3-[<span style="color: blue; font-weight: bold;">a</span>mino(methyl)silyl]cyclopentan-1-ol;<br />
+          буквенно-цифровые символы идентичны; в четвертом символе имени буква «а» предпочтительнее открывающей скобки}  
+      </div>
+      <div class="echem-formula">
+        `/`-`\/-\_(x1.5)C`H2-/-\(*`/`-`\*)_(x1.5)C`H2-/-\(*`/`-`\*)-CH2-O_(x1.5)C`H2-/-\`/`-`\
+      </div>
+      <div class="subtitle">
+        <b>1-[(cyclohexylmethoxy)methyl]-4-{[4-(cyclohexylmethyl)cyclohexyl]methyl}cyclohexane</b> (PIN) <br />
+        {not 1-({4-[(cyclohexylmethoxy)methyl]cyclohexyl}methyl)-4-(cyclohexylmethyl)cyclohexane <br />
+        буквы алфавита и первичные локанты заместителей идентичны для обоих названий;
+        однако в PIN нет локанта для первого внутреннего заместителя, но в альтернативном названии локант 
+        для первого внутреннего заместителя равен «4», и отсутствие локанта предпочтительнее «4».}
+      </div>
+      <div class="echem-formula">
+        H3C-C`|O|-Si(*`|CH3*)(*|CH3*)-CH2-O-CH2-CH2-NH-CH2-CH2-NH-CH2-CH2-NH-CH2-CH2-NH-CH2-CH2-NH2
+      </div>
+      <div class="subtitle">
+        <i>N</i><sup>1</sup>-{2-[(acetyldimethylsilyl)methoxy]ethyl}-<i>N</i><sup>2</sup>-[2-({2-[(2-aminoethyl)amino]ethyl}amino)ethyl]ethane-1,2-diamine<br /> 
+        <i>N</i><sup>1</sup>-[2-({2-[(acetyldimethylsilyl)methoxy]ethyl}amino)ethyl]-<i>N</i><sup>2</sup>-{2-[(2- aminoethyl)amino]ethyl}ethane-1,2-diamine <br />
+        [исходная структура должна представлять собой диамин; буквенно-цифровой порядок первых двух имен одинаков; в третьем символе предпочтительнее не буквенно-цифровой ‘{’, чем ‘[’] <br />
+        <b>19-amino-3,3-dimethyl-5-oxa-8,11,14,17-tetraaza-3-silanonadecan-2-one</b> (PIN)
+      </div>
+    </div>
+
+    <h3>P-14.7 ОБОЗНАЧЕННЫЙ И «ДОБАВЛЕННЫЙ ОБОЗНАЧЕННЫЙ ВОДОРОД»</h3>
+    <p>
+      <b>P-14.7.1</b> Указанный водород. 
+      При определенных обстоятельствах необходимо указать в названии кольца Манкуде или системы колец, 
+      т. е. такой, которая содержит максимальное количество некумулятивных двойных связей, одно или несколько положений, 
+      в которых не присоединена кратная связь. Когда эти позиции заняты атомами водорода, название можно уточнить, 
+      указав положение одного или нескольких атомов водорода в структуре; это достигается добавлением к названию 
+      курсивной заглавной буквы «<i>Н</i>», которой предшествует соответствующий числовой локант для каждого из этих атомов.
+    </p>
+    <div class="columns">
+      <div>
+        <div class="echem-formula">
+          @:n(n,a,L:0.5)(*_(A&a,L&L,N0)$itemColor1(gray)"&n"*)@(3,60)`-@n(4,120)_pp@n(5,-150)_pN@n(1,90)(*_(y-.5)H*)_p@n(2,-30)_pp
+        </div>
+        <div class="subtitle">
+          <b>1<i>H</i>-pyrrole</b> (PIN) <br />
+          pyrrole
+        </div>
+      </div>
+      <div>
+        <div class="echem-formula">
+          @:n(n,a,L:0.5)(*_(A&a,L&L,N0)$itemColor1(gray)"&n"*)@(3,60)`-@n(4,120)_pp@n(5,-150)_pN@n(1,-90)_pp@n(2,-30)_p
+        </div>
+        <div class="subtitle"><b>3<i>H</i>-pyrrole</b> (PIN)</div>
+      </div>
+    </div>
+    <p>
+      В первом примере «указанный водород» размещает один атом водорода в положении «1» пиррольного кольца; 
+      а во втором «указанный водород» указывает на «лишний» атом водорода в положении «3», то есть на один атом водорода больше, 
+      чем число присутствующих, если бы в кольце в этом положении была двойная связь. 
+      Указанный водород этого типа предшествует названию исходного гидрида. 
+      В общей номенклатуре указанный водород может быть опущен (см. P-25.7.1.3), а 1H-пиррол может называться просто «пиррол». 
+      Однако в предпочтительном названии IUPAC должны быть указаны локант и символ «<i>H</i>».
+    </p>
+    <p>
+      Подробные процедуры использования «указанного водорода» обсуждаются в P-58.2.1.
+    </p>
+    <p><b>P-14.7.2</b> «Добавленный указанный водород». 
+      Второй тип указанного водорода называется «добавленный указанный водород». 
+      Он описывает атомы водорода, добавленные к определенной структуре в результате добавления суффикса, 
+      описывающего структурную модификацию. 
+      «Добавленный указанный водород» указан в скобках после локанта структурной особенности, к которой он относится.
+    </p>
+    <div class="columns">
+      <div>
+        <div class="echem-formula">
+          P@:n(n,a,L:0.5)(*_(A&a,L&L,N0)$itemColor1(gray)"&n"*)@(1,-90,0.7)\\@n(2,-30)|@n(3,30)`//@n(4,90)`\@n(5,150)`||@n(6,-150)/
+        </div>
+        <div class="subtitle"><b>phosphinine</b> (PIN)</div>
+      </div>
+      <div>
+        <div class="echem-formula">
+          H_(y.5)P@:n(n,a,L:0.5)(*_(A&a,L&L,N0)$itemColor1(gray)"&n"*)@(1,90)\@n(2,150,0.4)/O`/|@n(3,30)`//@n(4,90)`\@n(5,150)`||@n(6,-150)/
+        </div>
+        <div class="subtitle"><b>phosphinin-2(1<i>H</i>)-one</b> (PIN)</div>
+      </div>
+    </div>
+    <p>
+      «Добавленный указанный водород» используется для введения свободной валентности, радикального или ионного центра 
+      или основной характеристической группы в полностью ненасыщенное гетеромоноциклическое соединение 
+      или конденсированную полициклическую систему в отсутствие 
+      или при недостатке достаточного количества атомов водорода для размещения операция на месте операции. 
+      Такие замещенные соединения называются с использованием суффикса для обозначения операции либо над группой –CH=, 
+      либо над атомом =C&lt;, либо над эквивалентными гетероатомами, такими как –N=, или группами, такими как =NH.
+    </p>
+    <p>
+      Подробные процедуры использования «добавленного указанного водорода» обсуждаются в P-58.2.2.
+    </p>
+    <div class="fig">
+      <div class="echem-formula">
+        /@:n(n,a,L:0.5)(*_(A&a,L&L,N0)$itemColor1(gray)"&n"*)@(1,90)`|O|\@n(2,-30)|@n(3,30)`//@n(4,90)`\`|`\\`/||\//
+      </div>
+      <div class="subtitle"><b>naphthalen-1(2<i>H</i>)-one</b> (PIN) </div>
+      <div class="echem-formula">
+        /N@:n(n,a,L:0.5)(*_(A&a,L&L,N0)$itemColor1(gray)"&n"*)@(1,90)(*_(y-.5)H*)\@n(2,150,0.4)(*//{}(*_q4~{}*)_p4~{}*)|@n(3,30)`//@n(4,90)`\`|`\\`/||\//
+      </div>
+      <div class="subtitle">
+        <b>quinolin-2(1<i>H</i>)-ylidene</b> (preferred prefix)
+      </div>
+      <div class="echem-formula">
+        `|_p@:n(n,a,L:0.4)(*_(A&a,L&L,N0)$itemColor1(gray)"&n"*)@(1,-60)_p@n(2,0)_pp@n(3,60)_p`|0_qq7_q7_qq7_q7_qq7_q7_(y1.4)COOH
+      </div>
+      <div class="subtitle">
+        <b>azulene-3a(1<i>H</i>)-carboxylic acid</b> (PIN) 
+      </div>
+      <div class="echem-formula">
+        //@:n(n,a,L:0.4)(*_(A&a,L&L,N0)$itemColor1(gray)"&n"*)@(1,-90)\NH@n(2,150,.5)|@n(3,30)`//@n(4,90)`\@n(4a,-30,.55)`|`\`//|\\/|{}(*_(a90,~,L.5)*)_(a-90,L.5,~)
+      </div>
+      <div class="subtitle">
+        <b>isoquinolin-4a(2<i>H</i>)-yl</b> (preferred prefix)
+      </div>
+      <div class="echem-formula">
+        //@:n(n,a,L:0.4)(*_(A&a,L&L,N0)$itemColor1(gray)"&n"*)@(1,-90)\@n(2,-30)|@n(3)`//@n(4,90)`\C$pos(90)^+@n(4a,-30,0.55)`|`\`//`\`//|\\/(*`|*)\\/
+      </div>
+      <div class="subtitle">
+        <b>anthracen-4a(2<i>H</i>)-ylium</b> (PIN)
+      </div>
+    </div>
+    <p>
+      «Добавленный указанный водород» не указывается для предпочтительных названий IUPAC, 
+      когда две идентичные характеристические группы, которые по существу удаляют одну из двойных связей исходной структуры,
+       указываются в качестве суффиксов в соединении mancude.
+    </p>
+    <div class="fig">
+      <div class="echem-formula">
+        /@:n(n,a,L:0.4)(*_(A&a,L&L,N0)$itemColor1(gray)"&n"*)@(1,90)`|O|\@n(2,150)/O`/|`//`\`|`\\`/||\//
+      </div>
+      <div class="subtitle"><b>naphthalene-1,2-dione</b> (PIN)</div>
+      <div class="echem-formula">
+        HO|/@:n(n,a,L:0.4)(*_(A&a,L&L,N0)$itemColor1(gray)"&n"*)@(1,-90)\\@n(2,-30)|`//`\@n(4a,-30,0.5)`|@n(8a,150,0.5)`\`//|\\/|OH
+      </div>
+      <div class="subtitle"><b>naphthalene-4a,8a-diol</b> (PIN)</div>
+    </div>
+
+    <h3>P-14.8 ADDUCTS</h3>
+    <h4>P-14.8.1 Organic adducts</h4>
+    <p>
+      Аддукт представляет собой химическое соединение, каждое молекулярное соединение которого образовано 
+      прямым объединением отдельных молекулярных образований таким образом, что возможно изменение связности, 
+      но не потеря атомов из любого из молекулярных образований (см. ссылку 19).
+    </p>
+    <p>
+      В этом подразделе рассматриваются только аддукты, образующиеся из органических соединений. 
+      Неорганические аддукты обсуждаются в ref. 12, IR-5,5. 
+      В этом подразделе рассматриваются предпочтительные названия ИЮПАК для двух различных типов органических аддуктов: 
+      аддуктов Льюиса и π-аддуктов. 
+      Подобным образом называются соли органических оснований или кислот неизвестного строения, см. главу P-7. 
+      В общей номенклатуре определение аддукта, данное выше, может включать и другие виды представлений в качестве аддуктов, 
+      например, бутадиен—хлороводород.
+    </p>
+    <p>
+      Формулы для этих аддуктов написаны в порядке, соответствующем общему старшинству органических соединений, 
+      указанному в P-41. Названия образуются путем цитирования названий отдельных соединений в порядке формулы, 
+      соединенных длинными (длинными) тире (—). 
+      Пропорции компонентов указываются после названия арабской цифрой, отделенной от других цифр знаком солида; 
+      арабские числа и солид помещаются в круглые скобки, отделяемые от имени пробелом.
+    </p>
+    <p>
+      Соли и аддукты Льюиса между соединениями бора и элементами группы 15, 
+      в которых способ присоединения указан курсивными символами элементов, рассматриваются в P-68.1.6.
+    </p>
+    <div class="framed">
+      Для аддуктов, состоящих исключительно из органических соединений, отдельные компоненты указываются 
+      в порядке старшинства классов (см. P-41) в формулах, а не в соответствии с количеством видов в аддукте 
+      или в соответствии с рекомендованным алфавитно-цифровым порядком. в Рекомендациях 1979 г. 
+      (см. Правило D-1.55, ссылка 1) и в пересмотренной Номенклатуре неорганической химии, Рекомендации 2005 г. (ссылка 12). 
+      Для аддуктов, состоящих из органических и неорганических соединений, органические соединения предшествуют 
+      неорганическим соединениям в формулах. 
+      Названия образуются путем цитирования названий отдельных компонентов в порядке следования формулы. 
+      Использование порядка старшинства, универсальной системы, в качестве критерия ранжирования предпочтительнее 
+      зависящего от языка алфавитно-цифрового порядка как для предпочтительных имен ИЮПАК, так и для общей номенклатуры.
+    </div>
+    <div class="fig">
+      <div class="echem-formula">
+      //\||`/|\(*/`||`\*)||`/`\\`/`\\`|(*/\/`/|*)`\\`|//\|`|/\`\`|`\`//| * O2`N/@:n(n,a,L:0.5)(*_(A&a,L&L,N0)$itemColor1(gray)"&n"*)@(5,-30)`||/@n(1,90)(*`|NO2*)\\|@n(3,-140)(*\NO2*)`//`\
+    </div>
+    <div class="subtitle">
+      <b>coronene—1,3,5-trinitrobenzene (1/1)</b> (PIN)
+    </div>
+    </div>
+  </body>
+</html>

@@ -10,9 +10,9 @@ export const draftGraphFromAutoNode = (node: ChemNode): DraftGraph => {
     throw new ChemError("Expected C atom in auto node");
   const cv: DraftVertex = {
     content: c.obj,
-    valency: 4,
+    valence: 4,
   };
-  g.verices.push(cv);
+  g.vertices.push(cv);
   const h = node.items[1];
   if (h) {
     if (!(h.obj instanceof ChemAtom) || h.obj.id !== "H")
@@ -20,12 +20,12 @@ export const draftGraphFromAutoNode = (node: ChemNode): DraftGraph => {
     if (!h.n.isInt()) throw new ChemError("Invalid H count in auto node");
     const hCount = h.n.num;
     for (let i = 0; i < hCount; i++) {
-      const hv = {
+      const hv: DraftVertex = {
         content: h.obj,
-        valency: 1,
+        valence: 1,
         reserved: 0,
       };
-      g.verices.push(hv);
+      g.vertices.push(hv);
       g.edges.push({ v0: cv, v1: hv, mul: 1 });
     }
   }

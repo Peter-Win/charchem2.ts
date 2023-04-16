@@ -1,4 +1,4 @@
-import { DraftGraph } from "../graph/DraftGraph";
+import { DraftGraph } from "../../graph/DraftGraph";
 
 export const parseSmilesDraft = (code: string): DraftGraph => {
   const g = new DraftGraph();

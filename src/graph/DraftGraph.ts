@@ -1,37 +1,34 @@
 import { addAll } from "../utils/addAll";
 import { Int } from "../types";
-import { ChemSubObj } from "../core/ChemSubObj";
 import { ElemList } from "../core/ElemList";
 import { ChemAtom } from "../core/ChemAtom";
 import { ChemCustom } from "../core/ChemCustom";
+import { makeTextFormula } from "../inspectors/makeTextFormula";
+import { CommonVertex } from "./CommonVertex";
+import { CommonEdge } from "./CommonEdge";
 
-export interface DraftVertex {
-  readonly content: ChemSubObj;
-  readonly valency: Int;
+export interface DraftVertex extends CommonVertex {
   reserved?: Int; // Количество связей, зарезервированных для соединения с другими графами
-  charge?: Int;
-  mass?: Int; // for isotopes
 }
 
-export interface DraftEdge {
+export interface DraftEdge extends CommonEdge {
   v0: DraftVertex;
   v1: DraftVertex;
-  mul: Int;
 }
 
 export class DraftGraph {
-  verices: DraftVertex[] = [];
+  vertices: DraftVertex[] = [];
 
   edges: DraftEdge[] = [];
 
   addGraph(another: DraftGraph) {
-    addAll(this.verices, another.verices);
+    addAll(this.vertices, another.vertices);
     addAll(this.edges, another.edges);
   }
 
   getElemList(): ElemList {
     const list = new ElemList();
-    this.verices.forEach(({ content }) => {
+    this.vertices.forEach(({ content }) => {
       if (content instanceof ChemAtom) {
         list.addAtom(content);
       } else if (content instanceof ChemCustom) {
@@ -42,10 +39,29 @@ export class DraftGraph {
   }
 
   get reserved(): Int {
-    return this.verices.reduce((sum, { reserved = 0 }) => sum + reserved, 0);
+    return this.vertices.reduce((sum, { reserved = 0 }) => sum + reserved, 0);
   }
 
   getConnections(): DraftVertex[] {
-    return this.verices.filter(({ reserved }) => !!reserved);
+    return this.vertices.filter(({ reserved }) => !!reserved);
+  }
+
+  toString() {
+    const vIndex = (target: DraftVertex): number =>
+      this.vertices.indexOf(target);
+    return [
+      ...this.vertices.map(
+        (v, i) =>
+          `v${i}: ${makeTextFormula(v.content)}*${v.valence}${
+            v.reserved ? `*${v.reserved}` : ""
+          }${v.charge ? `^${v.charge}` : ""}`
+      ),
+      ...this.edges.map(
+        (e, i) =>
+          `e${i}: ${vIndex(e.v0)}-${vIndex(e.v1)}${
+            e.mul !== 1 ? `*${e.mul}` : ""
+          }`
+      ),
+    ].join("; ");
   }
 }

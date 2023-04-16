@@ -2,57 +2,94 @@ import { Int } from "../../types";
 import { ChemError } from "../../core/ChemError";
 import { ChemAtom } from "../../core/ChemAtom";
 import { ChemNode } from "../../core/ChemNode";
-import { DraftGraph, DraftVertex } from "../DraftGraph";
+import { DraftGraph } from "../DraftGraph";
+import { makeTextFormula } from "../../inspectors/makeTextFormula";
 
 const valences: Record<string, Int> = {
   H: 1,
+  D: 1,
+  T: 1,
+  Li: 1,
+  B: 3,
   C: 4,
+  N: 3,
   O: 2,
+  F: 1,
+  Na: 1,
+  S: 2,
+  Cl: 1,
+  K: 1,
+  Sb: 3,
+  Te: 2,
+  Br: 1,
+  I: 1,
 };
 
-// Пока очень простая реализация, похожая на автоузел
+// Версия 2.
+// Предполагается, что есть один центр, а остальные компоненты привязаны к нему: H3C-, -CN, -OH, -O-
 export const draftGraphFromNode = (node: ChemNode): DraftGraph => {
   const g = new DraftGraph();
   const { items } = node;
+  const center = node.getCenterItem();
+  if (!center)
+    throw new ChemError(`Invalid center of ${makeTextFormula(node)}`);
 
-  const first = items[0];
-  if (!first || !(first.obj instanceof ChemAtom) || !first.n.equals(1)) {
-    throw new ChemError("Invalid node");
-  }
-  const val1 = valences[first.obj.id];
-  if (!val1) throw new ChemError("Invalid node");
-
-  const vertex1: DraftVertex = {
-    content: first.obj,
-    valency: val1,
-    reserved: val1,
-  };
-  g.verices.push(vertex1);
-
-  const second = items[1];
-  if (second) {
-    if (!(second.obj instanceof ChemAtom) || !second.n.isInt()) {
-      throw new ChemError("Invalid node");
-    }
-    const n = second.n.num;
-    const val2 = valences[second.obj.id];
-    if (!val2) throw new ChemError("Invalid node");
-    vertex1.reserved = vertex1.valency - n * val2;
-    if (vertex1.reserved < 0) throw new ChemError("Invalid node");
+  items.forEach((item) => {
+    const { obj } = item;
+    if (!(obj instanceof ChemAtom))
+      throw new ChemError(`Expected atom in ${makeTextFormula(node)}`);
+    const valence = valences[obj.id];
+    if (!valence) throw new ChemError(`Unknown valence of ${obj.id}`);
+    if (!item.n.isInt())
+      throw new ChemError(
+        `Expected integer coefficient in ${makeTextFormula(node)}`
+      );
+    const n = item.n.num;
     for (let i = 0; i < n; i++) {
-      const vi: DraftVertex = {
-        content: second.obj,
-        valency: val2,
-      };
-      g.verices.push(vi);
-      g.edges.push({
-        v0: vertex1,
-        v1: vi,
-        mul: val2,
+      g.vertices.push({
+        content: obj,
+        valence,
+        reserved: item === center ? valence : 0,
+        mass: item.mass,
       });
     }
-  }
-  if (items.length > 2) throw new ChemError("Invalid node");
+  });
 
+  // Центральный элемент может превратиться в несколько. Н.р. N2
+  const cvList = g.vertices.filter(({ reserved }) => !!reserved);
+  if (!cvList.length)
+    throw new ChemError(`Invalid center of ${makeTextFormula(node)}`);
+  if (cvList.length === 1) {
+    const cv = cvList[0]!;
+    if (node.charge) {
+      const { value } = node.charge;
+      cv.charge = value;
+    }
+    let left = true;
+    g.vertices.forEach((v) => {
+      if (v !== cv) {
+        cv.reserved! -= v.valence;
+        g.edges.push({
+          v0: left ? v : cv,
+          v1: left ? cv : v,
+          mul: v.valence,
+        });
+      } else {
+        left = false;
+      }
+    });
+  } else if (cvList.length === 2 && g.vertices.length === 2) {
+    cvList.forEach((v) => {
+      // eslint-disable-next-line no-param-reassign
+      v.reserved = 0;
+    });
+    g.edges.push({
+      v0: cvList[0]!,
+      v1: cvList[1]!,
+      mul: cvList[0]!.valence,
+    });
+  } else {
+    throw new Error(`Too many center items`);
+  }
   return g;
 };
