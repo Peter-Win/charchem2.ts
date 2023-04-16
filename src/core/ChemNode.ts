@@ -90,6 +90,8 @@ export class ChemNode extends ChemObj implements ChemChargeOwner {
       atom(obj) {
         switch (obj.id) {
           case "H":
+          case "D":
+          case "T":
             curPriority = ItemPriority.Hydrogen;
             break;
           case "C":

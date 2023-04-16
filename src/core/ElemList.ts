@@ -98,7 +98,7 @@ export class ElemList {
   }
 
   // sort by Hill system
-  sortByHill() {
+  sortByHill(): this {
     this.list.sort((a: ElemRecord, b: ElemRecord): number => {
       const aid: string = a.id;
       const bid: string = b.id;
@@ -112,5 +112,6 @@ export class ElemList {
       if (bid === "H") return 1;
       return aid.localeCompare(bid);
     });
+    return this;
   }
 }

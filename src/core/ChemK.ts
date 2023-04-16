@@ -37,6 +37,10 @@ export class ChemK {
     return !Number.isNaN(this.num);
   }
 
+  isAbstract() {
+    return !this.isNumber();
+  }
+
   isInt(): boolean {
     // eslint-disable-next-line no-bitwise
     return this.num === ~~this.num;
