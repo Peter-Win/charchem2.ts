@@ -5,6 +5,7 @@ import { ChemAgent } from "../core/ChemAgent";
 import { ChemNodeItem } from "../core/ChemNodeItem";
 import { ChemBracketEnd } from "../core/ChemBracket";
 import { ChemMul } from "../core/ChemMul";
+import { ChemCustom } from "../core/ChemCustom";
 
 /**
  * Является ли указанное выражение абстрактным.
@@ -48,8 +49,9 @@ class IsAbstractVisitor implements Visitor {
     this.isStop = isAbsK(obj.n);
   }
 
-  custom() {
-    if (this.useItems) {
+  custom(obj: ChemCustom) {
+    // Наличие пустых узлов не делает формулу абстрактной, т.к. они нужны для фиктивных элементов
+    if (this.useItems && obj.text) {
       this.isStop = true;
     }
   }

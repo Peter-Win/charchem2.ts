@@ -21,6 +21,7 @@ describe("AgentCmdMul", () => {
     const agent = expr.getAgents()[0]!;
     const surface = createTestSurface();
     const imgProps = createTestImgProps(surface, 40);
+    imgProps.mulRadius = 0;
     const { agentFrame } = buildAgentPrior(agent, imgProps);
     saveSurface("AgentCmdMul-bridgeBetweenNodes", agentFrame, surface);
     const { figures } = agentFrame;
