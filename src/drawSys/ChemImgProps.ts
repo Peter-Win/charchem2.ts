@@ -16,7 +16,7 @@ export interface TextProps {
 export class ChemImgProps {
   stdStyle: TextProps;
 
-  styles = {} as Record<ChemStyleId, TextProps | undefined>;
+  styles: Partial<Record<ChemStyleId, TextProps | undefined>> = {};
 
   line: number; // Длина 2D-химической связи (от центра до центра)
 
@@ -55,6 +55,8 @@ export class ChemImgProps {
   agentKSpace = 0; // гориз отступ коэффициента агента
 
   mulChar = "\u00b7";
+
+  mulRadius = 0.1; // Радиус операции * для аддуктов относительно высоты шрифта для стиля "multiplier". Если 0, то используется mulChar
 
   kw = 40; // Коэффициент для вычисления lineWidth = ceil(line/kw)
 

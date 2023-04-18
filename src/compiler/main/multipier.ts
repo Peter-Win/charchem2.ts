@@ -1,7 +1,8 @@
 import { ChemCompiler } from "../ChemCompiler";
 import { ChemK } from "../../core/ChemK";
 import { ChemMul, ChemMulEnd } from "../../core/ChemMul";
-import { closeNode } from "./node";
+import { closeNode, openNode } from "./node";
+import { ifDef } from "../../utils/ifDef";
 
 export const startMul = (
   compiler: ChemCompiler,
@@ -9,7 +10,10 @@ export const startMul = (
   isFirst: boolean
 ) => {
   const mul = new ChemMul(k, isFirst, compiler.varColor);
-  mul.nodes[0] = compiler.curNode;
+  const { curNode, curBond } = compiler;
+  // Если нет узла, но есть связь, то надо создать автоузел, закрывающий связь.
+  mul.nodes[0] = curNode || ifDef(curBond, () => openNode(compiler, true));
+
   closeNode(compiler);
   compiler.chainSys.closeSubChain();
   compiler.curAgent!.commands.push(mul);

@@ -3,10 +3,10 @@ import { ChemMul } from "../../core/ChemMul";
 import { AgentCmdBridge } from "./AgentCmdBridge";
 import { PAgentCtx } from "./PAgentCtx";
 import { createCoeff } from "./createCoeff";
-import { FigText } from "../../drawSys/figures/FigText";
 import { Point } from "../../math/Point";
 import { AgentCmdBrClose } from "./AgentCmdBrClose";
 import { AgentCmdBrOpen } from "./AgentCmdBrOpen";
+import { drawMul } from "./drawMul";
 
 export class AgentCmdMulBridge extends AgentCmdBridge {
   constructor(public readonly mul: ChemMul) {
@@ -31,14 +31,16 @@ export class AgentCmdMulBridge extends AgentCmdBridge {
       "multiplier",
       mul.color
     );
-    const mFields = props.lineWidth * 2;
-    const figMul = new FigText(props.mulChar, mFont, mStyle);
-    figMul.org.x = mFields;
+    const mFields = props.line * 0.2;
+    const figMul = drawMul(props, mFont, mStyle);
+    figMul.org.x += mFields;
     bridgeFrame.addFigure(figMul, true);
     if (mul.n.isSpecified()) {
       const figK = createCoeff(mul, props);
       figK.org.set(bridgeFrame.bounds.right + mFields, 0);
       bridgeFrame.addFigure(figK, true);
+    } else {
+      bridgeFrame.bounds.B.x += mFields;
     }
     const { cluster, srcConn } = ctx.clusters.unite(
       ctx,
