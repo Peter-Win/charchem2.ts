@@ -177,8 +177,8 @@ describe("AgentCmdMul", () => {
     expect(rcC.top).toBeCloseTo(rcMul.top);
     expect(rcC.bottom).toBeCloseTo(rcMul.bottom);
   });
-  it("B*[C]*2F", () => {
-    const expr = compile("B*[C]*2F");
+  it("H*[C]*2F", () => {
+    const expr = compile("H*[C]*2F");
     expect(expr.getMessage()).toBe("");
     const agent = expr.getAgents()[0]!;
     const surface = createTestSurface();
@@ -186,6 +186,8 @@ describe("AgentCmdMul", () => {
     const { agentFrame } = buildAgentPrior(agent, imgProps);
     saveSurface("AgentCmdMul-twoMuls", agentFrame, surface);
     const { figures } = agentFrame;
+
+    expect(figures.length).toBe(7);
 
     expect(figures[0]).toBeInstanceOf(FigFrame);
     expect((figures[0] as FigFrame).figures.length).toBe(1);
@@ -199,7 +201,7 @@ describe("AgentCmdMul", () => {
     expect(
       (((figures[0] as FigFrame).figures[0] as FigFrame).figures[0] as FigText)
         .text
-    ).toBe("B");
+    ).toBe("H");
 
     expect(figures[1]).toBeInstanceOf(FigFrame);
     expect((figures[1] as FigFrame).figures.length).toBe(1);
@@ -243,5 +245,11 @@ describe("AgentCmdMul", () => {
       (((figures[5] as FigFrame).figures[0] as FigFrame).figures[0] as FigText)
         .text
     ).toBe("F");
+
+    expect(figures[6]).toBeInstanceOf(FigFrame);
+    expect((figures[6] as FigFrame).figures.length).toBe(2);
+    expect((figures[6] as FigFrame).figures[0]).toBeInstanceOf(FigEllipse);
+    expect((figures[6] as FigFrame).figures[1]).toBeInstanceOf(FigText);
+    expect(((figures[6] as FigFrame).figures[1] as FigText).text).toBe("2");
   });
 });
