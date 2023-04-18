@@ -7,11 +7,14 @@ import { AgentCmdBrClose } from "./AgentCmdBrClose";
 import { AgentCmdBrOpen } from "./AgentCmdBrOpen";
 import { AgentCmdNode } from "./AgentCmdNode";
 import { AgentCmdSoftBond } from "./AgentCmdSoftBond";
-import { ChemMul } from "../../core/ChemMul";
+import { ChemMul, ChemMulEnd } from "../../core/ChemMul";
 import { createAgentCmdMul } from "./AgentCmdMul";
 import { ChemAgent } from "../../core/ChemAgent";
 
-export const createAgentCmd = (obj: ChemObj, agent: ChemAgent): AgentCmd => {
+export const createAgentCmd = (
+  obj: ChemObj,
+  agent: ChemAgent
+): AgentCmd | undefined => {
   if (obj instanceof ChemBond) {
     if (obj.soft) return new AgentCmdSoftBond(obj, agent);
   } else if (obj instanceof ChemBracketBegin) {
@@ -22,6 +25,8 @@ export const createAgentCmd = (obj: ChemObj, agent: ChemAgent): AgentCmd => {
     return createAgentCmdMul(obj);
   } else if (obj instanceof ChemNode) {
     return new AgentCmdNode(obj);
+  } else if (obj instanceof ChemMulEnd) {
+    return undefined;
   }
   return new AgentCmd();
 };

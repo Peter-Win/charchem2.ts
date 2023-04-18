@@ -12,11 +12,13 @@ export const processCommands = (ctx: PAgentCtx) => {
       return;
     }
     const cmd = createAgentCmd(obj, ctx.agent);
-    if (previousCmd) cmd.onPrevious(previousCmd, ctx);
-    if (cmd.canPush(ctx)) {
-      ctx.cmdStack.unshift(cmd);
+    if (cmd) {
+      if (previousCmd) cmd.onPrevious(previousCmd, ctx);
+      if (cmd.canPush(ctx)) {
+        ctx.cmdStack.unshift(cmd);
+      }
+      previousCmd = cmd;
     }
-    previousCmd = cmd;
   });
   unwind(ctx, () => true);
 };
