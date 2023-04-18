@@ -13,6 +13,7 @@ import { ChemMul, ChemMulEnd } from "../../../core/ChemMul";
 import { PAgentCtx } from "../PAgentCtx";
 import { processCommands } from "../processCommands";
 import { prepareNodes } from "../prepareNodes";
+import { FigEllipse } from "../../../drawSys/figures/FigEllipse";
 
 describe("AgentCmdMul", () => {
   it("Typical multiplier with 2 nodes", () => {
@@ -175,5 +176,80 @@ describe("AgentCmdMul", () => {
     const rcMul = frMul!.getRelativeBounds();
     expect(rcC.top).toBeCloseTo(rcMul.top);
     expect(rcC.bottom).toBeCloseTo(rcMul.bottom);
+  });
+  it("H*[C]*2F", () => {
+    const expr = compile("H*[C]*2F");
+    expect(expr.getMessage()).toBe("");
+    const agent = expr.getAgents()[0]!;
+    const surface = createTestSurface();
+    const imgProps = createTestImgProps(surface, 40);
+    const { agentFrame } = buildAgentPrior(agent, imgProps);
+    saveSurface("AgentCmdMul-twoMuls", agentFrame, surface);
+    const { figures } = agentFrame;
+
+    expect(figures.length).toBe(7);
+
+    expect(figures[0]).toBeInstanceOf(FigFrame);
+    expect((figures[0] as FigFrame).figures.length).toBe(1);
+    expect((figures[0] as FigFrame).figures[0]).toBeInstanceOf(FigFrame);
+    expect(
+      ((figures[0] as FigFrame).figures[0] as FigFrame).figures.length
+    ).toBe(1);
+    expect(
+      ((figures[0] as FigFrame).figures[0] as FigFrame).figures[0]
+    ).toBeInstanceOf(FigText);
+    expect(
+      (((figures[0] as FigFrame).figures[0] as FigFrame).figures[0] as FigText)
+        .text
+    ).toBe("H");
+
+    expect(figures[1]).toBeInstanceOf(FigFrame);
+    expect((figures[1] as FigFrame).figures.length).toBe(1);
+    expect((figures[1] as FigFrame).figures[0]).toBeInstanceOf(FigFrame);
+    expect(
+      ((figures[1] as FigFrame).figures[0] as FigFrame).figures.length
+    ).toBe(1);
+    expect(
+      ((figures[1] as FigFrame).figures[0] as FigFrame).figures[0]
+    ).toBeInstanceOf(FigText);
+    expect(
+      (((figures[1] as FigFrame).figures[0] as FigFrame).figures[0] as FigText)
+        .text
+    ).toBe("C");
+
+    expect(figures[2]).toBeInstanceOf(FigFrame);
+    expect((figures[2] as FigFrame).figures.length).toBe(1);
+    expect((figures[2] as FigFrame).figures[0]).toBeInstanceOf(FigText);
+    expect(((figures[2] as FigFrame).figures[0] as FigText).text).toBe("[");
+    expect(figures[2]).toBeInstanceOf(FigFrame);
+
+    expect(figures[3]).toBeInstanceOf(FigFrame);
+    expect((figures[3] as FigFrame).figures.length).toBe(1);
+    expect((figures[3] as FigFrame).figures[0]).toBeInstanceOf(FigText);
+    expect(((figures[3] as FigFrame).figures[0] as FigText).text).toBe("]");
+
+    expect(figures[4]).toBeInstanceOf(FigFrame);
+    expect((figures[4] as FigFrame).figures.length).toBe(1);
+    expect((figures[4] as FigFrame).figures[0]).toBeInstanceOf(FigEllipse);
+
+    expect(figures[5]).toBeInstanceOf(FigFrame);
+    expect((figures[5] as FigFrame).figures.length).toBe(1);
+    expect((figures[5] as FigFrame).figures[0]).toBeInstanceOf(FigFrame);
+    expect(
+      ((figures[5] as FigFrame).figures[0] as FigFrame).figures.length
+    ).toBe(1);
+    expect(
+      ((figures[5] as FigFrame).figures[0] as FigFrame).figures[0]
+    ).toBeInstanceOf(FigText);
+    expect(
+      (((figures[5] as FigFrame).figures[0] as FigFrame).figures[0] as FigText)
+        .text
+    ).toBe("F");
+
+    expect(figures[6]).toBeInstanceOf(FigFrame);
+    expect((figures[6] as FigFrame).figures.length).toBe(2);
+    expect((figures[6] as FigFrame).figures[0]).toBeInstanceOf(FigEllipse);
+    expect((figures[6] as FigFrame).figures[1]).toBeInstanceOf(FigText);
+    expect(((figures[6] as FigFrame).figures[1] as FigText).text).toBe("2");
   });
 });
