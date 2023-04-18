@@ -56,7 +56,7 @@ export class ChemImgProps {
 
   mulChar = "\u00b7";
 
-  mulRadius = 0.1; // Радиус операции * для аддуктов относительно line. Если 0, то используется mulChar
+  mulRadius = 0.1; // Радиус операции * для аддуктов относительно высоты шрифта для стиля "multiplier". Если 0, то используется mulChar
 
   kw = 40; // Коэффициент для вычисления lineWidth = ceil(line/kw)
 

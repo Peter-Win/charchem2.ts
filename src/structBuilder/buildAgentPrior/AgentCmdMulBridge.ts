@@ -33,7 +33,6 @@ export class AgentCmdMulBridge extends AgentCmdBridge {
     );
     const mFields = props.line * 0.2;
     const figMul = drawMul(props, mFont, mStyle);
-    // new FigText(props.mulChar, mFont, mStyle);
     figMul.org.x += mFields;
     bridgeFrame.addFigure(figMul, true);
     if (mul.n.isSpecified()) {
