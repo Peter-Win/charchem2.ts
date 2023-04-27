@@ -100,7 +100,9 @@ export const updateAutoNode = (node: ChemNode) => {
     (sum, chemBond) => sum + chemBond.n,
     0.0
   );
-  const countH: Int = 4 - Math.round(multipleSum);
+  // Заряд влияет на валентность узла: carbon monoxide ⁻C≡O⁺
+  const charge: Int = node.charge?.value ?? 0;
+  const countH: Int = 4 + charge - Math.round(multipleSum);
   if (countH > 0) {
     node.items.push(new ChemNodeItem(PeriodicTable.dict.H, new ChemK(countH)));
   }

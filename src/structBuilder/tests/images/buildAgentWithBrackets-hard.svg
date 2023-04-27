@@ -20,5 +20,5 @@
   <use xlink:href="#HussarBoldWeb-l" transform="matrix(0.035555555555555556 0 0 -0.035555555555555556 248.47583670214965 48.55555555555556)" fill="black" />
   <path d="M8 0H0V120.44H8V118.97H3.16V1.47H8Z" fill="black" transform="translate(68.63,1)" />
   <path d="M0 0H8V120.44H0V118.97H4.84V1.47H0Z" fill="black" transform="translate(153.27,1)" />
-  <use xlink:href="#HussarBoldWeb-four" transform="matrix(0.021333333333333333 0 0 -0.021333333333333333 161.26902946218593 134.51111111111112)" fill="black" />
+  <use xlink:href="#HussarBoldWeb-four" transform="matrix(0.021333333333333333 0 0 -0.021333333333333333 165.26902946218593 134.51111111111112)" fill="black" />
 </svg>

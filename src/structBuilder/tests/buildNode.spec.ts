@@ -66,7 +66,7 @@ describe("buildNode", () => {
     expect(res).toBeDefined();
     const { nodeFrame } = res as ResultBuildNode;
     expect(nodeFrame.figures).toHaveLength(3);
-    const [f1, f2, t3] = nodeFrame.figures as [FigFrame, FigFrame, FigText];
+    const [f1, f2, f3] = nodeFrame.figures as [FigFrame, FigFrame, FigFrame];
     expect(f1).toBeInstanceOf(FigFrame);
     const n = f1.figures[0] as FigText;
     expect(n).toBeInstanceOf(FigText);
@@ -74,8 +74,7 @@ describe("buildNode", () => {
     expect(n.style.fill).toBe("blue");
 
     expect(f2).toBeInstanceOf(FigFrame);
-    expect(t3).toBeInstanceOf(FigText);
-    expect(t3.text).toBe("+");
+    expect(f3).toBeInstanceOf(FigFrame);
 
     const root = new FigFrame();
     root.addFigure(nodeFrame);
