@@ -5,9 +5,9 @@
 import { normalize360 } from "../math/angles";
 
 //  LB    RB
-export type CoeffPos = "LT" | "RT" | "LB" | "RB" | "CU";
+export type CoeffPos = "LT" | "RT" | "LB" | "RB" | "CU" | "CD";
 
-export const rxCoeffPos = /^LT|RT|LB|RB|CU$/;
+export const rxCoeffPos = /^LT|RT|LB|RB|CU|CD$/;
 
 export type CoeffPosOrAngle = CoeffPos | number;
 
