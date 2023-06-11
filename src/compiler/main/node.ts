@@ -34,23 +34,47 @@ export const openNode = (
       // if second node of bond is auto, then bond is not soft
       changeBondToHard(compiler, bond);
     }
-    if (dir && !dir.isZero() && !bond.soft) {
-      const pt = bond.calcPt();
-      const existsNode = compiler.chainSys.findNode(pt);
-      if (existsNode) {
-        compiler.nodesBranch.onNode(existsNode);
-        if (!bond.soft || existsNode.autoMode) {
-          if (!bond.middlePoints) {
-            existsNode.fixed = true; // Узел уже не может автокорректироваться, т.к. это деформирует ранее построенную структуру.
-            const oldNode = bond.nodes[0]!;
-            const oldBond = findBondBetweenNodes(compiler, oldNode, existsNode);
-            if (oldBond) {
-              mergeBonds(compiler, oldBond, bond, existsNode);
-              return existsNode;
+    if (dir && !dir.isZero()) {
+      if (!bond.soft) {
+        const pt = bond.calcPt();
+        const existsNode = compiler.chainSys.findNode(pt);
+        if (existsNode) {
+          compiler.nodesBranch.onNode(existsNode);
+          if (!bond.soft || existsNode.autoMode) {
+            if (!bond.middlePoints) {
+              existsNode.fixed = true; // Узел уже не может автокорректироваться, т.к. это деформирует ранее построенную структуру.
+              const oldNode = bond.nodes[0]!;
+              const oldBond = findBondBetweenNodes(
+                compiler,
+                oldNode,
+                existsNode
+              );
+              if (oldBond) {
+                mergeBonds(compiler, oldBond, bond, existsNode);
+                return existsNode;
+              }
             }
           }
+          bindNodeToBond(compiler, existsNode, bond);
+          return existsNode;
         }
-        bindNodeToBond(compiler, existsNode, bond);
+      }
+      // 0\    /3  Возможна ситуация, когда уже существует мягкая связь из того же узла в том же направлении
+      //   1==2    Здесь цепь 4-1-2-5 на участке 1-2 может мержится с мягкой связью
+      // 4/    \5
+      const softBond = compiler.curAgent?.bonds.find(
+        ({ soft, nodes, dir: testDir }) =>
+          soft &&
+          nodes.length === 2 &&
+          nodes[0]?.index === bond.nodes[0]?.index &&
+          !!nodes[1] &&
+          testDir &&
+          dir.equals(testDir)
+      );
+      if (softBond) {
+        const existsNode = softBond.nodes[1]!;
+        mergeBonds(compiler, softBond, bond, existsNode);
+        compiler.chainSys.setCurNode(existsNode);
         return existsNode;
       }
     }

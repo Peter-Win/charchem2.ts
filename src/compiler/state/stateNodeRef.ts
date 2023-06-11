@@ -1,3 +1,4 @@
+import { ChemBond } from "../../core/ChemBond";
 import { Int } from "../../types";
 import { ChemCompiler, CompilerState } from "../ChemCompiler";
 import { isSpace } from "../parse/isSpace";
@@ -8,6 +9,7 @@ import { findElement } from "../../core/PeriodicTable";
 import { scanId } from "../parse/scanId";
 import { stateAgentMid } from "./stateAgentMid";
 import { scanInt } from "../parse/scanInt";
+import { mergeBonds } from "../main/bondCommon";
 
 const onReferenceError = (
   compiler: ChemCompiler,
@@ -15,12 +17,25 @@ const onReferenceError = (
   pos: Int
 ): never => compiler.error("Invalid node reference '[ref]'", { ref, pos });
 
+const bondNodesKey = (bond: ChemBond): string =>
+  bond.nodes.map((n) => n?.index ?? "").join(",");
+
 const useRef = (compiler: ChemCompiler, node: ChemNode) => {
   const { curBond } = compiler;
   if (curBond) {
     curBond.soft = false;
     curBond.nodes[1] = node;
-    compiler.chainSys.bondToRef(curBond);
+    // Здесь нужна проверка на мерж связей...
+    const curKey = bondNodesKey(curBond);
+    const prevBond = compiler.curAgent?.bonds.find(
+      (b) => bondNodesKey(b) === curKey
+    );
+    if (prevBond && prevBond !== curBond) {
+      compiler.chainSys.setCurNode(curBond.nodes[1]);
+      mergeBonds(compiler, prevBond, curBond, node);
+    } else {
+      compiler.chainSys.bondToRef(curBond);
+    }
   } else {
     compiler.chainSys.addNode(node);
     compiler.nodesBranch.onNode(node);

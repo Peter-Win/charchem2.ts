@@ -131,6 +131,14 @@ export const mergeBonds = (
   newBond.isAuto = false;
   newBond.soft = false;
   newBond.nodes[1] = newNode;
+
+  // Конечные координаты отрезка должны совпадать со старой связью.
+  // Но направление может поменяться т.к. это имеет значение для отрисовки следующих связей
+  const [nbn0, nbn1] = newBond.nodes;
+  if (nbn0 && nbn1) {
+    newBond.dir = nbn1.pt.minus(nbn0.pt);
+  }
+
   compiler.chainSys.addBond(newBond);
   removeItem(compiler.curAgent!.bonds, newBond);
   removeItem(compiler.curAgent!.commands, newBond);
