@@ -7,6 +7,7 @@ import { rulesHtml } from "../textRules/rulesHtml";
 import { AutoCompileConfig } from "./AutoCompileConfig";
 import { renderFormulaCanvas } from "./renderFormulaCanvas";
 import { renderFormulaSvg } from "./renderFormulaSvg";
+import { addClass } from "./addClass";
 
 export const renderFormulaCfg = (
   owner: Element,
@@ -23,10 +24,14 @@ export const renderFormulaCfg = (
     if (canText) {
       // eslint-disable-next-line no-param-reassign
       owner.innerHTML = makeTextFormula(expr, rulesHtml);
+      addClass(owner, "echem-is-text");
     } else if (config.drawSysId === "canvas") {
       renderFormulaCanvas(owner, expr, config.fontPropsCache);
     } else {
       renderFormulaSvg(owner, expr, config.fontPropsCache);
+    }
+    if (expr instanceof ChemExpr) {
+      owner.setAttribute("data-src", expr.src0.trim());
     }
   }
 };

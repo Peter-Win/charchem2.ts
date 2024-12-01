@@ -4,8 +4,9 @@ const {CleanWebpackPlugin,} = require('clean-webpack-plugin');
 
 // version update
 try {
-  const sver = fs.readFileSync(path.join(__dirname, "version.json"))
-  const ver = JSON.parse(sver)
+  const sver = fs.readFileSync(path.join(__dirname, "package.json"))
+  const package = JSON.parse(sver)
+  const ver = package.version.split(".");
   if (Array.isArray(ver)) {
     const text = `export default [${ver.join(', ')}];`;
     fs.writeFileSync(path.join(__dirname, "src", "version.ts"), text)

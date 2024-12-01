@@ -1,3 +1,4 @@
+import { ChemBond } from "../core/ChemBond";
 import { ChemObj } from "../core/ChemObj";
 import { RulesBase } from "../textRules/RulesBase";
 import { ChemCharge } from "../core/ChemCharge";
@@ -60,6 +61,8 @@ export const makeTextFormula = (
 
   const space = () => ctxOut(" ");
 
+  const isLtr = (bond?: ChemBond): boolean => !bond?.isNeg;
+
   const drawCharge = (
     charge: ChemCharge | undefined,
     isPrefix: boolean,
@@ -91,7 +94,7 @@ export const makeTextFormula = (
     },
 
     bond(obj) {
-      stack[0]!.l2r = !obj.isNeg;
+      stack[0]!.l2r = isLtr(obj);
       ctxOut(obj.tx, obj.color);
     },
 
@@ -123,19 +126,20 @@ export const makeTextFormula = (
 
     itemPost(obj) {
       if (autoNode) return;
+      if (obj.charge) ctxOut(rules.itemCharge(obj.charge), itemColor);
       if (obj.n.isSpecified()) ctxOut(rules.itemCount(obj.n), itemColor);
     },
 
     nodePre(obj) {
       push();
-      drawCharge(obj.charge, true, itemColor);
+      drawCharge(obj.charge, true, obj.color);
       if (obj.autoMode) {
         autoNode = true;
       }
     },
 
     nodePost(obj) {
-      drawCharge(obj.charge, false, itemColor);
+      drawCharge(obj.charge, false, obj.color);
       autoNode = false;
       pop();
     },
@@ -150,17 +154,38 @@ export const makeTextFormula = (
     },
 
     bracketBegin(obj) {
-      push();
-      drawCharge(obj.end?.charge, true, obj.color);
-      ctxOut(obj.text, obj.color);
+      const ltr = isLtr(obj.bond);
+      if (ltr) {
+        push();
+        drawCharge(obj.end?.charge, true, obj.color);
+        ctxOut(obj.text, obj.color);
+      } else {
+        const { color, end } = obj;
+        if (end) {
+          if (stack[0]) stack[0].l2r = false;
+          drawCharge(end.charge, false, color);
+          if (end.n.isSpecified()) ctxOut(rules.itemCount(end.n), color);
+          ctxOut(end.text, color);
+        }
+        push();
+      }
     },
 
     bracketEnd(obj) {
-      const { color } = obj.begin;
-      ctxOut(obj.text, color);
-      if (obj.n.isSpecified()) ctxOut(rules.itemCount(obj.n), color);
-      drawCharge(obj.charge, false, color);
-      pop();
+      const { begin } = obj;
+      const { color } = begin;
+      const ltr = isLtr(begin.bond);
+      if (ltr) {
+        ctxOut(obj.text, color);
+        if (obj.n.isSpecified()) ctxOut(rules.itemCount(obj.n), color);
+        drawCharge(obj.charge, false, color);
+        pop();
+      } else {
+        pop();
+        if (stack[0]) stack[0].l2r = false;
+        ctxOut(begin.text, color);
+        drawCharge(obj.charge, true, color);
+      }
     },
 
     mul(obj) {
@@ -168,6 +193,11 @@ export const makeTextFormula = (
       if (obj.n.isSpecified()) ctxOut(rules.mulK(obj.n), obj.color);
     },
   });
+
+  // Обычно такое не нужно.
+  // Но если нужно получить текст для одной команды (скобки), тогда содержимое может остаться в стеке.
+  while (stack.length > 1) pop();
+
   const nonOptimized = buildTextFromChunks(stack[0]!.chunks, rules).trim();
   return rules.postProcess(nonOptimized);
 };

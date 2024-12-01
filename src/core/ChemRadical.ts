@@ -51,15 +51,24 @@ const descriptions: DescrItem[] = [
       ["H", 9],
     ],
   ],
+  // tert-butyl
   [
-    ["t-Bu", "Bu-t"],
+    ["t-Bu", "Bu-t", "tBu"],
     [
       ["C", 4],
       ["H", 9],
     ],
   ],
   [
-    ["i-Bu", "Bu-i"],
+    ["i-Bu", "Bu-i", "iBu"],
+    [
+      ["C", 4],
+      ["H", 9],
+    ],
+  ],
+  // sec-butyl
+  [
+    ["s-Bu", "Bu-s", "sBu"],
     [
       ["C", 4],
       ["H", 9],

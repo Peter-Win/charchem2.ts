@@ -18,4 +18,16 @@ describe("funcColor", () => {
     expect(makeTextFormula(items[1]!)).toBe("O");
     expect(items[1]!.color).toBeUndefined();
   });
+
+  it("AgentK color", () => {
+    const expr = compile("$color(green)3H2");
+    expect(expr.getMessage()).toBe("");
+    const agent = expr.getAgents()[0]!;
+    expect(agent).toBeDefined();
+    const n = agent.n!;
+    expect(n).toBeDefined();
+    expect(n.num).toBe(3);
+    expect(n.text).toBe("");
+    expect(n.color).toBe("green");
+  });
 });

@@ -9,6 +9,10 @@ export const isTextFormula = (chemObj: ChemObj): boolean => {
     itemPre(obj) {
       this.isStop = !!obj.dots;
     },
+    bracketBegin(obj) {
+      // If the $padding function is used, it means graphic mode
+      this.isStop = !!obj.padding;
+    },
   });
   return !visitor.isStop;
 };

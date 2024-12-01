@@ -11,6 +11,8 @@ export class ChemK {
 
   pos?: CoeffPos;
 
+  color?: string;
+
   constructor(n: Double, pos?: CoeffPos);
 
   constructor(text: string, pos?: CoeffPos);

@@ -91,6 +91,7 @@ export const makeBackFigure = (
     // Выгоднее использовать заглушку, чем потом контролировать пригодность полученных объектов.
     return new FigFrame();
   }
+  const srcRect = rect.clone();
   if (padding) {
     rect = applyPadding(rect, padding, props.line);
   }
@@ -101,7 +102,12 @@ export const makeBackFigure = (
   if (strokeWidth) style.strokeWidth = props.lineWidth * strokeWidth;
 
   if (shape === "round") {
-    const r = calcRadius(ctx, rect, nodes);
+    const r0 = calcRadius(ctx, rect, nodes);
+    const rPad = Math.min(
+      (rect.width - srcRect.width) / 2,
+      (rect.height - srcRect.height) / 2
+    );
+    const r = r0 + rPad;
     return new FigEllipse(rect.center, new Point(r, r), style);
   }
   if (shape === "ellipse") return createBgEllipse(rect, style);

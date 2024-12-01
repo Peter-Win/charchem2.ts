@@ -87,7 +87,7 @@ describe("Brackets", () => {
     expect(makeTextFormula(expr, rulesHtml)).toBe(
       "[SO<sub>4</sub>]<sup>2-</sup>"
     );
-    expect(makeTextFormula(makeBrutto(expr))).toBe("O4S2-");
+    expect(makeTextFormula(makeBrutto(expr))).toBe("O4S^2-");
   });
   it("ChargePrefix", () => {
     const expr = compile("[SO4]`^-2");
@@ -170,18 +170,18 @@ describe("Brackets", () => {
       "Auto",
       "`|",
       "`-",
-      "(",
-      "H2C",
       ")2",
+      "H2C",
+      "(",
       "|",
       "Auto",
       "-",
       "|",
       "Auto",
       "`-",
-      "(",
-      "H2C",
       ")2",
+      "H2C",
+      "(",
       "`|",
       "-",
       "(",

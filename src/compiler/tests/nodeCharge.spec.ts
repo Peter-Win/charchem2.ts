@@ -30,13 +30,13 @@ describe("NodeCharge", () => {
       bonds.map((it) => `${it.nodes[0]?.index}:${it.nodes[1]?.index}`)
     ).toEqual(["0:1", "1:2", "1:3", "1:4", "1:5", "1:6"]);
     expect(agent.nodes.map((it) => makeTextFormula(makeBrutto(it)))).toEqual([
-      "K+",
+      "K^+",
       "Fe",
       "O",
       "O",
       "O",
       "O",
-      "K+",
+      "K^+",
     ]);
     expect(makeTextFormula(makeBrutto(expr))).toBe("FeK2O4");
   });
@@ -49,7 +49,7 @@ describe("NodeCharge", () => {
     expect(node.charge).toBeDefined();
     expect(node.charge!.isLeft).toBe(true);
     expect(node.charge!.pos).toBe("LT");
-    expect(makeTextFormula(node)).toBe("+H");
+    expect(makeTextFormula(node)).toBe("+^H");
   });
   it("Left bottom", () => {
     const expr = compile("H$pos(LB)^+");
@@ -60,7 +60,7 @@ describe("NodeCharge", () => {
     expect(node.charge).toBeDefined();
     expect(node.charge!.isLeft).toBe(true);
     expect(node.charge!.pos).toBe("LB");
-    expect(makeTextFormula(node)).toBe("+H");
+    expect(makeTextFormula(node)).toBe("+^H");
   });
   it("Using angle in left side", () => {
     const expr = compile("H$pos(150)^+");
@@ -71,6 +71,6 @@ describe("NodeCharge", () => {
     expect(node.charge).toBeDefined();
     expect(node.charge!.isLeft).toBe(true);
     expect(node.charge!.pos).toBe(150);
-    expect(makeTextFormula(node)).toBe("+H");
+    expect(makeTextFormula(node)).toBe("+^H");
   });
 });

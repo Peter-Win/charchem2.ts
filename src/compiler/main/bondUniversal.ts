@@ -263,7 +263,8 @@ export const setBondProperties = (
 export const createUniversalBond = (
   compiler: ChemCompiler,
   args: string[],
-  argPos: Int[]
+  argPos: Int[],
+  begin: number
 ) => {
   const bond = createCommonBond(compiler);
   if (!compiler.curNode) {
@@ -272,5 +273,5 @@ export const createUniversalBond = (
   const params = makeParamsDict(args, argPos);
   bond.dir = calcBondDirection(compiler, params);
   setBondProperties(compiler, bond, params);
-  onOpenBond(compiler, bond);
+  onOpenBond(compiler, bond, begin);
 };

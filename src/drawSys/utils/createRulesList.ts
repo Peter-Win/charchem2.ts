@@ -2,6 +2,7 @@ import { RulesHtml } from "../../textRules/rulesHtml";
 import { ChemK } from "../../core/ChemK";
 import { ChemCharge } from "../../core/ChemCharge";
 import { ChemStyleId } from "../ChemStyleId";
+import { ChemImgProps } from "../ChemImgProps";
 
 export const createRulesList = (rules: RulesHtml) => {
   const k = new ChemK(9);
@@ -15,5 +16,10 @@ export const createRulesList = (rules: RulesHtml) => {
     ["bracketCharge", rules.bracketCharge(new ChemCharge("9", 9))],
     ["bracketCount", rules.bracketCount(k)],
   ];
+  // Не вошедшие в список стили, которые являются индексами, считаются такими же как коэффициент элемента
+  const used = new Set<ChemStyleId>(list.map(([id]) => id));
+  ChemImgProps.getIndexStyles().forEach((styleId) => {
+    if (!used.has(styleId)) list.push([styleId, rules.itemCount(k)]);
+  });
   return list;
 };

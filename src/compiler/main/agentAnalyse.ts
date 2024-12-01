@@ -26,10 +26,12 @@ export const agentAnalyse = (
   compiler: ChemCompiler,
   onDefault: () => Int
 ): Int => {
+  compiler.agentMode = "in";
   const c = compiler.curChar();
+  const pos0 = compiler.pos;
   const bond = scanSimpleBond(compiler);
   if (bond) {
-    createSimpleBond(compiler, bond);
+    createSimpleBond(compiler, bond, pos0);
     return compiler.setState(stateAgentMid);
   }
   if (c >= "A" && c <= "Z") {

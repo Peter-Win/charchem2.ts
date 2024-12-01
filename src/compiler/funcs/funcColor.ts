@@ -13,7 +13,6 @@ export const funcColor = (
 export const funcItemColor = (
   compiler: ChemCompiler,
   [value]: string[],
-  // @Suppress("UNUSED_PARAMETER")
   pos: Int[]
 ) => {
   compiler.varItemColor = value;
@@ -22,7 +21,6 @@ export const funcItemColor = (
 export const funcItemColor1 = (
   compiler: ChemCompiler,
   [value]: string[],
-  // @Suppress("UNUSED_PARAMETER")
   pos: Int[]
 ) => {
   compiler.varItemColor1 = value;
@@ -31,7 +29,6 @@ export const funcItemColor1 = (
 export const funcAtomColor = (
   compiler: ChemCompiler,
   [value]: string[],
-  // @Suppress("UNUSED_PARAMETER")
   pos: Int[]
 ) => {
   compiler.varAtomColor = value;
@@ -40,7 +37,6 @@ export const funcAtomColor = (
 export const funcAtomColor1 = (
   compiler: ChemCompiler,
   [value]: string[],
-  // @Suppress("UNUSED_PARAMETER")
   pos: Int[]
 ) => {
   compiler.varAtomColor1 = value;

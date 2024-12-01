@@ -93,7 +93,14 @@ export const getNodeForBondStart = (
 };
 
 // Предполагается, что свойства bond уже заполнены. В первую очередь: dir, n, soft
-export const onOpenBond = (compiler: ChemCompiler, bond: ChemBond) => {
+export const onOpenBond = (
+  compiler: ChemCompiler,
+  bond: ChemBond,
+  begin: number
+) => {
+  if (compiler.srcMap) {
+    compiler.srcMap.push({ begin, end: compiler.pos, obj: bond });
+  }
   const oldNode = getNodeForBondStart(compiler, bond);
   closeNode(compiler);
   applyMiddlePoints(compiler, bond);

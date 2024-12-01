@@ -57,6 +57,8 @@ export class ChemCompiler {
 
   curAgent?: ChemAgent;
 
+  agentMode?: "begin" | "in";
+
   curNode?: ChemNode;
 
   curBond?: ChemBond;

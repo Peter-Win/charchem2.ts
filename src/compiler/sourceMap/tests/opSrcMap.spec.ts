@@ -1,6 +1,6 @@
-import { ChemOp } from "../../core/ChemOp";
-import { compile } from "../compile";
-import { getSrcItemsForObject } from "./getSrcItemsForObject";
+import { ChemOp } from "../../../core/ChemOp";
+import { compile } from "../../compile";
+import { getSrcItemsForObject } from "../getSrcItemsForObject";
 
 describe("opSrcMap", () => {
   it("simple", () => {

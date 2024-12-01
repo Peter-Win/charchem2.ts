@@ -1,0 +1,190 @@
+html, body, div, span, page, nav, a, h1 {margin:0; padding: 0;}
+:root {
+    --select-color: #B0B;
+}
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px;
+}
+ol {
+    padding: 0 0 0 1em;
+}
+page {display: none}
+
+page > * {
+    margin-left: 2rem;
+    max-width: 1000px;
+}
+code {
+    background-color: #F0F0F0;
+}
+code em {
+    text-decoration: none;
+    color: var(--select-color);
+    font-style: normal;
+}
+
+table {
+    border-collapse: collapse;
+    max-width: 1200px;
+}
+td, th {
+    padding: 0.2rem 0.6rem;
+    border: thin solid silver;
+}
+.td-center td {
+    text-align: center;
+}
+.chem-code {
+    color: #333;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: 600;
+    font-size: 90%;
+}
+
+.nowrap-childs > * {
+    white-space: nowrap;
+}
+
+.two-col-table {
+    max-width: 960px;
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-template-rows: auto;
+    align-items: center;
+}
+.inline-grid {
+    display: -ms-inline-grid;
+    display: -moz-inline-grid;
+    display: inline-grid;
+}
+.two-col-table > .echem-is-text, .two-col-table > code {
+    align-self: baseline;
+}
+.two-col-table > * { 
+    padding: 0.3em 1em;
+    width: 100%;
+    text-align: center;
+}
+.two-col-table header {
+    font-weight: bold;
+    background: #DDD;
+    text-align: center;
+    padding: 0.5em !important;
+}
+a[data-ref] {
+    color: brown;
+    border-bottom: dashed thin brown;
+    cursor: pointer;
+    text-decoration: none;
+}
+.bread-crumbs {
+    display: flex; 
+    flex-direction: row; 
+    gap: 8px;
+    padding-bottom: 0.5rem;
+}
+.bread-crumbs, .bottom-nav {
+    font-size: 90%;
+}
+.bottom-nav {
+    display: grid; 
+    grid-template-columns: 1fr auto;
+    padding: 0.5em 2em;
+    border-top: thin solid silver;
+    margin-top: 12px;
+    margin-left: 0 !important;
+}
+
+.dark-theme {
+    background: black;
+    color: white;
+    display: inline-block;
+    padding: 0.3rem 1rem;
+}
+.demo-dark-theme code {color: inherit;}
+
+.echem-formula.small-comment em {font-size: 70%; font-weight: bold;}
+.blue-sup sup {color: blue;}
+table.center-not2 td {text-align: center;}
+table.center-not2 td:nth-child(2) {text-align: left;}
+
+.templ-box {
+    display: flex;
+    flex-direction: row;
+}
+.templ-left {
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+.templ-left > div {
+    width: 6rem;
+    padding: 0.2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+.templ-left > div:hover {
+    background-color: #EEE;
+}
+.templ-left > div.active {
+    background-color: #DDD;
+}
+
+.templ-right {
+    width: 30%;
+}
+.templ-right h2 {
+    font-size: 18px;
+}
+.templ-right > div {
+    display: none;
+}
+.templ-right > div.active {
+    display: block;
+}
+.tm-code-box {
+    display: flex;
+    padding: 0.5em 0;
+    justify-content: center;
+}
+
+.active-therm {
+    background-color: yellow;
+}
+
+.hide-ru *[lang="ru"] {display: none;}
+.hide-en *[lang="en"] {display: none;}
+.lang-switcher {
+    position: fixed;
+    z-index: 1;
+    right: 5px;
+    top: 5px;
+    background-color: white;
+    border: thin solid silver;
+    display: flex;
+    padding: 4px 8px;
+    gap: 8px;
+}
+.lang-switcher button {
+    cursor: pointer;
+    background-color: #EEE;
+    color: #777;
+    padding: 4px 10px;
+    border: thin solid #777;
+}
+.lang-switcher button.active {
+    color: black;
+    background-color: #AAA;
+    font-weight: bold;
+    border-color: #888;
+}
+
+a[target]::after {
+    content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' viewBox='0 0 16 16'%3E%3Cpath fill-rule='evenodd' d='M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z'/%3E%3Cpath fill-rule='evenodd' d='M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0v-5z'/%3E%3C/svg%3E");
+    margin-left: 0.25em;
+}
