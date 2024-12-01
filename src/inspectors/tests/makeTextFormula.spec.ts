@@ -26,8 +26,8 @@ describe("makeTextFormula", () => {
     expect(makeTextFormulaSrc("2H2 + O2 = 2H2O", rulesText)).toBe(
       "2H2 + O2 = 2H2O"
     );
-    expect(makeTextFormulaSrc("SO4^2-", rulesText)).toBe("SO42-");
-    expect(makeTextFormulaSrc("SO4`^-2", rulesText)).toBe("-2SO4");
+    expect(makeTextFormulaSrc("SO4^2-", rulesText)).toBe("SO4^2-");
+    expect(makeTextFormulaSrc("SO4`^-2", rulesText)).toBe("-2^SO4");
   });
   it("Reverse", () => {
     expect(makeTextFormulaSrc("Br`-(C=O)`-Cl", rulesText)).toBe("Cl-(C=O)-Br");
@@ -64,6 +64,13 @@ describe("makeTextFormula", () => {
       "$color(blue)H2$color(red)S$color()O4"
     );
   });
+  it("Item charge", () => {
+    const expr = compile("Fe(+3)");
+    expect(expr.getMessage()).toBe("");
+    expect(makeTextFormula(expr, rulesHtml)).toBe(
+      `Fe<sup class="echem-item-charge">+3</sup>`
+    );
+  });
   it("Item Color", () => {
     const expr = compile("$color(gray)$itemColor(brown){R}-OH");
     expect(expr.getMessage()).toBe("");
@@ -81,6 +88,13 @@ describe("makeTextFormula", () => {
     );
     expect(makeTextFormula(expr, rulesCharChem)).toBe(
       "$color(brown){R}$color(gray)-$color(brown)OH$color()"
+    );
+  });
+  it("Item color not for node charge", () => {
+    const expr = compile("$color(red)$itemColor(blue)Ca^2+");
+    expect(makeTextFormula(expr)).toBe("Ca^2+");
+    expect(makeTextFormula(expr, rulesHtml)).toBe(
+      `<span style="color:blue">Ca</span><span style="color:red"><sup>2+</sup></span>`
     );
   });
   it("Atom Color", () => {
@@ -114,7 +128,7 @@ describe("makeTextFormula", () => {
       `$atomColor1(red)3Ba^2+ + 2PO4^3- -> $atomColor1(red)Ba3(PO4)2"|v"`
     );
     expect(expr.getMessage()).toBe("");
-    expect(makeTextFormula(expr)).toBe("3Ba2+ + 2PO43- → Ba3(PO4)2↓");
+    expect(makeTextFormula(expr)).toBe("3Ba^2+ + 2PO4^3- → Ba3(PO4)2↓");
     expect(makeTextFormula(expr, rulesBB)).toBe(
       `[b]3[/b]${bbColor(
         "Ba",
@@ -156,5 +170,19 @@ describe("makeTextFormula", () => {
       "<i>R<sup>1</sup></i>-<em>A<sub>123</sub></em>"
     );
     expect(makeTextFormula(expr, rulesMhchem)).toBe("R^{1}-A_{123}");
+  });
+  it("Brackets right to left", () => {
+    const expr = compile("COOH`-(CCl`=CH)2^+`-H3C");
+    expect(expr.getMessage()).toBe("");
+    expect(makeTextFormula(expr)).toBe("H3C-(CH=CCl)2^+-COOH");
+
+    const expr1 = compile("COOH`-(CCl`=CH)2`^+`-H3C");
+    expect(expr1.getMessage()).toBe("");
+    expect(makeTextFormula(expr1)).toBe("H3C-+^(CH=CCl)2-COOH");
+
+    // этот пример не очень корректный, т.к. формула не текстовая, но последовательность должна быть такая
+    const expr2 = compile("`-(H2C)2|");
+    expect(expr2.getMessage()).toBe("");
+    expect(makeTextFormula(expr2)).toBe("(H2C)2-|");
   });
 });

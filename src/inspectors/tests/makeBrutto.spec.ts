@@ -26,7 +26,7 @@ describe("makeBrutto", () => {
     const brutto = makeBrutto(expr);
     expect(brutto.getMessage()).toBe("");
     expect(calcCharge(brutto)).toBe(-2.0);
-    expect(makeTextFormula(brutto)).toBe("O4S2-");
+    expect(makeTextFormula(brutto)).toBe("O4S^2-");
     expect(makeTextFormula(brutto, rulesHtml)).toBe(
       "O<sub>4</sub>S<sup>2-</sup>"
     );
@@ -48,7 +48,7 @@ describe("makeBrutto", () => {
     );
   });
   it("IgnoreOfEmptyNode", () => {
-    const expr = compile("H3C-{}|OH");
+    const expr = compile("H3C-{}|{}-OH");
     expect(expr.getMessage()).toBe("");
     expect(makeTextFormula(makeBrutto(expr), rulesCharChem)).toBe("CH4O");
   });

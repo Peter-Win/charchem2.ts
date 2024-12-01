@@ -25,7 +25,8 @@ import { MarkupChunkType } from "../utils/markup";
  */
 export class RulesHtml extends RulesBase {
   agentK(k: ChemK): string {
-    return `<b>${k}</b>`;
+    const attr: string = k.color ? ` style="color:${escapeXml(k.color)}"` : "";
+    return `<b${attr}>${k}</b>`;
   }
 
   comment(text: string): string {
@@ -48,6 +49,10 @@ export class RulesHtml extends RulesBase {
     return `${drawTag("span", { class: "echem-mass-and-num" })}${strMass(
       mass
     )}<br/>${num}</span>`;
+  }
+
+  itemCharge(charge: ChemCharge): string {
+    return `<sup class="echem-item-charge">${charge.text}</sup>`;
   }
 
   nodeCharge(charge: ChemCharge): string {

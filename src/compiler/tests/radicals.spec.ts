@@ -39,4 +39,13 @@ describe("radicals", () => {
       "C21H36N7O16P3S"
     );
   });
+  it("sec-butyl", () => {
+    const expr = compile("{sBu}-OH");
+    expect(expr.getMessage()).toBe("");
+    expect(isAbstract(expr)).toBe(false);
+    expect(makeTextFormula(expr)).toBe("sBu-OH");
+    const { dict } = PeriodicTable;
+    const m = dict.C.mass * 4 + dict.H.mass * 10 + dict.O.mass;
+    expect(calcMass(expr)).toBeCloseTo(m, 3);
+  });
 });

@@ -57,7 +57,7 @@ describe("buildNode", () => {
     expect(expr.getMessage()).toBe("");
 
     const node: ChemNode = expr.getAgents()[0]!.nodes[0]!;
-    expect(makeTextFormula(node)).toBe("NH4+");
+    expect(makeTextFormula(node)).toBe("NH4^+");
 
     const surface = createTestSurface();
     const imgProps = createTestImgProps(surface, 80);

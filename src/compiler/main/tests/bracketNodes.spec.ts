@@ -118,7 +118,7 @@ describe("Bracket nodes", () => {
     expect(commands[4]).toBeInstanceOf(ChemBracketEnd);
     expect(commands[0]).toHaveProperty("color", "blue");
     expect(commands[1]).toHaveProperty("color", "red");
-    expect(commands[2]).not.toHaveProperty("color");
+    expect(commands[2]).toHaveProperty("color", undefined); // Перед узлом стоит $color()
     expect(commands[3]).toHaveProperty("color", "red");
     expect(commands[4]).toHaveProperty("color", "blue");
   });

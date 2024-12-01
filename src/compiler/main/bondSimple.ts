@@ -95,7 +95,11 @@ export const scanSimpleBond = (
   }
 };
 
-export const createSimpleBond = (compiler: ChemCompiler, bond: ChemBond) => {
+export const createSimpleBond = (
+  compiler: ChemCompiler,
+  bond: ChemBond,
+  begin: number
+) => {
   scanBondSuffix(compiler, bond);
-  onOpenBond(compiler, bond);
+  onOpenBond(compiler, bond, begin);
 };

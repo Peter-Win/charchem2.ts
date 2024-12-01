@@ -5,6 +5,7 @@ import { WebFontCache } from "../drawSys/browser/WebFontCache";
 import { ChemExpr } from "../core/ChemExpr";
 import { ChemAgent } from "../core/ChemAgent";
 import { buildFrame } from "../structBuilder/buildFrame";
+import { addClass } from "./addClass";
 
 export const renderFormulaCanvas = (
   owner: Element,
@@ -19,4 +20,5 @@ export const renderFormulaCanvas = (
   const surface = new HtmlCanvasSurface(canvas, fontPropsCache);
   const props = createChemImgProps(owner, surface);
   renderTopFrame(buildFrame(expr, props), surface);
+  addClass(owner, "echem-is-canvas");
 };

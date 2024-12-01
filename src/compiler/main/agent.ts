@@ -72,6 +72,7 @@ export const onCloseAgent = (compiler: ChemCompiler) => {
       b.index = i;
     });
     compiler.addSrcMapItem(curAgent, compiler.entityBegin);
+    compiler.agentMode = undefined;
   }
 };
 

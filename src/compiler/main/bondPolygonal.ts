@@ -41,5 +41,5 @@ export const createPolygonalBond = (compiler: ChemCompiler) => {
   scanBondSuffix(compiler, bond);
   bond.tx = compiler.subStr(beginPos);
 
-  onOpenBond(compiler, bond);
+  onOpenBond(compiler, bond, beginPos);
 };

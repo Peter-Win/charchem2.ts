@@ -3,6 +3,8 @@
 
 System to describe the chemical formulas for WEB
 
+Full documentation is in the Docs folder
+
 Features of 2.0
 - Braces by {{OH}}
 - $padding() for brackets: $padding(0.1)[N<`|H><`/H><\H>]

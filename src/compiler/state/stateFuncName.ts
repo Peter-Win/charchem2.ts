@@ -4,6 +4,7 @@ import { scanArgs } from "../parse/scanArgs";
 import { ifDef } from "../../utils/ifDef";
 import { stateAgentMid } from "./stateAgentMid";
 import { funcsDict } from "../funcs/funcsDict";
+import { stateAgentBegin } from "./stateAgentBegin";
 
 export const stateFuncName: CompilerState = (compiler) => {
   const startPos = compiler.pos; // Указывает на следующий символ за $
@@ -15,5 +16,9 @@ export const stateFuncName: CompilerState = (compiler) => {
   // Если имя функции не найдено, функция игнорируется
   // с целью совместимости со следующими версиями
   ifDef(funcsDict[name], (func) => func(compiler, args, argPos));
+  if (compiler.agentMode === "begin") {
+    // Случай, когда функция описывается раньше чем создан агент
+    return compiler.setState(stateAgentBegin);
+  }
   return compiler.setState(stateAgentMid);
 };

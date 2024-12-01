@@ -1,7 +1,7 @@
 {
   "name": "charchem2.ts",
   "private": true,
-  "version": "1.0.0",
+  "version": "2.0.12",
   "description": "System to describe the chemical formulas for WEB",
   "main": "dist/index.js",
   "files": [
@@ -17,8 +17,7 @@
     "buildDev": "tsc --declaration",
     "test": "jest",
     "test:coverage": "jest --coverage",
-    "lint": "eslint ./src --ext .ts",
-    "lint:fix": "eslint ./src --ext .ts --fix",
+    "lint": "eslint ./src --ext .ts --fix",
     "prepare": "husky install"
   },
   "dependencies": {

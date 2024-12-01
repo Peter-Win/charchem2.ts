@@ -45,6 +45,11 @@ export class RulesBase {
     return "";
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  itemCharge(charge: ChemCharge): string {
+    return "";
+  }
+
   nodeCharge(charge: ChemCharge): string {
     return charge.text;
   }

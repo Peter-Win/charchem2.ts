@@ -6,6 +6,7 @@ import { renderTopFrame } from "../drawSys/figures/renderTopFrame";
 import { ChemAgent } from "../core/ChemAgent";
 import { buildFrame } from "../structBuilder/buildFrame";
 import { standaloneExportOptions } from "../drawSys/svg/standaloneExportOptions";
+import { addClass } from "./addClass";
 
 /**
  * Make a local SVG image for the specified expression on the given HTML element.
@@ -28,6 +29,7 @@ export const renderFormulaSvg = (
     width: `${bounds.width}px`,
     height: `${bounds.height}px`,
   });
+  addClass(owner, "echem-is-svg");
 };
 
 export const makeFormulaSvgText = (

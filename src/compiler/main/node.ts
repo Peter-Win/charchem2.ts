@@ -91,6 +91,8 @@ export const openNode = (
   const node = compiler.curAgent!.addNode(new ChemNode());
   node.index = compiler.curAgent!.nodes.length - 1;
   node.autoMode = isAuto;
+  // Цвет узла зависит только от $color, т.к. $itemColor и $atomColor относятся не к узлу, а к его элементам.
+  node.color = compiler.varColor;
 
   compiler.curNode = node;
   compiler.chargeOwner = node;

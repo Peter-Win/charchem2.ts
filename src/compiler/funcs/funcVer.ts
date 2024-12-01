@@ -20,11 +20,7 @@ export const parseVerParameter = (args: string[]): [Int, Int] => {
   return [toIntOrZero(verList2[0]), toIntOrZero(verList2[1])];
 };
 
-export const funcVer = (
-  compiler: ChemCompiler,
-  args: string[]
-  // @Suppress("UNUSED_PARAMETER") pos: List<Int>,
-) => {
+export const funcVer = (compiler: ChemCompiler, args: string[]) => {
   const [high, low] = parseVerParameter(args);
   const currentVersion = getVersion();
   if (

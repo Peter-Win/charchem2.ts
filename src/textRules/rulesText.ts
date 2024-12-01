@@ -1,4 +1,12 @@
+import { ChemCharge } from "../core/ChemCharge";
 import { RulesBase } from "./RulesBase";
+
+export class RulesText extends RulesBase {
+  // eslint-disable-next-line class-methods-use-this
+  nodeCharge({ isLeft, text }: ChemCharge): string {
+    return isLeft ? `${text}^` : `^${text}`;
+  }
+}
 
 /**
  * Правила для текстового представления формул.
@@ -7,4 +15,4 @@ import { RulesBase } from "./RulesBase";
  * Для того чтобы получить больше возможностей, рекомендуется использовать другие правила.
  * Например, HTML или MathJax/mhchem.
  */
-export const rulesText = Object.freeze(new RulesBase());
+export const rulesText = Object.freeze(new RulesText());

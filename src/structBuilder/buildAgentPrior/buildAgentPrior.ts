@@ -43,7 +43,7 @@ export const buildAgentPrior = (
   const center = findAgentCenter(ctx);
 
   if (agent.n.isSpecified()) {
-    const kStyle = imgProps.getStyle("agentK");
+    const kStyle = imgProps.getStyleColored("agentK", agent.n.color);
     const figK = new FigText(agent.n.toString(), kStyle.font, kStyle.style);
     const irc = getTextInternalRect(figK);
     figK.org.x =

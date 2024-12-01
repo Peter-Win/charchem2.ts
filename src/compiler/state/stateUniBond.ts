@@ -8,12 +8,13 @@ import { scanArgs } from "../parse/scanArgs";
 import { stateAgentMid } from "./stateAgentMid";
 
 export const stateUniBond: CompilerState = (compiler) => {
+  const begin = compiler.pos - 1;
   switch (compiler.curChar()) {
     case "(":
       {
         compiler.pos++;
         const { args, argPos } = scanArgs(compiler);
-        createUniversalBond(compiler, args, argPos);
+        createUniversalBond(compiler, args, argPos, begin);
       }
       break;
     case "p":
@@ -30,7 +31,7 @@ export const stateUniBond: CompilerState = (compiler) => {
       createSplineBond(compiler);
       break;
     default:
-      createUniversalBond(compiler, [], []);
+      createUniversalBond(compiler, [], [], begin);
       break;
   }
   return compiler.setState(stateAgentMid);
