@@ -33,6 +33,9 @@ import { roundMass } from "./math/massUtils";
 import { makeFormulaSvgText } from "./browser/renderFormulaSvg";
 import { WebFontCache } from "./drawSys/browser/WebFontCache";
 import { ChemEquation } from "./equation/ChemEquation";
+import { RulesBase } from "./textRules/RulesBase";
+import { makeTextFormula } from "./inspectors/makeTextFormula";
+import { dictTextRules } from "./textRules/dictTextRules";
 
 export const ChemSys = Object.freeze({
   addDict(globalDict: Record<string, LocalDict>) {
@@ -66,6 +69,18 @@ export const ChemSys = Object.freeze({
       typeof exprOrCode === "string" ? compile(exprOrCode) : exprOrCode;
     return makeFormulaSvgText(expr, fontPropsCache);
   },
+  /**
+   *
+   * @param objOrCode if string, then formula code, else ChemObj (usually ChemExpr)
+   * @param rules by default = dictTextRules.text
+   * @returns
+   */
+  makeTextFormula(objOrCode: ChemObj | string, rules?: RulesBase): string {
+    const chemObj =
+      typeof objOrCode === "string" ? compile(objOrCode) : objOrCode;
+    return makeTextFormula(chemObj, rules);
+  },
+  dictTextRules,
   makeBruttoKey(src: ChemObj | string): string {
     return makeBruttoKey(src);
   },
