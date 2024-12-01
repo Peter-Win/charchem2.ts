@@ -1,7 +1,7 @@
 {
   "name": "charchem2.ts",
   "private": true,
-  "version": "2.0.12",
+  "version": "2.0.13",
   "description": "System to describe the chemical formulas for WEB",
   "main": "dist/index.js",
   "files": [
