@@ -8,6 +8,7 @@ import { calcMass } from "../inspectors/calcMass";
 import { makeTextFormula } from "../inspectors/makeTextFormula";
 import { rulesHtml } from "../textRules/rulesHtml";
 import { isTextFormula } from "../inspectors/isTextFormula";
+import { getSrcItemsForObject } from "../compiler/sourceMap";
 
 export class ChemExpr extends ChemObj {
   error?: Error;
@@ -53,6 +54,14 @@ export class ChemExpr extends ChemObj {
       (entity: ChemObj) => entity instanceof ChemAgent
     );
     return result as ChemAgent[];
+  }
+
+  findMapItems(target: ChemObj): SrcMapItem[] {
+    return getSrcItemsForObject(target, this.srcMap);
+  }
+
+  srcMapItemText(item: SrcMapItem): string {
+    return this.src.slice(item.begin, item.end);
   }
 
   /**
