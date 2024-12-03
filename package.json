@@ -1,20 +1,27 @@
 {
-  "name": "charchem2.ts",
-  "private": true,
+  "name": "charchem2",
   "version": "2.0.14",
   "description": "System to describe the chemical formulas for WEB",
   "main": "dist/index.js",
   "files": [
-    "dist"
+    "dist/**/*"
   ],
   "types": "dist/index.d.ts",
   "keywords": [],
   "author": "PeterWin",
-  "license": "",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Peter-Win/charchem2.ts.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Peter-Win/charchem2.ts/issues"
+  },
+  "homepage": "https://github.com/Peter-Win/charchem2.ts#readme",
   "scripts": {
     "audit:fix": "yarn-audit-fix",
     "buildLib": "webpack --mode=production",
-    "buildDev": "tsc --declaration",
+    "build": "tsc --declaration",
     "test": "jest",
     "test:coverage": "jest --coverage",
     "lint": "eslint ./src --ext .ts --fix",
