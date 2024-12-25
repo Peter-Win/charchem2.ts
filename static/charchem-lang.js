@@ -1,5 +1,5 @@
 ﻿/*
- Языковые дополнения для easyChem
+ Языковые дополнения для CharChem
  International extensions
  */
 ChemSys.addDict({
