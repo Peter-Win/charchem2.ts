@@ -1,6 +1,7 @@
 const path = require('path');
 const fs = require('fs');
-const {CleanWebpackPlugin,} = require('clean-webpack-plugin');
+const {CleanWebpackPlugin} = require('clean-webpack-plugin');
+const {CharChemLibExt} = require("./scripts/CharChemLibExt");
 
 // version update
 try {
@@ -16,14 +17,18 @@ try {
 }
 
 module.exports = {
-  entry: './src/index.ts',
+  entry: {
+    charchem2: './src/index.ts',
+    "charchem-lang": "./static/charchem-lang.ts",
+  },
   output: {
     path: path.resolve(__dirname, 'lib'),
-    filename: 'charchem2.js',
+    filename: '[name].js',
     publicPath: '/',
   },
   plugins: [
     new CleanWebpackPlugin(),
+    new CharChemLibExt(),
   ],
   devServer: {
     static: {
