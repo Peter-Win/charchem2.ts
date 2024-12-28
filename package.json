@@ -21,11 +21,12 @@
   "scripts": {
     "audit:fix": "yarn-audit-fix",
     "buildLib": "webpack --mode=production",
-    "build": "tsc --declaration",
+    "build": "tsc --declaration && node ./scripts/postBuild.js",
     "test": "jest",
     "test:coverage": "jest --coverage",
     "lint": "eslint ./src --ext .ts --fix",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "international": "node ./scripts/international.js && yarn lint"
   },
   "dependencies": {},
   "devDependencies": {
