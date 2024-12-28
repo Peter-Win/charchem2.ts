@@ -28,8 +28,8 @@ The results will be in the `charchem2.ts/lib` folder
 This method allows you to use CharChem both in a browser and in a desktop (server) application.
 
 Installation options:
-- `npm i charchem2 -D`
-- `yarn add charchem2 --dev`
+- `npm i charchem2 -S`
+- or `yarn add charchem2`
 
 All main features are collected in the file `src/ChemSys.ts`.
 

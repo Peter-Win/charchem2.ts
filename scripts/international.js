@@ -12,7 +12,8 @@ const jsonText = fs.readFileSync(srcJsonName, {encoding: "utf-8"});
 
 const tsText = 
 `/**
- * This file was generated automatically from static/internationalDict.json.
+ * This file was generated automatically from static/internationalDict.json
+ * by 'yarn international' (or 'npm run international'). 
  * Therefore, there is no need to try to edit it.
  */
 
