@@ -13,12 +13,14 @@ Please, see [documentation here](http://charchem.org/en/start).
 
 If you want to build the library from the source code yourself, you will need [GIT](https://git-scm.com/downloads) and [Node.js](https://nodejs.org/en/download).
 If you have this software on your computer, use the following commands:
+
 ```
 git clone https://github.com/Peter-Win/charchem2.ts
 cd charchem2.ts
 npm i
 npm run buildLib
 ```
+
 The results will be in the `charchem2.ts/lib` folder
 
 ## Connecting a library to a project via NPM
@@ -39,6 +41,7 @@ In addition, there is an extended set, presented in the `internationalDict.json`
 
 If you need to use an extended language set via the `script` tag, then it is recommended to use `charchem-lang.js`.
 And if the npm library is used, then:
+
 ```
 import {ChemSys} from "charchem2";
 import {internationalDict} from  "charchem2/dist/internationalDict";
@@ -49,6 +52,7 @@ ChemSys.addDict(internationalDict);
 If the extended set does not contain the language you need, you can fill in the necessary phrases yourself and connect them via `ChemSys.addDict`.
 
 After the required dictionaries are registered, you can switch to the required language using the following code:
+
 ```
 ChemSys.curLang = "en"; // Instead of "en", you can specify any of the registered locales.
 ```
