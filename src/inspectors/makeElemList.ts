@@ -2,9 +2,8 @@ import { Double } from "../types";
 import { ChemObj } from "../core/ChemObj";
 import { ElemList } from "../core/ElemList";
 /**
- * Формирование списка элементов из выражения.
- * Не учитываются коэффициенты агентов.
- * Не имеет смысла для выражений, имеющих более одного агента.
+ * Generate a list of elements from an expression.
+ * Does not make sense for expressions that have more than one agent.
  */
 export const makeElemList = (
   chemObj: ChemObj,

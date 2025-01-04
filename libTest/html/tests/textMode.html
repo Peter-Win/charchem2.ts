@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Text mode</title>
+    <link href="../../../lib/charchem.css" rel="stylesheet" />
+    <script src="../../../lib/charchem2.js"></script>
+    <style>
+      * {box-sizing: border-box; padding: 0; margin: 0;}
+      h1 {font-size: 1.4rem;}
+      body { display: flex; flex-direction: column; gap: 0.5rem; padding: 0.5rem;}
+      .error {
+        border: thin solid red;
+        padding: 0.5rem 1rem;
+        background-color: #FEE;
+      }
+      #expr { width: 100%; }
+      #dst { display: flex; flex-direction: column; gap: 0.5rem;}
+      .chunk label {font-size: 90%; font-weight: bold; display: block; font-family: Arial, Helvetica, sans-serif;}
+      .input { position: sticky; top: 0; padding: 0.3rem 0; background: white; z-index: 1; }
+    </style>
+    <script>
+      function createElem(tag, owner, options) {
+        options = options || {};
+        var elem = document.createElement(tag);
+        if (owner) owner.appendChild(elem);
+        if (options.cls) elem.classList.add(options.cls);
+        if (options.style) Object.assign(elem.style, options.style);
+        if (options.html) elem.innerHTML = options.html; 
+        if (options.text) elem.innerText = options.text;
+        return elem;
+      }
+      function textChunk(dstBox, expr, type, label, fn) {
+        var code = ChemSys.makeTextFormula(expr, ChemSys.dictTextRules[type]);
+        if (fn) code = fn(code);
+        var chunk = createElem("div", dstBox, {cls: "chunk"});
+        createElem("label", chunk, {text: label});
+        createElem("code", chunk, {text: code});
+      }
+      function onChange(srcText) {
+        var dstBox = document.getElementById("dst");
+        dstBox.innerHTML = "";
+        var expr = ChemSys.compile(srcText);
+        if (!expr.isOk()) {
+          createElem("div", dstBox, {cls: "error", text: expr.getMessage()});
+          return;
+        }
+        var dstElem = createElem("div", dstBox, {cls: "echem-formula"});
+        ChemSys.draw(dstElem, expr);
+        if (!expr.isLinear()) {
+          createElem("div", dstBox, {cls: "error", text: "This formula is not linear"});
+          return;
+        }
+        var labels = Object.keys(ChemSys.dictTextRules);
+        for (var i=0; i<labels.length; i++) {
+          var label = labels[i];
+          var fn = label === "mhchem" ? function(c){ return "\\ce{"+c+"}"} : undefined;
+          textChunk(dstBox, expr, label, label, fn);
+        }
+      }
+      window.addEventListener("load", function(){
+        var srcText = 'CuSO4 + KI \"h[nu]\"--> Cu\"|v\" + I2\"|v\" + K2SO4';
+        var inp = document.getElementById("expr");
+        inp.value = srcText;
+        inp.addEventListener("input", function(ev){
+          onChange(ev.target.value); 
+        })
+        onChange(srcText);
+      });
+    </script>
+  </head>
+  <body>
+    <h1>Text mode</h1>
+    <div class="input">
+      <input type="text" id="expr" />
+    </div>
+    <div id="dst"></div>
+  </body>
+</html>

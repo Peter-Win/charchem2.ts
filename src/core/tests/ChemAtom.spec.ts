@@ -4,8 +4,8 @@ describe("ChemAtom", () => {
   it("stable", () => {
     const H = new ChemAtom(1, "H", 1.008);
     const T = new ChemAtom(1, "T", 3);
-    const c12 = new ChemAtom(6, "C", 12, true);
-    const c14 = new ChemAtom(6, "C", 14, false);
+    const c12 = new ChemAtom(6, "C", 12, { stable: true });
+    const c14 = new ChemAtom(6, "C", 14, { stable: false });
     expect(H.stable).toBe(true);
     expect(T.stable).toBe(false);
     expect(c12.stable).toBe(true);

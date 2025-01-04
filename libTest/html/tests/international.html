@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>International</title>
+    <link href="../../../lib/charchem.css" rel="stylesheet" />
+    <script src="../../../lib/charchem2.js"></script>
+    <script src="../../../lib/charchem-lang.js"></script>
+    <style>
+      * { box-sizing: border-box; }
+      html {background-color: white;}
+      h1 { font-size: 1rem; padding: 0; margin: 0 0 0.5rem 0; }
+      .phrase-box {
+        position: sticky;
+        top: 0;
+        background-color: white;
+        padding: 0.3rem 0;
+        border-bottom: thin solid black;
+      }
+      .phrase-box input { width: 100%;}
+      .tr-table {
+        border-collapse: collapse;
+        width: 100%;
+      }
+      .tr-table td, .tr-table th {
+        border: thin solid silver;
+        padding: 0.1rem 0.5rem;
+      }
+      .tr-table thead {background-color: #EEE;}
+    </style>
+  </head>
+  <body>
+    <h1>International</h1>
+    <div class="phrase-box">
+      <input type="text" id="text" value="Fe" />
+    </div>
+    <table class="tr-table">
+      <thead>
+        <tr>
+          <th>English</th>
+          <th>Native</th>
+          <th>Translation</th>
+        </tr>
+      </thead>
+      <tbody id="tbody"></tbody>
+    </table>
+    <script>
+      window.addEventListener("load", function(){
+        var ed = document.getElementById("text");
+        ed.addEventListener("input", function(ev) {
+          drawResult(ev.target.value);
+        });
+        drawResult(ed.value);
+      });
+      window.addEventListener("message", function(ev) {
+        console.log("msg", ev);
+      })
+      function createElem(tag, owner, text) {
+          var elem = document.createElement(tag);
+          if (owner) owner.appendChild(elem);
+          if (text) elem.innerText = text;
+          return elem;
+      }
+      function drawResult(phrase) {
+        var locales = Object.keys(ChemSys.Dict);
+        var tbody = document.getElementById("tbody");
+        tbody.innerHTML = "";
+        for (var i=0; i<locales.length; i++) {
+          var locale = locales[i];
+          var row = createElem("tr", tbody);
+          createElem("td", row, ChemSys.lang("$English", {}, locale));
+          createElem("td", row, ChemSys.lang("$Native", {}, locale));
+          createElem("td", row, ChemSys.lang(phrase, {}, locale));
+        }
+      }
+    </script>
+  </body>
+</html>

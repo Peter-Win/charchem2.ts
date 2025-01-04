@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>CharChem library integration tests</title>
+    <meta charset="utf-8" />
+    <script src="../../lib/charchem2.js"></script>
+    <style>
+      .frames {
+        display: flex;
+        flex-wrap: wrap;
+      }
+      .frames > iframe { 
+        border: thin solid brown;
+        margin-right: 1rem;
+        margin-bottom: 1rem;
+        width: 400px;
+        height: 270px;
+      }
+      .ver {
+        color: #888;
+        font-size: 90%;
+      }
+      noscript, #lib-is-missing {
+        border: thick solid red;
+        padding: 1rem;
+        background-color: #FCC;
+      }
+      #lib-is-missing {
+        display: none;
+      }
+      #lib-is-missing code {
+        font-size: 1rem;
+        font-family: 'Courier New', Courier, monospace;
+        font-weight: bold;
+        background-color: #FAA;
+        padding: 0.1rem 0.3rem;
+      }
+      #lib-is-missing b {font-size: 140%;}
+    </style>
+    <script>
+      var tests = [
+        "svgAutoCompile",
+        "canvasAutoCompile",
+        "textMode",
+        "international",
+        "table",
+        "equal",
+      ];
+      window.addEventListener("load", function() {
+        if (!window.ChemSys) {
+          document.getElementById("lib-is-missing").style.display = "block";
+          return;
+        }
+        var verElem = document.querySelector(".ver");
+        if (verElem) {
+          verElem.innerHTML = "CharChem version: " + ChemSys.verStr;
+        }
+        var frames = document.querySelector(".frames");
+        for (var i=0; i<tests.length; i++) {
+          var frame = document.createElement("iframe");
+          frame.setAttribute("src", "./tests/" + tests[i] + ".html");
+          frames.appendChild(frame);
+        }
+      });
+    </script>
+  </head>
+  <body>
+    <noscript>
+      You must allow scripting in your browser.
+    </noscript>
+    <div id="lib-is-missing">
+      <b>Library is missing!</b><br />
+      You need to run the <code>yarn buildLib</code> or <code>npm run buildLib</code> command from the project root folder.      
+    </div>
+    <div class="frames"></div>
+    <div class="ver"></div>
+  </body>
+</html>

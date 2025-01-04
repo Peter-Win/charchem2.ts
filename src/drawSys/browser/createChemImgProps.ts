@@ -7,9 +7,11 @@ import { ChemStyleId } from "../ChemStyleId";
 
 let rulesList: [ChemStyleId, string][] | undefined;
 
+const doc = typeof window === "undefined" ? undefined : window.document;
+
 type FnComputedStyle = (element: Element) => CSSStyleDeclaration;
 const findComputedStyle: FnComputedStyle =
-  document.defaultView?.getComputedStyle ||
+  doc?.defaultView?.getComputedStyle ||
   // @ts-ignore
   ((element: Element) => element.currentStyle);
 
