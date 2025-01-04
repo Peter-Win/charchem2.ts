@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Solving a chemical equation</title>
+    <script src="../../../lib/charchem2.js"></script>
+    <link href="../../../lib/charchem.css" rel="stylesheet" />
+    <style>
+      .section { border: thin solid silver; padding: 0.2rem; margin-bottom: 0.5rem; }
+      .section > label { font-weight: bold; }
+    </style>
+  </head>
+  <body>
+    <h1>Solving equation</h1>
+    <div class="section">
+      <label>Source expression:</label>
+      <div id="Src" class="echem-formula"></div>
+    </div>
+    <div class="section">
+      <label>Solved expression:</label>
+      <div id="Dst" class="echem-formula"></div>
+    </div>
+    <script>
+      window.addEventListener("load", function(){
+        const srcCode = "KMnO4 + KCl + H2SO4 = Cl2 + MnSO4 + K2SO4 + H2O";
+        ChemSys.draw(document.getElementById("Src"), srcCode);
+        const dstExpr = ChemSys.equalize(srcCode);
+        ChemSys.draw(document.getElementById("Dst"), dstExpr);
+      });
+    </script>
+  </body>
+</html>

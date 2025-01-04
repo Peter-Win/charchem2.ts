@@ -6,11 +6,11 @@ import { rulesMhchem } from "./rulesMhchem";
 import { rulesRTF } from "./rulesRTF";
 import { rulesText } from "./rulesText";
 
-export const dictTextRules = {
+export const dictTextRules: Record<string, RulesBase> = {
   bb: rulesBB,
   charChem: rulesCharChem,
   html: rulesHtml,
   mhchem: rulesMhchem,
   rtf: rulesRTF,
   text: rulesText,
-} satisfies Record<string, RulesBase>;
+};
