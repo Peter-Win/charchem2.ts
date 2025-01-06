@@ -6,6 +6,7 @@ const testsPath = path.resolve(__dirname, "tests")
 const tests = [
   "props",
   "mass",
+  "svgFormula",
 ];
 
 tests.forEach(name => cp.execSync(`node ${path.join(testsPath, `${name}.js`)}`, {stdio: "inherit"}));

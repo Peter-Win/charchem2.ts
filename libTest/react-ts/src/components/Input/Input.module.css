@@ -1,0 +1,18 @@
+.input {
+  input {
+    width: 100%;
+    padding: 6px 15px;
+    box-sizing: border-box;
+
+    border: thin solid #CCC;
+    color: #3D3D3D;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 125%;
+
+    &:focus {
+      border: 2px solid #00659A;
+    }
+  }
+}

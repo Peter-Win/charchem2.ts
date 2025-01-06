@@ -1,0 +1,42 @@
+.buttons {
+  display: inline-block;
+  --active: #555;
+  --hover: #888;
+  --normal: black;
+  --r: 4px;
+
+  & > button {
+    color: var(--normal);
+    background: none;
+    padding: 0.2rem 0.8rem;
+    font-size: 1rem;
+    cursor: pointer;
+    border: thin solid var(--normal);
+    &:hover {
+      color: var(--hover);
+    }
+    &:focus {
+      outline: none;
+      box-shadow: 0 0 0 2px var(--hover);
+    }
+    &:not(:last-child) {
+      border-right: none;
+    }
+    &:first-child {
+      border-radius: var(--r) 0 0 var(--r);
+    }
+    &:last-child {
+      border-radius: 0 var(--r) var(--r) 0;
+    }
+
+    &.active {
+      background-color: var(--active);
+      border-color: var(--active);
+      color: white;
+      &:hover {
+        background-color: var(--hover);
+        border-color: var(--hover);
+      }
+    }
+  }
+}
