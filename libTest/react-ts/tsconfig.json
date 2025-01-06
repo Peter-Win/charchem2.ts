@@ -1,0 +1,39 @@
+{
+  "compilerOptions": {
+    "outDir": "./dist/",
+    "sourceMap": true,
+    "module": "CommonJS",
+    "target": "es5",
+    "allowJs": true,
+    "esModuleInterop": true,
+    "alwaysStrict": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "strictPropertyInitialization": true,
+    "strictFunctionTypes": true,
+    "noImplicitThis": true,
+    "strictBindCallApply": true,
+    "noPropertyAccessFromIndexSignature": true,
+    "noUncheckedIndexedAccess": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "jsx": "react",
+    "types": [
+      "node"
+    ],
+    "plugins": [
+      {
+        "name": "typescript-plugin-css-modules"
+      }
+    ],
+    "baseUrl": "./",
+    "paths": {
+      "src/*": ["src/*"],
+      "charchem2/*": ["../../dist/*"]
+    }
+  },
+  "include": [
+    "./src/**/*",
+    "declaration.d.ts"
+  ]
+}

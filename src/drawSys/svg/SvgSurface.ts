@@ -45,7 +45,7 @@ export abstract class SvgSurface implements AbstractSurface {
 
   drawPath(org: Point, path: PathSeg[], style: PathStyle): void {
     const attrs: XmlAttrs = { d: pathToString(path), ...pathAttrs(style, org) };
-    this.body.push(`${drawTag("path", attrs, true)}`);
+    this.addFigure(drawTag("path", attrs, true));
   }
 
   drawRect(offset: Point, rect: Rect, style: PathStyle, radius?: Point) {
@@ -60,7 +60,7 @@ export abstract class SvgSurface implements AbstractSurface {
       attrs.rx = toa(radius.x);
       attrs.ry = toa(radius.y);
     }
-    this.body.push(drawTag("rect", attrs, true));
+    this.addFigure(drawTag("rect", attrs, true));
   }
 
   drawEllipse(
@@ -76,7 +76,7 @@ export abstract class SvgSurface implements AbstractSurface {
       rx: toa(radius.x),
       ry: toa(radius.y),
     };
-    this.body.push(`${drawTag("ellipse", attrs, true)}`);
+    this.addFigure(`${drawTag("ellipse", attrs, true)}`);
   }
 
   // Svg specific

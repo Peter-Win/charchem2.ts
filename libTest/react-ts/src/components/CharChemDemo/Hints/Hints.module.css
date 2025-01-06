@@ -1,0 +1,16 @@
+.hints {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.hintItem {
+  border: none;
+  background: none;
+  color: #AAA;
+  cursor: pointer;
+  border-bottom: thin dashed #AAA;
+  &:hover {
+    color: #888;
+  }
+}

@@ -1,0 +1,17 @@
+.toolbar {
+  display: flex;
+  gap: 2rem;
+}
+.formulaBox {
+  flex: 1;
+  overflow: auto;
+}
+
+.light {
+  background-color: #EEE;
+  color: #333;
+}
+.dark {
+  background-color: black;
+  color: white;
+}

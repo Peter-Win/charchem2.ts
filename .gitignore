@@ -5,6 +5,7 @@ node_modules/
 /*.log
 /coverage
 .eslintcache
-/dist
+dist/
 /lib
+/libTest/result/
 /rubbers/figure.txt

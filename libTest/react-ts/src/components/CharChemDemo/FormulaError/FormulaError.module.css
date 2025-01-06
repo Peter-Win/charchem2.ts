@@ -1,0 +1,16 @@
+.errorBox {
+  border: thin solid red;
+  background-color: #FEE;
+  padding: 1rem;
+}
+.message {
+  color: #800;
+}
+.pos {
+  background-color: #FAA;
+  padding: 0.1rem;
+}
+.pos0 {
+  background-color: #AFA;
+  padding: 0.1rem;
+}

@@ -1,0 +1,47 @@
+{
+  "name": "react-ts",
+  "private": true,
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.tsx",
+  "keywords": [],
+  "author": "PeterWin",
+  "license": "",
+  "scripts": {
+    "build": "webpack --mode=production",
+    "start": "webpack serve --mode=development",
+    "lint": "eslint ./src --ext .ts,.tsx --fix"
+  },
+  "devDependencies": {
+    "@types/react": "^19.0.2",
+    "@types/react-dom": "^19.0.2",
+    "@typescript-eslint/eslint-plugin": "^8.19.0",
+    "@typescript-eslint/parser": "^8.19.0",
+    "clean-webpack-plugin": "^4.0.0",
+    "css-loader": "^7.1.2",
+    "eslint": "^8.57.1",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-import": "^2.31.0",
+    "eslint-plugin-jsx-a11y": "^6.10.2",
+    "eslint-plugin-prettier": "^5.2.1",
+    "eslint-plugin-react": "^7.37.3",
+    "eslint-plugin-react-hooks": "^5.1.0",
+    "html-webpack-plugin": "^5.6.3",
+    "loader-utils": "^3.3.1",
+    "prettier": "^3.4.2",
+    "style-loader": "^4.0.0",
+    "ts-loader": "^9.5.1",
+    "typescript": "^5.7.2",
+    "typescript-plugin-css-modules": "^5.1.0",
+    "webpack": "^5.97.1",
+    "webpack-cli": "^6.0.1",
+    "webpack-dev-server": "^5.2.0"
+  },
+  "dependencies": {
+    "mobx": "^6.13.5",
+    "mobx-react-lite": "^4.1.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  }
+}
