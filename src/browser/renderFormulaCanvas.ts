@@ -1,4 +1,4 @@
-import { createChemImgProps } from "../drawSys/browser/createChemImgProps";
+import { createBrowserChemImgProps } from "../drawSys/browser/createBrowserChemImgProps";
 import { renderTopFrame } from "../drawSys/figures/renderTopFrame";
 import { HtmlCanvasSurface } from "../drawSys/browser/HtmlCanvasSurface";
 import { WebFontCache } from "../drawSys/browser/WebFontCache";
@@ -18,7 +18,7 @@ export const renderFormulaCanvas = (
   const canvas = document.createElement("canvas");
   owner.append(canvas);
   const surface = new HtmlCanvasSurface(canvas, fontPropsCache);
-  const props = createChemImgProps(owner, surface);
+  const props = createBrowserChemImgProps(owner, surface);
   renderTopFrame(buildFrame(expr, props), surface);
   addClass(owner, "echem-is-canvas");
 };

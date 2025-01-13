@@ -9,6 +9,7 @@ import { PathSeg, PathVisitor } from "../path";
 import { tracePath } from "../utils/tracePath";
 import { WebFontCache } from "./WebFontCache";
 import { HtmlCanvasLocalFont } from "./HtmlCanvasLocalFont";
+import { Matrix2x3 } from "../../math/Matrix2x3";
 
 export class HtmlCanvasSurface implements AbstractSurface {
   private domElement: HTMLCanvasElement;
@@ -47,16 +48,27 @@ export class HtmlCanvasSurface implements AbstractSurface {
     return font;
   }
 
-  applyStyle(style: PathStyle, org?: Point) {
+  applyStyle(style: PathStyle, org?: Point | Matrix2x3) {
     const { htmlContext } = this;
-    if (org) htmlContext.translate(org.x, org.y);
+    if (org) {
+      if (org instanceof Point) {
+        htmlContext.translate(org.x, org.y);
+      } else if (org instanceof Matrix2x3) {
+        const { a, b, c, d, e, f } = org;
+        htmlContext.transform(a, b, c, d, e, f);
+      }
+    }
     htmlContext.beginPath();
     htmlContext.fillStyle = style.fill ?? "transparent";
     htmlContext.strokeStyle = style.stroke ?? "transparent";
     htmlContext.lineWidth = style.strokeWidth ?? 1;
   }
 
-  drawPath(org: Point, segments: PathSeg[], style: PathStyle): void {
+  drawPath(
+    org: Point | Matrix2x3,
+    segments: PathSeg[],
+    style: PathStyle
+  ): void {
     const { htmlContext } = this;
     htmlContext.save();
     this.applyStyle(style, org);

@@ -1,7 +1,7 @@
 import { WebFontCache } from "../drawSys/browser/WebFontCache";
 import { ChemExpr } from "../core/ChemExpr";
 import { SvgWebSurface } from "../drawSys/browser/SvgWebSurface";
-import { createChemImgProps } from "../drawSys/browser/createChemImgProps";
+import { createBrowserChemImgProps } from "../drawSys/browser/createBrowserChemImgProps";
 import { renderTopFrame } from "../drawSys/figures/renderTopFrame";
 import { ChemAgent } from "../core/ChemAgent";
 import { buildFrame } from "../structBuilder/buildFrame";
@@ -20,7 +20,7 @@ export const renderFormulaSvg = (
 ) => {
   if (typeof document === "undefined") return;
   const surface = new SvgWebSurface(fontPropsCache);
-  const props = createChemImgProps(owner, surface);
+  const props = createBrowserChemImgProps(owner, surface);
   const frame = buildFrame(expr, props);
   renderTopFrame(frame, surface);
   const { bounds } = frame;
@@ -42,7 +42,7 @@ export const makeFormulaSvgText = (
   try {
     document.body.append(tmp);
     const surface = new SvgWebSurface(fontPropsCache);
-    const props = createChemImgProps(tmp, surface);
+    const props = createBrowserChemImgProps(tmp, surface);
     const frame = buildFrame(expr, props);
     renderTopFrame(frame, surface);
     const { bounds } = frame;

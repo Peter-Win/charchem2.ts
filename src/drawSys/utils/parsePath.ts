@@ -1,6 +1,11 @@
 import { Point } from "../../math/Point";
 import { PathSeg } from "../path";
 
+/**
+ * @param d SVG > path > d attribute
+ * @see https://developer.mozilla.org/en-US/docs/Web/SVG/Tutorial/Paths
+ * @returns
+ */
 export const parsePath = (d: string): PathSeg[] => {
   const error = () => {
     throw Error("Invalid path");

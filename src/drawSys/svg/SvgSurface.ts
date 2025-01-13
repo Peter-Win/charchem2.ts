@@ -13,8 +13,9 @@ import { toa } from "../../math";
 import { PathSeg } from "../path";
 import { pathToString } from "../utils/pathToString";
 import { XmlAttrs } from "../../utils/xml/xmlTypes";
+import { Matrix2x3 } from "../../math/Matrix2x3";
 
-const pathAttrs = (style: PathStyle, org?: Point) => {
+const pathAttrs = (style: PathStyle, org?: Point | Matrix2x3) => {
   const { stroke, strokeWidth, join, cap } = style;
   const attrs: XmlAttrs = {};
   attrs.fill = style.fill ?? "none";
@@ -24,8 +25,13 @@ const pathAttrs = (style: PathStyle, org?: Point) => {
   if (strokeWidth) attrs["stroke-width"] = toa(strokeWidth);
   if (join) attrs["stroke-linecap"] = join;
   if (cap) attrs["stroke-linecap"] = cap;
-  if (org && !org.isZero())
-    attrs.transform = `translate(${toa(org.x)},${toa(org.y)})`;
+  if (org) {
+    if (org instanceof Point && !org.isZero()) {
+      attrs.transform = `translate(${toa(org.x)},${toa(org.y)})`;
+    } else if (org instanceof Matrix2x3) {
+      attrs.transform = `matrix(${org.repr()})`;
+    }
+  }
   return attrs;
 };
 
@@ -43,7 +49,7 @@ export abstract class SvgSurface implements AbstractSurface {
     this.clear();
   }
 
-  drawPath(org: Point, path: PathSeg[], style: PathStyle): void {
+  drawPath(org: Point | Matrix2x3, path: PathSeg[], style: PathStyle): void {
     const attrs: XmlAttrs = { d: pathToString(path), ...pathAttrs(style, org) };
     this.addFigure(drawTag("path", attrs, true));
   }
