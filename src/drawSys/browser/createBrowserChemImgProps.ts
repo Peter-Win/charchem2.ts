@@ -15,7 +15,7 @@ const findComputedStyle: FnComputedStyle =
   // @ts-ignore
   ((element: Element) => element.currentStyle);
 
-export const createChemImgProps = (
+export const createBrowserChemImgProps = (
   owner: Element,
   surface: AbstractSurface
 ): ChemImgProps => {

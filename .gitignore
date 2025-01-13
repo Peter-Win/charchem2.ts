@@ -9,3 +9,4 @@ dist/
 /lib
 /libTest/result/
 /rubbers/figure.txt
+**/tests/files/*.*

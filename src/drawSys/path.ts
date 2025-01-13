@@ -19,7 +19,7 @@ export interface PathSegHoriz {
   x: Double;
 }
 
-export interface PathSegCubic {
+export interface PathSegQuadratic {
   cmd: "Q";
   rel?: boolean;
   cp: Point;
@@ -61,7 +61,7 @@ export type PathSeg =
   | PathSegPt
   | PathSegVert
   | PathSegHoriz
-  | PathSegCubic
+  | PathSegQuadratic
   | PathSegBezier
   | PathSegBezierShort
   | PathSegArc

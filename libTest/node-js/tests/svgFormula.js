@@ -9,11 +9,12 @@ const {compile} = require("../../../dist/compiler/compile");
 const {buildExpression} = require("../../../dist/structBuilder/buildExpression");
 const {SvgSurfacePortable} = require("../../../dist/drawSys/svg/SvgSurfacePortable");
 const {standaloneExportOptions} = require("../../../dist/drawSys/svg/standaloneExportOptions");
-const {ChemImgProps} = require("../../../dist/drawSys/ChemImgProps");
-const {LocalSvgFont} = require("../../../dist/drawSys/svg/LocalSvgFont");
 const {SvgFont} = require("../../../dist/drawSys/portableFonts/svgFont/SvgFont");
 const {renderTopFrame} = require("../../../dist/drawSys/figures/renderTopFrame");
+const {createPortableImgProps} = require("../../../dist/drawSys/portableFonts/createPortableImgProps");
+const {createEps} = require("../../../dist/drawSys/ps/createEps");
 
+const title = "Flavanonol";
 const srcCode = "$color(blue)|$color()<$color(green)\\wOH$color()>`/$color(red)|O`|$color()`\\`|`\\\\`/||\\//`|0/O\\/d\\\\/`||`\\`//|; #-5\\0\"Flav\"$color(blue)\"an\"$color(red)\"on\"$color(green)\"ol\"$color();#O-0$color(green)\"3-hydroxy\"$color(blue)\"-2,3-dihydro\"_(y.7,N0)$color()\"-2-phenylchromen-\"$color(red)\"4-one\"";
 
 // Make expression from source formula code
@@ -23,25 +24,27 @@ assert.equal(expr.getMessage(), "");
 // load font
 const fontName = path.resolve(__dirname, "..", "..", "..", "static", "fonts", "Cambria-regular.svg");
 const fontXmlCode = fs.readFileSync(fontName, {encoding: "utf-8"});
-const fontFactory = SvgFont.create(fontXmlCode);
+const mainFont = SvgFont.create(fontXmlCode);
 
-// Prepare image properties
-const localFont = new LocalSvgFont(fontFactory, {
-  family: fontFactory.fontFace.fontFamily,
-  height: 18,
+const imgProps = createPortableImgProps({
+  mainFont,
+  fontSize: 18,
+  fillColor: "black",
 });
-const style = { fill: "black"};
-const imgProps = new ChemImgProps({font: localFont, style});
-imgProps.init();
 
 // Build formula image in abstract format
 const {frame} = buildExpression(expr, imgProps);
 
 // Convert abstract figures to portable SVG format
-const surface = new SvgSurfacePortable(fontFactory);
+const surface = new SvgSurfacePortable(mainFont);
 renderTopFrame(frame, surface);
 const dstText = surface.exportText(standaloneExportOptions);
 
 // Write SVG text to file
-const dstFileName = path.resolve(__dirname, "..", "..", "result", "formula.svg")
+const dstFileName = path.resolve(__dirname, "..", "..", "result", "formula.svg");
 fs.writeFileSync(dstFileName, dstText, {encoding: "utf-8"});
+
+// Make EPS-file
+const epsName = path.resolve(__dirname, "..", "..", "result", "formula.eps");
+const epsContent = createEps({ frame, title}).exportText();
+fs.writeFileSync(epsName, epsContent, {encoding: "ascii"});
