@@ -1,0 +1,22 @@
+.box {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.toolbar {
+  background-color: #EEE;
+  padding: 0.5rem 1rem;
+  display: flex;
+  flex-direction: row;
+  gap: 0.6rem;
+}
+
+.toolbar > button {
+  border: none;
+  padding: 0.2rem 0.6rem;
+  background-color: #DDD;
+  cursor: pointer;
+  &:hover { background-color: #AAA;}
+  &.active { background: #0b76ef; color: white;}
+
+}

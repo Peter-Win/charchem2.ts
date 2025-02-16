@@ -36,6 +36,12 @@ import { ChemEquation } from "./equation/ChemEquation";
 import { RulesBase } from "./textRules/RulesBase";
 import { makeTextFormula } from "./inspectors/makeTextFormula";
 import { dictTextRules } from "./textRules/dictTextRules";
+import {
+  textFormula,
+  FmtDef,
+  FmtType,
+  textTypes,
+} from "./textBuilder/textFormula";
 
 export const ChemSys = Object.freeze({
   addDict(globalDict: Record<string, LocalDict>) {
@@ -70,7 +76,7 @@ export const ChemSys = Object.freeze({
     return makeFormulaSvgText(expr, fontPropsCache);
   },
   /**
-   *
+   * @deprecated next version: ChemSys.textFormula()
    * @param objOrCode if string, then formula code, else ChemObj (usually ChemExpr)
    * @param rules by default = dictTextRules.text
    * @returns
@@ -80,7 +86,21 @@ export const ChemSys = Object.freeze({
       typeof objOrCode === "string" ? compile(objOrCode) : objOrCode;
     return makeTextFormula(chemObj, rules);
   },
+  /**
+   * @deprecated next version: ChemSys.testTypesList (for ChemSys.textFormula())
+   */
   dictTextRules,
+
+  textFormula(
+    objOrCode: ChemObj | string,
+    fmtOrType: FmtDef | FmtType
+  ): string {
+    return textFormula(objOrCode, fmtOrType);
+  },
+  get textTypesList(): readonly FmtType[] {
+    return textTypes;
+  },
+
   makeBruttoKey(src: ChemObj | string): string {
     return makeBruttoKey(src);
   },

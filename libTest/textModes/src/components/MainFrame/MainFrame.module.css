@@ -1,0 +1,13 @@
+.mainFrame {
+  display: flex;
+  flex-direction: column;
+  h1 { padding: 0.5rem 1rem; }
+}
+.formulaBox {
+  padding: 1rem;
+  position: sticky;
+  z-index: 1; /* If this is not done, then when scrolling MathML, formulas are displayed on top of the input panel. */
+  top: 0;
+  background-color: #EEE;
+  box-shadow: 0 0.1em 0.5em #AAA;
+}

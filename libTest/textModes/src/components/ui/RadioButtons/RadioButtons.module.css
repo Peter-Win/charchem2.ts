@@ -1,0 +1,24 @@
+.box {
+  display: inline-flex;
+  flex-direction: row;
+  gap: 0.2rem;
+}
+
+.box > button {
+  padding: 0.1rem 0.4rem;
+  border: none;
+  min-width: 4rem;
+  text-align: center;
+  background-color: #CCC;
+  cursor: pointer;
+}
+
+.box > button:hover {
+  background-color: #888;
+  color: white;
+}
+
+.box > button.active {
+  background-color: #0b76ef;
+  color: white;
+}

@@ -1,0 +1,28 @@
+.button {
+  display: inline-flex;
+  padding: 6px 15px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border-radius: 4px;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 200;
+  line-height: 115%;
+  color: white;
+  background: #888;
+  cursor: pointer;
+  border: none;
+
+  &.primary:not(:disabled) {
+    background: #7FB2CC;
+    &:hover {
+      background-color: #417FC6;
+    }
+  }
+  &:disabled {
+    background-color: #CCC;
+    color: #818181;
+    cursor: default;
+  }
+}

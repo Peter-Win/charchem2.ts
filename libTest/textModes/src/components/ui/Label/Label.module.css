@@ -1,0 +1,15 @@
+.box {
+  display: inline-flex;
+  gap: 0.6rem;
+}
+
+.vertical {
+  flex-direction: column;
+  gap: 0.4rem;
+}
+.right {
+  flex-direction: row-reverse;
+}
+.vertical.right {
+  flex-direction: column-reverse;
+}

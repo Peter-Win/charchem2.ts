@@ -18,12 +18,22 @@ cp.execSync("node ./node-js/test-node-js.js", {stdio: "inherit"});
 console.log("> react-ts");
 cp.execSync("node ./react-ts/test-react-ts.js", {stdio: "inherit"});
 
+console.log("> textModes");
+cp.execSync("node ./textModes/start.js", {stdio: "inherit"});
+
 console.log("Generate report in", reportName);
 const reportText = `<!DOCTYPE html>
 <html>
   <head>
     <meta charset="utf-8" />
     <title>Test report</title>
+    <style>
+    body {font-size: 16px;}
+    a {font-size: 120%; border-radius: 5px; padding: 0.2em 0.6em; background-color: #EEE;}
+    a:hover {background-color: #CCC;}
+    ul {display: flex; flex-direction: column; gap: 0.5em;}
+    li > a {display: inline-block;}
+    </style>
   </head>
   <body>
     <h1>All tests were completed successfully</h1>
@@ -34,6 +44,7 @@ const reportText = `<!DOCTYPE html>
         <img src="./formula.svg" width="300px" />
       </li>
       <li><a href="../react-ts/dist/index.html">React result</a></li>
+      <li><a href="../textModes/dist/index.html">Text modes test</a></li>
     </ul>
   </body>
 </html>`;

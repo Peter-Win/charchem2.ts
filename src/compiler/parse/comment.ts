@@ -79,14 +79,20 @@ const convertComment = (text: string): string => {
   return result;
 };
 
+const replaceSlashed = (text: string): string =>
+  text.replace(/\\([A-Za-z][a-z]*)/g, (x, y) => specCharsB[y] || x);
+
+/**
+ * Support of \Greek in v 2.2
+ */
 export const replaceGreek = (src: string): string =>
-  replaceLimited(src, "[", "]", (it) => specCharsB[it]);
+  replaceSlashed(replaceLimited(src, "[", "]", (it) => specCharsB[it]));
 
 // Символы в квадратных скобках.
 // Здесь можно добавлять другие символы без снижения производительности.
 // (на производительность влияет размер текста и количество скобок в нем)
 
-const specCharsB: Record<string, string> = {
+export const specCharsB: Record<string, string> = {
   alpha: "α",
   Alpha: "Α",
   beta: "β",

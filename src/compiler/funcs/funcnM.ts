@@ -9,7 +9,13 @@ import { funcM } from "./funcM";
 
 export const funcnM = (compiler: ChemCompiler, args: string[], pos: Int[]) => {
   funcM(compiler, args, pos);
-  // -1 означает, что надо использовать массу того атома, к которому применяется функция
-  // в отличие от null, который означает, что номер элемента вообще не выводится
-  compiler.varAtomNumber = args.length > 1 ? +args[1]! || -1 : -1;
+  // "" означает, что надо использовать массу того атома, к которому применяется функция
+  // в отличие от undefined, который означает, что номер элемента вообще не выводится
+  compiler.varAtomNumber = args.length > 1 ? cvt(args[1]!) : "";
+};
+
+const cvt = (s: string): number | undefined => {
+  if (!s) return undefined;
+  const n = +s;
+  return Number.isNaN(n) ? undefined : n;
 };

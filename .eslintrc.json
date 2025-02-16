@@ -36,6 +36,7 @@
     "no-dupe-class-members": "off",
     "no-use-before-define": "off",
     "no-plusplus": "off",
+    "no-continue": "off",
     
     "no-restricted-syntax": "off",
     "import/no-extraneous-dependencies": [

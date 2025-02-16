@@ -89,9 +89,10 @@ export const buildItem = (
       drawIndex(charge.text, "oxidationState", "CU");
     }
     ifDef(mass, (it) => drawIndex(it, "itemMass", "LT"));
-    ifDef(atomNum, (it) =>
-      drawIndex(it >= 0 ? it : locateAtomNumber(item), "atomNumber", "LB")
-    );
+    ifDef(atomNum, (it) => {
+      const atomNumber = it === "" ? locateAtomNumber(item) : it;
+      if (atomNumber !== undefined) drawIndex(atomNumber, "atomNumber", "LB");
+    });
     if (dots) {
       const rc = rcCore.clone();
       if (itemFont) {

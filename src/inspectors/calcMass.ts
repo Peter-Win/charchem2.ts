@@ -18,7 +18,7 @@ export const calcMass = (
   chemObj: ChemObj,
   applyAgentK: boolean = true
 ): Double => {
-  const stack: Double[] = [0.0];
+  const stack: Double[] | [Double] = [0.0];
   const push = () => {
     stack.unshift(0.0);
   };

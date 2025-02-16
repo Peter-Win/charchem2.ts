@@ -1,0 +1,4 @@
+2.1.0 Atomic masses have been brought into line with IUPAC. The epsilonMass parameter has been added to the ChemAtom.
+2.1.1 Added support for EPS format for outputting graphical formulas.
+2.2.1 Text formula generator 2.0. Supported formats: HTML, MathML, TeX. Fixed vulnerability for XSS.
+2.2.1 New chemical operations: <-, <--

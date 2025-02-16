@@ -14,6 +14,8 @@ export class OpDef {
   }
 }
 
+// <-- must be before <-
+
 export const opsList: OpDef[] = [
   new OpDef("+"),
   new OpDef("-->", "—→", true),
@@ -23,11 +25,15 @@ export const opsList: OpDef[] = [
   new OpDef("→", null, true),
   new OpDef("=", null, true),
   new OpDef("↔", null, true),
+  new OpDef("<-->", "←→", true), // v2.2
   new OpDef("<->", "↔", true),
   new OpDef("<=>", "\u21CC", true),
   new OpDef("<==>", "\u21CC", true),
-  new OpDef("*", "∙"),
+  new OpDef("*", "∙"), // deprecated
   new OpDef("!=", "≠", true),
+  new OpDef("<|--", "←—", true), // v2.2
+  new OpDef("<--", "←—", true), // v2.2
+  new OpDef("<-", "←", true), // &#x2190; v2.2
 ];
 
 export const onCloseOp = (compiler: ChemCompiler) => {

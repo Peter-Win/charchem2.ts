@@ -1,0 +1,22 @@
+.box {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+
+  input {font-size: 1.1rem; padding: 0.2rem 0.4rem;}
+}
+
+.tips {
+  display: flex;
+  flex-direction: row;
+  gap: 1.5rem;
+  overflow-x: auto;
+
+  button {
+    border: none;
+    background: none;
+    color: #555;
+    cursor: pointer;
+    border-bottom: thin dashed #555;
+  }
+}

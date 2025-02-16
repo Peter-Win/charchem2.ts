@@ -28,7 +28,6 @@
     "prepare": "husky install",
     "international": "node ./scripts/international.js && yarn lint"
   },
-  "dependencies": {},
   "devDependencies": {
     "@testing-library/dom": "^8.13.0",
     "@testing-library/jest-dom": "^5.16.4",

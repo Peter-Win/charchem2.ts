@@ -31,7 +31,8 @@
         return elem;
       }
       function textChunk(dstBox, expr, type, label, fn) {
-        var code = ChemSys.makeTextFormula(expr, ChemSys.dictTextRules[type]);
+        // var code = ChemSys.makeTextFormula(expr, ChemSys.dictTextRules[type]);
+        var code = ChemSys.textFormula(expr, type);
         if (fn) code = fn(code);
         var chunk = createElem("div", dstBox, {cls: "chunk"});
         createElem("label", chunk, {text: label});
@@ -51,11 +52,11 @@
           createElem("div", dstBox, {cls: "error", text: "This formula is not linear"});
           return;
         }
-        var labels = Object.keys(ChemSys.dictTextRules);
+        var labels = ChemSys.textTypesList; //Object.keys(ChemSys.dictTextRules);
         for (var i=0; i<labels.length; i++) {
           var label = labels[i];
-          var fn = label === "mhchem" ? function(c){ return "\\ce{"+c+"}"} : undefined;
-          textChunk(dstBox, expr, label, label, fn);
+          // var fn = label === "mhchem" ? function(c){ return "\\ce{"+c+"}"} : undefined;
+          textChunk(dstBox, expr, label, label);
         }
       }
       window.addEventListener("load", function(){
