@@ -1,0 +1,16 @@
+html, body, div, p, h1, h2, h3, h4, ul, li, span,
+form, input, select, button {
+    margin: 0;
+    padding: 0;
+}
+* { box-sizing: border-box; }
+:root {
+    --text-main: #333;
+    --fill-main: #FFF;
+}
+body {
+    color: var(--text-main);
+    background: var(--fill-main);
+    font-family: Geneva, Arial, Helvetica, sans-serif;
+    font-size: 16px;
+}

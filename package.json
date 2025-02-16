@@ -1,6 +1,6 @@
 {
   "name": "charchem2",
-  "version": "2.1.1",
+  "version": "2.2.0",
   "description": "System to describe the chemical formulas for WEB",
   "main": "dist/index.js",
   "files": [
@@ -26,9 +26,9 @@
     "test:coverage": "jest --coverage",
     "lint": "eslint ./src --ext .ts --fix",
     "prepare": "husky install",
-    "international": "node ./scripts/international.js && yarn lint"
+    "international": "node ./scripts/international.js && yarn lint",
+    "version": "yarn build"
   },
-  "dependencies": {},
   "devDependencies": {
     "@testing-library/dom": "^8.13.0",
     "@testing-library/jest-dom": "^5.16.4",

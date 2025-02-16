@@ -42,4 +42,13 @@ describe("scanOp", () => {
     const res = scanOp(compiler);
     expect(res).toBeUndefined();
   });
+  it("Long Leftwards Arrow", () => {
+    //                                   012345
+    const compiler = createTestCompiler("B <-- C");
+    compiler.pos = 2;
+    const res = scanOp(compiler);
+    expect(res).toBeDefined();
+    expect(res!.src).toBe("<--");
+    expect(compiler.pos).toBe(5);
+  });
 });

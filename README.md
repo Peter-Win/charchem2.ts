@@ -26,6 +26,7 @@ The results will be in the `charchem2.ts/lib` folder
 ## Connecting a library to a project via NPM
 
 This method allows you to use CharChem both in a browser and in a desktop (server) application.
+Tested in Node.js.
 
 Installation options:
 - `npm i charchem2 -S`
@@ -57,9 +58,4 @@ After the required dictionaries are registered, you can switch to the required l
 ChemSys.curLang = "en"; // Instead of "en", you can specify any of the registered locales.
 ```
 
-
-## Miscellaneous
-
-Problems:
-- It is possible to insert unsafe code in HTML formula view by Text and Custom items.
 

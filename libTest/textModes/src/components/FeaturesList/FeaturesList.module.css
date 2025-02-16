@@ -1,0 +1,30 @@
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  --rad: 5px;
+  --bk: #DDD;
+}
+.list > div {
+  display: flex;
+  flex-direction: column;
+}
+.itemTopRow {
+  display: flex;
+  flex-direction: row;
+  gap: 3rem;
+  align-items: center;
+  font-size: 90%;
+}
+.itemHead {
+  display: inline-block;
+  background-color: var(--bk);
+  padding: 0.4rem 1rem 0.1rem;
+  border-radius: var(--rad);
+}
+.open .itemHead {
+  border-radius: var(--rad) var(--rad) 0 0;
+}
+.itemBody {
+  border: thick solid var(--bk);
+}

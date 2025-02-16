@@ -1,0 +1,30 @@
+.box {
+  border: thin solid silver;
+  display: flex;
+  flex-direction: column;
+  border-radius: 4px;
+}
+
+.title {
+  background-color: #CCC;
+  background: linear-gradient(to bottom, #EEE, #DDD);
+  padding: 0.5rem 1rem;
+  border: none;
+  display: flex;
+  flex-direction: row;
+  gap: 1em;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.title > svg {
+  transition: transform 0.2s ease-in-out;
+}
+
+.open .title > svg {
+  transform: rotate(90deg);
+}
+
+.content {
+  padding: 0.2rem 0.5rem;
+}

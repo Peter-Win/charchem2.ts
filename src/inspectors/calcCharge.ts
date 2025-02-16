@@ -7,7 +7,7 @@ import { ChemObj } from "../core/ChemObj";
  * При наличии абстрактных коэффициентов возвращается NaN
  */
 export const calcCharge = (chemObj: ChemObj): Double => {
-  const stack: Double[] = [0.0];
+  const stack: Double[] | [Double] = [0.0];
   const push = () => {
     stack.unshift(0.0);
   };

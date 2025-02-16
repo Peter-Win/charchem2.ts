@@ -17,6 +17,7 @@ export const stateElement: CompilerState = (compiler) => {
       pos: compiler.elementStartPos,
       Elem: id,
     });
-  addNodeItem(compiler, elem);
+  const item = addNodeItem(compiler, elem);
+  compiler.addSrcMapItem(item, compiler.elementStartPos);
   return compiler.setState(statePostItem);
 };

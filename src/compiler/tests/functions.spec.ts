@@ -12,8 +12,14 @@ describe("Functions", () => {
     expect(makeTextFormulaSrc("$nM(235)U", rulesHtml)).toBe(
       `<span class="echem-mass-and-num">235<br/>92</span>U`
     );
+    expect(makeTextFormulaSrc("$nM(1){n}", rulesHtml)).toBe(
+      `<sup>1</sup><i>n</i>`
+    );
     expect(makeTextFormulaSrc("$nM(1,0){n}", rulesHtml)).toBe(
       `<span class="echem-mass-and-num">1<br/>0</span><i>n</i>`
+    );
+    expect(makeTextFormulaSrc("$nM(1,-1){n}", rulesHtml)).toBe(
+      `<span class="echem-mass-and-num">1<br/>-1</span><i>n</i>`
     );
   });
   it("Slope", () => {

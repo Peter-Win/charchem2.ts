@@ -3,7 +3,7 @@
 
 Single page application (SPA)
 
-Technologies used: TypeScript, React, Webpack, CSS modules, MobX.
+Technologies used: TypeScript, React, Webpack, CSS modules.
 
 For local start use commands:
 

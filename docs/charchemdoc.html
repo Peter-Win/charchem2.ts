@@ -43,8 +43,8 @@
       The <a href="?p=ref">Reference</a> is not intended to be read.
       It should be consulted as needed to obtain detailed information on various aspects of the CharChem system.      
     </p>
-    <p lang="ru">Автор документа: PeterWin. Версия от 2024-12-01</p>
-    <p lang="en">Author of the document: PeterWin. Version from 2024-12-01</p>
+    <p lang="ru">Автор документа: PeterWin. Версия от 2026-02-15</p>
+    <p lang="en">Author of the document: PeterWin. Version from 2026-02-15</p>
   </page>  
 
   <page id="rules" data-owner="home">
@@ -995,7 +995,7 @@
     <p lang="ru">Мы уже рассмотрели относительно простые возможности CharChem. Пора переходить к более серьёзным формулам.</p>
     <p lang="en">We have already looked at the relatively simple capabilities of CharChem. It is time to move on to more serious formulas.</p>
     <p lang="ru">Существует довольно много всяких способов для описания химических связей.</p>
-    <p lang="ru">There are quite a few different ways to describe chemical bonds.</p>
+    <p lang="en">There are quite a few different ways to describe chemical bonds.</p>
     <ul class="contents" data-owner="rules-bonds"></ul>
   </page> 
 
@@ -1729,7 +1729,7 @@
     <p lang="ru">Левый называется <i>вертикальным</i>, а правый &mdash; <i>горизонтальным</i>.</p>
     <p lang="en">The left one is called <i>vertical</i> and the right one is called <i>horizontal</i>.</p>
     <p lang="ru">Разница в том, что наклонная связь, которая описывается символом <code>\</code> (обратный слэш), 
-      в вертикальном шестиугольнике образует с осью X угол в 30°, а во втором - 60°.</p>
+      в вертикальном шестиугольнике образует с осью X угол в 30°, а во втором &mdash; 60°.</p>
     <p lang="en">
       The difference is that the inclined bond, which is described by the symbol <code>\</code> (backslash), 
       forms an angle of 30° with the X-axis in the vertical hexagon, and 60° in the second.
@@ -1992,6 +1992,7 @@
         function drawTbl(t, f) {
           var r1=createElem("tr", t), r2=createElem("tr", t);
           f.forEach(function(code){
+            console.log(">>", code);
             createElem("code", createElem("td", r1), {text: code});
             ChemSys.draw(createElem("span", createElem("td", r2), {cls: "echem-formula"}), code);
           });
@@ -2226,11 +2227,11 @@
       <tr>
         <td>
           <span lang="ru">
-            Число означает, сколько углов (сторон) должно быть у полигона. Например, для треугольника - 3.<br />
+            Число означает, сколько углов (сторон) должно быть у полигона. Например, для треугольника &mdash; 3.<br />
             А если число не указано, то по-умолчанию считается 5.
           </span>
           <span lang="en">
-            The number indicates how many angles (sides) the polygon should have. For example, for a triangle - 3.<br />
+            The number indicates how many angles (sides) the polygon should have. For example, for a triangle &mdash; 3.<br />
             And if the number is not specified, then 5 is considered by default.
           </span>
         </td>
@@ -3797,13 +3798,13 @@
       But even now it should be done only in extreme cases, when there is no other way.
     </p>
     <p lang="ru">Начинаем с узла <code>COOH</code>. Затем связь в обратную сторону <code>`-</code>. 
-      А дальше важно - нужно обозначить открывающуюся скобку. 
+      А дальше важно &mdash; нужно обозначить открывающуюся скобку. 
       Хотя визуально на этом месте должна быть закрывающаяся скобка с коэфиициентом.
       Но при описании формулы всегда сначала идёт открывающаяся скобка.
     </p>
     <p lang="en">
       We start with the <code>COOH</code> node. Then the chemical bond in the opposite direction <code>`-</code>. 
-      And then it is important - you need to designate the opening bracket. 
+      And then it is important &mdash; you need to designate the opening bracket. 
       Although visually there should be a closing bracket with a coefficient in this place. 
       But when describing a formula, the opening bracket always comes first.
     </p>
@@ -5222,8 +5223,8 @@
     <p lang="ru">Поддержка описания цветов в таком формате есть во многих графических редакторах. Например в PhotoShop или GIMP.</p>
     <p lang="en">Many graphic editors support color descriptions in this format. For example, PhotoShop or GIMP.</p>
     <h2>RGB</h2>
-    <p lang="ru">Начинается с ключевого слова rgb, а затем в скобках, через запятую указываются компоненты цвета.</p>
-    <p lang="en">It starts with the keyword rgb, and then in brackets, separated by commas, the color components are indicated.</p>
+    <p lang="ru">Начинается с ключевого слова rgb, а затем в скобках, через запятую указываются компоненты цвета. Диапазон от 0 до 255.</p>
+    <p lang="en">It starts with the keyword rgb, and then in brackets, separated by commas, the color components are indicated. The range of values ​​is from 0 to 255.</p>
     <p>
       <span lang="ru">Например</span><span lang="en">For example</span>:
       <code class="chem-code">rgb(255, 128, 128)</code>.
@@ -6972,7 +6973,7 @@
     <script>
       window.addEventListener("load", function() {
         var tbl = document.getElementById("chem-ops-table");
-        ["+", "-->", "--|>", "->", "®", "→", "=", "↔", "<->", "<=>", "<==>", "!="].forEach(function(op) {
+        ["+", "-->", "--|>", "->", "®", "→", "=", "↔", "<->", "<-->", "<=>", "<==>", "!=", "<-", "<--", "<|--"].forEach(function(op) {
           var tr = createElem("tr", tbl);
           var cmd = '"comment"'+op;
           createElem("code", createElem("td", tr), {text: op});
@@ -7621,6 +7622,14 @@
       Greek letters can be used in comments and <a data-ref="abs-item">abstract items</a>.
       To do this, enter the name of the letter in square brackets.
     </p>
+    <p lang="ru">
+      В CharChem версии 2.2+ можно использовать греческие буквы как в TeX-системах &mdash; через обратный слэш и название буквы.
+      Н.р.: <code>\Alpha</code>
+    </p>
+    <p lang="en">
+      In CharChem version 2.2+, you can use Greek letters as in TeX systems &mdash; via a backslash and the letter name. 
+      For example, <code>\Alpha</code>
+    </p>
     <table>
       <tr><td><code>[Alpha] [alpha]</code></td><td>Α α</td></tr>
       <tr><td><code>[Beta] [beta]</code></td><td>Β β</td></tr>
@@ -7650,10 +7659,10 @@
     <p lang="ru">Примеры</p>
     <p lang="en">Examples</p>
     <div class="two-col-table" style="display: inline-grid;">
-      <code class="chem-code">$nM(27)Al + {[gamma]} -&gt; $nM(27)Al"*"</code>
-      <div class="echem-formula">$nM(27)Al + {[gamma]} -&gt; $nM(27)Al"*"</div>
-      <code class="chem-code">C + O2 -> CO2"; [Delta]_RH=-393,51 kJ/mol"</code>
-      <div class="echem-formula">C + O2 -> CO2"; [Delta]_RH=-393,51 kJ/mol"</div>
+      <code class="chem-code">$nM(27)Al + {<em>[gamma]</em>} -&gt; $nM(27)Al"*"</code>
+      <div class="echem-formula">$nM(27)Al + $itemColor1(var(--select-color)){[gamma]} -&gt; $nM(27)Al"*"</div>
+      <code class="chem-code">C + O2 -> CO2"; <em>\Delta</em>_RH=-393,51 kJ/mol"</code>
+      <div class="echem-formula">C + O2 -> CO2"; {\color{var(--select-color)}\Delta}_RH=-393,51 kJ/mol"</div>
     </div>
   </page>
 

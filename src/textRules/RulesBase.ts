@@ -41,7 +41,7 @@ export class RulesBase {
   }
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  itemMassAndNum(mass: Double, number: Int): string {
+  itemMassAndNum(mass: Double, number: Int | undefined): string {
     return "";
   }
 

@@ -2,12 +2,11 @@ import { ChemAgent } from "../core/ChemAgent";
 import { compile } from "../compiler/compile";
 import { ChemExpr } from "../core/ChemExpr";
 import { isTextFormula } from "../inspectors/isTextFormula";
-import { makeTextFormula } from "../inspectors/makeTextFormula";
-import { rulesHtml } from "../textRules/rulesHtml";
 import { AutoCompileConfig } from "./AutoCompileConfig";
 import { renderFormulaCanvas } from "./renderFormulaCanvas";
 import { renderFormulaSvg } from "./renderFormulaSvg";
 import { addClass } from "./addClass";
+import { textFormula } from "../textBuilder/textFormula";
 
 export const renderFormulaCfg = (
   owner: Element,
@@ -23,7 +22,7 @@ export const renderFormulaCfg = (
     const canText = !config.nonText && isTextFormula(expr);
     if (canText) {
       // eslint-disable-next-line no-param-reassign
-      owner.innerHTML = makeTextFormula(expr, rulesHtml);
+      owner.innerHTML = textFormula(expr, "html");
       addClass(owner, "echem-is-text");
     } else if (config.drawSysId === "canvas") {
       renderFormulaCanvas(owner, expr, config.fontPropsCache);

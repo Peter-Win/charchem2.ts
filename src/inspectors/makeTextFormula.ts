@@ -115,10 +115,14 @@ export const makeTextFormula = (
       itemColor = obj.color;
       atomColor = obj.atomColor;
       const rawAtomNum = obj.atomNum;
-      if (rawAtomNum) {
+      if (rawAtomNum !== undefined) {
         // Вывести двухэтажную конструкцию: масса/атомный номер слева от элемента
-        const atomNum = rawAtomNum >= 0 ? rawAtomNum : locateAtomNumber(obj);
-        ctxOut(rules.itemMassAndNum(obj.mass || 0, atomNum), itemColor);
+        const atomNum = rawAtomNum === "" ? locateAtomNumber(obj) : rawAtomNum;
+        if (atomNum === undefined) {
+          ctxOut(rules.itemMass(obj.mass || 0), itemColor);
+        } else {
+          ctxOut(rules.itemMassAndNum(obj.mass || 0, atomNum), itemColor);
+        }
       } else {
         ifDef(obj.mass, (mass) => ctxOut(rules.itemMass(mass), itemColor));
       }

@@ -4,6 +4,7 @@ const dict: Record<string, string> = {
   "&": "amp",
   "<": "lt",
   ">": "gt",
+  "\u00A0": "nbsp",
 };
 
 export const escapeXml = (

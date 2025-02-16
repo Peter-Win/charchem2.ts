@@ -23,7 +23,7 @@ export class ChemNodeItem extends ChemObj {
   // If specified, then ignore mass of sub object
   mass?: Double;
 
-  atomNum?: Int; // признак вывода атомного номера (для ядерных реакций).
+  atomNum?: Int | ""; // признак вывода атомного номера (для ядерных реакций).
 
   color?: string; // общий цвет
 
