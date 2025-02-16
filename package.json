@@ -1,6 +1,6 @@
 {
   "name": "charchem2",
-  "version": "2.1.1",
+  "version": "2.2.0",
   "description": "System to describe the chemical formulas for WEB",
   "main": "dist/index.js",
   "files": [
