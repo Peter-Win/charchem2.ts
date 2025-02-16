@@ -1,5 +1,5 @@
 ﻿/*
- easyChem CSS file
+ CharChem CSS file
 */
 /* Periodic system table */
 .mentable { border-collapse:collapse; margin-top:5px; line-height:1;}
@@ -108,7 +108,14 @@
 .cch-expr {
     --col-height: 0.3em;
     --col-top: calc(-1*(var(--col-height) + 0.4em));
+    --op-comm-dy: 0.3em;
+    --op-comm2-dy: calc(0.5em - var(--op-comm-dy)); /* for head+footer both */
+    --op-comm1-dy: calc(1em - var(--op-comm2-dy));  /* for head only or footer only */
+    --arr-begin-pad: 0.2em;  /* begin--------->end */
+    --arr-end-pad: 0.4em;
+    --arr-both-pad: var(--arr-end-pad); /* For double-headed arrows, the indents are the same. Otherwise, you can see the offset between the top and bottom comments. */
 }
+
 span.echem-formula {
     display: inline-block;
 }
@@ -129,77 +136,77 @@ div.echem-formula {
     box-sizing: content-box;
 }
   
-  .cch-agent  {
+.cch-agent  {
     display: inline-flex;
     align-items: baseline;
-  }
-  .cch-node-item, .cch-symbols {
+}
+.cch-node-item, .cch-symbols {
     display: inline-flex;
     align-items: baseline;
-  }
+}
   
-  /* If the agent contains elements with oxidation states, then a place must be reserved at the top. 
-  The oxidation states will rise there via the absolute position. */
-  .cch-has-over {
+/* If the agent contains elements with oxidation states, then a place must be reserved at the top. 
+The oxidation states will rise there via the absolute position. */
+.cch-has-over {
     padding-top: var(--col-height);
-  }
-  .cch-agent-k {
+}
+.cch-agent-k {
     padding-right: 0.1em;
-  }
+}
   
-  .cch-over { 
+.cch-over { 
     display: inline-flex; 
     position: relative;
-  }
+}
   
-  .cch-over > *:nth-child(2) {
+.cch-over > *:nth-child(2) {
     position: absolute;
     left: 0;
     width: 100%;
     display: inline-flex;
     justify-content: center;
-  }
-  .cch-over > *:nth-child(2) {
+}
+.cch-over > *:nth-child(2) {
     top: var(--col-top);
-  }
+}
   
-  .cch-index,
-  .cch-over > *:nth-child(2), 
-  .cch-supsub > * {
+.cch-index,
+.cch-over > *:nth-child(2), 
+.cch-supsub > * {
     font-size: 0.65em;
     white-space: nowrap;
     font-stretch: condensed;
     letter-spacing: -0.05em;
-  
+
     line-height: 1em;
     min-height: 1em;    
-  }
+}
   
-  .cch-supsub {
+.cch-supsub {
     display: inline-flex;
     flex-direction: column;
     align-self: center;
     margin-top: -0.25em;
     padding-top: 0.2em;
-  }
-  .cch-supsub-left > * {text-align: right;}
+}
+.cch-supsub-left > * {text-align: right;}
   
-  .cch-charge {
+.cch-charge {
     display: inline-flex;
     align-items: baseline;
-  }
-  .cch-minus {
+}
+.cch-minus {
     display: inline-block;
     width: 0.4em;
     transform: scaleX(0.8);
-  }
-  .cch-mul {
+}
+.cch-mul {
     display: inline-block;
     padding: 0 0.1em;
-  }
+}
   
   
-  /*********************
+/*********************
       Operations
         _____________________________.cch-op-both
        ^   
@@ -218,118 +225,109 @@ div.echem-formula {
        |   ***   ***    * .cch-op-comment
        v_____________________________________
   
-  *********************/
-  .cch-expr {
-    --op-comm-dy: 0.3em;
-    --op-comm2-dy: calc(0.5em - var(--op-comm-dy)); /* for head+footer both */
-    --op-comm1-dy: calc(1em - var(--op-comm2-dy));  /* for head only or footer only */
-    --arr-begin-pad: 0.2em;  /* begin--------->end */
-    --arr-end-pad: 0.4em;
-    --arr-both-pad: var(--arr-end-pad); /* For double-headed arrows, the indents are the same. Otherwise, you can see the offset between the top and bottom comments. */
-  }
-  
-  
-  /* Если этого не сделать, то align-items неправильно работает для пустой строки. Как будто не находит базовую линию. */
-  .cch-op-comment::before,
-  .cch-arrow-both::before {
+*********************/
+    
+/* Если этого не сделать, то align-items неправильно работает для пустой строки. Как будто не находит базовую линию. */
+.cch-op-comment::before,
+.cch-arrow-both::before {
     display: inline-block;
     content: ".";
     width: 0;
     visibility: hidden;
-  }
+}
   
-  .cch-op-comment {
+.cch-op-comment {
     min-width: 1.2em;
     display: inline-flex;
     justify-content: center;
-  }
-  .cch-op-comment > * {
+}
+.cch-op-comment > * {
     font-size: 80%;  
-  }
-  .cch-op-comment:has(+ .cch-op[data-op="-->"]), /* above */
-  .cch-op[data-op="-->"] + .cch-op-comment /* below */
-  {
+}
+.cch-op-comment:has(+ .cch-op[data-op="-->"]), /* above */
+.cch-op[data-op="-->"] + .cch-op-comment /* below */
+{
     padding-left: var(--arr-begin-pad);
     padding-right: var(--arr-end-pad);
-  }
-  .cch-op-comment:has(+ .cch-op[data-op="<--"]), /* above */ 
-  .cch-op[data-op="<--"] + .cch-op-comment /* below */
-  {
+}
+.cch-op-comment:has(+ .cch-op[data-op="<--"]), /* above */ 
+.cch-op[data-op="<--"] + .cch-op-comment /* below */
+{
     padding-right: var(--arr-begin-pad);
     padding-left: var(--arr-end-pad);
-  }
-  .cch-op-comment:has(+ .cch-op[data-op="<==>"]) /* above */ ,
-  .cch-op[data-op="<==>"] + .cch-op-comment /* below */,
-  .cch-op-comment:has(+ .cch-op[data-op="<-->"]) /* above */,
-  .cch-op[data-op="<-->"] + .cch-op-comment /* below */
-  {
+}
+.cch-op-comment:has(+ .cch-op[data-op="<==>"]) /* above */ ,
+.cch-op[data-op="<==>"] + .cch-op-comment /* below */,
+.cch-op-comment:has(+ .cch-op[data-op="<-->"]) /* above */,
+.cch-op[data-op="<-->"] + .cch-op-comment /* below */
+{
     padding-right: var(--arr-both-pad);
     padding-left: var(--arr-both-pad);
-  }
+}
   
-  .cch-op {
+.cch-op {
     position: relative;
     min-width: 0.6em;
     height: 1em;
     display: inline-flex;
     justify-content: center;
-  }
-  .cch-op-arrow .cch-op-code {
+}
+.cch-op-arrow .cch-op-code {
     opacity: 0;
     width: 1.2em;
-  }
-  .cch-op-code {
+}
+.cch-op-code {
     text-align: center;
     white-space: nowrap;  
     height: 1em;
     display: inline-flex;
-  }
+}
   
-  .cch-op-both {
+.cch-op-both {
     align-self: baseline;
     padding-top: 1em;
     margin-bottom: -1em; /* иначе образуется поле снизу */
     transform: translateY(-1em);
-  
+
     display: inline-flex;
     flex-direction: column;
     align-items: center;
     line-height: 1;
-  }
-  .cch-op-both > * {position: relative;}
-  .cch-op-both > .cch-op {
+}
+.cch-op-both > * {position: relative;}
+.cch-op-both > .cch-op {
     width: 100%;
     height: 1em;
-  }
-  .cch-op-both > *:nth-child(1) {transform: translateY(var(--op-comm2-dy));}
-  .cch-op-both > *:nth-child(3) {transform: translateY(calc(-1 * var(--op-comm2-dy)));}
+}
+.cch-op-both > *:nth-child(1) {transform: translateY(var(--op-comm2-dy));}
+.cch-op-both > *:nth-child(3) {transform: translateY(calc(-1 * var(--op-comm2-dy)));}
   
-  .cch-op-head {
+.cch-op-head {
     position: relative;
     padding-top: var(--op-comm1-dy);
     display: inline-flex;
-  }
-  .cch-op-head > *:first-child {
+}
+.cch-op-head > *:first-child {
     transform: translateY(calc(-1 * var(--op-comm1-dy)));
-  }
-  .cch-op-head > .cch-op, .cch-op-footer > .cch-op {
+}
+.cch-op-head > .cch-op, .cch-op-footer > .cch-op {
     width: 100%;
     position: absolute;
-  }
-  .cch-op-footer {
+}
+.cch-op-footer {
     position: relative;
     padding-bottom: var(--op-comm1-dy);
     display: inline-flex;
-  }
-  .cch-op-footer > *:nth-child(2) {
+}
+.cch-op-footer > *:nth-child(2) {
     transform: translateY(var(--op-comm1-dy));
-  }
-  .cch-arrow-both, .cch-arrow-bidir {
+}
+.cch-arrow-both, .cch-arrow-bidir {
     display: inline-flex;
     line-height: 1em;
     height: 1em;
-  }
-  .cch-arrow-fwd, .cch-arrow-bkwd, .cch-arrow-both-left, .cch-arrow-both-right {
+}
+.cch-arrow-fwd, .cch-arrow-bkwd, .cch-arrow-both-left, .cch-arrow-both-right {
     overflow: hidden; 
     width: 100%; 
     display: inline-flex;
@@ -338,20 +336,13 @@ div.echem-formula {
     line-height: 1em;
     height: 1em;
     & > svg {position: absolute;}
-  }
-  .cch-arrow-both-left {width: 50%; left:0}
-  .cch-arrow-both-right {width: 50%; right: 0;}
-  .cch-arrow-fwd svg {right: 0;}
-  .cch-arrow-bkwd svg {left: 0;}
-  .cch-arrow-fwd svg, .cch-arrow-bkwd svg {top:0.3em;} 
-  .cch-arrow-both-left svg {left: 0; top:0;}
-  .cch-arrow-both-left > svg, .cch-arrow-both-right > svg {top:0.14em;}
-  .cch-arrow-both .cch-arrow-bkwd, .cch-arrow-bidir .cch-arrow-bkwd  {width: 50%; left:0}
-  .cch-arrow-both .cch-arrow-fwd, .cch-arrow-bidir .cch-arrow-fwd {width: 50%; right:0}
-  
-  .cch-arrow-fwd {
-    background-image: url('data:image/svg+xml,<svg width="400em" height="0.522em" viewBox="0 0 400000 522" preserveAspectRatio="xMaxYMin slice" fill="black"><path d="M0 241v40h399891c-47.3 35.3-84 78-110 128-16.7 32-27.7 63.7-33 95 0 1.3-.2 2.7-.5 4-.3 1.3-.5 2.3-.5 3 0 7.3 6.7 11 20 11 8 0 13.2-.8 15.5-2.5 2.3-1.7 4.2-5.5 5.5-11.5 2-13.3 5.7-27 11-41 14.7-44.7 39-84.5 73-119.5s73.7-60.2 119-75.5c6-2 9-5.7 9-11s-3-9-9-11c-45.3-15.3-85-40.5-119-75.5s-58.3-74.8-73-119.5c-4.7-14-8.3-27.3-11-40-1.3-6.7-3.2-10.8-5.5-12.5-2.3-1.7-7.5-2.5-15.5-2.5-14 0-21 3.7-21 11 0 2 2 10.3 6 25 20.7 83.3 67 151.7 139 205zm0 0v40h399900v-40z"></path></svg>');
-    background-repeat: no-repeat;
-    background-position: right;
-  }
-  
+}
+.cch-arrow-both-left {width: 50%; left:0}
+.cch-arrow-both-right {width: 50%; right: 0;}
+.cch-arrow-fwd svg {right: 0;}
+.cch-arrow-bkwd svg {left: 0;}
+.cch-arrow-fwd svg, .cch-arrow-bkwd svg {top:0.3em;} 
+.cch-arrow-both-left svg {left: 0; top:0;}
+.cch-arrow-both-left > svg, .cch-arrow-both-right > svg {top:0.14em;}
+.cch-arrow-both .cch-arrow-bkwd, .cch-arrow-bidir .cch-arrow-bkwd  {width: 50%; left:0}
+.cch-arrow-both .cch-arrow-fwd, .cch-arrow-bidir .cch-arrow-fwd {width: 50%; right:0}

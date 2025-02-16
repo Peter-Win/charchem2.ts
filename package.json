@@ -26,7 +26,8 @@
     "test:coverage": "jest --coverage",
     "lint": "eslint ./src --ext .ts --fix",
     "prepare": "husky install",
-    "international": "node ./scripts/international.js && yarn lint"
+    "international": "node ./scripts/international.js && yarn lint",
+    "version": "yarn build"
   },
   "devDependencies": {
     "@testing-library/dom": "^8.13.0",
