@@ -40,11 +40,16 @@ const surface = new SvgSurfacePortable(mainFont);
 renderTopFrame(frame, surface);
 const dstText = surface.exportText(standaloneExportOptions);
 
+const dirResult = path.resolve(__dirname, "..", "..", "result");
+if (!fs.existsSync(path)) {
+  fs.mkdirSync(dirResult);
+}
+
 // Write SVG text to file
-const dstFileName = path.resolve(__dirname, "..", "..", "result", "formula.svg");
+const dstFileName = path.resolve(dirResult, "formula.svg");
 fs.writeFileSync(dstFileName, dstText, {encoding: "utf-8"});
 
 // Make EPS-file
-const epsName = path.resolve(__dirname, "..", "..", "result", "formula.eps");
+const epsName = path.resolve(dirResult, "formula.eps");
 const epsContent = createEps({ frame, title}).exportText();
 fs.writeFileSync(epsName, epsContent, {encoding: "ascii"});
