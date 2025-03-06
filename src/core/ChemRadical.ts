@@ -129,3 +129,6 @@ export class ChemRadical extends ChemSubObj {
     return newDict;
   }
 }
+
+export const isShortRadical = (name: string): boolean =>
+  /^[A-Z][a-z]+$/.test(name);

@@ -27,6 +27,7 @@ describe("createTextOp", () => {
         },
         {
           type: "richText",
+          src: "over",
           color: "#200",
           pos: "T",
           items: [

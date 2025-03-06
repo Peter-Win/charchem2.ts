@@ -1,5 +1,5 @@
 import { compile } from "../compile";
-import { makeTextFormula } from "../../inspectors/makeTextFormula";
+import { textFormula } from "../../textBuilder/textFormula";
 
 describe("Macro", () => {
   it("Macro", () => {
@@ -14,7 +14,7 @@ describe("Macro", () => {
     expect(expr.getMessage()).toBe("");
     expect(expr.src).toBe("B<_(A-90)CH3><_(A30)CH3><_(A150)H3C> ");
     const agent = expr.getAgents()[0]!;
-    expect(agent.nodes.map((it) => makeTextFormula(it))).toEqual([
+    expect(agent.nodes.map((it) => textFormula(it, "text"))).toEqual([
       "B",
       "CH3",
       "CH3",

@@ -1,6 +1,5 @@
 import { compile } from "../compile";
-import { makeTextFormula } from "../../inspectors/makeTextFormula";
-import { rulesHtml } from "../../textRules/rulesHtml";
+import { textFormula } from "../../textBuilder/textFormula";
 
 describe("colors", () => {
   it("Color", () => {
@@ -13,8 +12,8 @@ describe("colors", () => {
     expect(items[0]!.color).toBe("red");
     expect(items[1]!.color).toBe("blue");
     expect(items[2]!.color).toBeUndefined();
-    expect(makeTextFormula(expr, rulesHtml)).toBe(
-      `<span style="color:red">H<sub>2</sub></span><span style="color:blue">S</span>O<sub>4</sub>`
+    expect(textFormula(expr, "htmlPoor")).toBe(
+      `<span style="color: red">H<sub>2</sub></span><span style="color: blue">S</span>O<sub>4</sub>`
     );
   });
 });

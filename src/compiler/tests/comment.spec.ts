@@ -3,8 +3,7 @@ import { isAbstract } from "../../inspectors/isAbstract";
 import { calcMass } from "../../inspectors/calcMass";
 import { PeriodicTable } from "../../core/PeriodicTable";
 import { ChemError } from "../../core/ChemError";
-import { makeTextFormula } from "../../inspectors/makeTextFormula";
-import { rulesHtml } from "../../textRules/rulesHtml";
+import { textFormula } from "../../textBuilder/textFormula";
 import { Lang } from "../../lang/Lang";
 
 describe("Comment", () => {
@@ -13,8 +12,8 @@ describe("Comment", () => {
     expect(expr.getMessage()).toBe("");
     expect(isAbstract(expr)).toBe(false);
     expect(calcMass(expr)).toBe(PeriodicTable.dict.C.mass);
-    expect(makeTextFormula(expr)).toBe("C(solid)");
-    expect(makeTextFormula(expr, rulesHtml)).toBe("C<em>(solid)</em>");
+    expect(textFormula(expr, "text")).toBe("C(solid)");
+    expect(textFormula(expr, "htmlPoor")).toBe("C<em>(solid)</em>");
   });
   it("Comment With Translation", () => {
     const oldLang = Lang.curLang;
@@ -23,7 +22,7 @@ describe("Comment", () => {
     Lang.curLang = oldLang;
     expect(expr.getMessage()).toBe("");
     expect(isAbstract(expr)).toBe(false);
-    expect(makeTextFormula(expr, rulesHtml)).toBe("NaCl<em>(р-р)</em>");
+    expect(textFormula(expr, "htmlPoor")).toBe("NaCl<em>(р-р)</em>");
     expect(calcMass(expr)).toBe(
       PeriodicTable.dict.Na.mass + PeriodicTable.dict.Cl.mass
     );
@@ -31,19 +30,19 @@ describe("Comment", () => {
   it("CommentWithSpecial", () => {
     const expr = compile('S"|v"');
     expect(expr.getMessage()).toBe("");
-    expect(makeTextFormula(expr)).toBe("S↓");
+    expect(textFormula(expr, "text")).toBe("S↓");
     expect(calcMass(expr)).toBe(PeriodicTable.dict.S.mass);
   });
   it("CommentWithGreek", () => {
     const expr = compile('Ar"[Theta][psi]"');
     expect(expr.getMessage()).toBe("");
-    expect(makeTextFormula(expr)).toBe("ArΘψ");
+    expect(textFormula(expr, "text")).toBe("ArΘψ");
     expect(calcMass(expr)).toBe(PeriodicTable.dict.Ar.mass);
   });
   it("BeforeAgent", () => {
     const expr = compile('"|^"F2');
     expect(expr.getMessage()).toBe("");
-    expect(makeTextFormula(expr)).toBe("↑F2");
+    expect(textFormula(expr, "text")).toBe("↑F2");
     expect(calcMass(expr)).toBe(PeriodicTable.dict.F.mass * 2);
   });
   it("Error", () => {

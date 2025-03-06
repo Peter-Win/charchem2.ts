@@ -63,5 +63,9 @@ module.exports = {
       '.ts',
       '.js',
     ],
+    alias: {
+      src: path.join(__dirname, "src"),
+      charchem2: path.resolve(__dirname, "..", "..", "src"),
+    },
   },
 };

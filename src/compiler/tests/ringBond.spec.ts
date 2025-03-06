@@ -1,5 +1,5 @@
 import { compile } from "../compile";
-import { makeTextFormula } from "../../inspectors/makeTextFormula";
+import { textFormula } from "../../textBuilder/textFormula";
 import { makeBrutto } from "../../inspectors/makeBrutto";
 import { calcMass } from "../../inspectors/calcMass";
 import { roundMass } from "../../math/massUtils";
@@ -7,6 +7,11 @@ import { PeriodicTable } from "../../core/PeriodicTable";
 import { ChemNode } from "../../core/ChemNode";
 import { ChemBond } from "../../core/ChemBond";
 import { is0 } from "../../math";
+import { ChemObj } from "../../core/ChemObj";
+
+const toText = (obj: ChemObj): string => textFormula(obj, "text");
+
+const brutto = (obj: ChemObj): string => toText(makeBrutto(obj));
 
 describe("RingBond", () => {
   it("SimpleSquare", () => {
@@ -44,7 +49,7 @@ describe("RingBond", () => {
       "1o2o4o5o7o8",
     ]);
 
-    expect(makeTextFormula(makeBrutto(expr))).toBe("C7H7ClO");
+    expect(brutto(expr)).toBe("C7H7ClO");
     const { dict } = PeriodicTable;
     expect(roundMass(roundMass(calcMass(expr)))).toBe(
       roundMass(dict.C.mass * 7 + dict.H.mass * 7 + dict.Cl.mass + dict.O.mass)
@@ -56,7 +61,7 @@ describe("RingBond", () => {
     //  6---4---3
     const expr = compile("-|`-`|_o`-|-_o");
     expect(expr.getMessage()).toBe("");
-    expect(makeTextFormula(makeBrutto(expr))).toBe("C6H4");
+    expect(brutto(expr)).toBe("C6H4");
   });
   it("Pyrene", () => {
     const expr = compile("`/|\\/`|`\\_o`|/\\|`/_o|0\\/`|`\\_o`|0/\\|`/_o");
@@ -99,7 +104,7 @@ describe("RingBond", () => {
     expect(bondDef(bonds[21]!)).toBe("`/: 15 150 12");
     expect(bondDef(bonds[22]!)).toBe("o: 12 o 9 o 8 o 13 o 14 o 15");
 
-    expect(makeTextFormula(makeBrutto(expr))).toBe("C16H10");
+    expect(brutto(expr)).toBe("C16H10");
   });
   it("RingInBranch", () => {
     // Закрытие кольца внутри ветки
@@ -136,7 +141,7 @@ describe("RingBond", () => {
     );
     expect(expr.getMessage("")).toBe("");
     const agent = expr.getAgents()[0]!;
-    expect(agent.nodes.map((it) => makeTextFormula(it))).toEqual([
+    expect(agent.nodes.map(toText)).toEqual([
       "CH2",
       "CH2",
       "N",
@@ -158,7 +163,7 @@ describe("RingBond", () => {
     //   11  10
     const expr = compile("/-\\`/`-`\\_o`-`\\/-\\`/0_o`-0`/`-`\\/-\\0_o");
     expect(expr.getMessage()).toBe("");
-    expect(makeTextFormula(makeBrutto(expr))).toBe("C14H10");
+    expect(brutto(expr)).toBe("C14H10");
   });
   it("DDT", () => {
     //        0 Cl
@@ -169,7 +174,7 @@ describe("RingBond", () => {
     //  Cl  4      11   Cl 13
     const expr = compile("Cl|<`/|`/`\\<`/Cl>`|/\\_o>\\|\\/<\\Cl>`|`\\`/_o");
     expect(expr.getMessage()).toBe("");
-    expect(makeTextFormula(makeBrutto(expr))).toBe("C13H9Cl3");
+    expect(brutto(expr)).toBe("C13H9Cl3");
   });
   it("Cycle with ref", () => {
     //    3

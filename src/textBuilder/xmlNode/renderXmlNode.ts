@@ -11,13 +11,22 @@ export const renderXmlNode = (
   { tag, attrs, color, content }: XmlNode,
   options?: OptionsRenderXmlNode,
   level: number = 0
-) => {
+): string => {
+  if (!tag) {
+    if (typeof content === "string") {
+      return escapeXml(content);
+    }
+    if (Array.isArray(content)) {
+      return renderXmlNodes(content, options, level);
+    }
+  }
+
   const indent = options?.indent ?? "";
   const canSelfClosed = !options?.noSelfClosed;
   const attrsExt = color
     ? {
         ...attrs,
-        style: `color: ${color};`, // Предполагается, что такого атрибута нет в attrs
+        style: `color: ${color}`, // Предполагается, что такого атрибута нет в attrs
       }
     : attrs;
   let res = "";

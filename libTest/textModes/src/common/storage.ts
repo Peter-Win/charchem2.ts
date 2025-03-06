@@ -1,4 +1,7 @@
-export const storageLoad = <Data>(key: string, cvt: (json: unknown) => Data | undefined): Data | undefined => {
+export const storageLoad = <Data>(
+  key: string,
+  cvt: (json: unknown) => Data | undefined
+): Data | undefined => {
   try {
     const text = window.localStorage.getItem(key);
     if (text) {
@@ -11,7 +14,7 @@ export const storageLoad = <Data>(key: string, cvt: (json: unknown) => Data | un
     console.error(e);
   }
   return undefined;
-}
+};
 
 export const storageSave = (key: string, settings: unknown) => {
   try {
@@ -19,4 +22,4 @@ export const storageSave = (key: string, settings: unknown) => {
   } catch (e) {
     console.error(e);
   }
-}
+};

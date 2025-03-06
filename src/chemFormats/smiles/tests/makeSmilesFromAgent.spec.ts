@@ -3,7 +3,7 @@ import { makeSmilesFromAgent } from "../makeSmilesFromAgent";
 import { ChemAgent } from "../../../core/ChemAgent";
 import { makeGraphFromAgent } from "../../../graph/makeGraphFromAgent";
 import { removeHydrogen } from "../../../graph/removeHydrogens";
-import { makeTextFormula } from "../../../inspectors/makeTextFormula";
+import { textFormula } from "../../../textBuilder/textFormula";
 
 const compileAgent = (ccCode: string): ChemAgent =>
   compile(ccCode).getAgents()[0]!;
@@ -75,7 +75,8 @@ describe("makeSmilesFromAgent", () => {
     expect(draft.edges.map(({ mul }) => mul)).toEqual([1, 1, 2, 1]);
     expect(
       draft.vertices.map(
-        ({ content, hydrogen }) => makeTextFormula(content) + (hydrogen || 0)
+        ({ content, hydrogen }) =>
+          textFormula(content, "text") + (hydrogen || 0)
       )
     ).toEqual(["C3", "C2", "C0", "O0", "O1"]);
     expect(makeSmilesFromAgent(agentP)).toBe("CCC(=O)O");

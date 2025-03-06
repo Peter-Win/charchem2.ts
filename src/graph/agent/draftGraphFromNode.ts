@@ -1,9 +1,12 @@
+import { ChemObj } from "../../core/ChemObj";
 import { Int } from "../../types";
 import { ChemError } from "../../core/ChemError";
 import { ChemAtom } from "../../core/ChemAtom";
 import { ChemNode } from "../../core/ChemNode";
 import { DraftGraph } from "../DraftGraph";
-import { makeTextFormula } from "../../inspectors/makeTextFormula";
+import { textFormula } from "../../textBuilder/textFormula";
+
+const toText = (obj: ChemObj): string => textFormula(obj, "text");
 
 const valences: Record<string, Int> = {
   H: 1,
@@ -31,19 +34,16 @@ export const draftGraphFromNode = (node: ChemNode): DraftGraph => {
   const g = new DraftGraph();
   const { items } = node;
   const center = node.getCenterItem();
-  if (!center)
-    throw new ChemError(`Invalid center of ${makeTextFormula(node)}`);
+  if (!center) throw new ChemError(`Invalid center of ${toText(node)}`);
 
   items.forEach((item) => {
     const { obj } = item;
     if (!(obj instanceof ChemAtom))
-      throw new ChemError(`Expected atom in ${makeTextFormula(node)}`);
+      throw new ChemError(`Expected atom in ${toText(node)}`);
     const valence = valences[obj.id];
     if (!valence) throw new ChemError(`Unknown valence of ${obj.id}`);
     if (!item.n.isInt())
-      throw new ChemError(
-        `Expected integer coefficient in ${makeTextFormula(node)}`
-      );
+      throw new ChemError(`Expected integer coefficient in ${toText(node)}`);
     const n = item.n.num;
     for (let i = 0; i < n; i++) {
       g.vertices.push({
@@ -57,8 +57,7 @@ export const draftGraphFromNode = (node: ChemNode): DraftGraph => {
 
   // Центральный элемент может превратиться в несколько. Н.р. N2
   const cvList = g.vertices.filter(({ reserved }) => !!reserved);
-  if (!cvList.length)
-    throw new ChemError(`Invalid center of ${makeTextFormula(node)}`);
+  if (!cvList.length) throw new ChemError(`Invalid center of ${toText(node)}`);
   if (cvList.length === 1) {
     const cv = cvList[0]!;
     if (node.charge) {

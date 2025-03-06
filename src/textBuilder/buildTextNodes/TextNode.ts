@@ -11,7 +11,13 @@ import { ChemRadical } from "../../core/ChemRadical";
 export type TextPosition = "T" | "LT" | "RT" | "B" | "LB" | "RB" | "C";
 export type SpaceType = "agentAgent" | "agentOp" | "opOp";
 export type GroupType = "expr" | "agent" | "node";
-export type CoeffType = "agent" | "mul" | "item" | "bracket";
+export type CoeffType =
+  | "agent"
+  | "mul"
+  | "item"
+  | "bracket"
+  | "mass"
+  | "atomNum";
 
 type TextCommonProps = {
   color?: string;
@@ -76,6 +82,7 @@ type TextRadical = {
 };
 type TextRichText = {
   type: "richText";
+  src?: string;
 };
 type TextSpace = {
   type: "space";

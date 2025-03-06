@@ -1,6 +1,6 @@
 import { compile } from "../compile";
 import { Point } from "../../math/Point";
-import { makeTextFormula } from "../../inspectors/makeTextFormula";
+import { textFormula } from "../../textBuilder/textFormula";
 import { makeBrutto } from "../../inspectors/makeBrutto";
 
 describe("ParseNum", () => {
@@ -19,7 +19,7 @@ describe("ParseNum", () => {
         new Point(0.0, -h),
       ].map((p) => String(p))
     );
-    expect(makeTextFormula(makeBrutto(expr))).toBe("C4H8");
+    expect(textFormula(makeBrutto(expr), "text")).toBe("C4H8");
   });
   it("InvalidVariable", () => {
     const expr = compile("_(x%)");
@@ -52,7 +52,7 @@ describe("ParseNum", () => {
     // |________|
     const expr = compile("_(x$32,y.5)|_(x-$3)`|/");
     expect(expr.getMessage()).toBe("");
-    expect(makeTextFormula(makeBrutto(expr))).toBe("C5H10");
+    expect(textFormula(makeBrutto(expr), "text")).toBe("C5H10");
     const bonds = Array.from(expr.getAgents()[0]!.bonds);
     expect(bonds.map((it) => Math.round(it.dir!.polarAngleDeg()))).toEqual([
       30, 90, 180, -90, -30,

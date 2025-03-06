@@ -1,7 +1,7 @@
 import { compile } from "../../compiler/compile";
 import { makeGraphFromAgent } from "../makeGraphFromAgent";
 import { DraftGraph } from "../DraftGraph";
-import { makeTextFormula } from "../../inspectors/makeTextFormula";
+import { textFormula } from "../../textBuilder/textFormula";
 
 describe("makeGraphFromAgent", () => {
   it("simple line", () => {
@@ -37,7 +37,7 @@ describe("makeGraphFromAgent", () => {
     const expr = compile("C=O");
     expect(expr.getMessage()).toBe("");
     const g: DraftGraph = makeGraphFromAgent(expr.getAgents()[0]!);
-    expect(makeTextFormula(g.vertices[0]!.content)).toBe("C");
+    expect(textFormula(g.vertices[0]!.content, "text")).toBe("C");
     expect(g.vertices[0]!.valence).toBe(2);
   });
 });

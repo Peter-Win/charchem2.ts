@@ -1,5 +1,5 @@
 import { compile } from "../compile";
-import { makeTextFormula } from "../../inspectors/makeTextFormula";
+import { textFormula } from "../../textBuilder/textFormula";
 import { makeBrutto } from "../../inspectors/makeBrutto";
 
 describe("Branch", () => {
@@ -9,7 +9,7 @@ describe("Branch", () => {
     //     c
     const expr = compile("-<|>-");
     expect(expr.getMessage()).toBe("");
-    expect(makeTextFormula(makeBrutto(expr))).toBe("C4H10");
+    expect(textFormula(makeBrutto(expr), "text")).toBe("C4H10");
     const { nodes } = expr.getAgents()[0]!;
     expect(nodes).toHaveLength(4);
     const [a, b, c, d] = nodes;
@@ -21,7 +21,7 @@ describe("Branch", () => {
   it("NotAutoNode", () => {
     const expr = compile("H3C--N<|CH3>--CH3");
     expect(expr.getMessage()).toBe("");
-    expect(makeTextFormula(makeBrutto(expr))).toBe("C3H9N");
+    expect(textFormula(makeBrutto(expr), "text")).toBe("C3H9N");
     const { nodes } = expr.getAgents()[0]!;
     expect(nodes).toHaveLength(4);
     const [a, b, c, d] = nodes;
@@ -85,7 +85,7 @@ describe("Branch", () => {
     //     c
     const expr = compile("-(*|OH*)-");
     expect(expr.getMessage()).toBe("");
-    expect(makeTextFormula(makeBrutto(expr))).toBe("C3H8O");
+    expect(textFormula(makeBrutto(expr), "text")).toBe("C3H8O");
     const { nodes } = expr.getAgents()[0]!;
     expect(nodes).toHaveLength(4);
     const [a, b, c, d] = nodes;

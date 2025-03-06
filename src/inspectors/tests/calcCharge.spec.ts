@@ -1,14 +1,13 @@
 import { compile } from "../../compiler/compile";
 import { calcCharge } from "../calcCharge";
-import { makeTextFormula } from "../makeTextFormula";
-import { rulesHtml } from "../../textRules/rulesHtml";
+import { textFormula } from "../../textBuilder/textFormula";
 
 describe("calcCharge", () => {
   it("Single", () => {
     const expr = compile("NH4^+");
     expect(expr.getMessage()).toBe("");
     expect(calcCharge(expr)).toBe(1.0);
-    expect(makeTextFormula(expr, rulesHtml)).toBe("NH<sub>4</sub><sup>+</sup>");
+    expect(textFormula(expr, "htmlPoor")).toBe("NH<sub>4</sub><sup>+</sup>");
   });
   it("Expression", () => {
     const expr = compile("2Na^+ + SO4^2-");

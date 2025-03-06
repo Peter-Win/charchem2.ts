@@ -21,12 +21,12 @@ export const createTextOp = (op: ChemOp): TextNode => {
   };
   if (commentPre)
     items.push({
-      ...splitRichText(commentPre.text, op.color),
+      ...splitRichText(commentPre.text, op.color, true),
       pos: "T",
     });
   if (commentPost)
     items.push({
-      ...splitRichText(commentPost.text, op.color),
+      ...splitRichText(commentPost.text, op.color, true),
       pos: "B",
     });
   return colItem;

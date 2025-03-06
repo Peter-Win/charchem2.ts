@@ -1,4 +1,5 @@
 import { compile } from "../../../compiler/compile";
+import { ChemBracketEnd } from "../../../core/ChemBracket";
 import { ChemComment } from "../../../core/ChemComment";
 import { buildTextNodes } from "../buildTextNodes";
 import { TextNode } from "../TextNode";
@@ -120,6 +121,24 @@ describe("buildTextNodes", () => {
     // +--k
     // +--charge
   });
+
+  it("bracket end", () => {
+    const expr = compile("[CN]6");
+    expect(expr.getMessage()).toBe("");
+    let be: ChemBracketEnd | undefined;
+    expr.walk({
+      bracketEnd(obj) {
+        be = obj;
+      },
+    });
+    expect(be).toBeDefined();
+    const n = buildTextNodes(be!);
+    expect(n.type).toBe("group");
+    expect(n.items?.length).toBe(2);
+    expect(n.items?.[0]?.type).toBe("bracket");
+    expect(n.items?.[1]?.type).toBe("k");
+  });
+
   it("rich text", () => {
     const expr = compile(`-"H_2SO_4"`);
     expect(expr.getMessage()).toBe("");

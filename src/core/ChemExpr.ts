@@ -5,10 +5,9 @@ import { Visitor } from "./Visitor";
 import { ChemAgent } from "./ChemAgent";
 import { getErrorMessage } from "./ChemError";
 import { calcMass } from "../inspectors/calcMass";
-import { makeTextFormula } from "../inspectors/makeTextFormula";
-import { rulesHtml } from "../textRules/rulesHtml";
 import { isTextFormula } from "../inspectors/isTextFormula";
 import { getSrcItemsForObject } from "../compiler/sourceMap";
+import { textFormula } from "../textBuilder/textFormula";
 
 export class ChemExpr extends ChemObj {
   error?: Error;
@@ -76,17 +75,16 @@ export class ChemExpr extends ChemObj {
 
   /**
    * This method has been added for compatibility with previous versions.
-   * It is recommended to explicitly use function makeTextFormula.
+   * It is recommended to explicitly use function textFormula.
    * @deprecated
    */
-  html(): string {
-    return makeTextFormula(this, rulesHtml);
+  html(poor = false): string {
+    return textFormula(this, poor ? "htmlPoor" : "html");
   }
 
   /**
    * This method has been added for compatibility with previous versions.
    * It is recommended to explicitly use function isTextFormula.
-   * @deprecated
    */
   isLinear(): boolean {
     return isTextFormula(this);

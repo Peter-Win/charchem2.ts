@@ -4,11 +4,10 @@ import { ChemObj } from "../../core/ChemObj";
 import { ChemExpr } from "../../core/ChemExpr";
 import { ChemBond } from "../../core/ChemBond";
 import { makeElemList } from "../../inspectors/makeElemList";
-import { makeTextFormula } from "../../inspectors/makeTextFormula";
+import { textFormula } from "../../textBuilder/textFormula";
 import { makeBrutto } from "../../inspectors/makeBrutto";
 import { calcCharge } from "../../inspectors/calcCharge";
 import { compile } from "../compile";
-import { rulesCharChem } from "../../textRules/rulesCharChem";
 
 const chargeCheck = (node: ChemNode): ChemObj =>
   node.charge ? compile(makeElemList(node).toString()) : node;
@@ -17,7 +16,7 @@ const nodeCvt = (node: ChemNode): ChemObj =>
   node.autoMode ? makeBrutto(node) : chargeCheck(node);
 
 const nodeText = (node: ChemNode): string =>
-  `${node.index}:${makeTextFormula(nodeCvt(node), rulesCharChem)}`;
+  `${node.index}:${textFormula(nodeCvt(node), "CharChem")}`;
 
 const makeNodesText = (expr: ChemExpr) =>
   expr.getAgents()[0]!.nodes.map((it) => nodeText(it));
@@ -89,7 +88,7 @@ describe("ComplexCases", () => {
       new Set(Array.from(node0!.bonds).map((it) => it.linearText()))
     ).toEqual(new Set(["_pp", "-", "`\\0"]));
     expect(
-      agent.nodes.map((it) => makeTextFormula(nodeCvt(it), rulesCharChem))
+      agent.nodes.map((it) => textFormula(nodeCvt(it), "CharChem"))
     ).toEqual([
       "CH",
       "CH",
@@ -103,7 +102,7 @@ describe("ComplexCases", () => {
       '"4"',
       '"5"',
     ]);
-    expect(makeTextFormula(makeBrutto(expr))).toBe("C4H5N");
+    expect(textFormula(makeBrutto(expr), "text")).toBe("C4H5N");
   });
   it("AdenosineTriphosphate", () => {
     //                                 H2N 27
@@ -201,7 +200,7 @@ describe("ComplexCases", () => {
       "30:N",
     ];
     const realNodes = agent.nodes.map(
-      (it) => `${it.index}:${makeTextFormula(nodeCvt(it), rulesCharChem)}`
+      (it) => `${it.index}:${textFormula(nodeCvt(it), "CharChem")}`
     );
     expect(
       realNodes.reduce((acc, s, index) => {
@@ -210,7 +209,7 @@ describe("ComplexCases", () => {
         return acc;
       }, [] as string[])
     ).toEqual([]);
-    expect(makeTextFormula(makeBrutto(expr))).toBe("C10H16N5O13P3");
+    expect(textFormula(makeBrutto(expr), "text")).toBe("C10H16N5O13P3");
   });
   it("BetaCyfluthrin", () => {
     const expr = compile(
@@ -266,7 +265,7 @@ describe("ComplexCases", () => {
     ];
     expect(diff(makeBondsInfo(expr), needBonds)).toEqual([]);
     const actualNodes = agent.nodes.map(
-      (it) => `${it.index}:${makeTextFormula(nodeCvt(it), rulesCharChem)}`
+      (it) => `${it.index}:${textFormula(nodeCvt(it), "CharChem")}`
     );
     const needNodes = [
       "0:Cl",
@@ -301,7 +300,7 @@ describe("ComplexCases", () => {
       "29:CH",
     ];
     expect(diff(actualNodes, needNodes)).toEqual([]);
-    expect(makeTextFormula(makeBrutto(expr))).toBe("C22H18Cl2FNO3");
+    expect(textFormula(makeBrutto(expr), "text")).toBe("C22H18Cl2FNO3");
   });
   it("Clothianidin", () => {
     //    O2N 5
@@ -353,7 +352,7 @@ describe("ComplexCases", () => {
       "14:S",
     ];
     expect(diff(makeNodesText(expr), needNodes)).toEqual([]);
-    expect(makeTextFormula(makeBrutto(expr))).toBe("C6H8ClN5O2S");
+    expect(textFormula(makeBrutto(expr), "text")).toBe("C6H8ClN5O2S");
   });
   it("Carbofuran", () => {
     //   5
@@ -390,7 +389,7 @@ describe("ComplexCases", () => {
       "16:3(45)15",
     ];
     expect(diff(makeBondsInfo(expr), needBonds)).toEqual([]);
-    expect(makeTextFormula(makeBrutto(expr))).toBe("C12H15NO3");
+    expect(textFormula(makeBrutto(expr), "text")).toBe("C12H15NO3");
   });
   it("TrilonB", () => {
     //                   O 14
@@ -456,7 +455,7 @@ describe("ComplexCases", () => {
       "19:18(150)20",
     ];
     expect(diff(makeBondsInfo(expr), needBonds)).toEqual([]);
-    expect(makeTextFormula(makeBrutto(expr))).toBe("C10H14N2Na2O8");
+    expect(textFormula(makeBrutto(expr), "text")).toBe("C10H14N2Na2O8");
   });
   it("Anthracene", () => {
     //   13   6   1
@@ -488,7 +487,7 @@ describe("ComplexCases", () => {
       "18:o[8, 10, 11, 12, 13, 7]",
     ];
     expect(diff(makeBondsInfo(expr), needBonds)).toEqual([]);
-    expect(makeTextFormula(makeBrutto(expr))).toBe("C14H10");
+    expect(textFormula(makeBrutto(expr), "text")).toBe("C14H10");
   });
   it("Isobacteriochlorin", () => {
     // _(a54,N)
@@ -496,7 +495,7 @@ describe("ComplexCases", () => {
       "|_q:a2_qN_qq<_(a54):a>_q; `-_q<_(a54,N2)#a>_qN_qq<_(a54,N):b>_q; `||_q<_(a54,N2)#b>_qN<`-H>_q<_(a54,N2):c>_q; -_qq<_(a54)#c>_qN<`|H>_q<_(a54)=#a2>_qq"
     );
     expect(expr.getMessage()).toBe("");
-    expect(makeTextFormula(makeBrutto(expr))).toBe("C20H18N4");
+    expect(textFormula(makeBrutto(expr), "text")).toBe("C20H18N4");
   });
   it("MalonicAcid", () => {
     //       OH 0
@@ -532,7 +531,7 @@ describe("ComplexCases", () => {
       "5:4(60)6",
     ];
     expect(diff(makeBondsInfo(expr), needBonds)).toEqual([]);
-    expect(makeTextFormula(makeBrutto(expr))).toBe("C3H4O4");
+    expect(textFormula(makeBrutto(expr), "text")).toBe("C3H4O4");
   });
   it("Pulegone", () => {
     // Merge bonds after bracket declaration
@@ -569,7 +568,7 @@ describe("ComplexCases", () => {
       "9:CH2",
     ];
     expect(diff(makeNodesText(expr), needNodes)).toEqual([]);
-    expect(makeTextFormula(makeBrutto(expr))).toBe("C10H16O");
+    expect(textFormula(makeBrutto(expr), "text")).toBe("C10H16O");
   });
   it("HydrogenHexachlororhenateIV", () => {
     const expr = compile(
@@ -589,7 +588,7 @@ describe("ComplexCases", () => {
     ];
     expect(diff(makeNodesText(expr), needNodes)).toEqual([]);
     expect(calcCharge(expr)).toBe(0.0);
-    expect(makeTextFormula(makeBrutto(expr))).toBe("H2Cl6Re");
+    expect(textFormula(makeBrutto(expr), "text")).toBe("H2Cl6Re");
   });
   it("DihexacyanoferrateII", () => {
     const expr = compile(
@@ -614,13 +613,13 @@ describe("ComplexCases", () => {
       "14:Fe^3+",
     ];
     expect(diff(makeNodesText(expr), needNodes)).toEqual([]);
-    expect(makeTextFormula(makeBrutto(expr))).toBe("C6Fe2KN6");
+    expect(textFormula(makeBrutto(expr), "text")).toBe("C6Fe2KN6");
   });
   it("5837", () => {
     const expr = compile(
       "`\\`-_(a54)_q_p6_pp6_p6_pp6_p6_p6_qHN_q_qq; #1-<\\\\O>/N_(a54)<_q_q_q_q>_(a54,w+)<_pp6O>_q6N<_(y-.5)H>_(a60,d-)<_p6_q6_p6<_pp6O>_q6OH>_q6<_pp6O>_q6HN_p6<_(a60,d+)>_q6<_qq6O>_p6NH_(a-60,d-)<_p6_p6<_p6NH2>_qq6O>_q6<_qq6O>_p6NH_(a-60,w-)<_q6_q6_p6_q6_p6H2N>_p6<_qq6O>_p6NH_(a-60,w-)<_q6<_q6>_p6>_p6<_pp6O>_q6HN_p6_q6<_qq6O>_p6NH2; #1`/wHN\\<=O>`/<\\-_(a54)_qNH_q_qN<_(y-.5)H>_q>`-dHN`/<\\\\O>`-<`\\/<=O>`\\HO>`/wNH`-<`\\\\O>`/<\\`/\\`/\\NH2>`-dHN`/<\\\\O>`-<`\\/<=O>`\\H2N>`/wNH`-<`\\\\O>_(a-60,d-)_(a54)N<_q_q_q_q>_(a54)<_pp6O>_q6<_p6_p6<_qq6O>_p6NH2>_(a-60,w+)NH_p6<_pp6O>_q6<_p6_p6_pp6_q6_qq6_q6_qq6_q6>_(a-60,w+)NH_p6<_pp6O>_q6<_q6_(a-50)<_pp6O>_q6OH>_(a60,d+)HN_q6<_qq6O>_p6<_p6_p6_(a54,N2)_qN<_(y-.5)H>_q_qq<_q>_p6_pp6_p6_pp6_p6>_(a-60,w+)NH_p6<_pp6O>_q6<_p6_p6<_pp6O>_q6HO>_(a-60,w+)N<_(y-.5)H>_p6:a_pp6O; `-_q<_(a54,d+)#a>_qN<_q_q>|`/O/\\</\\|O`|/NH2>|dN<_(y.5)H>`/`\\O\\|<\\/`|O|\\NH2>`/dHN|\\O`\\`/<`\\`|HO>|wN<_(y.5)H>`/`\\O\\|<\\/`|O|\\NH2>`/dHN|\\O`\\`/<`\\w>|NH`/`\\O\\|`/HN|\\O`\\`/<`\\`|/`||`\\`//|\\\\>|wNH`/`\\O\\|<\\d>`/HN|\\O`\\_(a-60,w-)_(a54)_q_q_qN<_q>_(a54)<_qq6O>_p6<_p6_q6<_pp6O>_q6OH>_(a-60,w+)N<_(y.5)H>_q6<_qq6O>_p6<_p6_p6<_p6>_q6>_(a-60,w+)N<_(y-.5)H>_p6<_pp6O>_q6<_q6_p6_q6<_qq6O>_p6NH2>_(a60,d+)N<_(y-.5)H>_q6<_qq6O>_p6<_p6_p6_(a54)N<_(y.5)H>_q_qHN_q_q>_(a-60,w+)N<_(y-.5)H>_p6<_pp6O>_q6<_p6_p6<_pp6O>_q6OH>_(a-60,w+)HN_p6<_pp6O>_(a-60,d-)_(a54)N<_q_q_q_q>\\|O`|/<_(y-1.6)/\\//`|`\\\\`/||>\\dN<_(y.5)H>/`|O|\\<|`/`\\`//|\\\\/`||>/wN<_(y-.5)H>\\|O`|/\\N<_(y.5)H>/`|O|\\</`|<`\\>/>|dHN\\<//O>_(a60,d-)_(a54)N<_q_q_q_q>_(a54)<_pp6O>_q6<_p6_p6<_qq6O>_p6N_(y.5)H2>_(a-60,w+)NH_p6<_pp6O>_(a-60,w-)_(a54)_q_q_qN<_q>/`|O|\\<|<`/>\\>/wN<_(y-.5)H>\\|O`|/<`|d`\\HO>\\N<_(y.5)H>/`|O|\\<|w`/<_p7>_q6>/N<_(y.5)H>\\|O`|/<`|d`\\`|O|`/H2N>\\N<_(y.5)H>/`|O|\\<|<\\dOH>`/>/wN<_(y-.5)H>\\|O`|/\\N<_(y.5)H>/`|O|\\/\\/\\/\\/\\/\\/\\"
     );
     expect(expr.getMessage()).toBe("");
-    expect(makeTextFormula(makeBrutto(expr))).toBe("C248H363N65O72");
+    expect(textFormula(makeBrutto(expr), "text")).toBe("C248H363N65O72");
   });
 });

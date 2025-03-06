@@ -1,5 +1,5 @@
 import { compile } from "../compile";
-import { makeTextFormula } from "../../inspectors/makeTextFormula";
+import { textFormula } from "../../textBuilder/textFormula";
 import { makeBrutto } from "../../inspectors/makeBrutto";
 import { ChemExpr } from "../../core/ChemExpr";
 import { ChemNode } from "../../core/ChemNode";
@@ -29,16 +29,10 @@ describe("NodeCharge", () => {
     expect(
       bonds.map((it) => `${it.nodes[0]?.index}:${it.nodes[1]?.index}`)
     ).toEqual(["0:1", "1:2", "1:3", "1:4", "1:5", "1:6"]);
-    expect(agent.nodes.map((it) => makeTextFormula(makeBrutto(it)))).toEqual([
-      "K^+",
-      "Fe",
-      "O",
-      "O",
-      "O",
-      "O",
-      "K^+",
-    ]);
-    expect(makeTextFormula(makeBrutto(expr))).toBe("FeK2O4");
+    expect(
+      agent.nodes.map((it) => textFormula(makeBrutto(it), "text"))
+    ).toEqual(["K^+", "Fe", "O", "O", "O", "O", "K^+"]);
+    expect(textFormula(makeBrutto(expr), "text")).toBe("FeK2O4");
   });
   it("Use left", () => {
     const expr = compile("H`^+");
@@ -49,7 +43,7 @@ describe("NodeCharge", () => {
     expect(node.charge).toBeDefined();
     expect(node.charge!.isLeft).toBe(true);
     expect(node.charge!.pos).toBe("LT");
-    expect(makeTextFormula(node)).toBe("+^H");
+    expect(textFormula(node, "text")).toBe("^+H");
   });
   it("Left bottom", () => {
     const expr = compile("H$pos(LB)^+");
@@ -60,7 +54,7 @@ describe("NodeCharge", () => {
     expect(node.charge).toBeDefined();
     expect(node.charge!.isLeft).toBe(true);
     expect(node.charge!.pos).toBe("LB");
-    expect(makeTextFormula(node)).toBe("+^H");
+    expect(textFormula(node, "text")).toBe("^+H");
   });
   it("Using angle in left side", () => {
     const expr = compile("H$pos(150)^+");
@@ -71,6 +65,6 @@ describe("NodeCharge", () => {
     expect(node.charge).toBeDefined();
     expect(node.charge!.isLeft).toBe(true);
     expect(node.charge!.pos).toBe(150);
-    expect(makeTextFormula(node)).toBe("+^H");
+    expect(textFormula(node, "text")).toBe("^+H");
   });
 });

@@ -1,7 +1,7 @@
 import * as React from "react";
 import { observer } from "mobx-react-lite";
 import { store } from "../store";
-import { ChemSys } from "../../../../src/ChemSys";
+import { ChemSys } from "charchem2/ChemSys";
 import { ToolbarAndContent } from "./ui/ToolbarAndContent";
 import { FormulaViewSettings } from "./FormulaViewSettings";
 import { Button } from "./ui/Button";

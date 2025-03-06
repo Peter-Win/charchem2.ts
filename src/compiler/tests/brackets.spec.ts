@@ -2,21 +2,30 @@ import { ChemObj } from "../../core/ChemObj";
 import { ChemNode } from "../../core/ChemNode";
 import { ChemBond } from "../../core/ChemBond";
 import { ChemBracketBegin, ChemBracketEnd } from "../../core/ChemBracket";
-import { makeTextFormula } from "../../inspectors/makeTextFormula";
+import { textFormula } from "../../textBuilder/textFormula";
 import { compile } from "../compile";
 import { PeriodicTable } from "../../core/PeriodicTable";
 import { roundMass } from "../../math/massUtils";
 import { calcMass } from "../../inspectors/calcMass";
 import { makeBrutto } from "../../inspectors/makeBrutto";
-import { rulesHtml } from "../../textRules/rulesHtml";
 import { lastItem } from "../../utils/lastItem";
 import { isAbstract } from "../../inspectors/isAbstract";
 import { calcCharge } from "../../inspectors/calcCharge";
 
+const toText = (obj: ChemObj) => textFormula(obj, "text");
+const toHtml = (obj: ChemObj) =>
+  textFormula(obj, {
+    type: "text",
+    options: {
+      sub: (text) => `<sub>${text}</sub>`,
+      sup: (text) => `<sup>${text}</sup>`,
+    },
+  });
+
 const cmd2str = (cmd: ChemObj): string => {
   if (cmd instanceof ChemNode && cmd.autoMode) return "Auto";
-  if (cmd instanceof ChemBond && cmd.isNeg) return `\`${makeTextFormula(cmd)}`;
-  return makeTextFormula(cmd);
+  if (cmd instanceof ChemBond && cmd.isNeg) return `\`${toText(cmd)}`;
+  return toText(cmd);
 };
 
 describe("Brackets", () => {
@@ -51,7 +60,7 @@ describe("Brackets", () => {
   it("SimpleRoundBrackets", () => {
     const expr = compile("(NH4)2SO4");
     expect(expr.getMessage()).toBe("");
-    expect(makeTextFormula(expr)).toBe("(NH4)2SO4");
+    expect(toText(expr)).toBe("(NH4)2SO4");
 
     const { commands } = expr.getAgents()[0]!;
     expect(commands[0]).toBeInstanceOf(ChemBracketBegin);
@@ -62,32 +71,27 @@ describe("Brackets", () => {
     const { dict } = PeriodicTable;
     const m = dict.H.mass * 8 + dict.N.mass * 2 + dict.O.mass * 4 + dict.S.mass;
     expect(roundMass(calcMass(expr))).toBe(roundMass(m));
-    expect(makeTextFormula(makeBrutto(expr))).toBe("H8N2O4S");
+    expect(toText(makeBrutto(expr))).toBe("H8N2O4S");
   });
   it("SquareBrackets", () => {
     const expr = compile("K3[Fe(CN)6]");
     expect(expr.getMessage()).toBe("");
-    expect(expr.getAgents()[0]!.commands.map((it) => cmd2str(it))).toEqual([
-      "K3",
-      "[",
-      "Fe",
-      "(",
-      "CN",
-      ")6",
-      "]",
-    ]);
-    expect(makeTextFormula(expr, rulesHtml)).toEqual(
-      "K<sub>3</sub>[Fe(CN)<sub>6</sub>]"
-    );
-    expect(makeTextFormula(makeBrutto(expr))).toBe("C6FeK3N6");
+    const cm = expr.getAgents()[0]!.commands;
+    expect(cmd2str(cm[0]!)).toEqual("K3");
+    expect(cmd2str(cm[1]!)).toEqual("[");
+    expect(cmd2str(cm[2]!)).toEqual("Fe");
+    expect(cmd2str(cm[3]!)).toEqual("(");
+    expect(cmd2str(cm[4]!)).toEqual("CN");
+    expect(cmd2str(cm[5]!)).toEqual(")6");
+    expect(cmd2str(cm[6]!)).toEqual("]");
+    expect(toHtml(expr)).toEqual("K<sub>3</sub>[Fe(CN)<sub>6</sub>]");
+    expect(toText(makeBrutto(expr))).toBe("C6FeK3N6");
   });
   it("Charge", () => {
     const expr = compile("[SO4]^2-");
     expect(expr.getMessage()).toBe("");
-    expect(makeTextFormula(expr, rulesHtml)).toBe(
-      "[SO<sub>4</sub>]<sup>2-</sup>"
-    );
-    expect(makeTextFormula(makeBrutto(expr))).toBe("O4S^2-");
+    expect(toHtml(expr)).toBe("[SO<sub>4</sub>]<sup>2-</sup>");
+    expect(toText(makeBrutto(expr))).toBe("O4S^2-");
   });
   it("ChargePrefix", () => {
     const expr = compile("[SO4]`^-2");
@@ -98,17 +102,13 @@ describe("Brackets", () => {
     expect(charge).toBeDefined();
     expect(charge!.text).toBe("-2");
     expect(charge!.isLeft).toBe(true);
-    expect(makeTextFormula(expr, rulesHtml)).toBe(
-      "<sup>-2</sup>[SO<sub>4</sub>]"
-    );
-    expect(makeTextFormula(makeBrutto(expr), rulesHtml)).toBe(
-      "O<sub>4</sub>S<sup>2-</sup>"
-    );
+    expect(toHtml(expr)).toBe("<sup>-2</sup>[SO<sub>4</sub>]");
+    expect(toHtml(makeBrutto(expr))).toBe("O<sub>4</sub>S<sup>2-</sup>");
   });
   it("InputBond", () => {
     const expr = compile("H-[Cu<|Br><`|Br>]");
     expect(expr.getMessage()).toBe("");
-    expect(makeTextFormula(makeBrutto(expr))).toBe("HBr2Cu");
+    expect(toText(makeBrutto(expr))).toBe("HBr2Cu");
   });
   it("OutputBond", () => {
     const expr = compile("[Cu<|Br><`|Br>]-H");
@@ -130,20 +130,18 @@ describe("Brackets", () => {
     expect(bracketEnd).toBeInstanceOf(ChemBracketEnd);
     const { nodeIn } = bracketEnd;
     expect(nodeIn).toBeDefined();
-    expect(makeTextFormula(nodeIn!)).toBe("Cu");
+    expect(toText(nodeIn!)).toBe("Cu");
     const bracketEndBond = bracketEnd.bond;
     expect(bracketEndBond).toBeDefined();
-    expect(makeTextFormula(bracketEndBond!)).toBe("-");
+    expect(toText(bracketEndBond!)).toBe("-");
 
-    expect(makeTextFormula(makeBrutto(expr))).toBe("HBr2Cu");
+    expect(toText(makeBrutto(expr))).toBe("HBr2Cu");
   });
   it("InputOutputBond", () => {
     const expr = compile("H-(CH2)4-Cl");
     expect(expr.getMessage()).toBe("");
-    expect(makeTextFormula(expr, rulesHtml)).toBe(
-      "H-(CH<sub>2</sub>)<sub>4</sub>-Cl"
-    );
-    expect(makeTextFormula(makeBrutto(expr))).toBe("C4H9Cl");
+    expect(toHtml(expr)).toBe("H-(CH<sub>2</sub>)<sub>4</sub>-Cl");
+    expect(toText(makeBrutto(expr))).toBe("C4H9Cl");
   });
   it("Fenestrane5555", () => {
     // see https://en.wikipedia.org/wiki/Fenestrane
@@ -153,42 +151,42 @@ describe("Brackets", () => {
     //      |  |  |
     //  2(H2C)-+-(CH2)2
     // PS. this formula is not compiled correct by ver 1.0 of CharChem
-    const expr = compile("-(CH2)2|`-`|`-(H2C)2|-|<`-(H2C)2`|>-(CH2)2`|");
+    const expr = compile("-(CH2)2|`-`|`-(H2C)`2|-|<`-(H2C)`2`|>-(CH2)2`|");
     expect(expr.getMessage()).toBe("");
     const agent = expr.getAgents()[0]!;
     expect(agent.bonds).toHaveLength(12);
     expect(agent.bonds[0]!.soft).toBe(false);
-    expect(agent.commands.map(cmd2str)).toEqual([
-      "Auto",
-      "-",
-      "(",
-      "CH2",
-      ")2",
-      "|",
-      "Auto",
-      "`-",
-      "Auto",
-      "`|",
-      "`-",
-      ")2",
-      "H2C",
-      "(",
-      "|",
-      "Auto",
-      "-",
-      "|",
-      "Auto",
-      "`-",
-      ")2",
-      "H2C",
-      "(",
-      "`|",
-      "-",
-      "(",
-      "CH2",
-      ")2",
-      "`|",
-    ]);
+    const cm = agent.commands.map(cmd2str);
+    let i = 0;
+    expect(cm[i++]).toBe("Auto");
+    expect(cm[i++]).toBe("-");
+    expect(cm[i++]).toBe("(");
+    expect(cm[i++]).toBe("CH2");
+    expect(cm[i++]).toBe(")2");
+    expect(cm[i++]).toBe("|");
+    expect(cm[i++]).toBe("Auto");
+    expect(cm[i++]).toBe("`-");
+    expect(cm[i++]).toBe("Auto");
+    expect(cm[i++]).toBe("`|");
+    expect(cm[i++]).toBe("`-");
+    expect(cm[i++]).toBe("("); // Open bracket first!
+    expect(cm[i++]).toBe("H2C");
+    expect(cm[i++]).toBe(")2");
+    expect(cm[i++]).toBe("|");
+    expect(cm[i++]).toBe("Auto");
+    expect(cm[i++]).toBe("-");
+    expect(cm[i++]).toBe("|");
+    expect(cm[i++]).toBe("Auto");
+    expect(cm[i++]).toBe("`-");
+    expect(cm[i++]).toBe("(");
+    expect(cm[i++]).toBe("H2C");
+    expect(cm[i++]).toBe(")2");
+    expect(cm[i++]).toBe("`|");
+    expect(cm[i++]).toBe("-");
+    expect(cm[i++]).toBe("(");
+    expect(cm[i++]).toBe("CH2");
+    expect(cm[i++]).toBe(")2");
+    expect(cm[i++]).toBe("`|");
 
     expect(agent.nodes).toHaveLength(9);
     expect(agent.nodes.map((it) => it.pt.toString())).toEqual([
@@ -202,7 +200,7 @@ describe("Brackets", () => {
       "(-1, 2)",
       "(1, 2)",
     ]);
-    expect(makeTextFormula(makeBrutto(expr))).toBe("C13H20");
+    expect(toText(makeBrutto(expr))).toBe("C13H20");
   });
   it("FenestraneAbs", () => {
     // see https://en.wikipedia.org/wiki/Fenestrane
@@ -230,7 +228,7 @@ describe("Brackets", () => {
       "(-1, 2)",
       "(1, 2)",
     ]);
-    expect(nodes.map((it) => makeTextFormula(makeBrutto(it)))).toEqual([
+    expect(nodes.map((it) => toText(makeBrutto(it)))).toEqual([
       "CH",
       "CH2",
       "CH",
@@ -248,8 +246,8 @@ describe("Brackets", () => {
   it("Acetone", () => {
     const expr = compile("$ver(1.0)H3C(C=O)CH3");
     expect(expr.getMessage()).toBe("");
-    expect(makeTextFormula(expr)).toBe("H3C(C=O)CH3");
-    expect(makeTextFormula(makeBrutto(expr))).toBe("C3H6O");
+    expect(toText(expr)).toBe("H3C(C=O)CH3");
+    expect(toText(makeBrutto(expr))).toBe("C3H6O");
     const { dict } = PeriodicTable;
     expect(calcMass(expr)).toBe(
       roundMass(dict.C.mass * 3 + dict.H.mass * 6 + dict.O.mass)
@@ -265,7 +263,7 @@ describe("Brackets", () => {
     //     └       ┘10
     const expr = compile("$ver(1.0)Cl/[\\\\<|Cl>]10/\\Cl");
     expect(expr.getMessage()).toBe("");
-    expect(makeTextFormula(makeBrutto(expr))).toBe("C21H12Cl12");
+    expect(toText(makeBrutto(expr))).toBe("C21H12Cl12");
     expect(expr.getAgents()[0]!.commands.map(cmd2str)).toEqual([
       "Cl",
       "/",
@@ -299,7 +297,7 @@ describe("Brackets", () => {
     //      0    3
     const expr = compile("[HO/`|O|\\O^-]2_(x1.6,y#-1;-2,N0)Mg^2+");
     expect(expr.getMessage()).toBe("");
-    expect(makeTextFormula(makeBrutto(expr))).toBe("C2H2MgO6");
+    expect(toText(makeBrutto(expr))).toBe("C2H2MgO6");
     expect(calcCharge(expr)).toBe(0.0);
   });
   it("BranchAfterBracket", () => {
@@ -308,6 +306,6 @@ describe("Brackets", () => {
     //  └    ┘\I
     const expr = compile("[Mg]<_(x2,y-1)I><_(x2,y1)I>");
     expect(expr.getMessage()).toBe("");
-    expect(makeTextFormula(makeBrutto(expr))).toBe("I2Mg");
+    expect(toText(makeBrutto(expr))).toBe("I2Mg");
   });
 });

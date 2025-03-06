@@ -97,7 +97,8 @@ export const buildTextNodes = (srcExpr: ChemObj): TextNode => {
         color: obj.color,
       });
       correctBondsDirection(stack[0]);
-      popLevel();
+      // Есть особый случай, когда buildTextNode вызывается непосредственно для ChemBtacketEnd
+      if (stack.length > 1) popLevel();
       if (obj.n.isSpecified())
         addItem({
           type: "k",

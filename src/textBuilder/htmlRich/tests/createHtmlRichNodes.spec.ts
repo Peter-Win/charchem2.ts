@@ -49,7 +49,7 @@ describe("createHtmlRichNode", () => {
     const nodes = createHtmlRichNodes(textNode, {});
     const res = renderXmlNodes(nodes);
     expect(res).toBe(
-      `<span class="cch-expr"><span class="cch-agent"><span>C</span><span>;&nbsp;</span><span style="color: blue;">*</span></span></span>`
+      `<span class="cch-expr"><span class="cch-agent"><span>C</span><span>;&nbsp;</span><span style="color: blue">*</span></span></span>`
     );
   });
 });
