@@ -1,11 +1,11 @@
 import { createTestCompiler } from "../../ChemCompiler";
 import { ChemNode } from "../../../core/ChemNode";
-import { makeTextFormula } from "../../../inspectors/makeTextFormula";
+import { textFormula } from "../../../textBuilder/textFormula";
 import { parseNodesListDef } from "../bondSpline";
 import { createTestCompilerWithSingleAgent } from "../../createTestCompilerWithSingleAgent";
 
 const textNodes = (nodes: (ChemNode | undefined)[]): string[] =>
-  nodes.map((n) => (n ? makeTextFormula(n) : "NULL"));
+  nodes.map((n) => (n ? textFormula(n, "text") : "NULL"));
 
 describe("TestParseNodesListDef", () => {
   it("Empty List", () => {

@@ -2,8 +2,8 @@ import { compile } from "../compile";
 import { toa } from "../../math";
 import { ChemExpr } from "../../core/ChemExpr";
 import { ChemBond } from "../../core/ChemBond";
-import { makeTextFormula } from "../../inspectors/makeTextFormula";
 import { makeBrutto } from "../../inspectors/makeBrutto";
+import { textFormula } from "../../textBuilder/textFormula";
 
 const getBonds = (expr: ChemExpr): ChemBond[] =>
   Array.from(expr.getAgents()[0]!.bonds);
@@ -28,7 +28,7 @@ describe("universalBondProps", () => {
       "1.5r:|",
       "1.5r:|",
     ]);
-    expect(makeTextFormula(makeBrutto(expr))).toBe("C4H4");
+    expect(textFormula(makeBrutto(expr), "text")).toBe("C4H4");
   });
   it("Width", () => {
     //  0        w-3==4        D+7||8        D-11--

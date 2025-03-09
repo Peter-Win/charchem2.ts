@@ -8,6 +8,8 @@ import { ViewRichHtmlFormat } from "../ViewRichHtmlFormat";
 import { observer } from "mobx-react-lite";
 import { ViewTextFormat } from "../ViewTextFormat";
 import { FormulaView } from "../FormulaView";
+import { ViewPoorHtmlFormat } from "../ViewPoorHtmlFormat";
+import { ViewCharChemFormat } from "../ViewCharChemFormat";
 
 type SectionDef = {
   Component: React.FC;
@@ -30,6 +32,14 @@ const sections: Partial<Record<SectionKey, SectionDef>> = {
   Text: {
     Component: ViewTextFormat,
     title: "Text",
+  },
+  PoorHtml: {
+    Component: ViewPoorHtmlFormat,
+    title: "Poor HTML",
+  },
+  CharChem: {
+    Component: ViewCharChemFormat,
+    title: "CharChem",
   },
 }
 

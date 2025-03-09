@@ -3,7 +3,7 @@ import { compile } from "../../compiler/compile";
 describe("ChemExpr", () => {
   it("html", () => {
     const expr = compile("H2O");
-    expect(expr.html()).toBe("H<sub>2</sub>O");
+    expect(expr.html(true)).toBe("H<sub>2</sub>O");
   });
   it("isLinear", () => {
     expect(compile("H2SO4").isLinear()).toBe(true);

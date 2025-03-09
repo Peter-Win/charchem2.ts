@@ -31,7 +31,6 @@
         return elem;
       }
       function textChunk(dstBox, expr, type, label, fn) {
-        // var code = ChemSys.makeTextFormula(expr, ChemSys.dictTextRules[type]);
         var code = ChemSys.textFormula(expr, type);
         if (fn) code = fn(code);
         var chunk = createElem("div", dstBox, {cls: "chunk"});

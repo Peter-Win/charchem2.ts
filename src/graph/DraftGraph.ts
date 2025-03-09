@@ -3,9 +3,9 @@ import { Int } from "../types";
 import { ElemList } from "../core/ElemList";
 import { ChemAtom } from "../core/ChemAtom";
 import { ChemCustom } from "../core/ChemCustom";
-import { makeTextFormula } from "../inspectors/makeTextFormula";
 import { CommonVertex } from "./CommonVertex";
 import { CommonEdge } from "./CommonEdge";
+import { textFormula } from "../textBuilder/textFormula";
 
 export interface DraftVertex extends CommonVertex {
   reserved?: Int; // Количество связей, зарезервированных для соединения с другими графами
@@ -52,7 +52,7 @@ export class DraftGraph {
     return [
       ...this.vertices.map(
         (v, i) =>
-          `v${i}: ${makeTextFormula(v.content)}*${v.valence}${
+          `v${i}: ${textFormula(v.content, "text")}*${v.valence}${
             v.reserved ? `*${v.reserved}` : ""
           }${v.charge ? `^${v.charge}` : ""}`
       ),

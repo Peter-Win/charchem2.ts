@@ -7,7 +7,7 @@ export interface DebounceCounter {
 export const debounce = (
   counter: DebounceCounter,
   ms: number,
-  action: () => void,
+  action: () => void
 ) => {
   counter.counter = counter.counter || 0;
   counter.counter += 1;

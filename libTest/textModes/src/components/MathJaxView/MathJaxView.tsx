@@ -1,6 +1,6 @@
 import * as React from "react";
 import { SafeBox } from "../ui/SafeBox";
-import { MathJax, MathJaxContext } from "better-react-mathjax";
+import { MathJax, MathJaxContext, MathJaxContextProps } from "better-react-mathjax";
 import { ViewInnerHtml } from "../ui/ViewInnerHtml";
 
 type InputTeX = {
@@ -30,31 +30,58 @@ const mmlConfig = {
 
 export const MathJaxView: React.FC<PropsMathJaxView> = (props) => {
   const { code, input } = props;
-  const mmlDiv = React.useRef<HTMLDivElement>(null);
-  React.useEffect(() => {
-    if (input.type === "mml" && mmlDiv.current) {
-      console.log(">>>", code);
-      mmlDiv.current.innerHTML = code;
-    }
-  }, [code]);
   return (
-    <SafeBox>
-      {input.type === "tex" && <MathJaxContext 
-        version={3}
-        config={texConfig}
-      >
-        <MathJax inline dynamic>
-          <ViewInnerHtml html={`\\(${code}\\)`} />
-        </MathJax>
-      </MathJaxContext>}
-      {input.type === "mml" && <MathJaxContext 
-        version={3} 
-        config={mmlConfig}
-      >
-        <MathJax dynamic>
-          <div ref={mmlDiv} />
-        </MathJax>
-      </MathJaxContext>}
+    <SafeBox>      
+      {input.type === "tex" && (
+        <MathJaxShell config={texConfig} code={`\\(${code}\\)`} />
+      )}
+      {input.type === "mml" && (
+        <MathJaxShell config={mmlConfig} code="" />
+      )}
     </SafeBox>
   );
+}
+
+type PropsMathJaxShell = {
+  code: string;
+  config: MathJaxContextProps["config"];
+}
+
+type StMJLoading = {
+  state: "loading";
+}
+type StMJReady = {
+  state: "ready";
+}
+type StMJError = {
+  state: "error";
+  error: Error;
+}
+type StMJ = StMJLoading | StMJReady | StMJError;
+
+const MathJaxShell: React.FC<PropsMathJaxShell> = ({code, config}) => {
+  const [stMJ, setStMJ] = React.useState<StMJ>({state: "loading"});
+  return (
+    <SafeBox>
+      <MathJaxContext 
+        version={3} 
+        config={config}
+        onError={(error) => setStMJ({state: "error", error})}
+        onLoad={() => setStMJ({state: "ready"})}
+      >
+        {stMJ.state === "loading" && <div>Loading...</div>}
+        {stMJ.state === "error" && (
+          <div>
+            <h3>Error</h3>
+            <div>{stMJ.error.message}</div>
+          </div>
+        )}
+        {stMJ.state === "ready" && (
+          <MathJax inline dynamic>
+            <ViewInnerHtml html={code} />
+          </MathJax>
+        )}
+      </MathJaxContext>
+    </SafeBox>
+  )
 }

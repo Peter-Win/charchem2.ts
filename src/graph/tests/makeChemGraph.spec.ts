@@ -2,7 +2,7 @@ import { compile } from "../../compiler/compile";
 import { makeGraphFromAgent } from "../makeGraphFromAgent";
 import { makeChemGraph } from "../makeChemGraph";
 import { Edge, VertexEx } from "../ChemGraph";
-import { makeTextFormula } from "../../inspectors/makeTextFormula";
+import { textFormula } from "../../textBuilder/textFormula";
 
 describe("makeChemGraph", () => {
   it("Simple chain", () => {
@@ -20,17 +20,17 @@ describe("makeChemGraph", () => {
     expect(v0).toBeDefined();
     expect(v0.w).toBe(0);
     expect(v0.index).toBe(0);
-    expect(makeTextFormula(v0.content)).toBe("H");
+    expect(textFormula(v0.content, "text")).toBe("H");
     expect(v0.valence).toBe(1);
     expect(v0.edges).toEqual([0]);
 
     expect(v1.index).toBe(1);
-    expect(makeTextFormula(v1.content)).toBe("C");
+    expect(textFormula(v1.content, "text")).toBe("C");
     expect(v1.valence).toBe(4);
     expect(v1.edges).toEqual([0, 1]);
 
     expect(v2.index).toBe(2);
-    expect(makeTextFormula(v2.content)).toBe("N");
+    expect(textFormula(v2.content, "text")).toBe("N");
     expect(v2.valence).toBe(3);
     expect(v2.edges).toEqual([1]);
 

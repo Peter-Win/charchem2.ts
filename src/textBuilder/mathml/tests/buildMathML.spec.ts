@@ -101,7 +101,7 @@ describe("buildMathML", () => {
   });
   it("color", () => {
     expect(makeMML("$color(brown)3Br2")).toBe(
-      `<math style="color: brown;"><mrow><mn>3</mn><msub><mi>Br</mi><mn>2</mn></msub></mrow></math>`
+      `<math style="color: brown"><mrow><mn>3</mn><msub><mi>Br</mi><mn>2</mn></msub></mrow></math>`
     );
   });
   it("rich text", () => {

@@ -23,10 +23,10 @@ describe("renderXmlNode", () => {
       content: "value < 5",
     };
     expect(renderXmlNode(node)).toBe(
-      `<div data-size="small" style="color: magenta;">value &lt; 5</div>`
+      `<div data-size="small" style="color: magenta">value &lt; 5</div>`
     );
     expect(renderXmlNode(node, { indent: " " }, 2)).toBe(
-      `  <div data-size="small" style="color: magenta;">value &lt; 5</div>\n`
+      `  <div data-size="small" style="color: magenta">value &lt; 5</div>\n`
     );
   });
   it("sub nodes 1", () => {

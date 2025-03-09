@@ -1,7 +1,10 @@
 import { compile } from "../compile";
-import { makeTextFormula } from "../../inspectors/makeTextFormula";
 import { makeBrutto } from "../../inspectors/makeBrutto";
 import { Point, pointFromDeg } from "../../math/Point";
+import { textFormula } from "../../textBuilder/textFormula";
+import { ChemObj } from "../../core/ChemObj";
+
+const brutto = (obj: ChemObj): string => textFormula(makeBrutto(obj), "text");
 
 describe("UniversalBondCoord", () => {
   it("XY", () => {
@@ -13,7 +16,7 @@ describe("UniversalBondCoord", () => {
       "(1, 0)",
       "(1, -1)",
     ]);
-    expect(makeTextFormula(makeBrutto(expr))).toBe("C3H6");
+    expect(brutto(expr)).toBe("C3H6");
   });
   it("AbsoluteAngle", () => {
     const expr = compile("_(A0)$L(2)_(A90)_(A180,L1)_(A-90)");
@@ -25,7 +28,7 @@ describe("UniversalBondCoord", () => {
       "(1, 2)",
       "(0, 2)",
     ]);
-    expect(makeTextFormula(makeBrutto(expr))).toBe("C4H8");
+    expect(brutto(expr)).toBe("C4H8");
   });
   it("RelativeAngle", () => {
     const expr = compile("_(a45)O_(a90)_(a-90)");
@@ -38,12 +41,12 @@ describe("UniversalBondCoord", () => {
     expect(agent.nodes.map((it) => String(it.pt))).toEqual(
       [a, b, c, d].map((p) => String(p))
     );
-    expect(makeTextFormula(makeBrutto(expr))).toBe("C3H8O");
+    expect(brutto(expr)).toBe("C3H8O");
   });
   it("DefaultPolygonal", () => {
     const expr = compile("_(P)_(P)_(P)_(P)_(P)");
     expect(expr.getMessage()).toBe("");
-    expect(makeTextFormula(makeBrutto(expr))).toBe("C5H10");
+    expect(brutto(expr)).toBe("C5H10");
     expect(
       expr
         .getAgents()[0]!
@@ -53,7 +56,7 @@ describe("UniversalBondCoord", () => {
   it("NegativePolygonal", () => {
     const expr = compile("-_(P-4)_(P-4)_(P-4)");
     expect(expr.getMessage()).toBe("");
-    expect(makeTextFormula(makeBrutto(expr))).toBe("C4H8");
+    expect(brutto(expr)).toBe("C4H8");
     expect(expr.getAgents()[0]!.nodes.map((it) => String(it.pt))).toEqual([
       "(0, 0)",
       "(1, 0)",
@@ -68,7 +71,7 @@ describe("UniversalBondCoord", () => {
     //  |/
     const expr = compile("_(x1,y1)_(x-1,y1)_(p1;-1)");
     expect(expr.getMessage()).toBe("");
-    expect(makeTextFormula(makeBrutto(expr))).toBe("C4H10");
+    expect(brutto(expr)).toBe("C4H10");
     expect(expr.getAgents()[0]!.nodes.map((it) => String(it.pt))).toEqual([
       "(0, 0)",
       "(1, 1)",

@@ -3,7 +3,8 @@ import { TextNode } from "./TextNode";
 
 export const splitRichText = (
   srcText: string,
-  textColor: string | undefined
+  textColor: string | undefined,
+  needSrc?: boolean
 ): TextNode => {
   const onChunk = (
     chunk: MarkupChunk | string,
@@ -18,6 +19,9 @@ export const splitRichText = (
       items: chunk.chunks.map((c) => onChunk(c, locColor)),
       color: locColor,
     };
+    if (needSrc) {
+      res.src = srcText;
+    }
     if (chunk.type === "sub") {
       res.pos = "RB";
     } else if (chunk.type === "sup") {

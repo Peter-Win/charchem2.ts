@@ -1,23 +1,42 @@
 import { CSSProperties } from "react";
 import { makeAutoObservable } from "mobx";
-import { ChemExpr } from "../../../src/core/ChemExpr";
-import { compile } from "../../../src/compiler/compile";
-import { buildTextNodes, TextNode } from "../../../src/textBuilder/buildTextNodes";
-import { buildTextFormat } from "../../../src/textBuilder/text/buildTextFormat";
-import { initialTextSettings, makeTextOptions, TextSettings } from "./components/ViewTextFormat/TextSettings";
-import { defaultFormulaViewSettings, FormulaViewSettings } from "./components/FormulaViewSettings";
-import { buildHtmlRich, ResultHtmlRich } from "../../../src/textBuilder/htmlRich/buildHtmlRich";
-import { OptionsHtmlRich } from "../../../src/textBuilder/htmlRich/OptionsHtmlRich";
-import { ChemObj } from "../../../src/core/ChemObj";
-import { SrcMapItem } from "../../../src/compiler/sourceMap";
-import { XmlNode } from "../../../src/textBuilder/xmlNode/XmlNode";
-import { idGenBase } from "../../../src/textBuilder/htmlRich/idGenBase";
-import { renderXmlNodes } from "../../../src/textBuilder/xmlNode/renderXmlNode";
-import { buildTeX, TeXOptions } from "../../../src/textBuilder/tex/buildTeX";
+import { ChemExpr } from "charchem2/core/ChemExpr";
+import { compile } from "charchem2/compiler/compile";
+import { buildTextFormat } from "charchem2/textBuilder/text/buildTextFormat";
+import { OptionsHtmlRich } from "charchem2/textBuilder/htmlRich/OptionsHtmlRich";
+import { ChemObj } from "charchem2/core/ChemObj";
+import { SrcMapItem } from "charchem2/compiler/sourceMap";
+import { XmlNode } from "charchem2/textBuilder/xmlNode/XmlNode";
+import { idGenBase } from "charchem2/textBuilder/htmlRich/idGenBase";
+import { renderXmlNodes } from "charchem2/textBuilder/xmlNode/renderXmlNode";
+import { buildTeX, TeXOptions } from "charchem2/textBuilder/tex/buildTeX";
+import { htmlPoor } from "charchem2/textBuilder/htmlPoor/htmlPoor";
+import { buildCharChemText } from "charchem2/textBuilder/charChem/buildCharChemText";
+import { buildTextNodes, TextNode } from "charchem2/textBuilder/buildTextNodes";
+import { buildHtmlRich, ResultHtmlRich } from "charchem2/textBuilder/htmlRich/buildHtmlRich";
 import { initialTeXSettings } from "./components/ViewTeXFormat/TeXSettings";
 import { storageLoad, storageSave } from "./common/storage";
+import {
+  initialPoorHtmlSettings,
+  PoorHtmlSettings,
+} from "./components/ViewPoorHtmlFormat";
+import {
+  initialTextSettings,
+  makeTextOptions,
+  TextSettings,
+} from "./components/ViewTextFormat/TextSettings";
+import {
+  defaultFormulaViewSettings,
+  FormulaViewSettings,
+} from "./components/FormulaViewSettings";
 
-export type SectionKey = "RichHtml" | "MathML" | "TeX" | "Text";
+export type SectionKey =
+  | "RichHtml"
+  | "MathML"
+  | "TeX"
+  | "Text"
+  | "PoorHtml"
+  | "CharChem";
 const visibilityKey = "sections";
 
 export const store = makeAutoObservable({
@@ -27,11 +46,11 @@ export const store = makeAutoObservable({
   },
   get expr(): ChemExpr | undefined {
     if (!this.formula) return undefined;
-    const e = compile(this.formula, {srcMap: true});
+    const e = compile(this.formula, { srcMap: true });
     return e;
   },
   get srcNode(): TextNode | undefined {
-    const {expr} = this;
+    const { expr } = this;
     if (expr?.isLinear()) return buildTextNodes(expr);
     return undefined;
   },
@@ -56,8 +75,10 @@ export const store = makeAutoObservable({
   },
 
   init() {
-    const cvt = (json: unknown) => 
-      (json && typeof json === "object") ? json as typeof this.sectionsVisibility : undefined;
+    const cvt = (json: unknown) =>
+      json && typeof json === "object"
+        ? (json as typeof this.sectionsVisibility)
+        : undefined;
     const savedVisibility = storageLoad(visibilityKey, cvt);
     if (savedVisibility) {
       this.sectionsVisibility = savedVisibility;
@@ -68,16 +89,19 @@ export const store = makeAutoObservable({
     return {
       ...this.formulaViewSettings,
       // overflowX: "auto",
-    }
+    };
   },
 
   // formula view
-  formulaViewSettings: {...defaultFormulaViewSettings} as FormulaViewSettings,
-  setFormulaViewParam<P extends keyof FormulaViewSettings>(param: P, value: FormulaViewSettings[P]) {
+  formulaViewSettings: { ...defaultFormulaViewSettings } as FormulaViewSettings,
+  setFormulaViewParam<P extends keyof FormulaViewSettings>(
+    param: P,
+    value: FormulaViewSettings[P]
+  ) {
     this.formulaViewSettings[param] = value;
   },
   resetFormulaViewSettings() {
-    this.formulaViewSettings = {...defaultFormulaViewSettings};
+    this.formulaViewSettings = { ...defaultFormulaViewSettings };
   },
 
   // HTML format
@@ -86,17 +110,34 @@ export const store = makeAutoObservable({
     if (!srcNode) return undefined;
     const options: OptionsHtmlRich = {
       idGen: idGenBase("id"),
-    }
+    };
     return buildHtmlRich(srcNode, options)?.nodes;
   },
   get richHtmlCode(): string {
     const { richHtmlNodes } = this;
-    return renderXmlNodes(richHtmlNodes, {indent: "  ", noSelfClosed: true});
+    return renderXmlNodes(richHtmlNodes, { indent: "  ", noSelfClosed: true });
+  },
+
+  // poor html
+  get poorHtmlCode(): string {
+    const { srcNode } = this;
+    if (!srcNode) return "";
+    return htmlPoor(srcNode, this.poorHtmlSettings);
+  },
+  poorHtmlSettings: { ...initialPoorHtmlSettings } as PoorHtmlSettings,
+  setPoorHtmlSetting<Field extends keyof PoorHtmlSettings>(
+    field: Field,
+    value: PoorHtmlSettings[Field]
+  ) {
+    this.poorHtmlSettings[field] = value;
+  },
+  resetPoorHtmlSettings() {
+    this.poorHtmlSettings = { ...initialPoorHtmlSettings };
   },
 
   // React view
   get reactData(): ResultHtmlRich | undefined {
-    const {srcNode} = this;
+    const { srcNode } = this;
     if (!srcNode) return undefined;
     const options: OptionsHtmlRich = {
       srcMap: true,
@@ -106,12 +147,15 @@ export const store = makeAutoObservable({
   },
 
   // TeX format
-  teXSettings: {...initialTeXSettings} as TeXOptions,
-  setTeXSettings<Field extends keyof TeXOptions>(field: Field, value: TeXOptions[Field]) {
+  teXSettings: { ...initialTeXSettings } as TeXOptions,
+  setTeXSettings<Field extends keyof TeXOptions>(
+    field: Field,
+    value: TeXOptions[Field]
+  ) {
     this.teXSettings[field] = value;
   },
   resetTeXSettings() {
-    this.teXSettings = {...initialTeXSettings};
+    this.teXSettings = { ...initialTeXSettings };
   },
   get teXFormat(): string {
     if (!this.srcNode) return "";
@@ -119,24 +163,36 @@ export const store = makeAutoObservable({
   },
 
   // Text format
-  textSettings: {...initialTextSettings} as TextSettings,
-  setTextSettings<Field extends keyof TextSettings>(field: Field, value: TextSettings[Field]) {
+  textSettings: { ...initialTextSettings } as TextSettings,
+  setTextSettings<Field extends keyof TextSettings>(
+    field: Field,
+    value: TextSettings[Field]
+  ) {
     this.textSettings[field] = value;
   },
   resetTextSettings() {
-    this.textSettings = {...initialTextSettings};
+    this.textSettings = { ...initialTextSettings };
   },
   get textFormat(): string {
-    const {srcNode, textSettings} = this;
+    const { srcNode, textSettings } = this;
     if (!srcNode) return "";
     return buildTextFormat(srcNode, makeTextOptions(textSettings));
   },
+
+  // CharChem format
+  get charChemCode(): string {
+    const { srcNode } = this;
+    return srcNode ? buildCharChemText(srcNode) : "";
+  },
+  // get charChemExpr(): ChemExpr {
+  //   return compile(this.charChemCode);
+  // },
 
   onTextNode(node: TextNode | undefined): boolean {
     const nodeObj = getNodeObject(node);
     const srcMap = this.expr?.srcMap;
     if (nodeObj && srcMap) {
-      const list = srcMap.filter(({obj}) => nodeObj === obj);
+      const list = srcMap.filter(({ obj }) => nodeObj === obj);
       if (list.length > 0) {
         this.setSelectionPos(list);
         return true;
@@ -158,4 +214,4 @@ const getNodeObject = (node: TextNode | undefined): ChemObj | undefined => {
       break;
   }
   return undefined;
-}
+};

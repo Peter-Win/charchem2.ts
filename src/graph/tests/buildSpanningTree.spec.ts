@@ -4,7 +4,7 @@ import { removeHydrogen } from "../removeHydrogens";
 import { makeChemGraph } from "../makeChemGraph";
 import { traceGraph, WithStep } from "../traceGraph";
 import { buildSpanningTree, SpanningTreeNode } from "../buildSpanningTree";
-import { makeTextFormula } from "../../inspectors/makeTextFormula";
+import { textFormula } from "../../textBuilder/textFormula";
 import { findFarVertex } from "../findFarVertex";
 import { ChemSubObj } from "../../core/ChemSubObj";
 import { Int } from "../../types";
@@ -12,7 +12,7 @@ import { Int } from "../../types";
 const branchText = (branch: SpanningTreeNode[]): string =>
   branch
     .map((node) => {
-      let result = makeTextFormula(node.vertex.content);
+      let result = textFormula(node.vertex.content, "text");
       node.branches.forEach((b) => {
         result += `(${branchText(b)})`;
       });
@@ -142,7 +142,7 @@ describe("buildSpanningTree", () => {
     const expr = compile("/\\|O`|/OH");
     expect(expr.getMessage()).toBe("");
     const agent = expr.getAgents()[0]!;
-    expect(agent.nodes.map((n) => makeTextFormula(n))).toEqual([
+    expect(agent.nodes.map((n) => textFormula(n, "text"))).toEqual([
       "",
       "",
       "",
@@ -152,7 +152,7 @@ describe("buildSpanningTree", () => {
     expect(agent.bonds.map(({ n }) => n)).toEqual([1, 1, 2, 1]);
     const draft = removeHydrogen(makeGraphFromAgent(agent));
     const vxInfo = (vx: { content: ChemSubObj; hydrogen?: Int }): string =>
-      makeTextFormula(vx.content) + (vx.hydrogen || 0);
+      textFormula(vx.content, "text") + (vx.hydrogen || 0);
     expect(draft.vertices.map(vxInfo)).toEqual(["C3", "C2", "C0", "O0", "O1"]);
     const g = makeChemGraph<WithStep>(draft, { step: 0 }, {});
     expect(g.vertices.map(vxInfo)).toEqual(["C3", "C2", "C0", "O0", "O1"]);

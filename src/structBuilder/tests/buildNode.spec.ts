@@ -1,6 +1,5 @@
 import { ChemNode } from "../../core/ChemNode";
 import { compile } from "../../compiler/compile";
-import { makeTextFormula } from "../../inspectors/makeTextFormula";
 import { buildNode, ResultBuildNode } from "../buildNode";
 import { createTestImgProps, createTestSurface, saveSurface } from "./testEnv";
 import { FigFrame } from "../../drawSys/figures/FigFrame";
@@ -8,13 +7,14 @@ import { PathSeg } from "../../drawSys/path";
 import { FigPath } from "../../drawSys/figures/FigPath";
 import { Point } from "../../math/Point";
 import { FigText } from "../../drawSys/figures/FigText";
+import { textFormula } from "../../textBuilder/textFormula";
 
 describe("buildNode", () => {
   it("H2O", () => {
     const expr = compile("H2O");
     expect(expr.getMessage()).toBe("");
     const node: ChemNode = expr.getAgents()[0]!.nodes[0]!;
-    expect(makeTextFormula(node)).toBe("H2O");
+    expect(textFormula(node, "text")).toBe("H2O");
 
     const surface = createTestSurface();
     const imgProps = createTestImgProps(surface, 100, "#333");
@@ -57,7 +57,7 @@ describe("buildNode", () => {
     expect(expr.getMessage()).toBe("");
 
     const node: ChemNode = expr.getAgents()[0]!.nodes[0]!;
-    expect(makeTextFormula(node)).toBe("NH4^+");
+    expect(textFormula(node, "text")).toBe("NH4^+");
 
     const surface = createTestSurface();
     const imgProps = createTestImgProps(surface, 80);

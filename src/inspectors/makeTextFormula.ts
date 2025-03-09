@@ -30,6 +30,7 @@ class StackItem {
  * Сформировать текстовое представление химической формулы.
  * Не все формулы могут быть представлены в виде текста.
  * Поэтому перед вызовом этой функции нужно использовать isTextFormula
+ * @deprecated next version: textFormula
  */
 export const makeTextFormula = (
   chemObj: ChemObj,

@@ -3,12 +3,14 @@ const cp = require("node:child_process");
 const fs = require("node:fs");
 
 const commands = [
-  "npm i --force",
-  "npm run build",
+  ["npm i --force", () => !fs.existsSync(path.join(__dirname, "node_modules"))],
+  ["npm run build", () => true],
 ];
-commands.forEach(cmd => {
-  console.log(`react-ts > ${cmd}`);
-  cp.execSync(cmd, {stdio: "inherit", cwd: __dirname});  
+commands.forEach(([cmd, cond]) => {
+  if (cond()) {
+    console.log(`react-ts > ${cmd}`);
+    cp.execSync(cmd, {stdio: "inherit", cwd: __dirname});
+  }
 })
 
 // Change script url

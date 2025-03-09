@@ -3,8 +3,9 @@ import { TextNode } from "../TextNode";
 
 describe("splitRichText", () => {
   it("simple text", () => {
-    expect(splitRichText("Hello!", "black")).toEqual({
+    expect(splitRichText("Hello!", "black", true)).toEqual({
       type: "richText",
+      src: "Hello!",
       color: "black",
       items: [
         {

@@ -1,4 +1,4 @@
-import { makeTextFormula } from "../../../inspectors/makeTextFormula";
+import { textFormula } from "../../../textBuilder/textFormula";
 import { ChemNodeItem } from "../../../core/ChemNodeItem";
 import { compile } from "../../compile";
 
@@ -13,9 +13,9 @@ describe("funcColor", () => {
       },
     });
     expect(items.length).toBe(2);
-    expect(makeTextFormula(items[0]!)).toBe("H");
+    expect(textFormula(items[0]!, "text")).toBe("H");
     expect(items[0]!.color).toBe("blue");
-    expect(makeTextFormula(items[1]!)).toBe("O");
+    expect(textFormula(items[1]!, "text")).toBe("O");
     expect(items[1]!.color).toBeUndefined();
   });
 

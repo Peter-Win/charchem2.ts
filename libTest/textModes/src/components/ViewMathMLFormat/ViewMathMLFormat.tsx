@@ -2,15 +2,13 @@ import * as React from "react";
 import * as styles from "./ViewMathML.module.css";
 import { observer } from "mobx-react-lite";
 import { store } from "../../store";
-import { XmlNode } from "../../../../../src/textBuilder/xmlNode/XmlNode";
-import { buildMathML } from "../../../../../src/textBuilder/mathml/buildMathML"
+import { XmlNode } from "charchem2/textBuilder/xmlNode/XmlNode";
+import { buildMathML } from "charchem2/textBuilder/mathml/buildMathML"
+import { renderXmlNode } from "charchem2/textBuilder/xmlNode/renderXmlNode";
 import { XmlCodeView } from "../XmlCodeView";
 import { Checkbox } from "../ui/Checkbox";
 import { Feature, FeaturesList } from "../FeaturesList";
-import { renderXmlNode } from "../../../../../src/textBuilder/xmlNode/renderXmlNode";
 import { ViewInnerHtml } from "../ui/ViewInnerHtml";
-import { MathJax, MathJaxContext } from "better-react-mathjax";
-import { SafeBox } from "../ui/SafeBox";
 import { MathJaxView } from "../MathJaxView";
 
 export const ViewMathMLFormat: React.FC = observer(() => {

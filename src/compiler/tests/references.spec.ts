@@ -1,39 +1,42 @@
 import { compile } from "../compile";
-import { makeTextFormula } from "../../inspectors/makeTextFormula";
+import { textFormula } from "../../textBuilder/textFormula";
 import { makeBrutto } from "../../inspectors/makeBrutto";
 import { ChemBond } from "../../core/ChemBond";
+import { ChemObj } from "../../core/ChemObj";
+
+const toText = (obj: ChemObj): string => textFormula(obj, "text");
 
 describe("References", () => {
   it("Space", () => {
     const expr = compile("H3C# -CH2#\n -OH");
     expect(expr.getMessage()).toBe("");
-    expect(makeTextFormula(expr)).toBe("H3C-CH2-OH");
+    expect(toText(expr)).toBe("H3C-CH2-OH");
   });
   it("RefByDirectIndex", () => {
     const expr = compile("H-C-H; H|#2|H");
     expect(expr.getMessage()).toBe("");
-    expect(makeTextFormula(makeBrutto(expr))).toBe("CH4");
+    expect(toText(makeBrutto(expr))).toBe("CH4");
     const agent = expr.getAgents()[0]!;
     const nodeC = agent.nodes[1]!;
-    expect(makeTextFormula(nodeC)).toBe("C");
+    expect(toText(nodeC)).toBe("C");
     expect(Array.from(nodeC.bonds)).toHaveLength(4);
   });
   it("RefByReverseIndex", () => {
     const expr = compile("H-N-H; H|#-3");
     expect(expr.getMessage()).toBe("");
-    expect(makeTextFormula(makeBrutto(expr))).toBe("H3N");
+    expect(toText(makeBrutto(expr))).toBe("H3N");
     const agent = expr.getAgents()[0]!;
     const nodeN = agent.nodes[1]!;
-    expect(makeTextFormula(nodeN)).toBe("N");
+    expect(toText(nodeN)).toBe("N");
     expect(Array.from(nodeN.bonds)).toHaveLength(3);
   });
   it("RefByName", () => {
     const expr = compile("Cl-C:center-Cl; O||#center");
     expect(expr.getMessage()).toBe("");
-    expect(makeTextFormula(makeBrutto(expr))).toBe("CCl2O");
+    expect(toText(makeBrutto(expr))).toBe("CCl2O");
     const agent = expr.getAgents()[0]!;
     const nodeC = agent.nodes[1]!;
-    expect(makeTextFormula(nodeC)).toBe("C");
+    expect(toText(nodeC)).toBe("C");
     expect(Array.from(nodeC.bonds)).toHaveLength(3);
   });
   it("RefByFirstAtomName", () => {

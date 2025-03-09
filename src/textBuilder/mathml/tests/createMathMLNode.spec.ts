@@ -93,7 +93,7 @@ describe("createMathMLNode", () => {
       `<msup><mi mathvariant="normal">R</mi><mn>1</mn></msup>`
     );
     expect(cvt("$color(green){Hal_2}")).toBe(
-      `<msub style="color: green;"><mi>Hal</mi><mn>2</mn></msub>`
+      `<msub style="color: green"><mi>Hal</mi><mn>2</mn></msub>`
     );
     // radical
     expect(cvt("Me2O")).toBe(
@@ -103,7 +103,7 @@ describe("createMathMLNode", () => {
     expect(cvt("Ca,Mg")).toBe(`<mrow><mi>Ca</mi><mo>,</mo><mi>Mg</mi></mrow>`);
     // comment
     expect(cvt(`Fe"AB{\\color{red}CD}EF"`)).toBe(
-      `<mrow><mi>Fe</mi><mrow><mtext>AB</mtext><mtext style="color: red;">CD</mtext><mtext>EF</mtext></mrow></mrow>`
+      `<mrow><mi>Fe</mi><mrow><mtext>AB</mtext><mtext style="color: red">CD</mtext><mtext>EF</mtext></mrow></mrow>`
     );
   });
 

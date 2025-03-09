@@ -12,7 +12,7 @@ import { buildAgentPrior } from "../buildAgentPrior";
 import { FigText } from "../../../drawSys/figures/FigText";
 import { ChemBracketBegin, ChemBracketEnd } from "../../../core/ChemBracket";
 import { ChemNode } from "../../../core/ChemNode";
-import { makeTextFormula } from "../../../inspectors/makeTextFormula";
+import { textFormula } from "../../../textBuilder/textFormula";
 
 describe("buildAgentPrior with brackets", () => {
   it("Text bracket connected with nodes directly", () => {
@@ -194,17 +194,17 @@ describe("buildAgentPrior with brackets", () => {
     const { commands } = agent;
     expect(commands[2]).toBeInstanceOf(ChemNode);
     const n2 = commands[2] as ChemNode;
-    expect(makeTextFormula(n2)).toBe("N");
+    expect(textFormula(n2, "text")).toBe("N");
     expect(commands[3]).toBeInstanceOf(ChemBracketBegin);
     const bb = commands[3] as ChemBracketBegin;
     expect(commands[4]).toBeInstanceOf(ChemNode);
     const n4 = commands[4] as ChemNode;
-    expect(makeTextFormula(n4)).toBe("CH2");
+    expect(textFormula(n4, "text")).toBe("CH2");
     expect(commands[5]).toBeInstanceOf(ChemBracketEnd);
     const be = commands[5] as ChemBracketEnd;
     expect(commands[6]).toBeInstanceOf(ChemNode);
     const n6 = commands[6] as ChemNode;
-    expect(makeTextFormula(n6)).toBe("Cl");
+    expect(textFormula(n6, "text")).toBe("Cl");
     expect(bb.nodes[0]).toBe(n2);
     expect(bb.nodes[1]).toBe(n4);
     expect(be.nodes[0]).toBe(n4);

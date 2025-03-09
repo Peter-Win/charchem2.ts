@@ -1,6 +1,6 @@
 import { compile } from "../compile";
 import { ChemBond } from "../../core/ChemBond";
-import { makeTextFormula } from "../../inspectors/makeTextFormula";
+import { textFormula } from "../../textBuilder/textFormula";
 import { makeBrutto } from "../../inspectors/makeBrutto";
 import { ChemError } from "../../core/ChemError";
 
@@ -11,7 +11,7 @@ describe("MiddlePoints", () => {
   it("Simple", () => {
     const expr = compile("H2C`|H2C`|H2C_m(x2)_m(y2)_(x-2)");
     expect(expr.getMessage()).toBe("");
-    expect(makeTextFormula(makeBrutto(expr))).toBe("C3H6");
+    expect(textFormula(makeBrutto(expr), "text")).toBe("C3H6");
     const bonds = Array.from(expr.getAgents()[0]!.bonds);
     expect(bondNodes(bonds[0]!)).toEqual([1, 2]);
     expect(bondNodes(bonds[1]!)).toEqual([2, 3]);
@@ -41,7 +41,7 @@ describe("MiddlePoints", () => {
     expect(bondNodes(bonds[0]!)).toEqual([1, 2]);
     expect(bondNodes(bonds[1]!)).toEqual([2, 1]);
     expect(bondNodes(bonds[2]!)).toEqual([1, 2]);
-    expect(makeTextFormula(makeBrutto(expr))).toBe("C2H2");
+    expect(textFormula(makeBrutto(expr), "text")).toBe("C2H2");
   });
   it("_m without (", () => {
     const expr = compile("|_m");

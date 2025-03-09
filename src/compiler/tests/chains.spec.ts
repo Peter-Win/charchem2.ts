@@ -1,6 +1,6 @@
 import { compile } from "../compile";
 import { makeBrutto } from "../../inspectors/makeBrutto";
-import { makeTextFormula } from "../../inspectors/makeTextFormula";
+import { textFormula } from "../../textBuilder/textFormula";
 import { lastItem } from "../../utils/lastItem";
 
 describe("chains", () => {
@@ -81,7 +81,7 @@ describe("chains", () => {
     // d---c
     const expr = compile("{A}-{B}|{C}`-{D}`|#1");
     expect(expr.getMessage()).toBe("");
-    expect(makeTextFormula(makeBrutto(expr))).toBe("ABCD");
+    expect(textFormula(makeBrutto(expr), "text")).toBe("ABCD");
     const agent = expr.getAgents()[0]!;
     expect(agent.nodes).toHaveLength(4);
     const [a, b, c, d] = agent.nodes;
@@ -109,7 +109,7 @@ describe("chains", () => {
     // C-~-F
     const expr = compile("B|C-F`|K`-#1`|N");
     expect(expr.getMessage()).toBe("");
-    expect(makeTextFormula(makeBrutto(expr))).toBe("CBFKN");
+    expect(textFormula(makeBrutto(expr), "text")).toBe("CBFKN");
     const agent = expr.getAgents()[0]!;
     expect(agent.nodes).toHaveLength(5);
     const [b, c, f, k, n] = agent.nodes;
@@ -147,7 +147,7 @@ describe("chains", () => {
     //     8           7       y1
     const expr = compile("H-C-H; H-C-H; H|#2|#5|H");
     expect(expr.getMessage()).toBe("");
-    expect(makeTextFormula(makeBrutto(expr))).toBe("C2H6");
+    expect(textFormula(makeBrutto(expr), "text")).toBe("C2H6");
     const agent = expr.getAgents()[0]!;
     expect(agent.nodes).toHaveLength(8);
     expect(agent.bonds).toHaveLength(7);

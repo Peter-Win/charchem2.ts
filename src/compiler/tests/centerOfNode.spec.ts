@@ -1,12 +1,12 @@
 import { ChemNode } from "../../core/ChemNode";
 import { ChemExpr } from "../../core/ChemExpr";
-import { makeTextFormula } from "../../inspectors/makeTextFormula";
+import { textFormula } from "../../textBuilder/textFormula";
 import { compile } from "../compile";
 
 const getNode = (expr: ChemExpr): ChemNode => expr.getAgents()[0]!.nodes[0]!;
 
 const getCenterItemText = (expr: ChemExpr): string =>
-  makeTextFormula(getNode(expr).getCenterItem()!);
+  textFormula(getNode(expr).getCenterItem()!, "text");
 
 describe("Center of node", () => {
   it("SingleItem", () => {

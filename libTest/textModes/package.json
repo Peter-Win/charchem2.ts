@@ -9,7 +9,8 @@
   "license": "",
   "scripts": {
     "build": "webpack --mode=production",
-    "start": "webpack serve --mode=development"
+    "start": "webpack serve --mode=development",
+    "lint": "npx eslint ./src --ext .ts --fix"
   },
   "devDependencies": {
     "@types/katex": "^0.16.7",

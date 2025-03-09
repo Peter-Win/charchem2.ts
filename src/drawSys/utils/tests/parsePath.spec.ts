@@ -1,3 +1,5 @@
+import { Point } from "../../../math/Point";
+import { PathSeg } from "../../path";
 import { parsePath } from "../parsePath";
 
 describe("parsePath", () => {
@@ -70,5 +72,41 @@ describe("parsePath", () => {
       },
       { cmd: "L", rel: false, pt: { x: 315, y: 10 } },
     ]);
+  });
+
+  it("implicit L", () => {
+    expect(parsePath("M1 2 3 4 5-6")).toEqual([
+      { cmd: "M", rel: false, pt: new Point(1, 2) },
+      { cmd: "L", rel: false, pt: new Point(3, 4) },
+      { cmd: "L", rel: false, pt: new Point(5, -6) },
+    ]);
+    expect(parsePath("m1 2 3 4 5-6")).toEqual([
+      { cmd: "M", rel: true, pt: new Point(1, 2) },
+      { cmd: "L", rel: true, pt: new Point(3, 4) },
+      { cmd: "L", rel: true, pt: new Point(5, -6) },
+    ]);
+  });
+
+  it("implicit c", () => {
+    const d = `M0 241v40h399891c-47.3 35.3-84 78-110 128-16.7 32-27.7 63.7-33 95`;
+    expect(parsePath(d)).toEqual([
+      { cmd: "M", rel: false, pt: new Point(0, 241) },
+      { cmd: "V", rel: true, y: 40 },
+      { cmd: "H", rel: true, x: 399891 },
+      {
+        cmd: "C",
+        rel: true,
+        cp1: new Point(-47.3, 35.3),
+        cp2: new Point(-84, 78),
+        pt: new Point(-110, 128),
+      },
+      {
+        cmd: "C",
+        rel: true,
+        cp1: new Point(-16.7, 32),
+        cp2: new Point(-27.7, 63.7),
+        pt: new Point(-33, 95),
+      },
+    ] satisfies PathSeg[]);
   });
 });

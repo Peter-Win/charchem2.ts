@@ -1,7 +1,7 @@
 import { createTestCompilerWithSingleAgent } from "../../createTestCompilerWithSingleAgent";
 import { createTestCompiler } from "../../ChemCompiler";
 import { parseBackgroundArgs } from "../funcBackground";
-import { makeTextFormula } from "../../../inspectors/makeTextFormula";
+import { textFormula } from "../../../textBuilder/textFormula";
 import { compile } from "../../compile";
 import { ChemBackground } from "../../../core/ChemBackground";
 
@@ -33,8 +33,8 @@ describe("parseBackgroundArgs", () => {
     const params = parseBackgroundArgs(compiler, ["to:1;-1"], [1]);
     expect(params.nodes).toBeDefined();
     expect(params.nodes!.length).toBe(2);
-    expect(makeTextFormula(params.nodes![0]!)).toBe("F");
-    expect(makeTextFormula(params.nodes![1]!)).toBe("O");
+    expect(textFormula(params.nodes![0]!, "text")).toBe("F");
+    expect(textFormula(params.nodes![1]!, "text")).toBe("O");
   });
 });
 
@@ -48,6 +48,6 @@ describe("funcBackground", () => {
     expect(cmd.params.fill).toBe("brown");
     expect(cmd.params.nodes).toBeDefined();
     expect(cmd.params.nodes!.length).toBe(1);
-    expect(makeTextFormula(cmd.params.nodes![0]!)).toBe("NH2");
+    expect(textFormula(cmd.params.nodes![0]!, "text")).toBe("NH2");
   });
 });

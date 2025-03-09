@@ -1,5 +1,4 @@
-import { makeTextFormulaSrc } from "../../inspectors/makeTextFormula";
-import { rulesHtml } from "../../textRules/rulesHtml";
+import { textFormula } from "../../textBuilder/textFormula";
 import { pointFromDeg } from "../../math/Point";
 import { compile } from "../compile";
 import { getVersion } from "../../getVersion";
@@ -8,18 +7,16 @@ const sDir = (deg: number): string => String(pointFromDeg(deg));
 
 describe("Functions", () => {
   it("Mass", () => {
-    expect(makeTextFormulaSrc("$M(16)O", rulesHtml)).toBe("<sup>16</sup>O");
-    expect(makeTextFormulaSrc("$nM(235)U", rulesHtml)).toBe(
-      `<span class="echem-mass-and-num">235<br/>92</span>U`
+    expect(textFormula("$M(16)O", "htmlPoor")).toBe("<sup>16</sup>O");
+    expect(textFormula("$nM(235)U", "htmlPoor")).toBe(
+      `<sup>235</sup><sub>92</sub>U`
     );
-    expect(makeTextFormulaSrc("$nM(1){n}", rulesHtml)).toBe(
-      `<sup>1</sup><i>n</i>`
+    expect(textFormula("$nM(1){n}", "htmlPoor")).toBe(`<sup>1</sup><i>n</i>`);
+    expect(textFormula("$nM(1,0){n}", "htmlPoor")).toBe(
+      `<sup>1</sup><sub>0</sub><i>n</i>`
     );
-    expect(makeTextFormulaSrc("$nM(1,0){n}", rulesHtml)).toBe(
-      `<span class="echem-mass-and-num">1<br/>0</span><i>n</i>`
-    );
-    expect(makeTextFormulaSrc("$nM(1,-1){n}", rulesHtml)).toBe(
-      `<span class="echem-mass-and-num">1<br/>-1</span><i>n</i>`
+    expect(textFormula("$nM(1,-1){n}", "htmlPoor")).toBe(
+      `<sup>1</sup><sub>-1</sub><i>n</i>`
     );
   });
   it("Slope", () => {

@@ -28,7 +28,7 @@ export const addItemProps = (
         type: "k",
         k: new ChemK(atomNum),
         pos: "LB",
-        kType: "item",
+        kType: "atomNum",
         color,
       });
     }
@@ -40,7 +40,7 @@ export const addItemProps = (
       type: "k",
       k: new ChemK(atomMass),
       pos: "LT",
-      kType: "item",
+      kType: "mass",
       color,
     });
 

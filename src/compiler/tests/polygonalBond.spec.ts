@@ -1,6 +1,9 @@
 import { compile } from "../compile";
-import { makeTextFormula } from "../../inspectors/makeTextFormula";
+import { textFormula } from "../../textBuilder/textFormula";
 import { makeBrutto } from "../../inspectors/makeBrutto";
+import { ChemObj } from "../../core/ChemObj";
+
+const brutto = (obj: ChemObj): string => textFormula(makeBrutto(obj), "text");
 
 describe("PolygonalBond", () => {
   it("SimpleP", () => {
@@ -18,14 +21,8 @@ describe("PolygonalBond", () => {
       0, 72, 144, -144, -72,
     ]);
     expect(bonds.map((it) => it.n)).toEqual([2.0, 1.0, 2.0, 1.0, 1.0]);
-    expect(agents.nodes.map((it) => makeTextFormula(makeBrutto(it)))).toEqual([
-      "CH",
-      "CH",
-      "CH",
-      "CH",
-      "O",
-    ]);
-    expect(makeTextFormula(makeBrutto(expr))).toBe("C4H4O");
+    expect(agents.nodes.map(brutto)).toEqual(["CH", "CH", "CH", "CH", "O"]);
+    expect(brutto(expr)).toBe("C4H4O");
   });
   it("Q3", () => {
     const expr = compile("-_qq3_q3");
@@ -35,7 +32,7 @@ describe("PolygonalBond", () => {
       0, -120, 120,
     ]);
     expect(bonds.map((it) => it.n)).toEqual([1.0, 2.0, 1.0]);
-    expect(makeTextFormula(makeBrutto(expr))).toBe("C3H4");
+    expect(brutto(expr)).toBe("C3H4");
   });
   it("UsingLengthOfPreviousBond", () => {
     const expr = compile("_(x2)_p4");
@@ -58,7 +55,7 @@ describe("PolygonalBond", () => {
       "0,-1",
       "-1,0",
     ]);
-    expect(makeTextFormula(makeBrutto(expr))).toBe("C6H12");
+    expect(brutto(expr)).toBe("C6H12");
   });
   it("ZeroBond", () => {
     const expr = compile("-_p4o_p4_pp4");

@@ -1,0 +1,18 @@
+{
+  "settings": {
+    "react": {
+      "version": "detect"
+    },
+    "import/resolver": {
+      "node": {
+        "extensions": [".ts", ".tsx"]
+      },
+      "alias": {
+        "map": [
+          ["src", "./src"]
+        ],
+        "extensions": [".ts", ".tsx"]
+      }
+    }
+  }
+}

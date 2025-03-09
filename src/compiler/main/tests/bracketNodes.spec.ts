@@ -4,11 +4,12 @@
 
 import { compile } from "../../compile";
 import { ChemBracketBegin, ChemBracketEnd } from "../../../core/ChemBracket";
-import { makeTextFormula } from "../../../inspectors/makeTextFormula";
+import { textFormula } from "../../../textBuilder/textFormula";
 import { ChemNode } from "../../../core/ChemNode";
 
-const nodeText = (node?: ChemNode): string =>
-  node ? makeTextFormula(node) : "";
+const toText = (node: ChemNode) => textFormula(node, "text");
+
+const nodeText = (node?: ChemNode): string => (node ? toText(node) : "");
 
 describe("Bracket nodes", () => {
   it("Nodes without bond", () => {
@@ -25,8 +26,8 @@ describe("Bracket nodes", () => {
     // nodes
     const nCa = nodes[1]!;
     const nC = nodes[2]!;
-    expect(makeTextFormula(nCa)).toBe("Ca");
-    expect(makeTextFormula(nC)).toBe("C");
+    expect(toText(nCa)).toBe("Ca");
+    expect(toText(nC)).toBe("C");
     expect(nCa.chain).toBe(nC.chain);
     expect(nCa.subChain).toBeLessThan(nC.subChain);
 
