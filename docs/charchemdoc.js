@@ -52,7 +52,6 @@ window.addEventListener("load", function(){
 
 window.addEventListener("popstate", function(e) {
     var state = e.state;
-    console.log("popstate", state);
     if (typeof state === "object") {
         showPage(state.pageId, state.hash);
     }
@@ -82,6 +81,9 @@ var readyPages = {}
 var specialPageInit = {
     templates() {
         initTemplates();
+    },
+    figures() {
+        initSpiroCalc();
     },
 }
 var specialPageActive = {
@@ -241,7 +243,7 @@ function drawFormulas(page) {
         var f = formulas[i++];
         if (!f) {
             clearInterval(intervalId)
-        } else {
+        } else if (!f.getAttribute("data-src")) {
             ChemSys.draw(f, f.innerText, {});
         }
     }, 1);
@@ -263,6 +265,7 @@ function initTemplates() {
         var leftId = leftElem.id;
         if (leftId) {
             var rightId = "def-" + leftId;
+            console.log("rightId", rightId);
             var rightElem = document.getElementById(rightId);
             var titleElem = rightElem.querySelector("h2");
             if (titleElem) {
@@ -338,4 +341,69 @@ function initLangHandlers() {
     document.getElementById("setEn").addEventListener("click", function() {
         setLang("en");
     })
+}
+
+function initSpiroCalc() {
+    var elN = document.getElementById("spiro-n");
+    var elM = document.getElementById("spiro-m");
+    var elA1 = document.getElementById("spiro-a1");
+    var elA2 = document.getElementById("spiro-a2");
+    var elCode = document.getElementById("spiro-code");
+    var elF = document.getElementById("spiro-formula");
+    function recalc() {
+        var ok = true;
+        function check(elem) {
+            var res = 1;
+            var err = false;
+            var txt = elem.value.trim();
+            if (/^\d+$/.test(txt)) {
+                var num = +txt;
+                if (num >= 3) res = num;
+                else err = true;
+            } else err = true;
+            if (err) {
+                elem.classList.add("invalid");
+                ok = false;
+            } else {
+                elem.classList.remove("invalid");
+            }
+            return res;
+        }
+        function txtAngle(value) {
+            return "" + Math.round(value*100)/100;
+        }
+        var n = check(elN);
+        var m = check(elM);
+        var code = "";
+        if (ok) {
+            var a1 = 180 * (1 - (n + m) / (n * m));
+            var a2 = 180 * (n - m) / (n * m);
+            elA1.value = txtAngle(a1);
+            elA2.value = txtAngle(a2);
+            code = (n & 1) ? "|" : "_(A"+(90-180/n)+")";
+            var i = 1;
+            var qN = n === 5 ? "" : n;
+            for (; i<n/2; i++) {
+                code += "_q" + qN;
+            }
+            var relAngle = "_(a"+txtAngle(a1)+")";
+            code += relAngle;
+            var qM = m === 5 ? "" : m;
+            for (var j=1; j<m; j++) code += "_q" + qM;
+            code += relAngle;
+            i++;
+            for (; i<n; i++) code += "_q" + qN;
+            ChemSys.draw(elF, code);
+        } else {
+            elA1.value = "";
+            elA2.value = "";
+            elF.innerHTML = "";
+        }
+        elCode.innerText = code;
+    }
+    elN.value = "3";
+    elM.value = "4";
+    elN.addEventListener("input", recalc);
+    elM.addEventListener("input", recalc);
+    recalc();
 }
