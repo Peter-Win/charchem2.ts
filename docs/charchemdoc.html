@@ -10,8 +10,8 @@
 <body>
   <page id="home">
     <h1>
-      <span lang="ru">Документация по системе CharChem 2.0</span>
-      <span lang="en">CharChem 2.0 documentation</span>
+      <span lang="ru">Документация по системе CharChem 2.0+</span>
+      <span lang="en">CharChem 2.0+ documentation</span>
     </h1>
     <ul class="contents" data-owner="home"></ul>
     <h2>
@@ -43,8 +43,8 @@
       The <a href="?p=ref">Reference</a> is not intended to be read.
       It should be consulted as needed to obtain detailed information on various aspects of the CharChem system.      
     </p>
-    <p lang="ru">Автор документа: PeterWin. Версия от 2026-02-15</p>
-    <p lang="en">Author of the document: PeterWin. Version from 2026-02-15</p>
+    <p lang="ru">Автор документа: PeterWin. Версия от 2025-04-08</p>
+    <p lang="en">Author of the document: PeterWin. Version from 2025-04-08</p>
   </page>  
 
   <page id="rules" data-owner="home">
@@ -4376,6 +4376,173 @@
     </p>
   </page>
 
+  <page id="figures" data-owner="rules">
+    <h1>
+      <span lang="ru">Фигуры</span>
+      <span lang="en">Figures</span>
+    </h1>
+    <p lang="ru">
+      Здесь представлены фигуры, которые втречаются не часто, но всё-таки иногда бывают нужны.
+    </p>
+    <p lang="en">
+      Here are presented figures that are not encountered often, but are still sometimes needed.      
+    </p>
+    <h2>
+      <span lang="ru">Пятиугольник, который стыкуется с двумя шестиугольниками</span>
+      <span lang="en">A pentagon that is joined to two hexagons</span>
+    </h2>
+    <p lang="ru">
+      Пятиугольник, у которого две соседние стороны стыкуются полициклической структурой из шестиугольников.
+      При этом, все его стороны имеют одинаковую длину.<br />
+      А так же подходит для стыковки в одной точке трёх пятиугольников.
+    </p>
+    <p lang="en">
+      A pentagon in which two adjacent sides are joined by a polycyclic structure of hexagons.
+      Moreover, all its sides have the same length.<br />
+      It is also suitable for joining three pentagons at one point.      
+    </p>
+    <diV class="two-col-table">
+        <code class="chem-code">
+          `\`|/\/\|`/`\&lt;`|&gt;`/_(a-%pa:81.4707)_(a-%pb:68.5292)_(a-%pb)          
+        </code>
+        <div class="echem-formula">
+          `\`|/\/\|`/`\&lt;`|&gt;`/_(a-%pa:81.4707)_(a-%pb:68.5292)_(a-%pb)
+        </div>
+      <code class="chem-code">
+        `/|&lt;_(a-%pa:81.4707)_(a-%pb:68.5292)_(a-%pb)&gt;_(a%pa)_(a%pb)_(a%pb)\/0_(a-%pa)_(a-%pb)_(a-%pb)
+      </code>
+      <div class="echem-formula">
+        `/|&lt;_(a-%pa:81.4707)_(a-%pb:68.5292)_(a-%pb)&gt;_(a%pa)_(a%pb)_(a%pb)\/0_(a-%pa)_(a-%pb)_(a-%pb)
+      </div>
+    </diV>
+    <p lang="ru">Такая фигура образуется при помощи трёх относительных углов:</p>
+    <p lang="en">This figure is formed using three relative angles:</p>    
+    <div class="echem-formula">
+      $L(2)/:c\:a_(a%pa:81.4707):b_(a%pb:68.5292)_(a%pb); #c@:A(t,a)&lt;_(A&a,L0.5,N0)$itemColor(blue)&quot;&t&quot;&gt;@(c,90); #a@A(a,170); #b@A(b,-120); #5@A(b,-60); #1@A(a,10)
+    </div>
+    <p lang="ru">Угол <code>c = 120°</code>, обычно образуется <a data-ref="bond-short">краткими связями</a>, либо при помощи конструкций 
+      <a href="?p=rules-poly"><code>_p6,_q6</code></a> или 
+      <a href="?p=rules-uni-rel"><code>_(a60)</code></a>
+    </p>
+    <p lang="en">Angle <code>c = 120°</code>, usually formed by <a data-ref="bond-short">short bonds</a>, or using the constructions
+      <a href="?p=rules-poly"><code>_p6,_q6</code></a> or
+      <a href="?p=rules-uni-rel"><code>_(a60)</code></a>
+    </p>    
+    <p lang="ru">
+      Для углов <code>a</code> и <code>b</code> используются следующие конструкции:
+    </p>
+    <p lang="en">
+      For angles <code>a</code> and <code>b</code> the following constructions are used:
+    </p>
+    <div class="two-col-table" style="display: inline-grid;">
+      <div>a:</div>
+      <code>_(a81.4707)</code>
+      <div>b:</div>
+      <code>_(a68.5292)</code>
+    </div>
+    <p lang="ru">
+      В примерах выше использованы <a href="?p=ref-number">переменные</a> <code>%pa</code> и <code>%pb</code>,
+      чтобы не повторять длинные числа.
+    </p>
+    <p lang="en">
+      The examples above use <a href="?p=ref-number">variables</a> <code>%pa</code> and <code>%pb</code>,
+      to avoid repeating long numbers.
+    </p>
+
+    <h2><a id="spiro">
+      <span lang="en">Spiro compounds</span>
+      <span lang="ru">Спиросоединения</span>
+    </a></h2>
+    <p lang="ru">
+      Здесь предполагается, что к правильному многоугольнику A в одной вершине присоединяется правильный многоугольник B.
+    </p>
+    <p lang="en">
+      Here it is assumed that a regular polygon A is joined at one vertex by a regular polygon B.
+    </p>
+    <div class="echem-formula" style="text-align: center;">
+      @:n(n,a:180,L:0.4)(*_(A&a,L&L,N0)$itemColor1(gray)"&n"*)@;
+      $itemColor(blue)|_q_qv(*_q_q*)(*_(x-.85,N0)"A"*)\@n(1)-/`\`-@n(2)`/-0"B"
+    </div>
+    <p lang="ru">
+      В общем виде эту задачу рекомендуется решать через использование <a href="?p=rules-uni-rel">относительных углов</a>, 
+      которые вычисляются по следующей формуле:
+    </p>
+    <p lang="en">
+      In general, it is recommended to solve this problem by using <a href="?p=rules-uni-rel">relative angles</a>,
+      which are calculated using the following formula:
+    </p>
+    <div style="display: flex; justify-content: center; align-items: center; gap: 0.2rem">
+      <span>
+        <span lang="ru">угол</span>
+        <span lang="en">angle</span>
+        &nbsp;1 = 180
+      </span>
+      <span>·</span>
+      <span class="large-bracket">(</span>
+      <span>1</span>
+      <span>−</span>
+      <div class="fraction">
+        <span>n + m</span>
+        <span>n·m</span>
+      </div>
+      <span class="large-bracket">)</span>
+      <span>,</span> 
+      <span style="width: 1rem;"></span>
+      <span>
+        <span lang="ru">угол</span>
+        <span lang="en">angle</span>
+        &nbsp;2 = 180
+      </span>
+      <span>·</span>
+      <div class="fraction">
+        <span>n − m</span>
+        <span>n·m</span>
+      </div>
+    </div>
+    <p lang="ru">
+      Здесь <code>n</code> &mdash; количество углов полигона A, а <code>m</code> &mdash; полигона B.
+      Если обход полигона A идёт по часовой стрелке, то полученные углы нужно использовать с обратным знаком.
+    </p>
+    <p lang="en">
+      Here <code>n</code> is the number of corners of polygon A, and <code>m</code> is the number of corners of polygon B.
+      If the polygon A is traversed clockwise, then the obtained corners must be used with the opposite sign.
+    </p>    
+    <p lang="ru">
+      Достаточно использовать только первый угол, чтобы сохранить направление обхода.
+    </p>
+    <p lang="en">
+      It is enough to use only the first corner to preserve the direction of the traversal.
+    </p>
+    <div>
+      <b lang="ru">Калькулятор</b>
+      <b lang="en">Calculator</b>
+    </div>
+    <div class="spiro-calc">
+      <label>
+        <span>n:</span>
+        <input id="spiro-n" type="number" min="3" maxlength="3" />
+      </label>
+      <label>
+        <span>m:</span>
+        <input id="spiro-m" type="number" min="3" maxlength="3" />
+      </label>
+      <label>
+        <span lang="ru">первый угол:</span>
+        <span lang="en">first corner:</span>        
+        <input id="spiro-a1" type="number" readonly />
+      </label>
+      <label>
+        <span lang="ru">второй угол:</span>
+        <span lang="en">second corner:</span>
+        <input id="spiro-a2" type="number" readonly />
+      </label>
+    </div>
+    <div class="two-col-table">
+      <code class="chem-code" id="spiro-code"></code>
+      <span class="echem-formula" id="spiro-formula"></div>
+    </div>
+  </page>
+
   <page id="templates" data-owner="home">
     <h1>
       <span lang="ru">Подсказки</span>
@@ -4439,6 +4606,10 @@
         </div></div>
         <div id="tm-bg"><div class="echem-formula">$bg(orange,ellipse)OH|\|`/`\`|/</div></div>
         <div id="tm-reagent-center"><div class="echem-formula">H2O + H\$C()C|O`|/H</div></div>
+        <div id="tm-566"><div class="echem-formula">
+          `/|<_(a-%pa:81.4707)_(a-%pb:68.5292)_(a-%pb)>_(a%pa)_(a%pb)_(a%pb)\/0_(a-%pa)_(a-%pb)_(a-%pb)
+        </div></div>
+        <div id="tm-spiro"><div class="echem-formula">|_q3_(a84)_q_q_q_q_(a84)</div></div>
       </div>
       <div class="templ-right" id="tmDefList">
         <div id="def-tm-abs-coeff">
@@ -5135,7 +5306,29 @@
           </p>
           <p lang="ru">См: <a href="?p=ref-func-bg">Фоновая фигура</a>.</p>
           <p lang="en">See: <a href="?p=ref-func-bg">Background figure</a></p>
-        </div>               
+        </div>  
+        <div id="def-tm-566">
+          <h2>
+            <span lang="ru">Пятиугольник, который присоединяется двумя сторонами к сотовой структуре</span>
+            <span lang="en">A pentagon that is attached by two sides to a honeycomb structure</span>
+          </h2>
+          <p lang="ru">Подробности в разделе <a href="?p=figures">Фигуры</a></p>
+          <p lang="en">Details in the <a href="?p=figures">Figures</a> section</p>
+        </div>
+        <div id="def-tm-spiro">
+          <h2>
+            <span lang="ru">Спиросоединения</span>
+            <span lang="en">Spiro compounds</span>
+          </h2>
+          <p lang="ru">
+            Для присоединения одного полигона к другому рекомендуется использовать относительные углы.
+            Подробнее см. раздел <a href="?p=figures#spiro">Спиросоединения</a>
+          </p>
+          <p lang="en">
+            It is recommended to use relative angles to join one polygon to another.
+            For more information, see the section <a href="?p=figures#spiro">Spiro compounds</a>            
+          </p>
+        </div>
       </div>
     </div>
     <p lang="ru">Примеры перечислены в том порядке, в котором они следуют в разделе <a href="?p=rules">Описание химических формул</a></p>
