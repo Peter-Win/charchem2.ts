@@ -8,6 +8,7 @@ import {
 } from "../../../drawSys/utils/fontFaceProps";
 import { Rect } from "../../../math/Rect";
 import { ChemBond } from "../../../core/ChemBond";
+import { createStructBuilderCtx } from "../../StructBuilderCtx";
 
 describe("processCommands", () => {
   it("Soft bond", () => {
@@ -20,7 +21,7 @@ describe("processCommands", () => {
 
     const surface = createTestSurface();
     const imgProps = createTestImgProps(surface, 40);
-    const ctx = new PAgentCtx(agent, imgProps);
+    const ctx = new PAgentCtx(agent, createStructBuilderCtx(surface, imgProps));
     prepareNodes(ctx);
 
     const locFont = imgProps.stdStyle.font;

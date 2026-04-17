@@ -1,5 +1,6 @@
 import { compile } from "../../compiler/compile";
 import { buildExpression } from "../buildExpression";
+import { createStructBuilderCtx } from "../StructBuilderCtx";
 import { createTestImgProps, createTestSurface, saveSurface } from "./testEnv";
 
 const build = (formula: string, svSuffix?: string) => {
@@ -7,7 +8,7 @@ const build = (formula: string, svSuffix?: string) => {
   if (expr.error) throw expr.error;
   const surface = createTestSurface();
   const imgProps = createTestImgProps(surface, 40);
-  const res = buildExpression(expr, imgProps);
+  const res = buildExpression(expr, createStructBuilderCtx(surface, imgProps));
   if (svSuffix) saveSurface(`Expr-${svSuffix}`, res.frame, surface);
   return res;
 };

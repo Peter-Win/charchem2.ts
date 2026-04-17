@@ -10,6 +10,8 @@ import { addClassToXmlNode } from "../xmlNode/addClassToXmlNode";
 import { makeCchTag } from "./makeCchTag";
 import { cchOperation } from "./cchOperation";
 import { textInsideTag } from "../../utils/xml/textInsideTag";
+import { XmlAttrs } from "../../utils/xml/xmlTypes";
+import { getFontSizeFromPt } from "../htmlPoor/getFontSizeFromPt";
 
 /*
  Приняты следующие допущения.
@@ -261,6 +263,33 @@ const splitChargeText = (
     .map(create);
 
 const makeRichText = (srcNode: TextNode, ctx: CtxHtmlRich): XmlNode[] => {
+  if (srcNode.type === "richText") {
+    const cls: HtmlRichClass[] = [];
+    let attrs: XmlAttrs | undefined;
+    const { props } = srcNode;
+    if (props?.italic) cls.push("textit");
+    if (props?.bold) cls.push("textbf");
+    if (props?.underline && props?.overline) {
+      cls.push("underoverline");
+    } else {
+      if (props?.underline) cls.push("underline");
+      if (props?.overline) cls.push("overline");
+    }
+    const fontSize = getFontSizeFromPt(props?.fontSizePt);
+    if (fontSize) attrs = { style: `font-size: ${fontSize}` };
+
+    if (cls.length > 0 || attrs) {
+      return [
+        makeCchTag({
+          ctx,
+          srcNode,
+          cls,
+          attrs,
+          content: nodesList(srcNode.items, ctx),
+        }),
+      ];
+    }
+  }
   const scr = splitScripts(srcNode.items ?? []);
   if (!scr.RB && !scr.RT) {
     return nodesList(scr.C, ctx);

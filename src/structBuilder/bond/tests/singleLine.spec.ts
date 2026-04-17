@@ -11,6 +11,7 @@ import {
 } from "../../tests/testEnv";
 import { FigPath } from "../../../drawSys/figures/FigPath";
 import { FigFrame } from "../../../drawSys/figures/FigFrame";
+import { createStructBuilderCtx } from "../../StructBuilderCtx";
 
 const build = (formula: string, imgName?: string): ResultBuildAgent => {
   const expr = compile(formula);
@@ -18,7 +19,7 @@ const build = (formula: string, imgName?: string): ResultBuildAgent => {
   const agent = expr.getAgents()[0]!;
   const surface = createTestSurface();
   const imgProps = createTestImgProps(surface, 40);
-  const res = buildAgentPrior(agent, imgProps);
+  const res = buildAgentPrior(agent, createStructBuilderCtx(surface, imgProps));
   if (imgName) saveSurface(imgName, res.agentFrame, surface);
   return res;
 };

@@ -1,6 +1,6 @@
 import * as React from "react";
 import * as styles from "./ViewTeXFormat.module.css";
-import { TeXOptions } from "../../../../../src/textBuilder/tex/buildTeX";
+import { TeXOptions } from "charchem2/textBuilder/tex/buildTeX";
 import { Feature, FeaturesList } from "../FeaturesList";
 import { ViewKaTeX } from "../ViewKaTeX/ViewKaTeX";
 import { SafeBox } from "../ui/SafeBox";

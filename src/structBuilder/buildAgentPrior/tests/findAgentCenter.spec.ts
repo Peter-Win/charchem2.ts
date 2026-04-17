@@ -7,6 +7,7 @@ import {
   findDefaultY,
   findExplicitlyCentred,
 } from "../findAgentCenter";
+import { createStructBuilderCtx } from "../../StructBuilderCtx";
 
 const build = (formula: string): ResultBuildAgent => {
   const expr = compile(formula);
@@ -14,7 +15,7 @@ const build = (formula: string): ResultBuildAgent => {
   const agent = expr.getAgents()[0]!;
   const surface = createTestSurface();
   const imgProps = createTestImgProps(surface, 40);
-  return buildAgentPrior(agent, imgProps);
+  return buildAgentPrior(agent, createStructBuilderCtx(surface, imgProps));
 };
 
 describe("calcExplicitCenter", () => {

@@ -1,10 +1,10 @@
 import * as React from "react";
 import * as styles from "./ReactView.module.css";
 import { observer } from "mobx-react-lite";
+import { XmlNode } from "charchem2/textBuilder/xmlNode/XmlNode";
+import { parseCssClassBody } from "charchem2/utils/css/parseCssClassBody";
 import { store } from "../../store";
-import { XmlNode } from "../../../../../src/textBuilder/xmlNode/XmlNode";
 import { classNames } from "../../common/classNames";
-import { renderXmlNode } from "../../../../../src/textBuilder/xmlNode/renderXmlNode";
 
 /**
  * Here all output is done via React. No DOM manipulation.
@@ -31,13 +31,10 @@ export const ReactView: React.FC = observer(() => {
 });
 
 const renderNode = (node: XmlNode): React.ReactNode => {
-  const { tag, content, attrs={} } = node;
+  const { tag, content, attrs={}, color } = node;
   const {id, class: cls, style=""} = attrs;
-  const objStyle = style
-    .split(";")
-    .map(c => c.split(":"))
-    .filter(a => a.length === 2)
-    .reduce((acc, [k,v]) => ({...acc, [k!.trim()]: v!.trim()}), {});
+  const objStyle = parseCssClassBody(style);
+  if (color) objStyle.color = color;
 
   const onNodeEnter: React.MouseEventHandler<HTMLSpanElement> = (e => {
     const srcMap = store.reactData?.srcMap;

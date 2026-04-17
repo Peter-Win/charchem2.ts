@@ -1,11 +1,14 @@
 import { ChemOp } from "../../core/ChemOp";
 import { addAll } from "../../utils/addAll";
-import { TextNode } from "../buildTextNodes";
+import { RichTextProps, TextNode } from "../buildTextNodes";
 import { splitColumn } from "../buildTextNodes/splitColumn";
 import { splitScripts } from "../buildTextNodes/splitScripts";
 import { XmlNode } from "../xmlNode/XmlNode";
 import { OptionsHtmlPoor, PoorHtmlPart, stdTagsMap } from "./OptionsHtmlPoor";
 import { textInsideTag } from "../../utils/xml/textInsideTag";
+import { makeCssClassBody } from "../../utils/css/makeCssClassBody";
+import { getFontSizeFromPt } from "./getFontSizeFromPt";
+import { XmlAttrs } from "../../utils/xml/xmlTypes";
 
 export const htmlPoorNodes = (
   srcNode: TextNode,
@@ -55,7 +58,7 @@ const createHtmlPoorNodes = (
     case "radical":
       return textTag(node.radical.label);
     case "richText":
-      return makeRichText(node, ctx);
+      return makeRichText(node, ctx, node.props);
     case "space":
       return textTag(" ");
     case "text":
@@ -160,17 +163,31 @@ const makeItem = (
 
 const makeRichText = (
   node: TextNode,
-  ctx: OptionsHtmlPoor | undefined
+  ctx: OptionsHtmlPoor | undefined,
+  props: RichTextProps = {}
 ): XmlNode[] => {
   const scr = splitScripts(node.items ?? []);
   const center = nodesList(scr.C, ctx);
-  if (!scr.RB && !scr.RT) {
-    return center;
+  const css: XmlAttrs = {};
+  if (props.bold) css["font-weight"] = "bold";
+  if (props.italic) css["font-style"] = "italic";
+  if (props.underline && props.overline) {
+    css["text-decoration"] = "underline overline";
+  } else {
+    if (props.underline) css["text-decoration"] = "underline";
+    if (props.overline) css["text-decoration"] = "overline";
   }
+
+  const fontSize = getFontSizeFromPt(props.fontSizePt);
+  if (fontSize) css["font-size"] = fontSize;
+
+  const style = makeCssClassBody(css);
+  const attrs = style ? { style } : undefined;
   return [
     {
       tag: "span",
       color: node.color,
+      attrs,
       content: [
         ...center,
         ...optGroupTag("sub", undefined, scr.RB, ctx),

@@ -6,6 +6,7 @@ import { ChemExpr } from "../core/ChemExpr";
 import { ChemAgent } from "../core/ChemAgent";
 import { buildFrame } from "../structBuilder/buildFrame";
 import { addClass } from "./addClass";
+import { createStructBuilderCtx } from "../structBuilder/StructBuilderCtx";
 
 export const renderFormulaCanvas = (
   owner: Element,
@@ -19,6 +20,9 @@ export const renderFormulaCanvas = (
   owner.append(canvas);
   const surface = new HtmlCanvasSurface(canvas, fontPropsCache);
   const props = createBrowserChemImgProps(owner, surface);
-  renderTopFrame(buildFrame(expr, props), surface);
+  renderTopFrame(
+    buildFrame(expr, createStructBuilderCtx(surface, props)),
+    surface
+  );
   addClass(owner, "echem-is-canvas");
 };

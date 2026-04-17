@@ -1,4 +1,5 @@
 import { compile } from "../../../compiler/compile";
+import { createStructBuilderCtx } from "../../StructBuilderCtx";
 import {
   createTestImgProps,
   createTestSurface,
@@ -13,7 +14,10 @@ describe("buildAgentPrior", () => {
     const agent = expr.getAgents()[0]!;
     const surface = createTestSurface();
     const imgProps = createTestImgProps(surface, 40);
-    const { agentFrame } = buildAgentPrior(agent, imgProps);
+    const { agentFrame } = buildAgentPrior(
+      agent,
+      createStructBuilderCtx(surface, imgProps)
+    );
     saveSurface("buildAgentPrior-1", agentFrame, surface);
   });
 });

@@ -4,6 +4,7 @@ import { createTestImgProps, createTestSurface } from "../../tests/testEnv";
 import { PAgentCtx } from "../PAgentCtx";
 import { calcOffset, getClusterConnection, mergeClusters } from "../Clusters";
 import { Point } from "../../../math/Point";
+import { createStructBuilderCtx } from "../../StructBuilderCtx";
 
 describe("getClusterConnection", () => {
   //  0 ---O 1
@@ -20,7 +21,7 @@ describe("getClusterConnection", () => {
   const wH = locFont.getTextWidth("H");
   const k = imgProps.line;
 
-  const ctx = new PAgentCtx(agent, imgProps);
+  const ctx = new PAgentCtx(agent, createStructBuilderCtx(surface, imgProps));
   prepareNodes(ctx);
   const ni = ctx.nodesInfo;
   expect(ni).toHaveLength(4);
@@ -98,7 +99,7 @@ describe("mergeClusters", () => {
     const wO = locFont.getTextWidth("O");
     const wH = locFont.getTextWidth("H");
 
-    const ctx = new PAgentCtx(agent, imgProps);
+    const ctx = new PAgentCtx(agent, createStructBuilderCtx(surface, imgProps));
     prepareNodes(ctx);
     const ni = ctx.nodesInfo;
     const c1 = ctx.clusters.clusters[0]!;
@@ -144,7 +145,7 @@ describe("mergeClusters", () => {
     const wO = locFont.getTextWidth("O");
     const wH = locFont.getTextWidth("H");
 
-    const ctx = new PAgentCtx(agent, imgProps);
+    const ctx = new PAgentCtx(agent, createStructBuilderCtx(surface, imgProps));
     prepareNodes(ctx);
     const ni = ctx.nodesInfo;
     const c1 = ctx.clusters.clusters[0]!;

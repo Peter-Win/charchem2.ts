@@ -6,7 +6,7 @@ import { scanPostItem } from "../parse/scanPostItem";
 import { stateAgentMid } from "./stateAgentMid";
 import { openBrace } from "../main/brackets";
 import { replaceGreek } from "../parse/comment";
-import { scanMarkupEnd } from "../../utils/markup";
+import { scanMarkupEnd } from "../../utils/markup/scanMarkupEnd";
 
 /**
  * Создание абстрактного элемента или радикала

@@ -1,4 +1,4 @@
-import { MarkupChunk, parseMarkup } from "../../utils/markup";
+import { MarkupChunk, MarkupChunkItem, parseMarkup } from "../../utils/markup";
 import { TextNode } from "./TextNode";
 
 export const splitRichText = (
@@ -8,23 +8,31 @@ export const splitRichText = (
 ): TextNode => {
   const onChunk = (
     chunk: MarkupChunk | string,
-    color: string | undefined
+    superColor: string | undefined
   ): TextNode => {
     if (typeof chunk === "string") {
-      return { type: "text", text: chunk, color };
+      return {
+        type: "text",
+        text: chunk,
+        color: superColor,
+      };
     }
-    const locColor = chunk.color ?? color;
+    // const { color, type: chunkType, chunks, ...props } = chunk;
+    const { chunks, props: srcProps } = chunk;
+    const { color, type: chunkType, ...props } = srcProps ?? {};
+    const locColor = color ?? superColor;
     const res: TextNode = {
       type: "richText",
-      items: chunk.chunks.map((c) => onChunk(c, locColor)),
+      items: chunks.map((c) => onChunk(c, locColor)),
       color: locColor,
+      props,
     };
     if (needSrc) {
       res.src = srcText;
     }
-    if (chunk.type === "sub") {
+    if (chunkType === "sub") {
       res.pos = "RB";
-    } else if (chunk.type === "sup") {
+    } else if (chunkType === "sup") {
       res.pos = "RT";
     }
     return res;
@@ -57,27 +65,22 @@ export const splitRichText = (
  * Такая структура позволяет получить группы с индексами. н.р. <msub><mi>H</mi><mn>2</mn></msub>
  * @param chunk
  */
-const groupScripted = (chunk: MarkupChunk): MarkupChunk => {
-  const { chunks: ungrouped } = chunk;
+const groupScripted = (ungrouped: MarkupChunkItem[]): MarkupChunk => {
   const grouped: (MarkupChunk | string)[][] | [(MarkupChunk | string)[]] = [[]];
   ungrouped.forEach((subChunk) => {
-    if (
-      typeof subChunk === "string" ||
-      (subChunk.type !== "sub" && subChunk.type !== "sup")
-    ) {
+    if (typeof subChunk === "string" || !subChunk.props?.type) {
       grouped.unshift([]);
     }
     grouped[0].push(subChunk);
   });
   grouped.reverse();
-  const optimized: (MarkupChunk | string)[] = grouped
+  const optimized: MarkupChunkItem[] = grouped
     .filter((group) => group.length > 0)
     .map((group) => {
       if (group.length === 1) return group[0]!;
       return {
-        type: "",
         chunks: group,
       };
     });
-  return { ...chunk, chunks: optimized };
+  return { ...ungrouped, chunks: optimized };
 };

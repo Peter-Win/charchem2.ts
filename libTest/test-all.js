@@ -2,9 +2,16 @@ const fs = require("node:fs");
 const path = require("node:path");
 const cp = require("node:child_process");
 
-const reportName = path.resolve(__dirname, "result", "!report.html");
+const resultFolder = path.resolve(__dirname, "result");
+if (!fs.existsSync(resultFolder)) {
+  fs.mkdirSync(resultFolder);
+}
 
-// fs.unlinkSync(reportName);
+const reportName = path.join(resultFolder, "!report.html");
+
+if (fs.existsSync(reportName)) {
+  fs.unlinkSync(reportName);
+}
 
 console.log("> html");
 cp.execSync("node ./html/test-html.js", {stdio: "inherit"});

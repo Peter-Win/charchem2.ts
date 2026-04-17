@@ -15,6 +15,9 @@ export const makeCchTag = (p: {
   const node: XmlNode = {
     tag: "span",
   };
+  if (srcNode?.type === "richText") {
+    node.noIndent = true;
+  }
   if (p.attrs) node.attrs = p.attrs;
   if (srcNode?.color) {
     node.color = srcNode.color;

@@ -1,6 +1,9 @@
+import { parseCssClassBody } from "../../utils/css/parseCssClassBody";
 import { drawTag } from "../../utils/xml/drawTag";
 import { escapeXml } from "../../utils/xml/escapeXml";
 import { XmlNode } from "./XmlNode";
+import { makeCssClassBody } from "../../utils/css/makeCssClassBody";
+import { XmlAttrs } from "../../utils/xml/xmlTypes";
 
 export type OptionsRenderXmlNode = {
   indent?: string;
@@ -8,7 +11,7 @@ export type OptionsRenderXmlNode = {
 };
 
 export const renderXmlNode = (
-  { tag, attrs, color, content }: XmlNode,
+  { tag, attrs, color, content, noIndent }: XmlNode,
   options?: OptionsRenderXmlNode,
   level: number = 0
 ): string => {
@@ -21,14 +24,20 @@ export const renderXmlNode = (
     }
   }
 
-  const indent = options?.indent ?? "";
+  let indent = options?.indent ?? "";
+  const subOptions = options;
+  if (noIndent) {
+    // такой фокус потребовался, чтобы избежать нежелательных пробелов
+    indent = "";
+    if (subOptions) subOptions.indent = undefined;
+  }
   const canSelfClosed = !options?.noSelfClosed;
-  const attrsExt = color
-    ? {
-        ...attrs,
-        style: `color: ${color}`, // Предполагается, что такого атрибута нет в attrs
-      }
-    : attrs;
+  const { style = "", ...otherAttrs } = attrs ?? {};
+  const css = parseCssClassBody(style);
+  if (color) css.color = color;
+  const styleExt = makeCssClassBody(css);
+  const attrsExt: XmlAttrs = { ...otherAttrs };
+  if (styleExt) attrsExt.style = styleExt;
   let res = "";
   const addStr = (str: string, strLevel: number) => {
     if (indent) res += indent.repeat(strLevel);
@@ -56,7 +65,7 @@ export const renderXmlNode = (
       }
     } else if (Array.isArray(content)) {
       content.forEach((subNode) => {
-        res += renderXmlNode(subNode, options, level + 1);
+        res += renderXmlNode(subNode, subOptions, level + 1);
       });
     }
     if (content) {

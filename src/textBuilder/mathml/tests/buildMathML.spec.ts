@@ -21,7 +21,7 @@ describe("buildMathML", () => {
   });
   it("Abstract element", () => {
     expect(makeMML("{Hal^1}")).toBe(
-      "<math><msup><mi>Hal</mi><mn>1</mn></msup></math>"
+      `<math><msup><mi mathvariant="normal">Hal</mi><mi mathvariant="normal">1</mi></msup></math>`
     );
   });
   it("radical", () => {

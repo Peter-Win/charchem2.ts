@@ -94,7 +94,7 @@ export const createMathMLNode = (
       dstNode = mathItem(srcNode.radical.label, color);
       break;
     case "richText":
-      dstNode = mathRichText(srcNode, create);
+      dstNode = mathRichText(srcNode, ctx, srcNode.props, color);
       break;
     case "space":
       dstNode =

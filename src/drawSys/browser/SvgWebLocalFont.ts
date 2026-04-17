@@ -1,5 +1,10 @@
 import { Point } from "../../math/Point";
-import { AbstractSurface, LocalFont, TextStyle } from "../AbstractSurface";
+import {
+  AbstractSurface,
+  LocalFont,
+  LocalFontProps,
+  TextStyle,
+} from "../AbstractSurface";
 import { CommonFontFace } from "../CommonFontFace";
 import { WebFontProps } from "./WebFontProps";
 import { SvgWebSurface } from "./SvgWebSurface";
@@ -7,22 +12,15 @@ import { drawTag } from "../../utils/xml/drawTag";
 import { escapeXml } from "../../utils/xml/escapeXml";
 import { XmlAttrs } from "../../utils/xml/xmlTypes";
 import { toa } from "../../math";
-import { scaleFontFace } from "../utils/scaleFontFace";
-import { makeCanvasFontProp } from "./browserUtils/makeWebFontProps";
 
 export class SvgWebLocalFont implements LocalFont {
   private canvas: HTMLCanvasElement;
 
-  constructor(private webFontProps: WebFontProps) {
+  constructor(
+    private webFontProps: WebFontProps,
+    public readonly props: LocalFontProps
+  ) {
     this.canvas = document.createElement("canvas");
-  }
-
-  createScaled(scale: number): LocalFont {
-    const newProps = { ...this.webFontProps };
-    newProps.cssHeight *= scale;
-    newProps.fontFace = scaleFontFace(newProps.fontFace, scale);
-    newProps.canvasFont = makeCanvasFontProp(newProps);
-    return new SvgWebLocalFont(newProps);
   }
 
   getFontFace(): CommonFontFace {
@@ -44,16 +42,33 @@ export class SvgWebLocalFont implements LocalFont {
   ): void {
     if (surface instanceof SvgWebSurface) {
       const { fontFace, cssHeight, bold, italic } = this.webFontProps;
-      const attrs: XmlAttrs = {
-        x: toa(org.x),
-        y: toa(org.y),
+      const props: XmlAttrs = {
         fill: style.fill,
         "font-family": fontFace.fontFamily,
         "font-size": `${cssHeight}px`,
       };
-      if (bold) attrs["font-weight"] = "bold";
-      if (italic) attrs["font-style"] = "italic";
-      const code = `${drawTag("text", attrs)}${escapeXml(textLine)}</text>`;
+      if (bold) props["font-weight"] = "bold";
+      if (italic) props["font-style"] = "italic";
+      const stylesList: string[] = [];
+
+      if (style.underline) {
+        stylesList.push("underline");
+      }
+      if (style.overline) {
+        stylesList.push("overline");
+      }
+      if (stylesList.length > 0) {
+        props["text-decoration"] = stylesList.join(" ");
+      }
+      const attrs: XmlAttrs = {
+        x: toa(org.x),
+        y: toa(org.y),
+        ...surface.makeNodeAttrs(props),
+      };
+
+      // Необходимо заменить пробелы. Иначе происходит схлопывание первого пробела и двойных пробелов. Т.е "_a__b" выглядит как "a_b"
+      const encodedText = escapeXml(textLine).replace(/ /g, "&nbsp;");
+      const code = `${drawTag("text", attrs)}${encodedText}</text>`;
       surface.addFigure(code);
     } else {
       throw new Error("Expected SvgWebSurface");

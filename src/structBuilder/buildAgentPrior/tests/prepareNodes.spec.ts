@@ -3,6 +3,7 @@ import { compile } from "../../../compiler/compile";
 import { PAgentCtx } from "../PAgentCtx";
 import { prepareNodes } from "../prepareNodes";
 import { Clusters } from "../Clusters";
+import { createStructBuilderCtx } from "../../StructBuilderCtx";
 
 const getClusterNodeInices = (clusters: Clusters, id: number): number[] => {
   const nodes = clusters.clusters[id]?.nodes;
@@ -25,7 +26,7 @@ describe("prepareNodes", () => {
     const surface = createTestSurface();
     const imgProps = createTestImgProps(surface, 40);
 
-    const ctx = new PAgentCtx(agent, imgProps);
+    const ctx = new PAgentCtx(agent, createStructBuilderCtx(surface, imgProps));
     expect(ctx.nodesInfo).toHaveLength(0);
     expect(ctx.clusters.clusters).toEqual([]);
 

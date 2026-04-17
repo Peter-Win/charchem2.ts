@@ -1,3 +1,4 @@
+import { MarkupProps } from "../../utils/markup/markup";
 import { ChemAtom } from "../../core/ChemAtom";
 import { ChemBond } from "../../core/ChemBond";
 import { ChemCharge } from "../../core/ChemCharge";
@@ -7,6 +8,8 @@ import { ChemK } from "../../core/ChemK";
 import { ChemNodeItem } from "../../core/ChemNodeItem";
 import { ChemOp } from "../../core/ChemOp";
 import { ChemRadical } from "../../core/ChemRadical";
+
+export type RichTextProps = Omit<MarkupProps, "type" | "color">;
 
 export type TextPosition = "T" | "LT" | "RT" | "B" | "LB" | "RB" | "C";
 export type SpaceType = "agentAgent" | "agentOp" | "opOp";
@@ -83,6 +86,7 @@ type TextRadical = {
 type TextRichText = {
   type: "richText";
   src?: string;
+  props?: RichTextProps;
 };
 type TextSpace = {
   type: "space";

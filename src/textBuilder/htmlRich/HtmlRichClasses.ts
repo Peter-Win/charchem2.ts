@@ -21,9 +21,14 @@ export type HtmlRichClass =
   | "op-footer"
   | "op-head"
   | "over"
+  | "overline"
   | "supsub"
   | "supsub-left"
-  | "symbols";
+  | "symbols"
+  | "textbf"
+  | "textit"
+  | "underline"
+  | "underoverline"; // both lines
 
 export const htmlRichCls = (clsCode: HtmlRichClass | HtmlRichClass[]): string =>
   (Array.isArray(clsCode) ? clsCode : [clsCode])

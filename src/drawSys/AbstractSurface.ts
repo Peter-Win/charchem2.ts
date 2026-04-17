@@ -30,9 +30,12 @@ export interface LocalFontProps {
 
 export interface TextStyle {
   fill: string;
+  underline?: boolean;
+  overline?: boolean;
 }
 
 export interface LocalFont {
+  readonly props: LocalFontProps;
   getFontFace(): CommonFontFace;
   getTextWidth(textLine: string): number;
   drawLine(
@@ -41,7 +44,6 @@ export interface LocalFont {
     textLine: string,
     style: TextStyle
   ): void;
-  createScaled?(scale: number): LocalFont;
 }
 
 export type ParamsDrawGlyph = {
@@ -81,4 +83,13 @@ export const drawGlyph = (
     // If the surface does not support a special method, then a less efficient path-based output option is used.
     surface.drawPath(params.transform, params.getPath(), params.style);
   }
+};
+
+export const createModifiedLocalFont = (
+  surface: AbstractSurface,
+  srcFont: Readonly<LocalFont>,
+  props: Readonly<Partial<LocalFontProps>>
+): LocalFont => {
+  const newProps: LocalFontProps = { ...srcFont.props, ...props };
+  return surface.getFont(newProps);
 };

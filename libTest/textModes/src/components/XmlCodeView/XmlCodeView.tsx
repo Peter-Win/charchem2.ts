@@ -1,6 +1,6 @@
 import * as React from "react";
-import { XmlNode } from "../../../../../src/textBuilder/xmlNode/XmlNode";
-import { renderXmlNode } from "../../../../../src/textBuilder/xmlNode/renderXmlNode";
+import { XmlNode } from "charchem2/textBuilder/xmlNode/XmlNode";
+import { renderXmlNode } from "charchem2/textBuilder/xmlNode/renderXmlNode";
 
 type PropsXmlCodeView = {
   indent: string;

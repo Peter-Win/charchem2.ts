@@ -43,7 +43,7 @@ export class HtmlCanvasSurface implements AbstractSurface {
     const webProps = this.fontPropsCache.getWebProps(props);
     let font = this.fontCache[webProps.hash];
     if (font) return font;
-    font = new HtmlCanvasLocalFont(this.getCtx(), webProps);
+    font = new HtmlCanvasLocalFont(this.getCtx(), webProps, props);
     this.fontCache[webProps.hash] = font;
     return font;
   }
