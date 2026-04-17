@@ -12,6 +12,7 @@ import { FigPath } from "../drawSys/figures/FigPath";
 import { PathSeg } from "../drawSys/path";
 import { LocalFont, PathStyle, TextStyle } from "../drawSys/AbstractSurface";
 import { drawTextWithMarkup, ResultTextWithMarkup } from "./drawTextWithMarkup";
+import { StructBuilderCtx } from "./StructBuilderCtx";
 
 interface FigDef {
   figOp: Figure;
@@ -32,13 +33,13 @@ interface ResultBuildOp {
   center: Point;
 }
 
-export const buildOp = (op: ChemOp, props: ChemImgProps): ResultBuildOp => {
+export const buildOp = (op: ChemOp, ctx: StructBuilderCtx): ResultBuildOp => {
   const comms: [
     ResultTextWithMarkup | undefined,
     ResultTextWithMarkup | undefined
   ] = [
-    ifDef(op.commentPre, (it) => buildOpComment(it, props, op.color)),
-    ifDef(op.commentPost, (it) => buildOpComment(it, props, op.color)),
+    ifDef(op.commentPre, (it) => buildOpComment(it, ctx, op.color)),
+    ifDef(op.commentPost, (it) => buildOpComment(it, ctx, op.color)),
   ];
   const { srcText, dstText } = op;
   const commWidth = comms.reduce(
@@ -46,12 +47,12 @@ export const buildOp = (op: ChemOp, props: ChemImgProps): ResultBuildOp => {
     0
   );
   const frame = new FigFrame();
-  const style = props.getStyleColored("operation", op.color);
+  const style = ctx.imgProps.getStyleColored("operation", op.color);
   const drawFn = opDict[srcText] ?? opTextFigure;
   const { figOp, irc } = drawFn({
     srcText,
     dstText,
-    props,
+    props: ctx.imgProps,
     commWidth,
     ...style,
   });
@@ -353,9 +354,9 @@ const addOpComment = (
 
 const buildOpComment = (
   comm: ChemComment,
-  props: ChemImgProps,
+  ctx: StructBuilderCtx,
   color: string | undefined
 ): ResultTextWithMarkup => {
-  const tp = props.getStyleColored("opComment", color);
-  return drawTextWithMarkup(comm.text, props, tp);
+  const textProps = ctx.imgProps.getStyleColored("opComment", color);
+  return drawTextWithMarkup(comm.text, ctx, textProps);
 };

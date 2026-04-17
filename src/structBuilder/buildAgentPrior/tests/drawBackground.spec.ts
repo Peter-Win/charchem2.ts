@@ -15,6 +15,7 @@ import { FigRect } from "../../../drawSys/figures/FigRect";
 import { FigEllipse } from "../../../drawSys/figures/FigEllipse";
 import { FigFrame } from "../../../drawSys/figures/FigFrame";
 import { Point } from "../../../math/Point";
+import { createStructBuilderCtx } from "../../StructBuilderCtx";
 
 const build = (formula: string, imgName?: string): ResultBuildAgent => {
   const expr = compile(formula);
@@ -22,7 +23,7 @@ const build = (formula: string, imgName?: string): ResultBuildAgent => {
   const agent = expr.getAgents()[0]!;
   const surface = createTestSurface();
   const imgProps = createTestImgProps(surface, 40);
-  const res = buildAgentPrior(agent, imgProps);
+  const res = buildAgentPrior(agent, createStructBuilderCtx(surface, imgProps));
   if (imgName) saveSurface(imgName, res.agentFrame, surface);
   return res;
 };

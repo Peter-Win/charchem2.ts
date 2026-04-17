@@ -1,11 +1,17 @@
 import { FigFrame } from "../drawSys/figures/FigFrame";
-import { MarkupChunk, parseMarkup } from "../utils/markup";
-import { ChemImgProps, TextProps } from "../drawSys/ChemImgProps";
+import { MarkupChunk, MarkupProps, parseMarkupChunk } from "../utils/markup";
+import { TextProps } from "../drawSys/ChemImgProps";
 import { Figure } from "../drawSys/figures/Figure";
 import { Rect } from "../math/Rect";
 import { FigText } from "../drawSys/figures/FigText";
-import { is0 } from "../math";
-import { LocalFont, TextStyle } from "../drawSys/AbstractSurface";
+import { isClose } from "../math";
+import {
+  LocalFont,
+  LocalFontProps,
+  TextStyle,
+} from "../drawSys/AbstractSurface";
+import { StructBuilderCtx } from "./StructBuilderCtx";
+import { globalizeMarkupChunk } from "../utils/markup/globalizeMarkupChunk";
 
 export interface ResultTextWithMarkup {
   fig: Figure;
@@ -14,19 +20,20 @@ export interface ResultTextWithMarkup {
 
 interface ParamsDrawMarkup {
   chunk: MarkupChunk;
-  imgProps: ChemImgProps;
   font: LocalFont;
   style: TextStyle;
   scale: number;
+  ctx: StructBuilderCtx;
 }
 
 const drawMarkup = ({
   chunk,
-  imgProps,
+  ctx,
   font,
   style,
   scale,
 }: ParamsDrawMarkup): ResultTextWithMarkup => {
+  const { imgProps } = ctx;
   const irc = new Rect(0, -font.getFontFace().ascent, 0, 0);
   const fig = new FigFrame();
   fig.label = "markup";
@@ -36,20 +43,56 @@ const drawMarkup = ({
     xSup = fig.bounds.right;
     xSub = xSup;
   };
+
+  const modifiedFont = (props: Readonly<Partial<LocalFontProps>>): LocalFont =>
+    ctx.getFont({ ...font.props, ...props });
+
+  const applyFontFeatures = ({
+    fontSizePt,
+    bold,
+    italic,
+  }: MarkupProps): LocalFont => {
+    // TODO: если внутри одного тега шрифта будет другой, нужно чтобы он масштабировался относительно базового размера
+    const features: Partial<LocalFontProps> = {};
+    if (fontSizePt && !isClose(fontSizePt, 10)) {
+      features.height = 0.1 * fontSizePt * font.props.height;
+    }
+    if (bold) {
+      features.weight = "bold";
+    }
+    if (italic) {
+      features.style = "italic";
+    }
+    return Object.keys(features).length === 0 ? font : modifiedFont(features);
+  };
+
+  const applyStyle = (
+    prevStyle: TextStyle,
+    { underline, overline }: MarkupProps
+  ): TextStyle => ({
+    ...prevStyle,
+    underline,
+    overline,
+  });
+
   chunk.chunks.forEach((subChunk) => {
     if (typeof subChunk === "string") {
-      const txFig = new FigText(subChunk, font, style);
+      const txFig = new FigText(
+        subChunk,
+        applyFontFeatures(chunk.props ?? {}),
+        style
+      );
       txFig.org.x = fig.bounds.right;
       fig.addFigure(txFig, true);
       updateX();
       return;
     }
-    const { type, color } = subChunk;
+    const { type, color } = subChunk.props ?? {};
     if (type === "sup" || type === "sub") {
       const isSup = type === "sup";
-      const newFont: LocalFont = font.createScaled
-        ? font.createScaled(scale)
-        : font;
+      const newFont: LocalFont = modifiedFont({
+        height: font.props.height * scale,
+      });
       const ff = newFont.getFontFace();
       const height = ff.ascent - ff.descent;
       const rs = drawMarkup({
@@ -57,7 +100,7 @@ const drawMarkup = ({
         font: newFont,
         style,
         scale,
-        imgProps,
+        ctx,
       });
       const rsFig = rs.fig;
       if (isSup) {
@@ -76,9 +119,9 @@ const drawMarkup = ({
     if (color) newStyle.fill = color;
     const res = drawMarkup({
       chunk: subChunk,
-      imgProps,
+      ctx,
       font,
-      style: newStyle,
+      style: applyStyle(newStyle, subChunk.props ?? {}),
       scale,
     });
     res.fig.org.x = fig.bounds.right;
@@ -91,12 +134,13 @@ const drawMarkup = ({
 
 export const drawTextWithMarkup = (
   text: string,
-  imgProps: ChemImgProps,
+  ctx: StructBuilderCtx,
   { font, style }: TextProps
 ): ResultTextWithMarkup => {
+  const { imgProps } = ctx;
   const stdH = imgProps.stdStyle.font.getFontFace().ascent;
   const subH = imgProps.getStyle("itemCount").font.getFontFace().ascent;
-  const scale = is0(stdH - subH) ? 0.7 : subH / stdH;
-  const chunk = parseMarkup(text);
-  return drawMarkup({ chunk, imgProps, font, style, scale });
+  const scale = isClose(stdH, subH) ? 0.7 : subH / stdH;
+  const chunk: MarkupChunk = globalizeMarkupChunk(parseMarkupChunk(text), {});
+  return drawMarkup({ ctx, chunk, font, style, scale });
 };

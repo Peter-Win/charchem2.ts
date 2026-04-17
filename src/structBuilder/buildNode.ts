@@ -1,4 +1,3 @@
-import { ChemImgProps } from "../drawSys/ChemImgProps";
 import { ChemNode } from "../core/ChemNode";
 import { FigFrame } from "../drawSys/figures/FigFrame";
 import { buildItem } from "./buildItem";
@@ -6,6 +5,7 @@ import { Point } from "../math/Point";
 import { Rect } from "../math/Rect";
 import { drawCharge } from "./drawCharge";
 import { isEmptyNode } from "../core/isEmptyNode";
+import { StructBuilderCtx } from "./StructBuilderCtx";
 
 export interface ResultBuildNode {
   nodeFrame: FigFrame;
@@ -15,12 +15,13 @@ export interface ResultBuildNode {
 
 export const buildNode = (
   node: ChemNode,
-  imgProps: ChemImgProps
+  ctx: StructBuilderCtx
 ): ResultBuildNode | undefined => {
   if ((node.autoMode || isEmptyNode(node)) && !node.charge) {
     // auto node dont draw items. Example: /\/\
     return undefined;
   }
+  const { imgProps } = ctx;
   const nodeFrame = new FigFrame();
   nodeFrame.label = "node";
   const centerItem = node.getCenterItem();
@@ -34,7 +35,7 @@ export const buildNode = (
     nodeFrame.bounds = new Rect(0, -d, d, 0);
   } else {
     node.items.forEach((item) => {
-      const { itemFrame, rcCore } = buildItem(item, imgProps);
+      const { itemFrame, rcCore } = buildItem(item, ctx);
       itemFrame.org.x = x - itemFrame.bounds.left;
       nodeFrame.addFigure(itemFrame);
       if (rcCore) {

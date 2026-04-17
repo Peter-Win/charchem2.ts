@@ -8,6 +8,7 @@ import { FigPath } from "../../drawSys/figures/FigPath";
 import { Point } from "../../math/Point";
 import { FigText } from "../../drawSys/figures/FigText";
 import { textFormula } from "../../textBuilder/textFormula";
+import { createStructBuilderCtx } from "../StructBuilderCtx";
 
 describe("buildNode", () => {
   it("H2O", () => {
@@ -19,7 +20,7 @@ describe("buildNode", () => {
     const surface = createTestSurface();
     const imgProps = createTestImgProps(surface, 100, "#333");
 
-    const res = buildNode(node, imgProps);
+    const res = buildNode(node, createStructBuilderCtx(surface, imgProps));
     expect(res).toBeDefined();
     const { nodeFrame } = res as ResultBuildNode;
     expect(nodeFrame.figures).toHaveLength(2);
@@ -62,7 +63,7 @@ describe("buildNode", () => {
     const surface = createTestSurface();
     const imgProps = createTestImgProps(surface, 80);
 
-    const res = buildNode(node, imgProps);
+    const res = buildNode(node, createStructBuilderCtx(surface, imgProps));
     expect(res).toBeDefined();
     const { nodeFrame } = res as ResultBuildNode;
     expect(nodeFrame.figures).toHaveLength(3);

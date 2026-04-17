@@ -8,7 +8,7 @@ import { escapeXml } from "../utils/xml/escapeXml";
 import { ChemCharge } from "../core/ChemCharge";
 import { ChemOp } from "../core/ChemOp";
 import { ChemComment } from "../core/ChemComment";
-import { MarkupChunkType } from "../utils/markup";
+import { MarkupChunkType } from "../utils/markup/markup";
 
 /**
  * Правила для формирования HTML-представления формулы

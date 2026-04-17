@@ -96,7 +96,52 @@ export abstract class SvgSurface implements AbstractSurface {
   }
 
   exportText(options?: SvgExportOptions): string {
-    return buildSvgText(this.size, this.defs, this.body, options ?? {});
+    const { size, defs, body, classesMap } = this;
+    return buildSvgText({
+      size,
+      classes: Object.values(classesMap),
+      defs,
+      body,
+      options,
+    });
+  }
+
+  classByProps(props: XmlAttrs): string {
+    const key = JSON.stringify(props);
+    const cached = this.classesMap[key];
+    if (cached) return cached.name;
+    const className = `style-${this.getSalt()}-${
+      Object.values(this.classesMap).length + 1
+    }`;
+    const item: SvgClsItem = {
+      name: className,
+      props,
+    };
+    this.classesMap[key] = item;
+    return item.name;
+  }
+
+  salt?: string;
+
+  getSalt(): string {
+    if (this.salt !== undefined) {
+      return this.salt;
+    }
+    const salt = Math.floor(Math.random() * 36 ** 5).toString(36);
+    this.salt = salt;
+    return salt;
+  }
+
+  makeNodeAttrs(props: XmlAttrs): XmlAttrs {
+    // Если на странице появляется несколько svg-изображений с одинаковыми классами в блоке style,
+    // то они применяются не только к своим узлам, но и к узлам других изображений.
+    // Например, есть два svg. В одном .style-1 {fill: "blue"}, а в другом .style-1 {font-weight: bold}
+    // В результате все узлы с class="style-1" будут и синими, и жирными.
+    // Поэтому нужно либо успользовать уникальные имена классов, либо выводить пропсы не через класс, а inline
+    // Однако, не все свойства класса можно вставить в узел. Например, text-decoration работает только в классе.
+
+    // Текущая реализация предполагает использования случайно генерируемой соли.
+    return { class: this.classByProps(props) };
   }
 
   clear() {
@@ -108,5 +153,12 @@ export abstract class SvgSurface implements AbstractSurface {
 
   defs: Record<string, string> = {};
 
+  classesMap: Record<string, SvgClsItem> = {};
+
   body: string[] = [];
 }
+
+export type SvgClsItem = {
+  name: string;
+  props: XmlAttrs;
+};

@@ -11,7 +11,7 @@ const {SvgSurfacePortable} = require("../../../dist/drawSys/svg/SvgSurfacePortab
 const {standaloneExportOptions} = require("../../../dist/drawSys/svg/standaloneExportOptions");
 const {SvgFont} = require("../../../dist/drawSys/portableFonts/svgFont/SvgFont");
 const {renderTopFrame} = require("../../../dist/drawSys/figures/renderTopFrame");
-const {createPortableImgProps} = require("../../../dist/drawSys/portableFonts/createPortableImgProps");
+const {createPortableStructBuilderCtx} = require("../../../dist/drawSys/portableFonts/createPortableStructBuilderCtx");
 const {createEps} = require("../../../dist/drawSys/ps/createEps");
 
 const title = "Flavanonol";
@@ -26,14 +26,14 @@ const fontName = path.resolve(__dirname, "..", "..", "..", "static", "fonts", "C
 const fontXmlCode = fs.readFileSync(fontName, {encoding: "utf-8"});
 const mainFont = SvgFont.create(fontXmlCode);
 
-const imgProps = createPortableImgProps({
+const ctx = createPortableStructBuilderCtx({
   mainFont,
   fontSize: 18,
   fillColor: "black",
 });
 
 // Build formula image in abstract format
-const {frame} = buildExpression(expr, imgProps);
+const {frame} = buildExpression(expr, ctx);
 
 // Convert abstract figures to portable SVG format
 const surface = new SvgSurfacePortable(mainFont);
@@ -41,7 +41,7 @@ renderTopFrame(frame, surface);
 const dstText = surface.exportText(standaloneExportOptions);
 
 const dirResult = path.resolve(__dirname, "..", "..", "result");
-if (!fs.existsSync(path)) {
+if (!fs.existsSync(dirResult)) {
   fs.mkdirSync(dirResult);
 }
 

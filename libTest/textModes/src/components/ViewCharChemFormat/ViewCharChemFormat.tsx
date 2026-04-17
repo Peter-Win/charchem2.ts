@@ -2,7 +2,7 @@ import * as React from "react";
 import { observer } from "mobx-react-lite";
 import { store } from "../../store";
 import { Feature, FeaturesList } from "../FeaturesList";
-import { ChemSys } from "../../../../../src/ChemSys";
+import { ChemSys } from "charchem2/ChemSys";
 
 export const ViewCharChemFormat: React.FC = observer(() => {
   const {charChemCode} = store;

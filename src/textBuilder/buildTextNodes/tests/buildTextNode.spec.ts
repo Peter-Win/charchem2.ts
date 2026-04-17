@@ -164,16 +164,19 @@ describe("buildTextNodes", () => {
             {
               type: "richText", // Total comment
               color,
+              props: {},
               items: [
                 {
                   type: "richText", // H_2
                   color,
+                  props: {},
                   items: [
                     { type: "text", text: "H", color },
                     {
                       type: "richText",
                       color,
                       pos: "RB",
+                      props: {},
                       items: [{ type: "text", text: "2", color }],
                     },
                   ],
@@ -181,12 +184,14 @@ describe("buildTextNodes", () => {
                 {
                   type: "richText", // SO_4
                   color,
+                  props: {},
                   items: [
                     { type: "text", text: "SO", color },
                     {
                       type: "richText",
                       color,
                       pos: "RB",
+                      props: {},
                       items: [{ type: "text", color, text: "4" }],
                     },
                   ],

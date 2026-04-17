@@ -204,6 +204,21 @@ The oxidation states will rise there via the absolute position. */
     display: inline-block;
     padding: 0 0.1em;
 }
+.cch-textit {
+    font-style: italic;
+}
+.cch-textbf {
+    font-weight: bold;
+}
+.cch-underline {
+    text-decoration: underline;
+}
+.cch-overline {
+    text-decoration: overline;
+}
+.cch-underoverline {
+    text-decoration: underline overline;
+}
   
   
 /*********************

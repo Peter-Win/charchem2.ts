@@ -30,6 +30,7 @@ describe("createTextOp", () => {
           src: "over",
           color: "#200",
           pos: "T",
+          props: {},
           items: [
             {
               type: "text",

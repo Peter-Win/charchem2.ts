@@ -52,4 +52,15 @@ describe("createHtmlRichNode", () => {
       `<span class="cch-expr"><span class="cch-agent"><span>C</span><span>;&nbsp;</span><span style="color: blue">*</span></span></span>`
     );
   });
+
+  it("italic", () => {
+    const expr = compile(`{\\textit{R}}`);
+    expect(expr.getMessage()).toBe("");
+    const textNode = buildTextNodes(expr);
+    const nodes = createHtmlRichNodes(textNode, {});
+    const res = renderXmlNodes(nodes);
+    expect(res).toBe(
+      `<span class="cch-expr"><span class="cch-agent"><span class="cch-symbols"><span class="cch-textit"><span>R</span></span></span></span></span>`
+    );
+  });
 });

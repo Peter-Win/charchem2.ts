@@ -5,7 +5,7 @@ import { Feature, FeaturesList } from "../FeaturesList";
 import { XmlCodeView } from "../XmlCodeView";
 import { ViewInnerHtml } from "../ui/ViewInnerHtml";
 import { ReactView } from "../ReactView";
-import { XmlNode } from "../../../../../src/textBuilder/xmlNode/XmlNode";
+import { XmlNode } from "charchem2/textBuilder/xmlNode/XmlNode";
 
 export const ViewRichHtmlFormat: React.FC = observer(() => {
   const  { richHtmlNodes, richHtmlCode } = store;

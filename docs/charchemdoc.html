@@ -43,8 +43,8 @@
       The <a href="?p=ref">Reference</a> is not intended to be read.
       It should be consulted as needed to obtain detailed information on various aspects of the CharChem system.      
     </p>
-    <p lang="ru">Автор документа: PeterWin. Версия от 2025-04-08</p>
-    <p lang="en">Author of the document: PeterWin. Version from 2025-04-08</p>
+    <p lang="ru">Автор документа: PeterWin. Версия от 2026-04-17</p>
+    <p lang="en">Author of the document: PeterWin. Version from 2026-04-17</p>
   </page>  
 
   <page id="rules" data-owner="home">
@@ -862,7 +862,7 @@
       <span lang="en">Text color</span>
     </h2>
     <p lang="ru">
-      Обсуждавщиеся ранее <a href="?p=rules-color">цветовые функции</a> могут указывать цвет только для всего текстового элемента.<br />
+      Обсуждавшиеся ранее <a href="?p=rules-color">цветовые функции</a> могут указывать цвет только для всего текстового элемента.<br />
       Но если нужно менять цвета внутри текста, то нужно использовать конструкцию <code>{\color{<i>код-цвета</i>}текст}</code>.<br />
       Возможные <a href="?p=ref-color">коды цветов</a> перечислены в справочнике.
     </p>
@@ -881,10 +881,113 @@
       <code class="chem-code">-"AB\color{red}CDEF"</code>
       <div class="echem-formula">-"AB\color{red}CDEF"</div>
     </div>
-    <p lang="ru"><b>PS.</b> Синтаксис для цвета и надстрочных/подстрочных символов заимствован из достаточно известной системы 
+
+    <h2>
+      <span lang="ru">Размер шрифта</span>
+      <span lang="en">Font size</span>
+    </h2>
+    <p lang="ru">Добавлено в версии 2.3.0</p>
+    <p lang="en">Added in version 2.3.0</p>
+    <p lang="ru">
+      Для изменения размера шрифта можно использовать команду <code>{\fontsize{<i>n</i>}<i>текст</i>}</code><br />
+      Здесь <code><i>n</i></code> - это размер в пунктах. 10 пунктов соответствует стандартному размеру.
+    </p>
+    <p lang="en">
+      To change the font size, you can use the <code>{\fontsize{<i>n</i>}<i>text</i>}</code> command.<br />
+      Here <code><i>n</i></code> is the size in points. 10 points is the standard size.      
+    </p>
+    <p lang="ru">
+      Кроме того, есть целый ряд команд типа <code>\small</code>, <code>\large</code> или <code>\scriptsize</code>. 
+      С ними можно ознакомиться в <a href="?p=ref-fontsize">справочнике</a>.
+    </p>
+    <p lang="en">
+      Additionally, there are a number of commands like <code>\small</code>, <code>\large</code>, or <code>\scriptsize</code>.
+      You can find them in the <a href="?p=ref-fontsize">reference</a>.      
+    </p>
+    <div class="two-col-table" style="display: inline-grid;">
+      <code class="chem-code">_"Normal and {\fontsize{15}Size=15pt}"</code>
+      <div class="echem-formula">_"Normal and {\fontsize{15}Size=15pt}"</div>
+      <code class="chem-code">/&lt;_(y-.4,N0)"\scriptsize{2}"&gt;\</code>
+      <div class="echem-formula">/&lt;_(y-.4,N0)"\scriptsize{2}"&gt;\</div>
+    </div>
+
+    <h2>
+      <span lang="ru">Жирный текст</span>
+      <span lang="en">Bold text</span>
+    </h2>
+    <p>
+      <span lang="ru">Жирный текст можно сделать при помощи команд:</span>
+      <span lang="en">To make a text bold use commands:</span>
+      <code>\textbf{<i>...text...</i>}</code>
+      <span lang="ru">или</span><span lang="en">or</span>
+      <code>{\textbf <i>...text...</i>}</code>
+    </p>
+    <div class="two-col-table" style="display: inline-grid;">
+      <code class="chem-code">_"Normal and \textbf{Bold}"</code>
+      <div class="echem-formula">_"Normal and \textbf{Bold}"</div>
+      <code class="chem-code">\|`/`\`|/|0"{\textbf A}"</code>
+      <div class="echem-formula">\|`/`\`|/|0"{\textbf A}"</div>
+    </div>
+
+    <h2>
+      <span lang="en">Italicized text</span>
+      <span lang="ru">Выделенный курсивом текст</span>
+    </h2>
+    <p>
+      <span lang="ru">Наклонный шрифт можно использовать при помощи команд:</span> 
+      <span lang="en">To make a text italic is straightforward, use commands:</span>
+      <code>\textit{<i>...text...</i>}</code> 
+      <span lang="ru">или</span><span lang="en">or</span>
+      <code>{\textit <i>...text...</i>}</code>
+    </p>
+    <div class="two-col-table" style="display: inline-grid;">
+      <code class="chem-code">{Normal and \textit{Italic}}</code>
+      <div class="echem-formula">{Normal and \textit{Italic}}</div>
+      <code class="chem-code">\|`/`\`|/|0"{\textit A}"</code>
+      <div class="echem-formula">\|`/`\`|/|0"{\textit A}"</div>
+    </div>
+
+    <h2>
+      <span lang="ru">Другие текстовые стили</span>
+      <span lang="en">Other text styles</span>
+    </h2>
+    <p>
+      <span lang="ru">Подчеркнутый текст выводится командами:</span>
+      <span lang="en">To underline text use commands:</span>
+      <code>\underline{<i>text</i>}</code>
+      <span lang="ru">или</span><span lang="en">or</span>
+      <code>{\underline <i>text</i>}</code>
+    </p>
+    <div class="two-col-table" style="display: inline-grid;">
+      <code class="chem-code">_"Normal and \underline{Underline} or {\underline U2}"</code>
+      <div class="echem-formula">_"Normal and \underline{Underline} or {\underline U2}"</div>
+    </div>
+
+    <p>
+      <span lang="ru">Линия над текстом выводится командами:</span>
+      <span lang="en">The line above the text is displayed using the following commands:</span>
+      <code>\overline{<i>text</i>}</code>
+      <span lang="ru">или</span><span lang="en">or</span>
+      <code>{\overline <i>text</i>}</code>
+    </p>
+    <div class="two-col-table" style="display: inline-grid;">
+      <code class="chem-code">_{Normal and \overline{Overline} or {\overline O2}}</code>
+      <div class="echem-formula">_{Normal and \overline{Overline} or {\overline O2}}</div>
+    </div>
+
+    <p>
+      <span lang="ru">Возможно сочетание:</span>
+      <span lang="en">A combination is possible:</span>
+    </p>
+    <div class="two-col-table" style="display: inline-grid;">
+      <code class="chem-code">_{\overline{\underline{Hello}}}</code>
+      <div class="echem-formula">_{\overline{\underline{Hello}}}</div>
+    </div>
+    
+    <p lang="ru"><b>Примечание:</b> Синтаксис для цвета, параметров шрифта и надстрочных/подстрочных символов заимствован из достаточно известной системы 
       <a href="https://ru.wikipedia.org/wiki/TeX" target="_blank">TeX</a></p>
     <p lang="en">
-      <b>P.S.</b> The syntax for color and superscript/subscript characters is borrowed from the well-known 
+      <b>Note:</b> The syntax for color, font parameters and superscript/subscript characters is borrowed from the well-known 
       <a href="https://en.wikipedia.org/wiki/TeX" target="_blank">TeX</a> system.
     </p>
     <h2>
@@ -7856,6 +7959,102 @@
       <div class="echem-formula">$nM(27)Al + $itemColor1(var(--select-color)){[gamma]} -&gt; $nM(27)Al"*"</div>
       <code class="chem-code">C + O2 -> CO2"; <em>\Delta</em>_RH=-393,51 kJ/mol"</code>
       <div class="echem-formula">C + O2 -> CO2"; {\color{var(--select-color)}\Delta}_RH=-393,51 kJ/mol"</div>
+    </div>
+  </page>
+
+  <page id="ref-fontsize" data-owner="ref">
+    <h1>
+      <span lang="ru">Размер шрифта</span>
+      <span lang="en">Font size</span>
+    </h1>
+    <p>Изменение размера шрифта относится к <a href="?p=rules-text">текстовым возможностям</a>.</p>
+    <p>
+      Существует ряд размеров, которые можно указать по названию при помощи синтаксических конструкций:<br />
+      <code>{\<i>name</i> text}</code> или <code>\<i>name</i>{text}</code>.
+    </p>
+    <p>Возможные названия размеров (<i>name</i>) перечислены в следующей таблице:</p>
+    <table>
+      <tr>
+        <th>
+          <span lang="ru">Название</span>
+          <span lang="en">Name</span>
+        </th>
+        <th>
+          <span lang="ru">Размер в пунктах</span>
+          <span lang="en">Size in points</span>
+        </th>
+        <th>
+          <span lang="ru">Пример</span>
+          <span lang="en">Example</span>
+        </th>
+      </tr>
+      <tr>
+        <td><code>tiny</code></td>
+        <td>5</td>
+        <td><span class="echem-formula">_"Norm - \tiny{tiny Abc*123}"</span></td>
+      </tr>
+      <tr>
+        <td><code>scriptsize</code></td>
+        <td>7</td>
+        <td><span class="echem-formula">_"Norm - \scriptsize{scriptsize Abc*123}"</span></td>
+      </tr>
+      <tr>
+        <td><code>footnotesize</code></td>
+        <td>8</td>
+        <td><span class="echem-formula">_"Norm - \footnotesize{footnotesize Abc*123}"</span></td>
+      </tr>
+      <tr>
+        <td><code>small</code></td>
+        <td>9</td>
+        <td><span class="echem-formula">_"Norm - \small{small Abc*123}"</span></td>
+      </tr>
+      <tr>
+        <td><code>normalsize</code></td>
+        <td>10</td>
+        <td><span class="echem-formula">_"Norm - \normalsize{normalsize Abc*123}"</span></td>
+      </tr>
+      <tr>
+        <td><code>large</code></td>
+        <td>12</td>
+        <td><span class="echem-formula">_"Norm - \large{large Abc*123}"</span></td>
+      </tr>
+      <tr>
+        <td><code>Large</code></td>
+        <td>14.4</td>
+        <td><span class="echem-formula">_"Norm - \Large{Large Abc*123}"</span></td>
+      </tr>
+      <tr>
+        <td><code>LARGE</code></td>
+        <td>17.28</td>
+        <td><span class="echem-formula">_"Norm - \LARGE{LARGE Abc*123}"</span></td>
+      </tr>
+      <tr>
+        <td><code>huge</code></td>
+        <td>20.74</td>
+        <td><span class="echem-formula">_"Norm - \huge{huge Abc*123}"</span></td>
+      </tr>
+      <tr>
+        <td><code>Huge</code></td>
+        <td>24.88</td>
+        <td><span class="echem-formula">_"Norm - \Huge{Huge Abc*123}"</span></td>
+      </tr>
+    </table>
+    <p>
+      <span>Данные параметры соответствуют</span>
+      &nbsp;
+      <a href="https://www.latex-project.org/help/documentation/fntguide.pdf" target="_blank">
+        <span>официальной документации LaTeX</span>
+      </a>
+    </p>
+    <p lang="ru">Примеры</p>
+    <p lang="en">Examples</p>
+    <div class="two-col-table" style="display: inline-grid;">
+      <code class="chem-code">/&lt;_(y-.4,N0)"\scriptsize{2}"&gt;\</code>
+      <div class="echem-formula">/&lt;_(y-.4,N0)"\scriptsize{2}"&gt;\</div>
+      <code class="chem-code">\|`/`\`|/|0"{\Large A}"</code>
+      <div class="echem-formula">\|`/`\`|/|0"{\Large A}"</div>
+      <code class="chem-code">CaCO3 "\Large{\Delta}T"--&gt; CaO + CO2</code>
+      <div class="echem-formula">CaCO3 "\Large{\Delta}T"--&gt; CaO + CO2</div>
     </div>
   </page>
 

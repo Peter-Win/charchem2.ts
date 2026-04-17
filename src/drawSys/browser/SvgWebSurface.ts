@@ -17,7 +17,7 @@ export class SvgWebSurface extends SvgSurface {
     const webProps = this.fontPropsCache.getWebProps(props);
     const font = this.fontCache[webProps.hash];
     if (font) return font;
-    const svgLocFont = new SvgWebLocalFont(webProps);
+    const svgLocFont = new SvgWebLocalFont(webProps, props);
     this.fontCache[webProps.hash] = svgLocFont;
     return svgLocFont;
   }

@@ -7,6 +7,7 @@ import { ChemAgent } from "../core/ChemAgent";
 import { buildFrame } from "../structBuilder/buildFrame";
 import { standaloneExportOptions } from "../drawSys/svg/standaloneExportOptions";
 import { addClass } from "./addClass";
+import { createStructBuilderCtx } from "../structBuilder/StructBuilderCtx";
 
 /**
  * Make a local SVG image for the specified expression on the given HTML element.
@@ -21,7 +22,7 @@ export const renderFormulaSvg = (
   if (typeof document === "undefined") return;
   const surface = new SvgWebSurface(fontPropsCache);
   const props = createBrowserChemImgProps(owner, surface);
-  const frame = buildFrame(expr, props);
+  const frame = buildFrame(expr, createStructBuilderCtx(surface, props));
   renderTopFrame(frame, surface);
   const { bounds } = frame;
   // eslint-disable-next-line no-param-reassign
@@ -43,7 +44,7 @@ export const makeFormulaSvgText = (
     document.body.append(tmp);
     const surface = new SvgWebSurface(fontPropsCache);
     const props = createBrowserChemImgProps(tmp, surface);
-    const frame = buildFrame(expr, props);
+    const frame = buildFrame(expr, createStructBuilderCtx(surface, props));
     renderTopFrame(frame, surface);
     const { bounds } = frame;
     return surface.exportText({

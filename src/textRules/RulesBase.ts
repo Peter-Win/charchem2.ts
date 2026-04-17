@@ -5,7 +5,12 @@ import { strMass } from "../math/massUtils";
 import { ChemCharge } from "../core/ChemCharge";
 import { ChemOp } from "../core/ChemOp";
 import { ChemComment } from "../core/ChemComment";
-import { MarkupChunkType, markupFlat, parseMarkup } from "../utils/markup";
+import {
+  MarkupChunk,
+  MarkupChunkType,
+  parseMarkupChunk,
+} from "../utils/markup";
+import { markupFlat } from "../utils/markup/markupFlat";
 
 export class RulesBase {
   agentK(k: ChemK): string {
@@ -94,22 +99,24 @@ export class RulesBase {
   }
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  markupSection(type: MarkupChunkType, isOpen: boolean): string {
+  markupSection(type: MarkupChunkType | undefined, isOpen: boolean): string {
     return "";
   }
 
   useMarkup(text: string): string {
-    const topChunk = parseMarkup(text);
+    const topChunk: MarkupChunk = parseMarkupChunk(text);
     let result = "";
     markupFlat(topChunk, ({ phase, chunk }) => {
       if (typeof chunk === "string") {
         result += chunk;
       } else if (phase === "open" || phase === "close") {
         const isOpen = phase === "open";
-        if (!chunk.type && chunk.color) {
-          result += isOpen ? this.colorBegin(chunk.color) : this.colorEnd();
+        const color = chunk.props?.color;
+        const type = chunk.props?.type;
+        if (color && !type) {
+          result += isOpen ? this.colorBegin(color) : this.colorEnd();
         } else {
-          result += this.markupSection(chunk.type, isOpen);
+          result += this.markupSection(type, isOpen);
         }
       }
     });

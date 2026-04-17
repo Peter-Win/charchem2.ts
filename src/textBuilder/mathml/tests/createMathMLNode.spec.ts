@@ -90,10 +90,10 @@ describe("createMathMLNode", () => {
     // abstract element
     expect(cvt("{R}")).toBe(`<mi mathvariant="normal">R</mi>`);
     expect(cvt("{R^1}")).toBe(
-      `<msup><mi mathvariant="normal">R</mi><mn>1</mn></msup>`
+      `<msup><mi mathvariant="normal">R</mi><mi mathvariant="normal">1</mi></msup>`
     );
     expect(cvt("$color(green){Hal_2}")).toBe(
-      `<msub style="color: green"><mi>Hal</mi><mn>2</mn></msub>`
+      `<msub style="color: green"><mi mathvariant="normal">Hal</mi><mi mathvariant="normal">2</mi></msub>`
     );
     // radical
     expect(cvt("Me2O")).toBe(

@@ -20,5 +20,19 @@ describe("htmlPoor", () => {
   it("custom", () => {
     expect(cvt("{R}-OH")).toBe("<i>R</i>-OH");
     expect(cvt("{R}-OH", { tags: "span" })).toBe("R-OH");
+    expect(cvt("{\\color{orange}R}", { tags: "span" })).toBe(
+      '<span style="color: orange">R</span>'
+    );
+    expect(cvt("{\\textbf{Bold}}", { tags: "span" })).toBe(
+      '<span style="font-weight: bold">Bold</span>'
+    );
+    expect(cvt("{A\\small{B}}", { tags: "span" })).toBe(
+      'A<span style="font-size: 90%">B</span>'
+    );
+  });
+  it("nested font size", () => {
+    expect(cvt("{\\large{\\textit{BB}}}")).toBe(
+      `<i><span style="font-size: 120%"><span style="font-style: italic">BB</span></span></i>`
+    );
   });
 });

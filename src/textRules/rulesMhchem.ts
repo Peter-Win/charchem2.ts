@@ -5,7 +5,7 @@ import { RulesBase } from "./RulesBase";
 import { strMass } from "../math/massUtils";
 import { ChemCharge } from "../core/ChemCharge";
 import { ChemOp } from "../core/ChemOp";
-import { MarkupChunkType } from "../utils/markup";
+import { MarkupChunkType } from "../utils/markup/markup";
 
 const opDict: Record<string, string> = {
   "-->": "->",

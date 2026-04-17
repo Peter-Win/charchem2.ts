@@ -14,6 +14,7 @@ import { PAgentCtx } from "../PAgentCtx";
 import { processCommands } from "../processCommands";
 import { prepareNodes } from "../prepareNodes";
 import { FigEllipse } from "../../../drawSys/figures/FigEllipse";
+import { createStructBuilderCtx } from "../../StructBuilderCtx";
 
 describe("AgentCmdMul", () => {
   it("Typical multiplier with 2 nodes", () => {
@@ -23,7 +24,10 @@ describe("AgentCmdMul", () => {
     const surface = createTestSurface();
     const imgProps = createTestImgProps(surface, 40);
     imgProps.mulRadius = 0;
-    const { agentFrame } = buildAgentPrior(agent, imgProps);
+    const { agentFrame } = buildAgentPrior(
+      agent,
+      createStructBuilderCtx(surface, imgProps)
+    );
     saveSurface("AgentCmdMul-bridgeBetweenNodes", agentFrame, surface);
     const { figures } = agentFrame;
     expect(figures.length).toBe(3);
@@ -43,7 +47,10 @@ describe("AgentCmdMul", () => {
     const agent = expr.getAgents()[0]!;
     const surface = createTestSurface();
     const imgProps = createTestImgProps(surface, 40);
-    const { agentFrame } = buildAgentPrior(agent, imgProps);
+    const { agentFrame } = buildAgentPrior(
+      agent,
+      createStructBuilderCtx(surface, imgProps)
+    );
     saveSurface("AgentCmdMul-first", agentFrame, surface);
     const { figures } = agentFrame;
     expect(figures.length).toBe(4);
@@ -105,7 +112,7 @@ describe("AgentCmdMul", () => {
 
     const surface = createTestSurface();
     const imgProps = createTestImgProps(surface, 40);
-    const ctx = new PAgentCtx(agent, imgProps);
+    const ctx = new PAgentCtx(agent, createStructBuilderCtx(surface, imgProps));
     prepareNodes(ctx);
     processCommands(ctx);
     expect(ctx.clusters.clusters.length).toBe(1);
@@ -126,7 +133,10 @@ describe("AgentCmdMul", () => {
 
     const surface = createTestSurface();
     const imgProps = createTestImgProps(surface, 40);
-    const { agentFrame } = buildAgentPrior(agent, imgProps);
+    const { agentFrame } = buildAgentPrior(
+      agent,
+      createStructBuilderCtx(surface, imgProps)
+    );
     const figMulK = agentFrame.figures.find(
       (f) =>
         f instanceof FigFrame &&
@@ -153,7 +163,10 @@ describe("AgentCmdMul", () => {
     const agent = expr.getAgents()[0]!;
     const surface = createTestSurface();
     const imgProps = createTestImgProps(surface, 40);
-    const { agentFrame } = buildAgentPrior(agent, imgProps);
+    const { agentFrame } = buildAgentPrior(
+      agent,
+      createStructBuilderCtx(surface, imgProps)
+    );
     saveSurface("AgentCmdMul-emptyNode-mul", agentFrame, surface);
     // Фрейм для атома C
     const frC = agentFrame.figures.find(
@@ -183,7 +196,10 @@ describe("AgentCmdMul", () => {
     const agent = expr.getAgents()[0]!;
     const surface = createTestSurface();
     const imgProps = createTestImgProps(surface, 40);
-    const { agentFrame } = buildAgentPrior(agent, imgProps);
+    const { agentFrame } = buildAgentPrior(
+      agent,
+      createStructBuilderCtx(surface, imgProps)
+    );
     saveSurface("AgentCmdMul-twoMuls", agentFrame, surface);
     const { figures } = agentFrame;
 

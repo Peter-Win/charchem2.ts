@@ -13,7 +13,8 @@ import { standaloneExportOptions } from "../../svg/standaloneExportOptions";
 import { buildExpression } from "../../../structBuilder/buildExpression";
 import { FigEllipse } from "../../figures/FigEllipse";
 import { Point } from "../../../math/Point";
-import { createPortableImgProps } from "../../portableFonts/createPortableImgProps";
+import { createPortableStructBuilderCtx } from "../../portableFonts/createPortableStructBuilderCtx";
+import { StructBuilderCtx } from "../../../structBuilder/StructBuilderCtx";
 
 describe("createEps", () => {
   it("stroke path", async () => {
@@ -78,14 +79,13 @@ describe("createEps", () => {
     });
     const mainFont = SvgFont.create(fontBody);
 
-    const imgProps = createPortableImgProps({
+    // Build formula image in abstract format
+    const ctx: StructBuilderCtx = createPortableStructBuilderCtx({
       mainFont,
       fontSize: 18,
       fillColor: "black",
     });
-
-    // Build formula image in abstract format
-    const { frame } = buildExpression(expr, imgProps);
+    const { frame } = buildExpression(expr, ctx);
 
     // SVG
     const svgSurface = new SvgSurfacePortable(mainFont);

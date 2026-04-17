@@ -3,7 +3,6 @@
  *
  */
 
-import { ChemImgProps } from "../../drawSys/ChemImgProps";
 import { ChemAgent } from "../../core/ChemAgent";
 import { FigFrame } from "../../drawSys/figures/FigFrame";
 import { PAgentCtx } from "./PAgentCtx";
@@ -15,6 +14,7 @@ import { findAgentCenter } from "./findAgentCenter";
 import { FigText } from "../../drawSys/figures/FigText";
 import { getTextInternalRect } from "../getTextInternalRect";
 import { drawBackground } from "./drawBackground";
+import { StructBuilderCtx } from "../StructBuilderCtx";
 
 export interface ResultBuildAgent {
   agentFrame: FigFrame;
@@ -24,10 +24,11 @@ export interface ResultBuildAgent {
 
 export const buildAgentPrior = (
   agent: ChemAgent,
-  imgProps: ChemImgProps
+  builderCtx: StructBuilderCtx
 ): ResultBuildAgent => {
-  const ctx = new PAgentCtx(agent, imgProps);
+  const ctx = new PAgentCtx(agent, builderCtx);
   const { agentFrame } = ctx;
+  const { imgProps } = builderCtx;
 
   prepareNodes(ctx);
   processCommands(ctx);

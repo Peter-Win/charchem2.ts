@@ -7,7 +7,7 @@ import { PAgentCtx } from "./PAgentCtx";
 export const prepareNodes = (ctx: PAgentCtx) => {
   const { agent, props } = ctx;
   agent.nodes.forEach((node) => {
-    const res = buildNode(node, props) ?? {
+    const res = buildNode(node, ctx.builderCtx) ?? {
       nodeFrame: new FigFrame(),
       rcNodeCore: new Rect(),
       center: new Point(),

@@ -24,7 +24,7 @@ export class LocalSvgFont implements LocalFont {
 
   private scale: number;
 
-  constructor(factory: SvgFont, props: LocalFontProps) {
+  constructor(factory: SvgFont, public readonly props: LocalFontProps) {
     this.factory = factory;
     const originHeight = factory.getHeight();
     const scale = props.height / originHeight;

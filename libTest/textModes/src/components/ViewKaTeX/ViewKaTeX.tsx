@@ -21,7 +21,7 @@ export const ViewKaTeX: React.FC<PropsViewKaTeX> = ({texCode}) => {
       try {
         katex.render(texCode, ref.current, {output});
       } catch (e) {
-        if (ref.current) ref.current.innerHTML = e.message;
+        if (ref.current) ref.current.innerHTML = e instanceof Error ? e.message : "Error";
       }
     }
   }, [texCode, output]);

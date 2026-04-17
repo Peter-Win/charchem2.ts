@@ -5,6 +5,7 @@ import { AgentCmd } from "./AgentCmd";
 import { Clusters } from "./Clusters";
 import { NodeInfo } from "../NodeInfo";
 import { ChemBackground } from "../../core/ChemBackground";
+import { StructBuilderCtx } from "../StructBuilderCtx";
 
 export class PAgentCtx {
   readonly agentFrame: FigFrame;
@@ -21,8 +22,12 @@ export class PAgentCtx {
 
   constructor(
     public readonly agent: ChemAgent,
-    public readonly props: ChemImgProps
+    public readonly builderCtx: StructBuilderCtx
   ) {
     this.agentFrame = new FigFrame();
+  }
+
+  get props(): ChemImgProps {
+    return this.builderCtx.imgProps;
   }
 }

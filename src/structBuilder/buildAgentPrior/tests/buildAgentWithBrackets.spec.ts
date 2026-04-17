@@ -13,6 +13,7 @@ import { FigText } from "../../../drawSys/figures/FigText";
 import { ChemBracketBegin, ChemBracketEnd } from "../../../core/ChemBracket";
 import { ChemNode } from "../../../core/ChemNode";
 import { textFormula } from "../../../textBuilder/textFormula";
+import { createStructBuilderCtx } from "../../StructBuilderCtx";
 
 describe("buildAgentPrior with brackets", () => {
   it("Text bracket connected with nodes directly", () => {
@@ -21,7 +22,10 @@ describe("buildAgentPrior with brackets", () => {
     const agent = expr.getAgents()[0]!;
     const surface = createTestSurface();
     const imgProps = createTestImgProps(surface, 40);
-    const { agentFrame } = buildAgentPrior(agent, imgProps);
+    const { agentFrame } = buildAgentPrior(
+      agent,
+      createStructBuilderCtx(surface, imgProps)
+    );
     saveSurface("buildAgentWithBrackets-b2n", agentFrame, surface);
     const { figures } = agentFrame;
     expect(figures.length).toBe(5);
@@ -102,7 +106,10 @@ describe("buildAgentPrior with brackets", () => {
     const agent = expr.getAgents()[0]!;
     const surface = createTestSurface();
     const imgProps = createTestImgProps(surface, 40);
-    const { agentFrame } = buildAgentPrior(agent, imgProps);
+    const { agentFrame } = buildAgentPrior(
+      agent,
+      createStructBuilderCtx(surface, imgProps)
+    );
     saveSurface("buildAgentWithBrackets-b2b", agentFrame, surface);
     const bracketFrames = agentFrame.figures.filter(
       (fig) =>
@@ -126,7 +133,10 @@ describe("buildAgentPrior with brackets", () => {
     const agent = expr.getAgents()[0]!;
     const surface = createTestSurface();
     const imgProps = createTestImgProps(surface, 40);
-    const { agentFrame } = buildAgentPrior(agent, imgProps);
+    const { agentFrame } = buildAgentPrior(
+      agent,
+      createStructBuilderCtx(surface, imgProps)
+    );
     saveSurface("buildAgentWithBrackets-hard", agentFrame, surface);
   });
 
@@ -136,7 +146,10 @@ describe("buildAgentPrior with brackets", () => {
     const agent = expr.getAgents()[0]!;
     const surface = createTestSurface();
     const imgProps = createTestImgProps(surface, 40);
-    const { agentFrame } = buildAgentPrior(agent, imgProps);
+    const { agentFrame } = buildAgentPrior(
+      agent,
+      createStructBuilderCtx(surface, imgProps)
+    );
     saveSurface("buildAgentWithBrackets-textBraces", agentFrame, surface);
   });
 
@@ -146,7 +159,10 @@ describe("buildAgentPrior with brackets", () => {
     const agent = expr.getAgents()[0]!;
     const surface = createTestSurface();
     const imgProps = createTestImgProps(surface, 40);
-    const { agentFrame } = buildAgentPrior(agent, imgProps);
+    const { agentFrame } = buildAgentPrior(
+      agent,
+      createStructBuilderCtx(surface, imgProps)
+    );
     saveSurface("buildAgentWithBrackets-grBrackets", agentFrame, surface);
   });
 
@@ -168,7 +184,10 @@ describe("buildAgentPrior with brackets", () => {
 
     const surface = createTestSurface();
     const imgProps = createTestImgProps(surface, 40);
-    const { agentFrame } = buildAgentPrior(agent, imgProps);
+    const { agentFrame } = buildAgentPrior(
+      agent,
+      createStructBuilderCtx(surface, imgProps)
+    );
     const { figures } = agentFrame;
     expect(figures.length).toBe(14);
     // Фигура скобки представлена фреймом, внутри которого первый элемент FigPath
@@ -212,7 +231,10 @@ describe("buildAgentPrior with brackets", () => {
 
     const surface = createTestSurface();
     const imgProps = createTestImgProps(surface, 40);
-    const { agentFrame } = buildAgentPrior(agent, imgProps);
+    const { agentFrame } = buildAgentPrior(
+      agent,
+      createStructBuilderCtx(surface, imgProps)
+    );
     saveSurface("buildAgentWithBrackets-nch2cl", agentFrame, surface);
     const { figures } = agentFrame;
     // console.log(figures);
@@ -240,7 +262,10 @@ describe("buildAgentPrior with brackets", () => {
       // eslint-disable-next-line no-param-reassign
       props.styles.bracket = createTestStyle(surface, 30);
     });
-    const { agentFrame } = buildAgentPrior(agent, imgProps);
+    const { agentFrame } = buildAgentPrior(
+      agent,
+      createStructBuilderCtx(surface, imgProps)
+    );
     saveSurface("buildAgentWithBrackets-HR", agentFrame, surface);
   });
 
@@ -256,7 +281,10 @@ describe("buildAgentPrior with brackets", () => {
     const agent = expr.getAgents()[0]!;
     const surface = createTestSurface();
     const imgProps = createTestImgProps(surface, 40);
-    const { agentFrame } = buildAgentPrior(agent, imgProps);
+    const { agentFrame } = buildAgentPrior(
+      agent,
+      createStructBuilderCtx(surface, imgProps)
+    );
     saveSurface("buildAgentWithBrackets-softSpace", agentFrame, surface);
     // bond |: vert line (112.94, 17.56) to (112.94, 64)
     // bond `-: ltr horiz line (112.94, 64) to (59.83, 64)
@@ -318,7 +346,10 @@ describe("buildAgentPrior with brackets", () => {
     const agent = expr.getAgents()[0]!;
     const surface = createTestSurface();
     const imgProps = createTestImgProps(surface, 40);
-    const { agentFrame } = buildAgentPrior(agent, imgProps);
+    const { agentFrame } = buildAgentPrior(
+      agent,
+      createStructBuilderCtx(surface, imgProps)
+    );
     saveSurface("buildAgentWithBrackets-GrTxConn", agentFrame, surface);
     // Find all graphic brackets
     const grBrackets = agentFrame.figures.filter(
@@ -345,7 +376,10 @@ describe("buildAgentPrior with brackets", () => {
     const agent = expr.getAgents()[0]!;
     const surface = createTestSurface();
     const imgProps = createTestImgProps(surface, 40);
-    const { agentFrame, ctx } = buildAgentPrior(agent, imgProps);
+    const { agentFrame, ctx } = buildAgentPrior(
+      agent,
+      createStructBuilderCtx(surface, imgProps)
+    );
     saveSurface("buildAgentWithBrackets-ltrTxt", agentFrame, surface);
     // console.log("ctx.rtlNodes", ctx.rtlNodes)
     expect(Array.from(ctx.rtlNodes)).toEqual([1, 4, 5]);

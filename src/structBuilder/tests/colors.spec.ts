@@ -12,6 +12,7 @@ import { createTestImgProps, createTestSurface } from "./testEnv";
 import { FigFrame } from "../../drawSys/figures/FigFrame";
 import { FigText } from "../../drawSys/figures/FigText";
 import { FigPath } from "../../drawSys/figures/FigPath";
+import { createStructBuilderCtx } from "../StructBuilderCtx";
 
 describe("colors", () => {
   it("node items", () => {
@@ -37,7 +38,10 @@ describe("colors", () => {
       styles.comment = { ...stdStyle, style: { fill: "gray" } };
       styles.agentK = { ...stdStyle, style: { fill: "#008" } };
     });
-    const { agentFrame } = buildAgentPrior(agent, imgProps);
+    const { agentFrame } = buildAgentPrior(
+      agent,
+      createStructBuilderCtx(surface, imgProps)
+    );
     expect(agentFrame.figures.length).toBe(2); // node frame and agent coeff
 
     // agentK
@@ -117,7 +121,10 @@ describe("colors", () => {
 
     const surface = createTestSurface();
     const imgProps = createTestImgProps(surface, 100, "");
-    const { agentFrame } = buildAgentPrior(agent, imgProps);
+    const { agentFrame } = buildAgentPrior(
+      agent,
+      createStructBuilderCtx(surface, imgProps)
+    );
     const figures = agentFrame.figures.filter(
       (f) => !(f instanceof FigFrame && f.figures.length === 0)
     );

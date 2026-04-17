@@ -1,6 +1,6 @@
 import { ChemNodeItem } from "../core/ChemNodeItem";
 import { FigFrame } from "../drawSys/figures/FigFrame";
-import { ChemImgProps, TextProps } from "../drawSys/ChemImgProps";
+import { TextProps } from "../drawSys/ChemImgProps";
 import { drawText } from "./drawText";
 import { Rect } from "../math/Rect";
 import { drawTextNear } from "./drawTextNear";
@@ -15,6 +15,7 @@ import { ChemStyleId } from "../drawSys/ChemStyleId";
 import { CoeffPos } from "../types/CoeffPos";
 import { locateAtomNumber } from "../inspectors/locateAtomNumber";
 import { ifDef } from "../utils/ifDef";
+import { StructBuilderCtx } from "./StructBuilderCtx";
 
 interface BuildItemResult {
   itemFrame: FigFrame;
@@ -24,8 +25,9 @@ interface BuildItemResult {
 
 export const buildItem = (
   item: ChemNodeItem,
-  imgProps: ChemImgProps
+  ctx: StructBuilderCtx
 ): BuildItemResult => {
+  const { imgProps } = ctx;
   const itemFrame = new FigFrame();
   itemFrame.label = "item";
   const { color } = item;
@@ -41,11 +43,7 @@ export const buildItem = (
     },
     onMarkup(textWithMarkup: string, style: TextProps) {
       itemFont = style.font;
-      const { fig: figM, irc } = drawTextWithMarkup(
-        textWithMarkup,
-        imgProps,
-        style
-      );
+      const { fig: figM, irc } = drawTextWithMarkup(textWithMarkup, ctx, style);
       itemFrame.addFigure(figM, true);
       this.fig = figM;
       this.rcCore = irc;
