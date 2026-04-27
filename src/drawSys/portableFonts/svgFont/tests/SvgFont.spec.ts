@@ -53,7 +53,7 @@ describe("SvgFont", () => {
 
     expect(font.glyphs).toHaveLength(5);
     expect(new Set(Object.keys(font.codeMap))).toEqual(
-      new Set([" ", "+", "1", "Т"])
+      new Set([" ", "+", "1", "Т"]),
     );
     expect(Object.keys(font.nameMap)).toEqual([
       "space",
@@ -74,7 +74,7 @@ describe("SvgFont", () => {
     const list = font.textToGlyphs("Т + 1");
     expect(list).toHaveLength(5);
     expect(list.map((g) => g.name).join(",")).toBe(
-      "uni0422,space,plus,space,one"
+      "uni0422,space,plus,space,one",
     );
   });
   it("traceGlyphs", () => {

@@ -21,7 +21,7 @@ export const getCycleCenter = (cy: Cycle): Point => {
       : cy.nodes
           .reduce((sum, node) => sum.iadd(node.pt), new Point())
           .times(1 / L);
-  // eslint-disable-next-line no-param-reassign
+
   cy.center = center;
   return center;
 };
@@ -49,7 +49,7 @@ export const bondSideSign = (bond: ChemBond, side: 0 | 1): -1 | 0 | 1 => {
   const node = bond.nodes[side];
   if (!node || !bond.dir) return 0;
   const nearBonds = Array.from(node.bonds).filter(
-    (b) => b !== bond && b.isVisible() && b.dir
+    (b) => b !== bond && b.isVisible() && b.dir,
   );
   if (nearBonds.length !== 1) return 0;
   return vectorSign(bond.dir, nearBonds[0]!.dir!);
@@ -143,7 +143,7 @@ export class StructAnalyzer {
 
     const scan = (start: NodeDef) => {
       if (start.order !== NA) return;
-      // eslint-disable-next-line no-param-reassign
+
       start.order = 0;
       const queue: NodeDef[] = [start];
       const cyBonds = new Set<number>();

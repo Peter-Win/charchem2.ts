@@ -22,7 +22,7 @@ describe("createHtmlRichNode", () => {
     const ctx: CtxHtmlRich = {};
 
     expect(renderXmlNode(createHtmlRichNodes(textNode, ctx)[0]!)).toBe(
-      `<span class="cch-expr"><span>Al</span></span>`
+      `<span class="cch-expr"><span>Al</span></span>`,
     );
 
     const ctx1: CtxHtmlRich = {
@@ -33,7 +33,7 @@ describe("createHtmlRichNode", () => {
       srcMap: {},
     };
     expect(renderXmlNode(createHtmlRichNodes(textNode, ctx1)[0]!)).toBe(
-      `<span id="t_1" class="cch-expr"><span id="t_2" class="cch-node-item"><span id="t_3">Al</span></span></span>`
+      `<span id="t_1" class="cch-expr"><span id="t_2" class="cch-node-item"><span id="t_3">Al</span></span></span>`,
     );
     const srcMap = ctx1.srcMap!;
     expect(srcMap).toBeDefined();
@@ -49,7 +49,7 @@ describe("createHtmlRichNode", () => {
     const nodes = createHtmlRichNodes(textNode, {});
     const res = renderXmlNodes(nodes);
     expect(res).toBe(
-      `<span class="cch-expr"><span class="cch-agent"><span>C</span><span>;&nbsp;</span><span style="color: blue">*</span></span></span>`
+      `<span class="cch-expr"><span class="cch-agent"><span>C</span><span>;&nbsp;</span><span style="color: blue">*</span></span></span>`,
     );
   });
 
@@ -60,7 +60,7 @@ describe("createHtmlRichNode", () => {
     const nodes = createHtmlRichNodes(textNode, {});
     const res = renderXmlNodes(nodes);
     expect(res).toBe(
-      `<span class="cch-expr"><span class="cch-agent"><span class="cch-symbols"><span class="cch-textit"><span>R</span></span></span></span></span>`
+      `<span class="cch-expr"><span class="cch-agent"><span class="cch-symbols"><span class="cch-textit"><span>R</span></span></span></span></span>`,
     );
   });
 });

@@ -7,7 +7,10 @@ import { tracePath } from "../utils/tracePath";
 import { Figure } from "./Figure";
 
 export class FigPath extends Figure {
-  constructor(public segs: PathSeg[], public style: PathStyle) {
+  constructor(
+    public segs: PathSeg[],
+    public style: PathStyle,
+  ) {
     super();
   }
 
@@ -50,5 +53,5 @@ export const createLine = (a: Point, b: Point, style: PathStyle): FigPath =>
       { cmd: "M", pt: a },
       { cmd: "L", pt: b },
     ],
-    style
+    style,
   );

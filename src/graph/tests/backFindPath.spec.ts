@@ -38,7 +38,6 @@ test("backFindPath", () => {
   ]);
 
   path.vertices.forEach((v) => {
-    // eslint-disable-next-line no-param-reassign
     v.step = -1;
   });
   const v12 = g.vertices[12]!;

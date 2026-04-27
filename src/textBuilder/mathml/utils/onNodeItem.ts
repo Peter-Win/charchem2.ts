@@ -7,7 +7,7 @@ import { mathScripted } from "./mathScripted";
 
 export const onNodeItem = (
   itemNode: TextNode,
-  create: FnNodeToXml
+  create: FnNodeToXml,
 ): XmlNode | undefined => {
   const { items } = itemNode;
   if (!items) return undefined;

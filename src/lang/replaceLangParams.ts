@@ -9,7 +9,7 @@ interface ParamsReplaceLangParams {
 }
 
 export const replaceLangParams = (
-  fnParams: ParamsReplaceLangParams
+  fnParams: ParamsReplaceLangParams,
 ): string => {
   const { text, params, langId, tr } = fnParams;
   let result = "";

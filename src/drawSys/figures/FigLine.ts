@@ -8,7 +8,7 @@ export class FigLine extends Figure {
   constructor(
     public readonly a: Point,
     public readonly b: Point,
-    public readonly style: PathStyle
+    public readonly style: PathStyle,
   ) {
     super();
     this.update();

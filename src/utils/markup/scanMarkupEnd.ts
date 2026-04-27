@@ -1,7 +1,7 @@
 export const scanMarkupEnd = (
   text: string,
   start: number,
-  stopper: string
+  stopper: string,
 ): number => {
   let level = 0;
   let pos = start;

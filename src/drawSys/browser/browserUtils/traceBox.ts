@@ -3,7 +3,7 @@ export const traceBox = (
   pixels: Uint8ClampedArray,
   width: Int,
   height: Int,
-  toBottom: boolean
+  toBottom: boolean,
 ) => {
   const [start, finish, step] = toBottom
     ? [0, height, 1]

@@ -25,7 +25,7 @@ export const closeNode = (compiler: ChemCompiler) => {
 
 export const openNode = (
   compiler: ChemCompiler,
-  isAuto: boolean = false
+  isAuto: boolean = false,
 ): ChemNode => {
   const bond = compiler.curBond;
   if (bond) {
@@ -47,7 +47,7 @@ export const openNode = (
               const oldBond = findBondBetweenNodes(
                 compiler,
                 oldNode,
-                existsNode
+                existsNode,
               );
               if (oldBond) {
                 mergeBonds(compiler, oldBond, bond, existsNode);
@@ -69,7 +69,7 @@ export const openNode = (
           nodes[0]?.index === bond.nodes[0]?.index &&
           !!nodes[1] &&
           testDir &&
-          dir.equals(testDir)
+          dir.equals(testDir),
       );
       if (softBond) {
         const existsNode = softBond.nodes[1]!;
@@ -107,7 +107,7 @@ export const openNode = (
 
   if (compiler.background) {
     compiler.curAgent!.commands.push(
-      createBackground(compiler.background, node)
+      createBackground(compiler.background, node),
     );
     compiler.background = undefined;
   }
@@ -116,7 +116,7 @@ export const openNode = (
 
 export const getNodeForced = (
   compiler: ChemCompiler,
-  isAuto: boolean
+  isAuto: boolean,
 ): ChemNode => compiler.curNode ?? openNode(compiler, isAuto);
 
 // Вызывается в самом конце, когда уже заполнен список bonds
@@ -124,7 +124,7 @@ export const updateAutoNode = (node: ChemNode) => {
   node.items.push(new ChemNodeItem(PeriodicTable.dict.C));
   const multipleSum: Double = Array.from(node.bonds).reduce(
     (sum, chemBond) => sum + chemBond.n,
-    0.0
+    0.0,
   );
   // Заряд влияет на валентность узла: carbon monoxide ⁻C≡O⁺
   const charge: Int = node.charge?.value ?? 0;

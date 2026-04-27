@@ -9,7 +9,7 @@ import { getFontHeight } from "../../drawSys/utils/fontFaceProps";
 export const drawMul = (
   props: ChemImgProps,
   mFont: LocalFont,
-  mStyle: TextStyle
+  mStyle: TextStyle,
 ): Figure => {
   const { mulRadius } = props;
   if (mulRadius) {

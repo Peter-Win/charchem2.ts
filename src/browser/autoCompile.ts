@@ -7,7 +7,7 @@ export const fontPropsCache = new WebFontCache();
 export const autoCompile = () => {
   if (!document) return;
   const nodes = document.querySelectorAll(
-    ".easyChemConfig,.CharChemConfig,body.echem-auto-compile"
+    ".easyChemConfig,.CharChemConfig,body.echem-auto-compile",
   );
   if (nodes.length === 0) return;
   const cfgNode = nodes[nodes.length - 1]!;

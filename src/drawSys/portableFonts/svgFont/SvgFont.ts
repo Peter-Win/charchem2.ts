@@ -26,7 +26,7 @@ export class SvgFont {
     codeMap: Record<string, SvgFontGlyph>,
     nameMap: Record<string, SvgFontGlyph>,
     public readonly kernMap: Record<string, number>,
-    public readonly missingGlyph?: SvgFontGlyph
+    public readonly missingGlyph?: SvgFontGlyph,
   ) {
     this.fontFace = Object.freeze(fontFace);
     this.codeMap = codeMap;
@@ -59,7 +59,7 @@ export class SvgFont {
 
   traceGlyphs(
     glyphs: SvgFontGlyph[],
-    onGlyph?: (x: number, g: SvgFontGlyph) => void
+    onGlyph?: (x: number, g: SvgFontGlyph) => void,
   ): number {
     return glyphs.reduce((x: number, g: SvgFontGlyph, i: number) => {
       if (onGlyph) onGlyph(x, g);
@@ -131,7 +131,7 @@ export class SvgFont {
       codeMap,
       nameMap,
       kernMap,
-      missingGlyph
+      missingGlyph,
     );
   }
 }

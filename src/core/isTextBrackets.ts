@@ -11,19 +11,19 @@ import { isTextFormula } from "../inspectors/isTextFormula";
  */
 export const isTextBrackets = (
   begin: ChemBracketBegin,
-  commands: ChemObj[]
+  commands: ChemObj[],
 ): boolean =>
   !getBracketsContent(begin, commands).find((cmd) => !isTextFormula(cmd));
 
 export const isTextBracketsCached = (
   begin: ChemBracketBegin,
-  commands: ChemObj[]
+  commands: ChemObj[],
 ): boolean => {
   if (begin.isText !== undefined) {
     return begin.isText;
   }
   const result = isTextBrackets(begin, commands);
-  // eslint-disable-next-line no-param-reassign
+
   begin.isText = result;
   return result;
 };

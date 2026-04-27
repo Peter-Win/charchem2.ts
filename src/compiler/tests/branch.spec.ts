@@ -70,13 +70,13 @@ describe("Branch", () => {
   it("NotClosed", () => {
     const expr = compile("</<\\ + H2O");
     expect(expr.getMessage("ru")).toBe(
-      "Необходимо закрыть ветку, открытую в позиции 3"
+      "Необходимо закрыть ветку, открытую в позиции 3",
     );
   });
   it("NotOpened", () => {
     const expr = compile("/>");
     expect(expr.getMessage("ru")).toBe(
-      "Нельзя закрыть ветку в позиции 2, которая не открыта"
+      "Нельзя закрыть ветку в позиции 2, которая не открыта",
     );
   });
   it("AlternativeSyntax", () => {

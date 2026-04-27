@@ -14,7 +14,7 @@ describe("readFormalPars", () => {
   });
   it("WithDefaultValues", () => {
     const { names, dict } = readFormalPars(
-      new PreProcCtx("first:1,second:2)", 0)
+      new PreProcCtx("first:1,second:2)", 0),
     );
     expect(names).toEqual(["first", "second"]);
     expect(dict).toEqual({ first: "1", second: "2" });

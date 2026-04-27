@@ -4,7 +4,7 @@ import { ElemList } from "../core/ElemList";
 /* eslint no-bitwise: "off" */
 
 export const checkElementsMatching = (
-  parts: [ElemList, ElemList]
+  parts: [ElemList, ElemList],
 ): [string, LangParams | undefined] | undefined => {
   for (let j = 0; j !== 2; j++) {
     const first = parts[j];

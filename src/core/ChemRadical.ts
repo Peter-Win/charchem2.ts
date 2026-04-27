@@ -106,7 +106,10 @@ const descriptions: DescrItem[] = [
 ];
 
 export class ChemRadical extends ChemSubObj {
-  constructor(public readonly label: string, public readonly items: ElemList) {
+  constructor(
+    public readonly label: string,
+    public readonly items: ElemList,
+  ) {
     super();
   }
 

@@ -13,7 +13,7 @@ import { createCommonBond } from "./bondCommon";
 const nodesInterval = (
   compiler: ChemCompiler,
   refs: string[],
-  pos: Int
+  pos: Int,
 ): ChemNode[] => {
   const nodeA = findNodeEx(compiler, refs[0]!, pos);
   const nodeB = findNodeEx(compiler, refs[1]!, pos + refs[0]!.length + 1);
@@ -31,7 +31,7 @@ const nodesInterval = (
 export const parseNodesListDef = (
   compiler: ChemCompiler,
   value: string,
-  valuePos: Int
+  valuePos: Int,
 ): (ChemNode | undefined)[] | undefined => {
   if (!value) {
     return undefined;
@@ -49,7 +49,7 @@ export const parseNodesListDef = (
       curPos += chunk.length + 1;
       return dstList;
     },
-    []
+    [],
   );
   return nodes;
 };
@@ -88,7 +88,7 @@ export const createSplineBond = (compiler: ChemCompiler) => {
   setBondProperties(compiler, bond, params);
   const nodes: (ChemNode | undefined)[] | undefined = ifDef(
     params["#"],
-    (param) => parseNodesListDef(compiler, param.value, param.valuePos)
+    (param) => parseNodesListDef(compiler, param.value, param.valuePos),
   );
   const nodesList: NodesList = nodes
     ? checkCycledList(nodes)

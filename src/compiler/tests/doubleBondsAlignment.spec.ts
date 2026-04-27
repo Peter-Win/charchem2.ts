@@ -29,7 +29,7 @@ describe("DoubleBondAlignment", () => {
     //     | R | M   R | L |   ||
     //     +===+       +===+
     const expr = compile(
-      "=|$dblAlign(r)=`|$dblAlign(M)_(A0,N2,T=)_(A0,N2R,T=)|$dblAlign(L)_qq4_q4$dblAlign()=_(a90,N2,T||)"
+      "=|$dblAlign(r)=`|$dblAlign(M)_(A0,N2,T=)_(A0,N2R,T=)|$dblAlign(L)_qq4_q4$dblAlign()=_(a90,N2,T||)",
     );
     expect(expr.getMessage()).toBe("");
     expect(expr.entities).toHaveLength(1);

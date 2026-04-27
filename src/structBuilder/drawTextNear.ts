@@ -22,7 +22,7 @@ interface ParamsDrawTextNear {
 const getShiftCoeff = (
   imgProps: ChemImgProps,
   pos: "sup" | "sub",
-  type: NearTextType
+  type: NearTextType,
 ): number => {
   switch (type) {
     case "bracket":
@@ -35,7 +35,7 @@ const getShiftCoeff = (
 const makeRectExt = (
   rcCore: Rect,
   type: NearTextType,
-  imgProps: ChemImgProps
+  imgProps: ChemImgProps,
 ): Rect => {
   const rcCoreExt = rcCore.clone();
   if (type === "bracket") {
@@ -52,7 +52,7 @@ export const moveNearFigure = (
   pos: CoeffPosOrAngle,
   rcCore: Rect,
   imgProps: ChemImgProps,
-  type: NearTextType
+  type: NearTextType,
 ) => {
   const rcCoreExt = makeRectExt(rcCore, type, imgProps);
 
@@ -61,7 +61,7 @@ export const moveNearFigure = (
     const { center } = rcCoreExt;
     const { b } = rcCoreExt.clip(
       center,
-      center.plus(pointFromDeg(pos).times(rcCoreExt.width + rcCoreExt.height))
+      center.plus(pointFromDeg(pos).times(rcCoreExt.width + rcCoreExt.height)),
     );
     if (isClose(b.x, rcCoreExt.right)) {
       fig.org.x = b.x - rcFig.left;
@@ -116,7 +116,7 @@ export const drawTextNear = ({
     const { center } = rcCoreExt;
     const { b } = rcCoreExt.clip(
       center,
-      center.plus(pointFromDeg(pos).times(rcCoreExt.width + rcCoreExt.height))
+      center.plus(pointFromDeg(pos).times(rcCoreExt.width + rcCoreExt.height)),
     );
     if (isClose(b.x, rcCoreExt.right)) {
       fig.org.x = b.x;

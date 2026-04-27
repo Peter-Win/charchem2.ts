@@ -70,7 +70,7 @@ export class ChemEquation {
   protected setState(
     state: ChemEquationState,
     msgId?: string,
-    params?: LangParams
+    params?: LangParams,
   ): void {
     this.state = state;
     this.msgId = msgId ?? (state === "NotSolved" ? "Not solved" : undefined);
@@ -152,7 +152,7 @@ export class ChemEquation {
     // Индексация элементов
     const elemIndex = leftPart.list.reduce(
       (acc, rec, i) => ({ ...acc, [rec.id]: i }),
-      {} as Record<string, number>
+      {} as Record<string, number>,
     );
 
     this.agents.forEach((agent) => {
@@ -251,7 +251,7 @@ export class ChemEquation {
     const nRow = this.M.findIndex((row) => {
       const filledNdx: Int[] = row.reduce(
         (acc, k, j) => (k.isZero() ? acc : [...acc, j]),
-        [] as Int[]
+        [] as Int[],
       );
       if (filledNdx.length === 0) return true; // Пустая строка
       if (filledNdx.length === 2) {
@@ -305,7 +305,7 @@ export class ChemEquation {
         numCoeffs,
         agents,
         expr.src,
-        srcMap
+        srcMap,
       );
       this.expr = compile(newSrc, { srcMap: true });
     }
@@ -363,7 +363,7 @@ export class ChemEquation {
       if (inv >= 0) {
         // если хоть один из коэффициентов не разделился без остатка на d, переходим к сдедующему значению d
         d++;
-        // eslint-disable-next-line no-continue
+
         continue;
       }
       // если все коэффициэнты делятся, делим их и maxX

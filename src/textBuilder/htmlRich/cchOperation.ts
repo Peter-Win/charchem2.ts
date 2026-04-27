@@ -10,7 +10,7 @@ import { makeCchTag } from "./makeCchTag";
 export const cchOperation = (
   ctx: CtxHtmlRich,
   srcNode: TextNode,
-  op: ChemOp
+  op: ChemOp,
 ): XmlNode => {
   const arrow = cchArrowTag(ctx, srcNode, op);
   const cls: HtmlRichClass[] = ["op"];
@@ -39,7 +39,7 @@ export const cchOperation = (
 const cchArrowTag = (
   ctx: CtxHtmlRich,
   srcNode: TextNode,
-  op: ChemOp
+  op: ChemOp,
 ): XmlNode | undefined => {
   const { srcText } = op;
   if (srcText === "-->" || srcText === "-->") {

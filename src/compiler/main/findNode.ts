@@ -5,7 +5,7 @@ import { findElement } from "../../core/PeriodicTable";
 
 export const findNode = (
   compiler: ChemCompiler,
-  ref: string
+  ref: string,
 ): ChemNode | undefined => {
   const { nodes } = compiler.curAgent!;
   const n = +ref;
@@ -21,7 +21,7 @@ export const findNode = (
   const elem = findElement(ref);
   if (elem) {
     const elemNode = nodes.find(
-      (it) => it.items.length === 1 && it.items[0]!.obj === elem
+      (it) => it.items.length === 1 && it.items[0]!.obj === elem,
     );
     if (elemNode) return elemNode;
   }
@@ -31,7 +31,7 @@ export const findNode = (
 export const findNodeEx = (
   compiler: ChemCompiler,
   ref: string,
-  pos: Int
+  pos: Int,
 ): ChemNode => {
   const node = findNode(compiler, ref);
   if (!node) compiler.error("Invalid node reference '[ref]'", { ref, pos });

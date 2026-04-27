@@ -62,14 +62,14 @@ export const ChemSys = Object.freeze({
   draw(
     owner: Element,
     exprOrCode: ChemExpr | ChemAgent | string,
-    config?: AutoCompileConfig
+    config?: AutoCompileConfig,
   ): boolean {
     renderFormulaCfg(owner, exprOrCode, config ?? {});
     return true;
   },
   makeSVG(
     exprOrCode: ChemExpr | ChemAgent | string,
-    fontPropsCache?: WebFontCache
+    fontPropsCache?: WebFontCache,
   ): string {
     const expr =
       typeof exprOrCode === "string" ? compile(exprOrCode) : exprOrCode;
@@ -93,7 +93,7 @@ export const ChemSys = Object.freeze({
 
   textFormula(
     objOrCode: ChemObj | string,
-    fmtOrType: FmtDef | FmtType
+    fmtOrType: FmtDef | FmtType,
   ): string {
     return textFormula(objOrCode, fmtOrType);
   },

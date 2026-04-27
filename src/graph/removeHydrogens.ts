@@ -3,7 +3,7 @@ import { ChemAtom } from "../core/ChemAtom";
 
 export const removeHydrogen = (
   graph: DraftGraph,
-  canRemove?: (h: DraftVertex, near?: DraftVertex) => boolean
+  canRemove?: (h: DraftVertex, near?: DraftVertex) => boolean,
 ): DraftGraph => {
   const hSet = new Set<DraftVertex>();
   const checkVertex = (vh: DraftVertex, vOther: DraftVertex) => {
@@ -17,7 +17,7 @@ export const removeHydrogen = (
       (canRemove ? canRemove(vh, vOther) : true)
     ) {
       hSet.add(vh);
-      // eslint-disable-next-line no-param-reassign
+
       vOther.hydrogen = (vOther?.hydrogen ?? 0) + 1;
     }
   };
@@ -28,7 +28,7 @@ export const removeHydrogen = (
   const newGraph = new DraftGraph();
   newGraph.vertices = graph.vertices.filter((v) => !hSet.has(v));
   newGraph.edges = graph.edges.filter(
-    (e) => !hSet.has(e.v0) && !hSet.has(e.v1)
+    (e) => !hSet.has(e.v0) && !hSet.has(e.v1),
   );
   return newGraph;
 };

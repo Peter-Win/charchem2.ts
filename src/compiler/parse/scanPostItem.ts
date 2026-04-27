@@ -5,7 +5,7 @@ import { ifDef } from "../../utils/ifDef";
 
 export const scanPostItem = (
   compiler: ChemCompiler,
-  onCoeff: (coeff: ChemK) => void
+  onCoeff: (coeff: ChemK) => void,
 ): boolean =>
   ifDef(scanCoeff(compiler), (it) => {
     onCoeff(it);

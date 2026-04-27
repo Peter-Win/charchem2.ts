@@ -4,7 +4,7 @@ import { Rect } from "../math/Rect";
 export const applyPadding = (
   src: Rect,
   pads: Double[],
-  scale: Double
+  scale: Double,
 ): Rect => {
   if (pads.length === 1) {
     return src.clone().grow(pads[0]! * scale);
@@ -20,7 +20,7 @@ export const applyPadding = (
       src.left - dx,
       src.top - top,
       src.right + dx,
-      src.bottom + bot
+      src.bottom + bot,
     );
   }
   const t = pads[0]! * scale;

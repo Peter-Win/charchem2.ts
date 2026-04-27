@@ -6,7 +6,7 @@ describe("IsTextFormula", () => {
     expect(isTextFormula(compile("H2SO4"))).toBe(true);
     expect(isTextFormula(compile("K3[Fe(CN)6]"))).toBe(true);
     expect(isTextFormula(compile('Ca^2+ + PO4^2- -> Ca3(PO4)2"|v"'))).toBe(
-      true
+      true,
     );
     expect(isTextFormula(compile("CuSO4*5H2O"))).toBe(true);
     expect(isTextFormula(compile("[2Fe2O3*3H2O]"))).toBe(true);

@@ -19,7 +19,7 @@ describe("textFormula", () => {
     const expr = compile("H2O");
     expect(textFormula(expr, { type: "html" })).toBe(htmlInline);
     expect(textFormula(expr, { type: "html", options: { indent: "  " } })).toBe(
-      htmlBlock
+      htmlBlock,
     );
     expect(textFormula(expr, "text")).toBe("H2O");
     expect(textFormula(expr, "TeX")).toBe(`\\ce{H_2O}`);

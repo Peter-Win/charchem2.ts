@@ -7,7 +7,7 @@ import { scanPar } from "./scanPar";
 export const applyParamValues = (
   def: MacroParams,
   params: string[],
-  ctx: PreProcCtx
+  ctx: PreProcCtx,
 ): PreProcCtx => {
   if (def.names.length === 0) {
     return ctx;
@@ -43,7 +43,7 @@ export const applyParamValues = (
         s.slice(0, Math.min(f.length, s.length)) === f && f.length > prev.length
           ? f
           : prev,
-      ""
+      "",
     );
     // Если в формуле встретился знак &, с которым не связан ни один параметр, пропускаем
     if (id) {

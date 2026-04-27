@@ -9,7 +9,7 @@ export const mathRichText = (
   node: TextNode,
   ctx: CtxCreateMathMLNode,
   props: RichTextProps | undefined,
-  color: string | undefined
+  color: string | undefined,
 ): XmlNode => {
   const newCtx = {
     ...ctx,

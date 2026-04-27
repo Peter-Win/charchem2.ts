@@ -11,7 +11,7 @@ export class BranchDecl extends StackItem {
   constructor(
     pos: Int,
     public readonly node: ChemNode,
-    public readonly bond?: ChemBond
+    public readonly bond?: ChemBond,
   ) {
     super(pos);
   }

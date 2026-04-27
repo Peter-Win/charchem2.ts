@@ -13,7 +13,7 @@ describe("ChemExpr", () => {
   it("srcMapItemText", () => {
     const expr = compile(
       "O2 + 2H2 + Al@:c(a)<_(A&a)C_(a0,N3)N>@(-90)@c(30)@c(150)",
-      { srcMap: true }
+      { srcMap: true },
     );
     expect(expr.getMessage()).toBe("");
     const agents = expr.getAgents();
@@ -34,7 +34,7 @@ describe("ChemExpr", () => {
     expect(mi2.length).toBe(1);
     // раскрытый макрос
     expect(expr.srcMapItemText(mi2[0]!)).toBe(
-      "Al<_(A-90)C_(a0,N3)N><_(A30)C_(a0,N3)N><_(A150)C_(a0,N3)N>"
+      "Al<_(A-90)C_(a0,N3)N><_(A30)C_(a0,N3)N><_(A150)C_(a0,N3)N>",
     );
   });
 });

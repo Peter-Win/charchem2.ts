@@ -29,7 +29,7 @@ export class AgentCmdMulBridge extends AgentCmdBridge {
     const bridgeFrame = new FigFrame();
     const { font: mFont, style: mStyle } = props.getStyleColored(
       "multiplier",
-      mul.color
+      mul.color,
     );
     const mFields = props.line * 0.2;
     const figMul = drawMul(props, mFont, mStyle);
@@ -46,7 +46,7 @@ export class AgentCmdMulBridge extends AgentCmdBridge {
       ctx,
       { node: srcNode!, allBox: isPrevBox },
       { node: dstNode!, allBox: isNextBox },
-      new Point(bridgeFrame.bounds.right, 0)
+      new Point(bridgeFrame.bounds.right, 0),
     );
     let y = srcConn.yBase;
     if (y === undefined) {

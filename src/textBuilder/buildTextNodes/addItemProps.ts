@@ -6,7 +6,7 @@ import { ifDef } from "../../utils/ifDef";
 
 export const addItemProps = (
   obj: ChemNodeItem,
-  addItem: (node: TextNode) => void
+  addItem: (node: TextNode) => void,
 ) => {
   const { color } = obj;
   if (obj.n.isSpecified())

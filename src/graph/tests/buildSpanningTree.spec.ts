@@ -67,7 +67,7 @@ describe("buildSpanningTree", () => {
 
     expect(tree.trunk[3]!.branches.length).toBe(1);
     expect(
-      tree.trunk[3]!.branches[0]!.map(({ vertex }) => vertex.index)
+      tree.trunk[3]!.branches[0]!.map(({ vertex }) => vertex.index),
     ).toEqual([4, 6]);
     expect(tree.trunk[3]!.branches[0]!.map(({ edge }) => edge?.index)).toEqual([
       3, 5,

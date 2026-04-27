@@ -10,7 +10,7 @@ import { PAgentCtx } from "./PAgentCtx";
 export class AgentCmdSoftBond extends AgentCmdBridge {
   constructor(
     public readonly bond: ChemBond,
-    public readonly agent: ChemAgent
+    public readonly agent: ChemAgent,
   ) {
     super();
   }
@@ -24,7 +24,7 @@ export class AgentCmdSoftBond extends AgentCmdBridge {
     const { src, dst, bondA, bondB } = softBondTemplate(
       bond,
       ctx.props,
-      Point.zero
+      Point.zero,
     );
     const [srcNode, dstNode] = this.bond.nodes;
     const step = dst.minus(src);
@@ -33,7 +33,7 @@ export class AgentCmdSoftBond extends AgentCmdBridge {
         ctx,
         { node: srcNode!, allBox: !!this.srcCmd },
         { node: dstNode!, allBox: !!this.dstCmd },
-        step
+        step,
       );
     if (bond.isVisible()) {
       const y =
@@ -43,7 +43,7 @@ export class AgentCmdSoftBond extends AgentCmdBridge {
             const srcH = srcNodeInfo.res.rcNodeCore.height ?? 0;
             const dstH = dstNodeInfo.res.rcNodeCore.height ?? 0;
             return srcBase - Math.min(srcH / 2, dstH / 2);
-          })
+          }),
         ) ?? srcConn.yMiddle;
       const connPt = new Point(srcConn.x, y);
       bondA.iadd(connPt);

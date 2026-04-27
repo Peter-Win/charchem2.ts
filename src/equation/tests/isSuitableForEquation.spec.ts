@@ -7,11 +7,11 @@ describe("isSuitableForEquation", () => {
     expect(isSuitableForEquation(compile("H2 + O2 = H2O"))).toBeUndefined();
     // expressions with abstract items are correct
     expect(
-      isSuitableForEquation(compile("{M}OH + HCl = {M}Cl + H2O"))
+      isSuitableForEquation(compile("{M}OH + HCl = {M}Cl + H2O")),
     ).toBeUndefined();
     // expressions with abstract coefficients are correct
     expect(
-      isSuitableForEquation(compile("'n'CaCO3 -> CaO + CO2"))
+      isSuitableForEquation(compile("'n'CaCO3 -> CaO + CO2")),
     ).toBeUndefined();
   });
   it("abstract", () => {
@@ -24,7 +24,6 @@ describe("isSuitableForEquation", () => {
     expect(expr.getMessage()).toBe("");
     expr.walk({
       itemPre(obj) {
-        // eslint-disable-next-line no-param-reassign
         obj.n = new ChemK(1.5);
       },
     });

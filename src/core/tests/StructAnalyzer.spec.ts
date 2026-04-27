@@ -76,16 +76,16 @@ describe("StructAnalyzer", () => {
     expect(cyNodes(res3[0]!)).toEqual([1, 2, 3, 4]);
     expect(cyNodes(res3[1]!)).toEqual([3, 4, 7, 8]);
     expect(String(getCycleCenter(stA.cycles[0]!))).toBe(
-      String(new Point(0.5, 0.5))
+      String(new Point(0.5, 0.5)),
     );
     expect(String(getCycleCenter(stA.cycles[1]!))).toBe(
-      String(new Point(1.5, 0.5))
+      String(new Point(1.5, 0.5)),
     );
     expect(String(getCycleCenter(stA.cycles[2]!))).toBe(
-      String(new Point(0.5, 1.5))
+      String(new Point(0.5, 1.5)),
     );
     expect(String(getCycleCenter(stA.cycles[3]!))).toBe(
-      String(new Point(1.5, 1.5))
+      String(new Point(1.5, 1.5)),
     );
   });
   it("different chains", () => {

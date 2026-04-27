@@ -25,7 +25,7 @@ export class ElemRecord {
   constructor(
     a: string | ChemAtom | ElemRecord,
     n: Double = 1.0,
-    isCustom: boolean = false
+    isCustom: boolean = false,
   ) {
     if (typeof a === "string") {
       this.id = a;

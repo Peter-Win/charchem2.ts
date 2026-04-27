@@ -6,7 +6,7 @@ import {
 } from "./createPortableImgProps";
 
 export const createPortableStructBuilderCtx = (
-  params: ParamsPortableImgProps
+  params: ParamsPortableImgProps,
 ): StructBuilderCtx => ({
   imgProps: createPortableImgProps(params),
   getFont: (props) => new LocalSvgFont(params.mainFont, props),

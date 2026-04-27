@@ -38,7 +38,7 @@ describe("operation", () => {
       textFormula(expr, {
         type: "htmlPoor",
         options: { opComments: "script" },
-      })
+      }),
     ).toBe(`<sup>T</sup>→<sub>-Δ</sub>`);
   });
 });

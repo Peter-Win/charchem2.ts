@@ -63,22 +63,22 @@ describe("buildCharChemText", () => {
     expect(cvt("2H2 + O2 = 2H2O")).toBe("2H2 + O2 = 2H2O");
     expect(cvt(`{A} "H_2O"--> {B}`)).toBe(`{A} "H_2O"--> {B}`);
     expect(cvt(`{A} "above"<-->"below" {B}`)).toBe(
-      `{A} "above"<-->"below" {B}`
+      `{A} "above"<-->"below" {B}`,
     );
     expect(cvt(`{A} <--"below" {B}`)).toBe(`{A} <--"below" {B}`);
   });
   it("cc colors", () => {
     expect(
-      cvt(`$color(brown)3Br2$color() + 2Al → 2Al$itemColor1(brown)Br3`)
+      cvt(`$color(brown)3Br2$color() + 2Al → 2Al$itemColor1(brown)Br3`),
     ).toBe(`$color(brown)3Br2$color() + 2Al → 2Al$color(brown)Br3`);
   });
   it("atomColor", () => {
     expect(cvt(`$color(blue)$atomColor(red)2H2SO4`)).toBe(
-      "$color(blue)2$atomColor(red)H2SO4"
+      "$color(blue)2$atomColor(red)H2SO4",
     );
     expect(cvt(`$atomColor1(red)H2SO4`)).toBe(`$atomColor1(red)H2SO4`);
     expect(cvt(`$color(blue)$atomColor1(red)2H2S$atomColor1(brown)O4`)).toBe(
-      `$color(blue)2$atomColor1(red)H2S$atomColor(brown)O4`
+      `$color(blue)2$atomColor1(red)H2S$atomColor(brown)O4`,
     );
   });
 });

@@ -9,8 +9,8 @@ describe("drawChunksList", () => {
           { text: "N", styles: [{ tag: "i" }] },
           { text: "3", styles: [{ tag: "sup" }] },
         ],
-        textFormatHtml
-      )
+        textFormatHtml,
+      ),
     ).toBe("<i>N</i><sup>3</sup>");
   });
 });

@@ -56,10 +56,13 @@ export const splitDotPositions = (descr: string): number[] => {
   if (!isRev) {
     return result;
   }
-  const revSet = result.reduce((acc, n) => {
-    acc.delete(n);
-    return acc;
-  }, new Set([0, 1, 2, 3, 4, 5, 6, 7]));
+  const revSet = result.reduce(
+    (acc, n) => {
+      acc.delete(n);
+      return acc;
+    },
+    new Set([0, 1, 2, 3, 4, 5, 6, 7]),
+  );
   return Array.from(revSet);
 };
 
@@ -88,7 +91,7 @@ type ResDotArg =
 export const parseSingleDotArg = (
   compiler: ChemCompiler,
   arg: string,
-  pos: Int
+  pos: Int,
 ): ResDotArg | undefined => {
   if (!arg) return undefined;
   if (arg.startsWith("c:") || arg.startsWith("color:")) {
@@ -109,7 +112,7 @@ export const parseSingleDotArg = (
 export const parseDotsArgs = (
   compiler: ChemCompiler,
   args: string[],
-  pos: Int[]
+  pos: Int[],
 ): LewisDot[] => {
   const dots: LewisDot[] = [];
   let color: string | undefined;
@@ -151,7 +154,7 @@ export const parseDotsArgs = (
 export const funcDots = (
   compiler: ChemCompiler,
   args: string[],
-  pos: Int[]
+  pos: Int[],
 ) => {
   const dots: LewisDot[] = parseDotsArgs(compiler, args, pos);
   compiler.varDots = dots;

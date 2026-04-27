@@ -17,7 +17,7 @@ const findComputedStyle: FnComputedStyle =
 
 export const createBrowserChemImgProps = (
   owner: Element,
-  surface: AbstractSurface
+  surface: AbstractSurface,
 ): ChemImgProps => {
   // Система доступа к откомпилированным свойствам DOM-объектов. Используется отрисовщиком
   const span = document.createElement("span");

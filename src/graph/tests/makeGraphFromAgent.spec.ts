@@ -16,7 +16,7 @@ describe("makeGraphFromAgent", () => {
     //     H3  H6
     expect(g.toString()).toBe(
       "v0: C*4; v1: H*1; v2: H*1; v3: H*1; v4: C*4; v5: H*1; v6: H*1; v7: O*2; v8: H*1; " +
-        "e0: 0-1; e1: 0-2; e2: 0-3; e3: 4-5; e4: 4-6; e5: 7-8; e6: 0-4; e7: 4-7"
+        "e0: 0-1; e1: 0-2; e2: 0-3; e3: 4-5; e4: 4-6; e5: 7-8; e6: 0-4; e7: 4-7",
     );
   });
   it("double bond", () => {
@@ -30,7 +30,7 @@ describe("makeGraphFromAgent", () => {
     //   C == O
     // H2     3
     expect(g.toString()).toBe(
-      "v0: H*1; v1: H*1; v2: C*4; v3: O*2; e0: 0-2; e1: 1-2; e2: 2-3*2"
+      "v0: H*1; v1: H*1; v2: C*4; v3: O*2; e0: 0-2; e1: 1-2; e2: 2-3*2",
     );
   });
   it("calc real valence", () => {

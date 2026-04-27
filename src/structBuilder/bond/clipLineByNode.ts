@@ -10,7 +10,7 @@ export const clipLineByNode = (
   nodeRes: ResultBuildNode,
   a: Point | undefined,
   b: Point | undefined,
-  margin: Double
+  margin: Double,
 ): Point | undefined => {
   if (!a || !b) return undefined;
   const result = a.clone();

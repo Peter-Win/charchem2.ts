@@ -8,7 +8,7 @@ export const drawRect = (
   offset: Point,
   rect: Rect,
   style: PathStyle,
-  radius?: Point
+  radius?: Point,
 ) => {
   if (surface.drawRect) {
     surface.drawRect(offset, rect, style, radius);

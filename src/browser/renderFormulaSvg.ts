@@ -17,7 +17,7 @@ import { createStructBuilderCtx } from "../structBuilder/StructBuilderCtx";
 export const renderFormulaSvg = (
   owner: Element,
   expr: ChemExpr | ChemAgent,
-  fontPropsCache?: WebFontCache
+  fontPropsCache?: WebFontCache,
 ) => {
   if (typeof document === "undefined") return;
   const surface = new SvgWebSurface(fontPropsCache);
@@ -25,7 +25,7 @@ export const renderFormulaSvg = (
   const frame = buildFrame(expr, createStructBuilderCtx(surface, props));
   renderTopFrame(frame, surface);
   const { bounds } = frame;
-  // eslint-disable-next-line no-param-reassign
+
   owner.innerHTML = surface.exportText({
     width: `${bounds.width}px`,
     height: `${bounds.height}px`,
@@ -35,7 +35,7 @@ export const renderFormulaSvg = (
 
 export const makeFormulaSvgText = (
   expr: ChemExpr | ChemAgent,
-  fontPropsCache?: WebFontCache
+  fontPropsCache?: WebFontCache,
 ) => {
   if (typeof document === "undefined") return "";
   const tmp = document.createElement("div");

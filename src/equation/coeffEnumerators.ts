@@ -4,7 +4,7 @@ import { Int } from "../types";
 
 export const makeCoeffEnumerator = (
   dimesion: Int,
-  level: Int
+  level: Int,
 ): Generator<Int[]> => {
   if (dimesion === 2) return coeffEnumerator2d(level);
   if (dimesion === 3) return coeffEnumerator3d(level);
@@ -79,7 +79,7 @@ export function* coeffEnumerator3d(level: Int): Generator<Int[]> {
  */
 export function* coeffEnumeratorNd(
   dimension: Int,
-  maxLevel: Int
+  maxLevel: Int,
 ): Generator<Int[]> {
   const vars = new Array<Int>(dimension);
   vars.fill(1);

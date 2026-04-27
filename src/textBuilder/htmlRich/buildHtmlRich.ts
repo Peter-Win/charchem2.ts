@@ -12,7 +12,7 @@ export type ResultHtmlRich = {
 
 export const buildHtmlRich = (
   srcNode: TextNode,
-  options?: OptionsHtmlRich
+  options?: OptionsHtmlRich,
 ): ResultHtmlRich => {
   const rootNode = cloneTextNode(srcNode);
   // optimizeColors(rootNode, (n) => Array.isArray(n.items) ? n.items : undefined);

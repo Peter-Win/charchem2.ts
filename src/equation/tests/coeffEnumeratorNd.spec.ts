@@ -20,7 +20,7 @@ const fullNd = (dimension: Int, level: Int): Int[][] => {
     res.push([...counters]);
     let i = 0;
     while (i < dimension) {
-      counters[i]++;
+      counters[i]!++;
       if (counters[i]! <= level) break;
       counters[i] = 1;
       i++;
@@ -37,7 +37,7 @@ describe("coeffEnumeratorNd", () => {
   it("level=2", () => {
     const a = Array.from(coeffEnumeratorNd(4, 2));
     expect(a2s(a)).toBe(
-      "1111 2111 1211 2211 1121 2121 1221 2221 1112 2112 1212 2212 1122 2122 1222 2222"
+      "1111 2111 1211 2211 1121 2121 1221 2221 1112 2112 1212 2212 1122 2122 1222 2222",
     );
     const rb = a2r(fullNd(4, 2));
     expect(a2r(a)).toEqual(rb);

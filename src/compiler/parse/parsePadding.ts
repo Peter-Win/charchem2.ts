@@ -5,7 +5,7 @@ import { parseNum } from "./parseNum";
 export const parsePadding = (
   compiler: ChemCompiler,
   values: string,
-  pos: Int
+  pos: Int,
 ): Double[] => {
   const chunks = values.split(";");
   let curPos = 0;

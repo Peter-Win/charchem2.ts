@@ -37,7 +37,7 @@ describe("calcExplicitCenter", () => {
     expect(exNodes.length).toBe(1);
     expect(exNodes[0]!.node.index).toBe(2);
     expect(String(calcExplicitCenter(exNodes))).toBe(
-      String(getNodeCenterPos(exNodes[0]!))
+      String(getNodeCenterPos(exNodes[0]!)),
     );
   });
   it("two", () => {
@@ -76,7 +76,7 @@ describe("findDefaultY", () => {
     const center1 = getNodeCenterPos(ni1);
     const center2 = getNodeCenterPos(ni2);
     expect(findDefaultY(ctx.nodesInfo)).toBeCloseTo(
-      (center1.y + center2.y) / 2
+      (center1.y + center2.y) / 2,
     );
   });
   it("Priority of two nodes at the same level", () => {

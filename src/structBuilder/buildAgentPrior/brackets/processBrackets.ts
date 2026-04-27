@@ -38,7 +38,7 @@ const bracketCoeffs = (
   props: ChemImgProps,
   color?: string,
   n?: ChemK,
-  charge?: ChemCharge
+  charge?: ChemCharge,
 ) => {
   if (charge) {
     drawCharge({
@@ -71,7 +71,7 @@ const rubberBracket = (
   props: ChemImgProps,
   contentRect: Rect,
   n?: ChemK,
-  charge?: ChemCharge
+  charge?: ChemCharge,
 ): ResBracket => {
   const rubberFig = getRubberBracket(isOpen, bracket.text);
   const desiredRect = new Rect(0, 0, props.bracketWidth, contentRect.height);
@@ -92,7 +92,7 @@ const textBracket = (
   props: ChemImgProps,
   contentRect: Rect,
   k?: ChemK,
-  charge?: ChemCharge
+  charge?: ChemCharge,
 ): ResBracket => {
   const style = props.getStyleColored("bracket", bracket.color);
   const frame = new FigFrame();
@@ -147,7 +147,7 @@ export const makeBridge = (
   ctx: PAgentCtx,
   bracket: CommonBracket,
   isSrcBracket: boolean,
-  isBothText: boolean
+  isBothText: boolean,
 ) => {
   const [node0, node1] = bracket.nodes;
   if (node0 && node1) {
@@ -169,30 +169,33 @@ export const makeBridge = (
       src,
       dst,
       new Point(sign * ctx.props.bracketSpace, dy),
-      flAbs
+      flAbs,
     );
   }
 };
 
 const calcBracketRect = (
   content: ChemObj[],
-  nodesInfo: NodeInfo[]
+  nodesInfo: NodeInfo[],
 ): Rect | undefined =>
-  content.reduce((rect, cmd) => {
-    if (cmd instanceof ChemNode) {
-      const nodeInfo = getNodeInfo(cmd, nodesInfo);
-      const rcRel: Rect = nodeInfo.res.nodeFrame.getRelativeBounds();
-      if (!rect) return rcRel;
-      rect.unite(rcRel);
+  content.reduce(
+    (rect, cmd) => {
+      if (cmd instanceof ChemNode) {
+        const nodeInfo = getNodeInfo(cmd, nodesInfo);
+        const rcRel: Rect = nodeInfo.res.nodeFrame.getRelativeBounds();
+        if (!rect) return rcRel;
+        rect.unite(rcRel);
+        return rect;
+      }
       return rect;
-    }
-    return rect;
-  }, undefined as Rect | undefined);
+    },
+    undefined as Rect | undefined,
+  );
 
 export const processBrackets = (
   ctx: PAgentCtx,
   cmdOpen: AgentCmdBrOpen,
-  cmdClose: AgentCmdBrClose
+  cmdClose: AgentCmdBrClose,
 ) => {
   const { begin } = cmdOpen;
   const { end } = cmdClose;
@@ -221,7 +224,7 @@ export const processBrackets = (
     const p = getNodeCenterPos(getNodeInfo(content[0], nodesInfo));
     contentRect0 = new Rect(
       new Point(p.x - lineWidth, p.y - h),
-      new Point(p.x + lineWidth, p.y + h)
+      new Point(p.x + lineWidth, p.y + h),
     );
   }
   const contentRect1 = contentRect0;
@@ -231,7 +234,7 @@ export const processBrackets = (
     ifDef(begin.padding, (p) => applyPadding(contentRect1, p, line)) ??
     contentRect1;
   const isText = isText0 && contentRect.height === contentRect1.height;
-  // eslint-disable-next-line no-param-reassign
+
   cmdClose.isRealText = isText;
 
   const xPad = isText ? 0 : lineWidth;
@@ -293,9 +296,8 @@ export const processBrackets = (
   beginNi.left = figOpen;
   endNi.right = figClose;
 
-  // eslint-disable-next-line no-param-reassign
   cmdOpen.figure = figOpen;
-  // eslint-disable-next-line no-param-reassign
+
   cmdClose.figure = figClose;
   cluster.contentRect = contentRect;
 

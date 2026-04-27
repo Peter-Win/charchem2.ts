@@ -24,7 +24,10 @@ export class LocalSvgFont implements LocalFont {
 
   private scale: number;
 
-  constructor(factory: SvgFont, public readonly props: LocalFontProps) {
+  constructor(
+    factory: SvgFont,
+    public readonly props: LocalFontProps,
+  ) {
     this.factory = factory;
     const originHeight = factory.getHeight();
     const scale = props.height / originHeight;
@@ -48,7 +51,7 @@ export class LocalSvgFont implements LocalFont {
     surface: AbstractSurface,
     org: Point,
     textLine: string,
-    style: TextStyle
+    style: TextStyle,
   ) {
     const transform = this.transform.clone();
     transform.translate(org);
@@ -71,7 +74,7 @@ export class LocalSvgFont implements LocalFont {
               transform: `matrix(${transform.repr()})`,
               fill: style.fill,
             },
-            true
+            true,
           );
           surface.addFigure(figure);
         }

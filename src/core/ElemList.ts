@@ -20,7 +20,7 @@ export class ElemList {
   toString() {
     let result: string = this.list.reduce(
       (acc, elemRec) => `${acc}${elemRec}`,
-      ""
+      "",
     );
     const chargeText = makeChargeText(this.charge);
     if (chargeText !== "") {
@@ -91,7 +91,6 @@ export class ElemList {
     if (k !== 1.0) {
       this.charge *= k;
       this.list.forEach((it) => {
-        // eslint-disable-next-line no-param-reassign
         it.n *= k;
       });
     }

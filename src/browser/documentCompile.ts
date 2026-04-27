@@ -3,7 +3,7 @@ import { AutoCompileConfig } from "./AutoCompileConfig";
 import { renderFormulaCfg } from "./renderFormulaCfg";
 
 export const documentCompile = async (
-  config: AutoCompileConfig
+  config: AutoCompileConfig,
 ): Promise<void> => {
   if (!document) return Promise.reject(new Error("Document expected"));
   try {

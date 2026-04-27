@@ -17,7 +17,7 @@ interface EntityInfo {
 
 export const buildExpression = (
   expr: ChemExpr,
-  ctx: StructBuilderCtx
+  ctx: StructBuilderCtx,
 ): ResultBuildExpr => {
   const frame = new FigFrame();
   let x = 0;

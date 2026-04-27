@@ -11,7 +11,7 @@ describe("parseBackgroundArgs", () => {
     const params = parseBackgroundArgs(
       compiler,
       ["*", "round", "red"],
-      [1, 3, 9]
+      [1, 3, 9],
     );
     expect(params).toEqual({ isAll: true, shape: "round", fill: "red" });
   });
@@ -20,7 +20,7 @@ describe("parseBackgroundArgs", () => {
     const params = parseBackgroundArgs(
       compiler,
       ["padding:0.1;0.4", "stroke:rgba(255,0,0,0.2)", "width:4"],
-      [1, 3, 9]
+      [1, 3, 9],
     );
     expect(params).toEqual({
       padding: [0.1, 0.4],

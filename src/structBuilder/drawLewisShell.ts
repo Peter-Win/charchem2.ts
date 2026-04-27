@@ -27,7 +27,7 @@ export const drawLewisShell = (
   rc: Rect,
   dots: LewisDot[],
   props: ChemImgProps,
-  onDot: (dot: LewisDotExt) => void
+  onDot: (dot: LewisDotExt) => void,
 ) => {
   const c = rc.center;
   const d = rc.width + rc.height;

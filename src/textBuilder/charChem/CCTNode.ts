@@ -24,7 +24,6 @@ export type CCTNode = {
 };
 
 export const addFunc = (node: CCTNode, f: CCTFunc) => {
-  // eslint-disable-next-line no-param-reassign
   node.funcs = node.funcs ?? [];
   node.funcs.push(f);
 };

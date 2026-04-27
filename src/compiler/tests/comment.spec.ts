@@ -24,7 +24,7 @@ describe("Comment", () => {
     expect(isAbstract(expr)).toBe(false);
     expect(textFormula(expr, "htmlPoor")).toBe("NaCl<em>(р-р)</em>");
     expect(calcMass(expr)).toBe(
-      PeriodicTable.dict.Na.mass + PeriodicTable.dict.Cl.mass
+      PeriodicTable.dict.Na.mass + PeriodicTable.dict.Cl.mass,
     );
   });
   it("CommentWithSpecial", () => {

@@ -14,7 +14,7 @@ export const drawRubberFigure = (
   rubberFig: RubberFigure,
   desiredRect: Rect,
   style: PathStyle,
-  imgProps: ChemImgProps
+  imgProps: ChemImgProps,
 ): Figure => {
   const fig = new FigPath(rubberFig.draw(desiredRect, imgProps), style);
   fig.update();

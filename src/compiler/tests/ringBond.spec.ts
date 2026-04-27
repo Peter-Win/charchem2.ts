@@ -34,8 +34,8 @@ describe("RingBond", () => {
     const bonds = Array.from(agent.bonds);
     expect(
       bonds.map((bond) =>
-        bond.nodes.map((it) => `${it?.index ?? "null"}`).join(bond.tx)
-      )
+        bond.nodes.map((it) => `${it?.index ?? "null"}`).join(bond.tx),
+      ),
     ).toEqual([
       "0|1",
       "1\\2",
@@ -52,7 +52,7 @@ describe("RingBond", () => {
     expect(brutto(expr)).toBe("C7H7ClO");
     const { dict } = PeriodicTable;
     expect(roundMass(roundMass(calcMass(expr)))).toBe(
-      roundMass(dict.C.mass * 7 + dict.H.mass * 7 + dict.Cl.mass + dict.O.mass)
+      roundMass(dict.C.mass * 7 + dict.H.mass * 7 + dict.Cl.mass + dict.O.mass),
     );
   });
   it("DoubleRing", () => {
@@ -117,8 +117,8 @@ describe("RingBond", () => {
         (b) =>
           `${b.linearText()} [${b.nodes
             .map((it) => it?.index ?? "null")
-            .join(", ")}]`
-      )
+            .join(", ")}]`,
+      ),
     ).toEqual([
       "| [0, 1]",
       "`/ [1, 2]",
@@ -137,7 +137,7 @@ describe("RingBond", () => {
     //   \     /     \    |
     // 7 HC---CH 6  2 N---CH2 1
     const expr = compile(
-      "CH2_(y1.2)CH2_pN_pHC_pH2C_p; #-2`-C`/CH_p6HC_p6HC_p6N_p6CH_p6_o"
+      "CH2_(y1.2)CH2_pN_pHC_pH2C_p; #-2`-C`/CH_p6HC_p6HC_p6N_p6CH_p6_o",
     );
     expect(expr.getMessage("")).toBe("");
     const agent = expr.getAgents()[0]!;

@@ -16,7 +16,7 @@ export const singleLine = (
   a: Point,
   b: Point,
   style: string | undefined,
-  color: string
+  color: string,
 ) => {
   const lnStyle: PathStyle = {
     stroke: color,
@@ -37,7 +37,7 @@ export const singleLine = (
       thickWidth,
       color,
       lineWidth,
-      hatch
+      hatch,
     );
     fig.update();
   }
@@ -57,7 +57,7 @@ const drawWaveLine = (
   p0: Point,
   p1: Point,
   imgProps: ChemImgProps,
-  style: PathStyle
+  style: PathStyle,
 ) => {
   const srcSpace = !!bond.arr0;
   const dstSpace = !!bond.arr1;
@@ -85,7 +85,7 @@ const drawWaveLine = (
     const pt = a.plus(segDir);
     const cp1 = a.plus(
       // eslint-disable-next-line no-bitwise
-      (k & 1) === 0 ? new Point(vAmp.y, -vAmp.x) : new Point(-vAmp.y, vAmp.x)
+      (k & 1) === 0 ? new Point(vAmp.y, -vAmp.x) : new Point(-vAmp.y, vAmp.x),
     );
     const cp2 = cp1.plus(segDir);
     segs.push({ cmd: "C", cp1, cp2, pt });
@@ -101,7 +101,7 @@ const drawDashedLine = (
   p0: Point,
   p1: Point,
   imgProps: ChemImgProps,
-  style: PathStyle
+  style: PathStyle,
 ) => {
   // Общее число отрезков: n. Число всегда нечётное.
   const dir = p1.minus(p0);

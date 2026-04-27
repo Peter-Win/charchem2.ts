@@ -8,7 +8,7 @@ export const drawCrosshair = (
   frame: FigFrame,
   center: Point,
   radius: number,
-  style: PathStyle
+  style: PathStyle,
 ) => {
   const path: PathSeg[] = [
     { cmd: "M", pt: center.clone().add(-radius, 0) },

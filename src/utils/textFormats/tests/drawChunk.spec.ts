@@ -13,8 +13,8 @@ test("drawChunk", () => {
         styles: [{ tag: "i" }],
         text: "Hello",
       },
-      htmlLite
-    )
+      htmlLite,
+    ),
   ).toBe("<i>Hello</i>");
   expect(
     drawChunk(
@@ -22,7 +22,7 @@ test("drawChunk", () => {
         styles: [{ tag: "b" }, { tag: "i" }],
         text: "Test",
       },
-      htmlLite
-    )
+      htmlLite,
+    ),
   ).toBe("<b><i>Test</i></b>");
 });

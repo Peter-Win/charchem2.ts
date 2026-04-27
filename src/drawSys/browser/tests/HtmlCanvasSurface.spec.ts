@@ -24,7 +24,7 @@ describe("HtmlCanvasSurface", () => {
       surface
         .getCtx()
         .__getPath()
-        .map(({ type, props }) => ({ type, props }))
+        .map(({ type, props }) => ({ type, props })),
     ).toEqual([
       { type: "beginPath", props: {} },
       { type: "moveTo", props: { x: 0, y: 0 } },

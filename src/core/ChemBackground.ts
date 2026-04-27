@@ -27,10 +27,9 @@ export class ChemBackground extends ChemObj {
 
 export const createBackground = (
   params: ParamsChemBackground,
-  curNode: ChemNode
+  curNode: ChemNode,
 ): ChemBackground => {
   if (!params.isAll) {
-    // eslint-disable-next-line no-param-reassign
     params.nodes = params.nodes ?? [];
     params.nodes.push(curNode);
   }

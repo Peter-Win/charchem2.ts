@@ -61,9 +61,9 @@ const onTextNode = (srcNode: TextNode, dstNode: CCTNode) => {
       addText(
         (chargePosDict[srcNode.pos ?? ""] ?? "^@").replace(
           "@",
-          srcNode.charge.text.toLowerCase()
+          srcNode.charge.text.toLowerCase(),
         ),
-        srcNode.pos === "T" ? Order.oxi : Order.charge
+        srcNode.pos === "T" ? Order.oxi : Order.charge,
       );
       return;
     case "column":
@@ -97,7 +97,7 @@ const onTextNode = (srcNode: TextNode, dstNode: CCTNode) => {
             (srcNode.k.isNumber()
               ? srcNode.k.toString()
               : `'${srcNode.k.toString()}'`),
-          kOrder[srcNode.kType] ?? Order.coeff
+          kOrder[srcNode.kType] ?? Order.coeff,
         );
       }
       return;
@@ -117,7 +117,7 @@ const onTextNode = (srcNode: TextNode, dstNode: CCTNode) => {
       if (srcNode.src && (srcNode.pos === "T" || srcNode.pos === "B")) {
         addText(
           `"${srcNode.src}"`,
-          srcNode.pos === "T" ? Order.commPre : Order.commPost
+          srcNode.pos === "T" ? Order.commPre : Order.commPost,
         );
       }
       break;
@@ -171,7 +171,7 @@ const onItem = (srcNode: TextNode, dstNode: CCTNode) => {
   if (Array.isArray(itemNode.content)) {
     itemNode.content.sort(cmpOrder);
     const chargePos = itemNode.content.findIndex(
-      ({ order }) => order === Order.charge
+      ({ order }) => order === Order.charge,
     );
     if (chargePos >= 0) {
       add(dstNode, itemNode.content[chargePos]!);

@@ -75,7 +75,7 @@ describe("singleLine", () => {
     const fig = paths[0] as FigPath;
     const cCount = fig.segs.reduce(
       (sum, seg) => sum + (seg.cmd === "C" ? 1 : 0),
-      0
+      0,
     );
     expect(cCount).toBeGreaterThan(0);
   });
@@ -91,11 +91,11 @@ describe("singleLine", () => {
     const fig = paths[0] as FigPath;
     const mCount = fig.segs.reduce(
       (sum, seg) => sum + (seg.cmd === "M" ? 1 : 0),
-      0
+      0,
     );
     const lCount = fig.segs.reduce(
       (sum, seg) => sum + (seg.cmd === "L" ? 1 : 0),
-      0
+      0,
     );
     expect(mCount).toBeGreaterThan(1);
     expect(mCount).toBe(lCount);

@@ -8,7 +8,7 @@ import { ifDef } from "../../utils/ifDef";
 
 export const addNodeItem = (
   compiler: ChemCompiler,
-  subObj: ChemSubObj
+  subObj: ChemSubObj,
 ): ChemNodeItem => {
   closeItem(compiler);
   const item = new ChemNodeItem(subObj);

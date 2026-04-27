@@ -26,7 +26,7 @@ const drawTriple = (
   mid: SrcData,
   bot: SrcData,
   topConn: number,
-  botConn: number
+  botConn: number,
 ): PathSeg[] => {
   const segs: PathSeg[] = [];
   // Проверка стыковки
@@ -90,7 +90,7 @@ const drawTriple = (
     bot.segs,
     0,
     bot.segs.length - 1,
-    new Point(midCc.x - botCc.x, top.height + mid.height)
+    new Point(midCc.x - botCc.x, top.height + mid.height),
   );
   build(mid.segs, botConn + 1, topConn, new Point(0, top.height));
   // scale

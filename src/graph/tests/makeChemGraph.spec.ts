@@ -10,7 +10,7 @@ describe("makeChemGraph", () => {
     expect(expr.getMessage()).toBe("");
     const draftGraph = makeGraphFromAgent(expr.getAgents()[0]!);
     expect(draftGraph.toString()).toBe(
-      "v0: H*1; v1: C*4; v2: N*3; e0: 0-1; e1: 1-2*3"
+      "v0: H*1; v1: C*4; v2: N*3; e0: 0-1; e1: 1-2*3",
     );
     type W = { w: number };
     const g = makeChemGraph(draftGraph, { w: 0 }, {});

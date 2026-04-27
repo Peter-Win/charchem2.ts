@@ -12,7 +12,7 @@ export const tripleBond = (
   a: Point,
   b: Point,
   styles: string[],
-  color: string
+  color: string,
 ) => {
   //   left = style#0
   //   |
@@ -37,7 +37,7 @@ export const tripleBond = (
     a.plus(left1),
     b.plus(left1),
     styleLeft,
-    color
+    color,
   );
   singleLine(bond, frame, imgProps, a, b, styleCenter, color);
   singleLine(
@@ -47,6 +47,6 @@ export const tripleBond = (
     a.plus(right1),
     b.plus(right1),
     styleRight,
-    color
+    color,
   );
 };

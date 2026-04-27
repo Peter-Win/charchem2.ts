@@ -40,7 +40,7 @@ describe("colors", () => {
     });
     const { agentFrame } = buildAgentPrior(
       agent,
-      createStructBuilderCtx(surface, imgProps)
+      createStructBuilderCtx(surface, imgProps),
     );
     expect(agentFrame.figures.length).toBe(2); // node frame and agent coeff
 
@@ -67,7 +67,7 @@ describe("colors", () => {
       expect(tx0).toBeInstanceOf(FigText);
       expect(tx0.text).toBe("R");
       expect(
-        imgProps.getStyleColored("custom", getColor(node.items[0]!)).style.fill
+        imgProps.getStyleColored("custom", getColor(node.items[0]!)).style.fill,
       ).toBe("red");
       expect(tx0.style.fill).toBe("red");
     }
@@ -105,7 +105,8 @@ describe("colors", () => {
       expect(tx3).toBeInstanceOf(FigText);
       expect(tx3.text).toBe("↑");
       expect(
-        imgProps.getStyleColored("comment", getColor(node.items[3]!)).style.fill
+        imgProps.getStyleColored("comment", getColor(node.items[3]!)).style
+          .fill,
       ).toBe("gray");
       expect(tx3.style.fill).toBe("gray");
     }
@@ -123,10 +124,10 @@ describe("colors", () => {
     const imgProps = createTestImgProps(surface, 100, "");
     const { agentFrame } = buildAgentPrior(
       agent,
-      createStructBuilderCtx(surface, imgProps)
+      createStructBuilderCtx(surface, imgProps),
     );
     const figures = agentFrame.figures.filter(
-      (f) => !(f instanceof FigFrame && f.figures.length === 0)
+      (f) => !(f instanceof FigFrame && f.figures.length === 0),
     );
     expect(figures.length).toBe(3); // node frame and agent coeff
     expect(figures[0]).toBeInstanceOf(FigPath);

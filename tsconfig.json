@@ -1,7 +1,9 @@
 {
   "compilerOptions": {
-    "outDir": "./dist/",
     "sourceMap": true,
+    "rootDir": "./",
+    "rootDirs": ["./src", "./static"],
+    "outDir": "./dist/",
     "module": "CommonJS",
     "target": "es6",
     "allowJs": true,
@@ -17,7 +19,6 @@
     "noUncheckedIndexedAccess": true,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
-    "baseUrl": "./",
     "paths": {},
     "types": [
       "jest", "node"

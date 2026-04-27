@@ -61,7 +61,7 @@ test("makeMultiplicativePrefixKis", () => {
   updateNomenclatureDict();
   const allKis = (n: number) =>
     ["en", "ru"].map((lang) =>
-      trNumChunks(makeMultiplicativePrefixKis(n), lang)
+      trNumChunks(makeMultiplicativePrefixKis(n), lang),
     );
   expect(allKis(2)).toEqual(["bis", "бис"]);
   expect(allKis(3)).toEqual(["tris", "трис"]);

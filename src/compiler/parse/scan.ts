@@ -3,7 +3,7 @@ import { ChemCompiler } from "../ChemCompiler";
 
 export const scan = (
   compiler: ChemCompiler,
-  isValid: (c: Char) => boolean
+  isValid: (c: Char) => boolean,
 ): boolean => {
   while (!compiler.isFinish() && isValid(compiler.curChar())) {
     compiler.pos++;

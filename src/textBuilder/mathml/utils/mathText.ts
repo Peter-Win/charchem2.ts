@@ -5,7 +5,7 @@ import { mathItem } from "./mathItem";
 export const mathText = (
   { textMode, rtProps }: CtxCreateMathMLNode,
   text: string,
-  color: string | undefined
+  color: string | undefined,
 ): XmlNode => {
   if (textMode === "custom" && rtProps) {
     const res = {

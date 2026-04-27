@@ -46,7 +46,7 @@ describe("Mul", () => {
     expect(getCommands(expr)).toEqual(["CuSO4", "*5{{", "H2O", "}}"]);
     expect(textFormula(expr, "text")).toBe("CuSO4*5H2O");
     expect(textFormula(expr, "htmlPoor")).toBe(
-      "CuSO<sub>4</sub>∙5H<sub>2</sub>O"
+      "CuSO<sub>4</sub>∙5H<sub>2</sub>O",
     );
     const { dict } = PeriodicTable;
     const mH = dict.H.mass;
@@ -54,7 +54,7 @@ describe("Mul", () => {
     const mS = dict.S.mass;
     const mCu = dict.Cu.mass;
     expect(roundMass(calcMass(expr))).toBe(
-      roundMass(mCu + mS + mO * 4 + 5 * (mH * 2 + mO))
+      roundMass(mCu + mS + mO * 4 + 5 * (mH * 2 + mO)),
     );
     const cmd = getCommand(expr, 1) as ChemMul;
     expect(cmd).toBeInstanceOf(ChemMul);
@@ -87,7 +87,7 @@ describe("Mul", () => {
     const mCa = dict.Ca.mass;
     const mMg = dict.Mg.mass;
     expect(roundMass(calcMass(expr))).toBe(
-      roundMass(2 * (mCa + mOH2) + 3 * (mMg + mOH2))
+      roundMass(2 * (mCa + mOH2) + 3 * (mMg + mOH2)),
     );
     expect(textFormula(makeBrutto(expr), "text")).toBe("H10Ca2Mg3O10");
     {

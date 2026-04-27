@@ -28,21 +28,21 @@ describe("Universal bond", () => {
     expect(
       calcBondDirection(compiler, {
         A: { key: "A", value: "90", valuePos: 22 },
-      }).toString()
+      }).toString(),
     ).toBe("(0, 1)");
     // _(A180,L1.5)
     expect(
       calcBondDirection(compiler, {
         A: { key: "A", value: "180", valuePos: 33 },
         L: { key: "L", value: "1.5", valuePos: 44 },
-      }).toString()
+      }).toString(),
     ).toBe("(-1.5, 0)");
     // _(x.7,y-.9)
     expect(
       calcBondDirection(compiler, {
         x: { key: "x", value: ".7", valuePos: 2 },
         y: { key: "y", value: "-.9", valuePos: 3 },
-      }).toString()
+      }).toString(),
     ).toBe("(0.7, -0.9)");
   });
   it("parseBondMultiplicity 2", () => {
@@ -116,7 +116,7 @@ describe("Universal bond", () => {
     expect(calcPolygonDir(new Point(1, 0), 4).toString()).toBe("(0, 1)");
     expect(calcPolygonDir(new Point(2, 0), -4).toString()).toBe("(0, -2)");
     expect(
-      calcPolygonDir(new Point(Math.sqrt(3.0) / 2, -0.5), 3).toString()
+      calcPolygonDir(new Point(Math.sqrt(3.0) / 2, -0.5), 3).toString(),
     ).toBe("(0, 1)");
   });
 });

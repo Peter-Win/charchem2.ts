@@ -27,7 +27,7 @@ describe("replaceLangParams", () => {
         text: "Hello, [name]! Count=[count]",
         params: { name: "Abc", count: 321 },
         tr: testTr,
-      })
+      }),
     ).toBe("Hello, Abc! Count=321");
   });
   it("nested parameters", () => {
@@ -36,14 +36,14 @@ describe("replaceLangParams", () => {
         text: "[Side#] turn",
         params: { Side: "Left" },
         tr: testTr,
-      })
+      }),
     ).toBe("Left turn");
     expect(
       replaceLangParams({
         text: "[Side#] turn",
         params: { Side: "Right" },
         tr: testTr,
-      })
+      }),
     ).toBe("Right turn");
     expect(
       replaceLangParams({
@@ -51,7 +51,7 @@ describe("replaceLangParams", () => {
         params: { Side: "Left" },
         tr: testTr,
         langId: "ru",
-      })
+      }),
     ).toBe("Поворот налево");
     expect(
       replaceLangParams({
@@ -59,7 +59,7 @@ describe("replaceLangParams", () => {
         params: { Side: "Right" },
         tr: testTr,
         langId: "ru",
-      })
+      }),
     ).toBe("Поворот направо");
   });
 });

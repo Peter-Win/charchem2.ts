@@ -12,6 +12,8 @@ import { lastItem } from "../../utils/lastItem";
 import { isAbstract } from "../../inspectors/isAbstract";
 import { calcCharge } from "../../inspectors/calcCharge";
 
+/* eslint no-useless-assignment: "off" */
+
 const toText = (obj: ChemObj) => textFormula(obj, "text");
 const toHtml = (obj: ChemObj) =>
   textFormula(obj, {
@@ -36,25 +38,25 @@ describe("Brackets", () => {
   it("ErrorNotClosed", () => {
     const expr = compile("Ca(OH2");
     expect(expr.getMessage("ru")).toBe(
-      "Необходимо закрыть скобку, открытую в позиции 3"
+      "Необходимо закрыть скобку, открытую в позиции 3",
     );
   });
   it("ErrorNotOpen", () => {
     const expr = compile("CaOH)2");
     expect(expr.getMessage("ru")).toBe(
-      "Нет пары для скобки, закрытой в позиции 5"
+      "Нет пары для скобки, закрытой в позиции 5",
     );
   });
   it("ErrorNestedBranch", () => {
     const expr = compile("H-C<|(CH2>");
     expect(expr.getMessage("ru")).toBe(
-      "Нельзя закрыть ветку в позиции 10, пока не закрыта скобка в позиции 6"
+      "Нельзя закрыть ветку в позиции 10, пока не закрыта скобка в позиции 6",
     );
   });
   it("ErrorNestedBracket", () => {
     const expr = compile("H-C<|CH2)>");
     expect(expr.getMessage("ru")).toBe(
-      "Нельзя закрыть скобку в позиции 9, пока не закрыта ветка в позиции 4"
+      "Нельзя закрыть скобку в позиции 9, пока не закрыта ветка в позиции 4",
     );
   });
   it("SimpleRoundBrackets", () => {
@@ -250,7 +252,7 @@ describe("Brackets", () => {
     expect(toText(makeBrutto(expr))).toBe("C3H6O");
     const { dict } = PeriodicTable;
     expect(calcMass(expr)).toBe(
-      roundMass(dict.C.mass * 3 + dict.H.mass * 6 + dict.O.mass)
+      roundMass(dict.C.mass * 3 + dict.H.mass * 6 + dict.O.mass),
     );
   });
 
@@ -285,8 +287,8 @@ describe("Brackets", () => {
         dict.Cl.mass * 2 +
           dict.C.mass +
           dict.H.mass * 2 +
-          10 * (dict.C.mass * 2 + dict.H.mass + dict.Cl.mass)
-      )
+          10 * (dict.C.mass * 2 + dict.H.mass + dict.Cl.mass),
+      ),
     );
   });
   it("Connect Of Last Node In Brackets With Next Bond", () => {

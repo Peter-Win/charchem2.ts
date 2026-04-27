@@ -11,7 +11,7 @@ export interface OptionsBuildPIN {
 
 export const buildPreferredIupacName = (
   graph: ChemGraph,
-  options?: OptionsBuildPIN
+  options?: OptionsBuildPIN,
 ): NomChunk[] => {
   updateNomenclatureDict();
   throw new ChemError("Cant build PIN");

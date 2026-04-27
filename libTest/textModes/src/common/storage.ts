@@ -1,6 +1,6 @@
 export const storageLoad = <Data>(
   key: string,
-  cvt: (json: unknown) => Data | undefined
+  cvt: (json: unknown) => Data | undefined,
 ): Data | undefined => {
   try {
     const text = window.localStorage.getItem(key);

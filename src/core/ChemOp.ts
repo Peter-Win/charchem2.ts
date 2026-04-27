@@ -9,7 +9,7 @@ export class ChemOp extends ChemObj {
   constructor(
     public readonly srcText: string,
     public readonly dstText: string,
-    public readonly div: boolean
+    public readonly div: boolean,
   ) {
     super();
   }

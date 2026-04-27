@@ -12,7 +12,7 @@ describe("ChemEquation", () => {
     const eq = new ChemEquation();
     eq.initBySrc("Fe + O2 -> Fe'n'O'm'");
     expect(eq.getMessage("ru")).toBe(
-      "Невозможно балансировать уравнение с абстрактными коэффициентами"
+      "Невозможно балансировать уравнение с абстрактными коэффициентами",
     );
   });
 
@@ -20,7 +20,7 @@ describe("ChemEquation", () => {
     const eq = new ChemEquation();
     eq.initBySrc("H2 + O2");
     expect(eq.getMessage("ru")).toBe(
-      "Требуется одна операция, разделяющая левую и правую часть уравнения"
+      "Требуется одна операция, разделяющая левую и правую часть уравнения",
     );
   });
 
@@ -28,21 +28,21 @@ describe("ChemEquation", () => {
     const eq = new ChemEquation();
     eq.initBySrc("H2SO4 <=> H^+ + HSO4^- <=> 2H^+ + SO4^2-");
     expect(eq.getMessage("ru")).toBe(
-      "Требуется одна операция, разделяющая левую и правую часть уравнения"
+      "Требуется одна операция, разделяющая левую и правую часть уравнения",
     );
   });
   it("Element expected in right part", () => {
     const eq = new ChemEquation();
     eq.initBySrc("H2 + O2 + Cl -> H2O");
     expect(eq.getMessage("ru")).toBe(
-      "Отсутствует элемент Cl в правой части уравнения"
+      "Отсутствует элемент Cl в правой части уравнения",
     );
   });
   it("Element expected in left part", () => {
     const eq = new ChemEquation();
     eq.initBySrc("H2 + O2 -> H2O + Cl");
     expect(eq.getMessage("ru")).toBe(
-      "Отсутствует элемент Cl в левой части уравнения"
+      "Отсутствует элемент Cl в левой части уравнения",
     );
   });
   it("Matrix", () => {

@@ -9,7 +9,7 @@
  */
 export const isPropMatch = <T extends string>(
   prop: T,
-  description: string
+  description: string,
 ): boolean => {
   const lowDescr = description.toLowerCase();
   if (lowDescr === "all") {

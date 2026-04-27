@@ -34,7 +34,7 @@ class StackItem {
  */
 export const makeTextFormula = (
   chemObj: ChemObj,
-  rules: RulesBase = rulesText
+  rules: RulesBase = rulesText,
 ): string => {
   const stack: StackItem[] = [new StackItem()];
   let itemColor: string | undefined;
@@ -67,7 +67,7 @@ export const makeTextFormula = (
   const drawCharge = (
     charge: ChemCharge | undefined,
     isPrefix: boolean,
-    color?: string
+    color?: string,
   ) =>
     ifDef(charge, (it) => {
       if (isPrefix === it.isLeft) {
@@ -225,7 +225,7 @@ const buildTextFromChunks = (chunks: Chunk[], rules: RulesBase): string => {
 
 export const makeTextFormulaSrc = (
   sourceText: string,
-  rules: RulesBase
+  rules: RulesBase,
 ): string => {
   const expr = compile(sourceText);
   if (!expr.isOk()) return "";

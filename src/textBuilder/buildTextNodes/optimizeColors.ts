@@ -3,7 +3,7 @@
 
 export const optimizeColors = <T extends { color?: string }>(
   node: T,
-  getList: (owner: T) => T[] | undefined
+  getList: (owner: T) => T[] | undefined,
 ) => {
   const list = getList(node);
   if (!list) return;

@@ -9,7 +9,7 @@ const GrpCache = new Map<TCategories, Record<string, string>>();
 export const findCategory = (
   table: TCategories,
   item: string,
-  locale?: string
+  locale?: string,
 ) => {
   if (!GrpCache.has(table)) {
     const dict: Record<string, string> = {};
@@ -17,12 +17,11 @@ export const findCategory = (
     const revMap = Object.entries(table).reduce(
       (map, [categoryKey, pkList]) => {
         pkList.split(",").forEach((id) => {
-          // eslint-disable-next-line no-param-reassign
           map[id] = categoryKey;
         });
         return map;
       },
-      {} as Record<string, string>
+      {} as Record<string, string>,
     );
     let curCategory = "";
     PeriodicTable.elements.forEach(({ id }) => {

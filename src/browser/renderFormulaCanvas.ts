@@ -11,10 +11,10 @@ import { createStructBuilderCtx } from "../structBuilder/StructBuilderCtx";
 export const renderFormulaCanvas = (
   owner: Element,
   expr: ChemExpr | ChemAgent,
-  fontPropsCache?: WebFontCache
+  fontPropsCache?: WebFontCache,
 ): void => {
   if (!document) return;
-  // eslint-disable-next-line no-param-reassign
+
   owner.innerHTML = ""; // clear owner's content
   const canvas = document.createElement("canvas");
   owner.append(canvas);
@@ -22,7 +22,7 @@ export const renderFormulaCanvas = (
   const props = createBrowserChemImgProps(owner, surface);
   renderTopFrame(
     buildFrame(expr, createStructBuilderCtx(surface, props)),
-    surface
+    surface,
   );
   addClass(owner, "echem-is-canvas");
 };

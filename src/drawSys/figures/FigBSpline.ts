@@ -13,7 +13,7 @@ export class FigBSpline extends Figure {
     public readonly points: Point[],
     public readonly style: PathStyle,
     public readonly segmentLength: number,
-    public readonly bDashed: boolean
+    public readonly bDashed: boolean,
   ) {
     super();
   }
@@ -24,7 +24,7 @@ export class FigBSpline extends Figure {
         .slice(1, -2)
         .reduce(
           (rect: Rect | undefined, p: Point) => updateRect(p, rect),
-          undefined
+          undefined,
         ) ?? new Rect();
   }
 
@@ -110,7 +110,7 @@ export class FigBSpline extends Figure {
       segs.push(
         !this.bDashed
           ? { cmd: "Z" }
-          : { cmd: "L", pt: (segs[0] as PathSegPt).pt }
+          : { cmd: "L", pt: (segs[0] as PathSegPt).pt },
       );
     } else {
       segs.push({ cmd: "L", pt: points[newEdge]! }); // Последний сегмент
@@ -129,7 +129,7 @@ export class FigBSpline extends Figure {
    */
   static extendsPoints(
     srcPoints: Point[],
-    bCyclic: boolean
+    bCyclic: boolean,
   ): Point[] | undefined {
     const n = srcPoints.length;
     if (n < 3) return undefined;

@@ -6,7 +6,7 @@ import { prepareText } from "./parse/prepareText";
 
 export const compile = (
   text: string,
-  options?: ChemCompilerOptions
+  options?: ChemCompilerOptions,
 ): ChemExpr => {
   const compiler = new ChemCompiler(text, options);
   try {
@@ -17,7 +17,11 @@ export const compile = (
     }
     closeEntity(compiler);
   } catch (e) {
-    compiler.expr.error = e;
+    if (e instanceof Error) {
+      compiler.expr.error = e;
+    } else {
+      throw e;
+    }
   }
   return compiler.expr;
 };

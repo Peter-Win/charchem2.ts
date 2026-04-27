@@ -7,6 +7,8 @@ Official site: [http://charchem.org]
 
 Full documentation on formula descriptions is located in the `/docs` folder of the repository or [here](http://charchem.org/docs/charchemdoc.html).
 
+Additional examples of library usage are presented in folder `/libTest`. These include usage in the Node.JS environment and in conjunction with React.
+
 ## Library for use in HTML
 
 Please, see [documentation here](http://charchem.org/en/start).

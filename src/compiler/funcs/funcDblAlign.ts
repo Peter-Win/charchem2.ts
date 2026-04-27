@@ -5,7 +5,7 @@ const aligns = { r: 1, R: 1, l: 1, L: 1, m: 1, M: 1 };
 
 export const funcDblAlign = (
   compiler: ChemCompiler,
-  args: string[]
+  args: string[],
   // @Suppress("UNUSED_PARAMETER") pos: List<Int>
 ) => {
   compiler.varAlign =

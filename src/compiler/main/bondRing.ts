@@ -5,7 +5,7 @@ import { getNodeForced } from "./node";
 import { createCommonBond } from "./bondCommon";
 
 export const findRingNodes = (
-  compiler: ChemCompiler
+  compiler: ChemCompiler,
 ): (ChemNode | undefined)[] | undefined => {
   const curNode = getNodeForced(compiler, true);
   const nodesFull = compiler.nodesBranch.nodes;
@@ -15,7 +15,7 @@ export const findRingNodes = (
 };
 
 export const findRingNodesEx = (
-  compiler: ChemCompiler
+  compiler: ChemCompiler,
 ): (ChemNode | undefined)[] =>
   findRingNodes(compiler) ??
   compiler.error("Cant close ring", { pos: compiler.pos - 2 });

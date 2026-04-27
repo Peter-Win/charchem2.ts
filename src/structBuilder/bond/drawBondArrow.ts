@@ -10,7 +10,7 @@ export const drawBondArrow = (
   imgProps: ChemImgProps,
   a: Point,
   b: Point,
-  color: string
+  color: string,
 ) => {
   const { arrowL, arrowD, lineWidth } = imgProps;
   const n = a.minus(b).normal();

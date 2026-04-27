@@ -7,7 +7,7 @@ const div = (
   cls: string,
   value: string | number,
   attrs?: Record<string, string>,
-  tag?: string
+  tag?: string,
 ): string =>
   `${
     drawTag(tag ?? "div", { ...attrs, class: cls }) + escapeXml(String(value))
@@ -33,15 +33,14 @@ export class CellRender {
       "id",
       "name",
       "mass",
-    ]
+    ],
   ) {
     // В старых JS версиях вместо массива fields может быть строка, разделенная запятыми
     if (typeof fields === "string") {
-      // eslint-disable-next-line no-param-reassign
       fields = (fields as unknown as string).split(",") as CellRenderField[];
     }
     this.fields = fields.map((f) =>
-      typeof f === "function" ? f : fieldsDict[f]
+      typeof f === "function" ? f : fieldsDict[f],
     );
   }
 

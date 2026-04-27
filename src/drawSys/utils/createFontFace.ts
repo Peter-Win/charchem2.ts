@@ -1,7 +1,7 @@
 import { CommonFontFace, FontFaceBBox } from "../CommonFontFace";
 
 export const createFontFace = (
-  attrs: Record<string, string>
+  attrs: Record<string, string>,
 ): CommonFontFace => ({
   fontFamily: attrs["font-family"] || "",
   fontWeight: attrs["font-weight"] || "",

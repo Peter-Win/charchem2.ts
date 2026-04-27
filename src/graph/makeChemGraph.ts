@@ -6,13 +6,13 @@ import { ChemGraph, EdgeEx, VertexEx } from "./ChemGraph";
 export const makeChemGraph = <TV extends Object = {}, TE extends Object = {}>(
   draftGraph: DraftGraph,
   extVertex: TV | ((v: DraftVertex, index: Int) => TV),
-  extEdge: TE | ((e: DraftEdge, index: Int) => TE)
+  extEdge: TE | ((e: DraftEdge, index: Int) => TE),
 ): ChemGraph<TV, TE> => {
   const graph = new ChemGraph<TV, TE>();
   const vMap = new Map<DraftVertex, number>();
   const vertices = draftGraph.vertices.map((draftV, index): VertexEx<TV> => {
     vMap.set(draftV, index);
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+
     const { reserved, ...rest } = draftV;
     return {
       index,

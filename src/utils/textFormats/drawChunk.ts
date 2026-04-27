@@ -3,7 +3,7 @@ import { TextFormat } from "./TextFormat";
 
 export const drawChunk = (
   chunk: TextChunk,
-  format: Pick<TextFormat, "escape" | "styleToText">
+  format: Pick<TextFormat, "escape" | "styleToText">,
 ): string => {
   const pieces: string[] = [];
   const styles = [...(chunk.styles || [])];

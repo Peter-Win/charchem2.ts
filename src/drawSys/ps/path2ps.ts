@@ -25,7 +25,7 @@ export const path2ps = (path: PathSeg[]): string[] => {
     onQ: (cp, p) =>
       addCmd(
         cubicBezierFromQuadratic([prevPt ?? Point.zero, cp, p]).slice(1),
-        "curveto"
+        "curveto",
       ),
     onZ: () => lines.push("closepath"),
   });

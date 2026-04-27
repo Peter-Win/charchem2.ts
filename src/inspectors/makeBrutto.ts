@@ -13,7 +13,7 @@ import { makeElemList } from "./makeElemList";
 
 export const makeBrutto = (
   expr: ChemObj,
-  ignoreAgentK: boolean = false
+  ignoreAgentK: boolean = false,
 ): ChemExpr => {
   const result = new ChemExpr();
   const agent = new ChemAgent();
@@ -30,7 +30,7 @@ export const makeBrutto = (
   if (elemList.charge !== 0.0) {
     node.charge = new ChemCharge(
       makeChargeText(elemList.charge),
-      elemList.charge
+      elemList.charge,
     );
   }
   return result;

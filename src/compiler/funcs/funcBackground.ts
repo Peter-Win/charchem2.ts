@@ -28,7 +28,7 @@ import { parsePadding } from "../parse/parsePadding";
 export const funcBackground = (
   compiler: ChemCompiler,
   args: string[],
-  pos: Int[]
+  pos: Int[],
 ) => {
   if (compiler.background) {
     // Возможно указать несколько фонов подряд.
@@ -44,7 +44,7 @@ const shapeNames = new Set(["rect", "round", "ellipse"]);
 export const parseBackgroundArgs = (
   compiler: ChemCompiler,
   args: string[],
-  pos: Int[]
+  pos: Int[],
 ): ParamsChemBackground => {
   const params: ParamsChemBackground = {};
   args.forEach((arg, i) => {
@@ -100,7 +100,7 @@ export const parseBackgroundArgs = (
 const parseNodes = (
   compiler: ChemCompiler,
   nodesList: string,
-  pos: Int
+  pos: Int,
 ): ChemNode[] => {
   const chunks = nodesList.split(";");
   let curPos = 0;

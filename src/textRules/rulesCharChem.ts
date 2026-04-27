@@ -45,7 +45,7 @@ class RulesCharChem extends RulesBase {
 
   operation(op: ChemOp): string {
     return `${this.opComment(op.commentPre)}${op.srcText}${this.opComment(
-      op.commentPost
+      op.commentPost,
     )}`;
   }
 

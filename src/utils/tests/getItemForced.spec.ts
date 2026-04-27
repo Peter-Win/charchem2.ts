@@ -17,7 +17,7 @@ describe("getItemForced", () => {
     }
     const dict: Record<string, Struct> = {};
     expect(
-      getItemForced(dict, "A", () => ({ color: "red", width: 2 }))
+      getItemForced(dict, "A", () => ({ color: "red", width: 2 })),
     ).toEqual({ color: "red", width: 2 });
     expect(dict).toEqual({ A: { color: "red", width: 2 } });
   });

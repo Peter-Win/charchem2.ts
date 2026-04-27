@@ -11,7 +11,7 @@ it("Lang", () => {
   expect(Lang.tr(key, params, "en")).toBe("Expected 1 instead of 22");
   expect(Lang.tr(key, params, "?")).toBe("Expected 1 instead of 22");
   expect(Lang.tr(key, params, "ru-RU")).toBe(
-    "Требуется 1 вместо 22 в позиции 5"
+    "Требуется 1 вместо 22 в позиции 5",
   );
 });
 

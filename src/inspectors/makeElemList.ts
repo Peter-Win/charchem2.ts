@@ -7,7 +7,7 @@ import { ElemList } from "../core/ElemList";
  */
 export const makeElemList = (
   chemObj: ChemObj,
-  ignoreAgentK: boolean = false
+  ignoreAgentK: boolean = false,
 ): ElemList => {
   const stack: ElemList[] = [new ElemList()];
   const push = () => {

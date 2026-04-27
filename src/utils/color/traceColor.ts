@@ -8,7 +8,7 @@ export interface ColorVisitor<Result = void> {
 
 export const traceColor = <Result = void>(
   color: Color,
-  visitor: ColorVisitor<Result>
+  visitor: ColorVisitor<Result>,
 ): Result => {
   switch (color.type) {
     case "name":

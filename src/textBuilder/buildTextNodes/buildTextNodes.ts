@@ -182,7 +182,7 @@ export const buildTextNodes = (srcExpr: ChemObj): TextNode => {
               charge: obj.charge,
               pos: isLeft ? "LT" : "RT",
             },
-            itemNode
+            itemNode,
           );
         }
       }

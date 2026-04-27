@@ -11,7 +11,7 @@ import { textFormula } from "../textBuilder/textFormula";
 export const renderFormulaCfg = (
   owner: Element,
   exprOrCode: ChemExpr | ChemAgent | string,
-  config: AutoCompileConfig
+  config: AutoCompileConfig,
 ): void => {
   const expr =
     typeof exprOrCode === "string" ? compile(exprOrCode) : exprOrCode;
@@ -21,7 +21,6 @@ export const renderFormulaCfg = (
   } else {
     const canText = !config.nonText && isTextFormula(expr);
     if (canText) {
-      // eslint-disable-next-line no-param-reassign
       owner.innerHTML = textFormula(expr, "html");
       addClass(owner, "echem-is-text");
     } else if (config.drawSysId === "canvas") {

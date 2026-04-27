@@ -18,7 +18,7 @@ const numConstDict: Record<string, Double> = {
 const invalidNumber = (
   compiler: ChemCompiler,
   value: string,
-  pos: Int
+  pos: Int,
 ): never => {
   compiler.error("Invalid number [n]", { n: value, pos });
 };
@@ -26,7 +26,7 @@ const invalidNumber = (
 const parseNumConst = (
   compiler: ChemCompiler,
   value: string,
-  pos: Int
+  pos: Int,
 ): Double => numConstDict[value] ?? invalidNumber(compiler, value, pos);
 
 const useVariable = (compiler: ChemCompiler, name: string, pos: Int): Double =>
@@ -37,7 +37,7 @@ const declareVariable = (
   compiler: ChemCompiler,
   name: string,
   value: string,
-  pos: Int
+  pos: Int,
 ): Double => {
   if (!name) {
     compiler.error("Expected variable name", { pos });
@@ -53,7 +53,7 @@ const declareVariable = (
 const parseVariable = (
   compiler: ChemCompiler,
   expr: string,
-  pos: Int
+  pos: Int,
 ): Double => {
   const k = expr.indexOf(":");
   return k < 0
@@ -64,7 +64,7 @@ const parseVariable = (
 const parseNumExt = (
   compiler: ChemCompiler,
   srcValue: string,
-  valuePos: Int
+  valuePos: Int,
 ): Double => {
   let k: Double = 1.0;
   let value: string = srcValue;
@@ -83,7 +83,7 @@ const parseNumExt = (
 export const parseNum = (
   compiler: ChemCompiler,
   value: string,
-  pos: Int
+  pos: Int,
 ): Double => {
   const v = value.trim();
   if (!v) return 0.0;

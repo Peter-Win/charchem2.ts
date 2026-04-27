@@ -7,7 +7,7 @@ import { CoeffPosOrAngle } from "../../types/CoeffPos";
 
 export const scanCharge = (
   compiler: ChemCompiler,
-  coeffPos: CoeffPosOrAngle = "RT"
+  coeffPos: CoeffPosOrAngle = "RT",
 ): ChemCharge | undefined => {
   if (compiler.isFinish()) return undefined;
   const pos0 = compiler.pos;

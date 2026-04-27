@@ -14,7 +14,7 @@ export type ParamsPortableImgProps = {
  * Unlike createBrowserChemImgProps
  */
 export const createPortableImgProps = (
-  params: ParamsPortableImgProps
+  params: ParamsPortableImgProps,
 ): ChemImgProps => {
   const { mainFont, fontSize, smallFontSize, fillColor = "black" } = params;
   const localFont = new LocalSvgFont(mainFont, {

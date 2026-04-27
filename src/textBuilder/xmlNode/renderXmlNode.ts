@@ -13,7 +13,7 @@ export type OptionsRenderXmlNode = {
 export const renderXmlNode = (
   { tag, attrs, color, content, noIndent }: XmlNode,
   options?: OptionsRenderXmlNode,
-  level: number = 0
+  level: number = 0,
 ): string => {
   if (!tag) {
     if (typeof content === "string") {
@@ -78,6 +78,6 @@ export const renderXmlNode = (
 export const renderXmlNodes = (
   nodes: XmlNode[] | undefined,
   options?: OptionsRenderXmlNode,
-  level: number = 0
+  level: number = 0,
 ): string =>
   (nodes ?? []).map((node) => renderXmlNode(node, options, level)).join("");

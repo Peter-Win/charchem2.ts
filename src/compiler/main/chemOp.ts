@@ -6,7 +6,7 @@ export class OpDef {
   constructor(
     public readonly src: string,
     public readonly dst: string | null = null,
-    public readonly div: boolean = false
+    public readonly div: boolean = false,
   ) {}
 
   opCode() {

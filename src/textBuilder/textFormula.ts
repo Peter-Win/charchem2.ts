@@ -61,7 +61,7 @@ export const textTypes: readonly FmtType[] = [
 
 export const textFormula = (
   objOrCode: ChemObj | string,
-  fmtOrType: FmtDef | FmtType
+  fmtOrType: FmtDef | FmtType,
 ): string => {
   const chemObj =
     typeof objOrCode === "string" ? compile(objOrCode) : objOrCode;

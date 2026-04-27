@@ -10,7 +10,7 @@ import { unescapeXml } from "./unescapeXml";
  */
 export const lightXmlParser = (
   xmlText: string,
-  onTag: (tag: string, attrs: XmlAttrs) => void
+  onTag: (tag: string, attrs: XmlAttrs) => void,
 ) => {
   let pos = 0;
   type State =
@@ -116,7 +116,6 @@ export const lightXmlParser = (
     },
   };
   while (pos < xmlText.length) {
-    // eslint-disable-next-line no-plusplus
     const c = xmlText[pos++];
     dispatcher[state]!(c!);
   }

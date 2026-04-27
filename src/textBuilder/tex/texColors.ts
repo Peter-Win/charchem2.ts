@@ -80,7 +80,7 @@ export const findNearestColor = (
   red: number,
   green: number,
   blue: number,
-  inPredefined: boolean
+  inPredefined: boolean,
 ): number => {
   let minDist = Number.MAX_SAFE_INTEGER;
   let pos = 0;

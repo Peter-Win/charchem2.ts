@@ -2,7 +2,7 @@ import { VertexEx } from "./ChemGraph";
 import { WithStep } from "./traceGraph";
 
 export const findFarVertex = (
-  vertices: VertexEx<WithStep>[]
+  vertices: VertexEx<WithStep>[],
 ): VertexEx<WithStep> | undefined => {
   let maxStep = 0;
   let farVertices: VertexEx<WithStep>[] = [];

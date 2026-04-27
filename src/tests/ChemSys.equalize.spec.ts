@@ -5,7 +5,7 @@ describe("ChemSys.equalize", () => {
     const res = ChemSys.equalize("Na2S + KMnO4 + H2O -> MnO2 + NaOH + KOH + S");
     expect(res.getMessage()).toBe("");
     expect(res.src.trim()).toBe(
-      "3Na2S + 2KMnO4 + 4H2O -> 2MnO2 + 6NaOH + 2KOH + 3S"
+      "3Na2S + 2KMnO4 + 4H2O -> 2MnO2 + 6NaOH + 2KOH + 3S",
     );
     expect(res.getAgents().map((a) => a.n.num)).toEqual([3, 2, 4, 2, 6, 2, 3]);
   });
@@ -16,15 +16,15 @@ describe("ChemSys.equalize", () => {
   it("Abstract source", () => {
     const res = ChemSys.equalize("FeO + H2O + O2 -> Fe2O3*'n'H2O");
     expect(res.getMessage()).toBe(
-      "Can't balance expression with abstract coefficients"
+      "Can't balance expression with abstract coefficients",
     );
   });
   it("Mineral series", () => {
     const res = ChemSys.equalize(
-      "(Zn,Cu)5(CO3)2(OH)6 + HCl = ZnCl2 + CuCl2 + CO2 + H2O"
+      "(Zn,Cu)5(CO3)2(OH)6 + HCl = ZnCl2 + CuCl2 + CO2 + H2O",
     );
     expect(res.getMessage()).toBe(
-      "Can't balance expression with mineral series"
+      "Can't balance expression with mineral series",
     );
   });
   it("Balance is not found", () => {

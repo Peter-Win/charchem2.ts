@@ -7,7 +7,7 @@ export class FigText extends Figure {
   constructor(
     public readonly text: string,
     public readonly font: LocalFont,
-    public readonly style: TextStyle
+    public readonly style: TextStyle,
   ) {
     super();
     const ff = font.getFontFace();

@@ -22,8 +22,10 @@ export interface TableConfigItem {
 
 export type Category = Record<string, string>;
 
-export interface TableConfigItemExt
-  extends Omit<TableConfigItem, "ofsX" | "ofsY" | "width" | "height"> {
+export interface TableConfigItemExt extends Omit<
+  TableConfigItem,
+  "ofsX" | "ofsY" | "width" | "height"
+> {
   width: number;
   height: number;
   ofsX: number;

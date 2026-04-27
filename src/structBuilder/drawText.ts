@@ -5,7 +5,7 @@ import { FigText } from "../drawSys/figures/FigText";
 export const drawText = (
   frame: FigFrame,
   text: string,
-  style: TextProps
+  style: TextProps,
 ): FigText => {
   const fig = new FigText(text, style.font, style.style);
   frame.addFigure(fig);

@@ -50,7 +50,7 @@ describe("ChemBond", () => {
     //  O      N       v
     //         H4      H8
     const expr = compile(
-      "|O/N<_(y-.5)H>\\N<_(y.5)H>/N$L(.5)<`|H>$L()\\<_(y.5)H>/_(y-.5)"
+      "|O/N<_(y-.5)H>\\N<_(y.5)H>/N$L(.5)<`|H>$L()\\<_(y.5)H>/_(y-.5)",
     );
     expect(expr.getMessage()).toBe("");
     const agent = expr.getAgents()[0]!;

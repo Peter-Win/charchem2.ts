@@ -3,5 +3,5 @@ import { SrcMapItem } from "./SrcMapItem";
 
 export const getSrcItemsForObject = (
   needObj: ChemObj,
-  srcMap?: SrcMapItem[]
+  srcMap?: SrcMapItem[],
 ): SrcMapItem[] => srcMap?.filter(({ obj }) => needObj === obj) ?? [];

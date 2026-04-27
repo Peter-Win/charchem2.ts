@@ -15,7 +15,7 @@ const dict: Record<string, RubberFigure> = {
 
 export const getRubberBracket = (
   isOpen: boolean,
-  text: string
+  text: string,
 ): RubberFigure => {
   const rubberFig = dict[text];
   if (rubberFig) return rubberFig;

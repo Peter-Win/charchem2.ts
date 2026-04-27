@@ -10,7 +10,7 @@ export const wedgeBond = (
   dst: Point,
   imgProps: ChemImgProps,
   color: string,
-  hash: boolean
+  hash: boolean,
 ): Figure => {
   const { chiralWidth, lineWidth, hatch } = imgProps;
   if (hash) {
@@ -21,7 +21,7 @@ export const wedgeBond = (
       chiralWidth,
       color,
       lineWidth,
-      hatch
+      hatch,
     );
   }
   const d1 = dst.minus(src).normal();

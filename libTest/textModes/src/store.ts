@@ -13,7 +13,10 @@ import { buildTeX, TeXOptions } from "charchem2/textBuilder/tex/buildTeX";
 import { htmlPoor } from "charchem2/textBuilder/htmlPoor/htmlPoor";
 import { buildCharChemText } from "charchem2/textBuilder/charChem/buildCharChemText";
 import { buildTextNodes, TextNode } from "charchem2/textBuilder/buildTextNodes";
-import { buildHtmlRich, ResultHtmlRich } from "charchem2/textBuilder/htmlRich/buildHtmlRich";
+import {
+  buildHtmlRich,
+  ResultHtmlRich,
+} from "charchem2/textBuilder/htmlRich/buildHtmlRich";
 import { initialTeXSettings } from "./components/ViewTeXFormat/TeXSettings";
 import { storageLoad, storageSave } from "./common/storage";
 import {
@@ -96,7 +99,7 @@ export const store = makeAutoObservable({
   formulaViewSettings: { ...defaultFormulaViewSettings } as FormulaViewSettings,
   setFormulaViewParam<P extends keyof FormulaViewSettings>(
     param: P,
-    value: FormulaViewSettings[P]
+    value: FormulaViewSettings[P],
   ) {
     this.formulaViewSettings[param] = value;
   },
@@ -127,7 +130,7 @@ export const store = makeAutoObservable({
   poorHtmlSettings: { ...initialPoorHtmlSettings } as PoorHtmlSettings,
   setPoorHtmlSetting<Field extends keyof PoorHtmlSettings>(
     field: Field,
-    value: PoorHtmlSettings[Field]
+    value: PoorHtmlSettings[Field],
   ) {
     this.poorHtmlSettings[field] = value;
   },
@@ -150,7 +153,7 @@ export const store = makeAutoObservable({
   teXSettings: { ...initialTeXSettings } as TeXOptions,
   setTeXSettings<Field extends keyof TeXOptions>(
     field: Field,
-    value: TeXOptions[Field]
+    value: TeXOptions[Field],
   ) {
     this.teXSettings[field] = value;
   },
@@ -166,7 +169,7 @@ export const store = makeAutoObservable({
   textSettings: { ...initialTextSettings } as TextSettings,
   setTextSettings<Field extends keyof TextSettings>(
     field: Field,
-    value: TextSettings[Field]
+    value: TextSettings[Field],
   ) {
     this.textSettings[field] = value;
   },

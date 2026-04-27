@@ -76,7 +76,7 @@ export class ChemImgProps {
     stdStyle: TextProps,
     line: number = 0,
     hline: number = 0,
-    width: number = 0
+    width: number = 0,
   ) {
     this.stdStyle = stdStyle;
     if (!this.stdStyle.style.fill) this.stdStyle.style.fill = "black";

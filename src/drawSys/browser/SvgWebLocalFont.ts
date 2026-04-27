@@ -18,7 +18,7 @@ export class SvgWebLocalFont implements LocalFont {
 
   constructor(
     private webFontProps: WebFontProps,
-    public readonly props: LocalFontProps
+    public readonly props: LocalFontProps,
   ) {
     this.canvas = document.createElement("canvas");
   }
@@ -38,7 +38,7 @@ export class SvgWebLocalFont implements LocalFont {
     surface: AbstractSurface,
     org: Point,
     textLine: string,
-    style: TextStyle
+    style: TextStyle,
   ): void {
     if (surface instanceof SvgWebSurface) {
       const { fontFace, cssHeight, bold, italic } = this.webFontProps;

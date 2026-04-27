@@ -38,7 +38,7 @@ export const findMaxY = (g?: SvgFontGlyph) => {
 
 export const adjustFontFace = (
   ff: CommonFontFace,
-  codeMap: Record<string, SvgFontGlyph>
+  codeMap: Record<string, SvgFontGlyph>,
 ): CommonFontFace => {
   const res = { ...ff };
   ifDef(findMaxY(codeMap.F), (y) => {

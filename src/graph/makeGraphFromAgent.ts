@@ -27,7 +27,6 @@ export const makeGraphFromAgent = (agent: ChemAgent): DraftGraph => {
   bonds.forEach((bond) => linkDraftVertices(graph, bond, nodesMap));
   graph.vertices.forEach((v) => {
     if (v.reserved) {
-      // eslint-disable-next-line no-param-reassign
       (v as unknown as { valence: Int }).valence -=
         v.reserved + (v.charge ?? 0);
     }
