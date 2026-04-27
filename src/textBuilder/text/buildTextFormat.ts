@@ -36,7 +36,7 @@ export type OptionsTextFormat = {
 
 export const buildTextFormat = (
   srcNode: TextNode,
-  options?: OptionsTextFormat
+  options?: OptionsTextFormat,
 ): string => {
   const dstNode = cloneTextNode(srcNode);
   optimizeColors(dstNode, ({ items }) => items);
@@ -88,7 +88,7 @@ const strNode = (srcNode: TextNode, options?: OptionsTextFormat): string => {
 const strItems = (
   items: (TextNode | string)[] | undefined,
   options?: OptionsTextFormat,
-  divider = ""
+  divider = "",
 ): string =>
   (items ?? [])
     .map((node) => (typeof node === "string" ? node : strNode(node, options)))
@@ -117,7 +117,7 @@ const opDictAscii: Record<string, string> = {
 
 const strExtOp = (
   node: TextNode,
-  options: OptionsTextFormat | undefined
+  options: OptionsTextFormat | undefined,
 ): string => {
   const col = splitColumn(node.items);
   let items: (TextNode | string)[] = col.C ?? [];
@@ -142,7 +142,7 @@ const strExtOp = (
 
 const strRichText = (
   items: TextNode[] | undefined,
-  options: OptionsTextFormat | undefined
+  options: OptionsTextFormat | undefined,
 ): string => {
   const s = splitScripts(items);
   const c = strItems(s.C, options);
@@ -151,7 +151,7 @@ const strRichText = (
 
 const strNodeItem = (
   srcNode: TextNode,
-  options: OptionsTextFormat | undefined
+  options: OptionsTextFormat | undefined,
 ): string => {
   const col = splitColumn(srcNode.items ?? []);
   const scripted = splitScripts(col.C ?? []);
@@ -191,7 +191,7 @@ const oxPosToScript: Record<OxidationPos, ScriptKey> = {
 const strScripted = (
   dict: ReturnType<typeof splitScripts>,
   center: string | undefined,
-  options: OptionsTextFormat | undefined
+  options: OptionsTextFormat | undefined,
 ): string =>
   [
     strSup(dict.LT, options, true),
@@ -204,7 +204,7 @@ const strScripted = (
 const strSup = (
   items: TextNode[] | undefined,
   options: OptionsTextFormat | undefined,
-  left?: boolean
+  left?: boolean,
 ): string => {
   let res = strItems(items, options, options?.scriptDivider);
   if (res) {
@@ -221,7 +221,7 @@ const strSup = (
 const strSub = (
   items: TextNode[] | undefined,
   options: OptionsTextFormat | undefined,
-  left?: boolean
+  left?: boolean,
 ): string => {
   let res = strItems(items, options, options?.scriptDivider);
   if (res) {

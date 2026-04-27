@@ -21,7 +21,7 @@ export const changeBondToHard = (compiler: ChemCompiler, bond: ChemBond) => {
 export const bindNodeToBond = (
   compiler: ChemCompiler,
   node: ChemNode,
-  chemBond: ChemBond
+  chemBond: ChemBond,
 ) => {
   compiler.curNode = node;
 
@@ -46,7 +46,7 @@ export const bindNodeToBond = (
 
 export const bindNodeToCurrentBond = (
   compiler: ChemCompiler,
-  node?: ChemNode
+  node?: ChemNode,
 ) => {
   const { curBond } = compiler;
   if (curBond) {
@@ -57,7 +57,7 @@ export const bindNodeToCurrentBond = (
 export const findBondBetweenNodes = (
   compiler: ChemCompiler,
   nodeA: ChemNode,
-  nodeB: ChemNode
+  nodeB: ChemNode,
 ): ChemBond | undefined =>
   compiler.curAgent!.bonds.find((it) => {
     const { nodes } = it;
@@ -71,7 +71,7 @@ export const findBondBetweenNodes = (
 
 export const getNodeForBondStart = (
   compiler: ChemCompiler,
-  bond?: ChemBond
+  bond?: ChemBond,
 ): ChemNode => {
   const { curNode } = compiler;
   if (curNode) {
@@ -96,7 +96,7 @@ export const getNodeForBondStart = (
 export const onOpenBond = (
   compiler: ChemCompiler,
   bond: ChemBond,
-  begin: number
+  begin: number,
 ) => {
   if (compiler.srcMap) {
     compiler.srcMap.push({ begin, end: compiler.pos, obj: bond });
@@ -126,7 +126,7 @@ export const mergeBonds = (
   compiler: ChemCompiler,
   oldBond: ChemBond,
   newBond: ChemBond,
-  newNode: ChemNode
+  newNode: ChemNode,
 ) => {
   // При наложении связей от новой только добавляется кратность.
   // Остальные характеристики значения не имеют

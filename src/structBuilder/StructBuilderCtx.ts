@@ -12,7 +12,7 @@ export type StructBuilderCtx = {
 
 export const createStructBuilderCtx = (
   surface: AbstractSurface,
-  imgProps: ChemImgProps
+  imgProps: ChemImgProps,
 ): StructBuilderCtx => ({
   imgProps,
   getFont: (props) => surface.getFont(props),

@@ -41,7 +41,7 @@ export const createTexFromNode = (node: TextNode, ctx: CtxTeX): string => {
       return texColor(
         onScripted(splitScripts(node.items ?? []), node.color, ctx),
         node.color,
-        ctx
+        ctx,
       );
     case "charge":
       return texColor(node.charge.text, node.color, ctx);
@@ -74,7 +74,7 @@ export const createTexFromNode = (node: TextNode, ctx: CtxTeX): string => {
       return texColor(
         replaceSpecialTeXSymbols(escapeTex(node.text)),
         node.color,
-        ctx
+        ctx,
       );
     default:
       break;
@@ -86,7 +86,7 @@ const onCoeff = (
   text: string,
   type: CoeffType,
   color: string | undefined,
-  ctx: CtxTeX
+  ctx: CtxTeX,
 ): string => {
   let k = texColor(text, color, ctx);
   if (ctx.noMhchem && type === "agent") {
@@ -122,12 +122,12 @@ const texColor = (text: string, color: string | undefined, ctx: CtxTeX) => {
 const onGroup = (
   items: TextNode[] | undefined,
   color: string | undefined,
-  ctx: CtxTeX
+  ctx: CtxTeX,
 ): string =>
   texColor(
     items?.map((it) => createTexFromNode(it, ctx)).join("") ?? "",
     color,
-    ctx
+    ctx,
   );
 
 type CmdCode = "^" | "_";
@@ -142,7 +142,7 @@ const optimizedCmd = (cmd: CmdCode, param: string, ctx: CtxTeX): string => {
 const onScripted = (
   s: ReturnType<typeof splitScripts>,
   color: string | undefined,
-  ctx: CtxTeX
+  ctx: CtxTeX,
 ): string => {
   let res = "";
   const onCmd = (cmd: CmdCode, pos: ScriptKey) => {
@@ -163,14 +163,14 @@ const onColumnExt = (
   top: TextNode[] | string | undefined,
   bottom: TextNode[] | string | undefined,
   color: string | undefined,
-  ctx: CtxTeX
+  ctx: CtxTeX,
 ) => {
   const cvtParam = (param: TextNode[] | string) =>
     Array.isArray(param) ? onGroup(param, color, ctx) : param;
   const op = (
     cmd: "overset" | "underset",
     secondary: TextNode[] | string,
-    primary: TextNode[] | string
+    primary: TextNode[] | string,
   ) => `\\${cmd}{${cvtParam(secondary)}}{${cvtParam(primary)}}`;
 
   const c = center ?? "";
@@ -189,7 +189,7 @@ const onColumnExt = (
 const onColumn = (
   node: TextNode,
   color: string | undefined,
-  ctx: CtxTeX
+  ctx: CtxTeX,
 ): string => {
   const col = splitColumn(node.items ?? []);
   return onColumnExt(col.C, col.T, col.B, color, ctx);
@@ -201,7 +201,7 @@ const onItem = (node: TextNode, ctx: CtxTeX): string => {
   return texColor(
     onColumnExt(center, col.T, col.B, undefined, ctx),
     node.color,
-    ctx
+    ctx,
   );
 };
 
@@ -265,7 +265,7 @@ export const mhchemOpsDict: Record<string, string> = {
 export const stdOp = (
   srcText: string,
   dstText: string,
-  ctx: CtxTeX
+  ctx: CtxTeX,
 ): string => {
   if (!ctx.noMhchem) {
     return mhchemOpsDict[srcText] ?? dstText;

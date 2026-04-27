@@ -6,7 +6,7 @@ export const makeSourceWithNewCoeffs = (
   coeffs: Int[],
   agents: ChemAgent[],
   oldSrc: string,
-  srcMap: SrcMapItem[]
+  srcMap: SrcMapItem[],
 ): string => {
   const chunks: string[] = [];
   let prevPos = 0;

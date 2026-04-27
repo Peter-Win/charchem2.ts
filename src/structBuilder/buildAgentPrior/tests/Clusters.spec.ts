@@ -115,13 +115,13 @@ describe("mergeClusters", () => {
       false,
       ctx.clusters.clusters[0]!,
       ctx.nodesInfo[0]!,
-      false
+      false,
     );
     const connB = getClusterConnection(
       false,
       ctx.clusters.clusters[1]!,
       ctx.nodesInfo[1]!,
-      true
+      true,
     );
     expect(connA.x).toBeCloseTo(wH / 2);
     expect(connB.x).toBeCloseTo(-wO / 2);
@@ -132,7 +132,7 @@ describe("mergeClusters", () => {
     expect(c1.frame.figures).toHaveLength(2);
     expect(
       c1.frame.figures[1]!.getRelativeBounds().left -
-        c1.frame.figures[0]!.getRelativeBounds().right
+        c1.frame.figures[0]!.getRelativeBounds().right,
     ).toBeCloseTo(10);
   });
   it("right to left", () => {
@@ -161,13 +161,13 @@ describe("mergeClusters", () => {
       false,
       ctx.clusters.clusters[0]!,
       ctx.nodesInfo[0]!,
-      true
+      true,
     );
     const connB = getClusterConnection(
       false,
       ctx.clusters.clusters[1]!,
       ctx.nodesInfo[1]!,
-      false
+      false,
     );
     expect(connA.x).toBeCloseTo(-wH / 2);
     expect(connB.x).toBeCloseTo(wO / 2);
@@ -178,7 +178,7 @@ describe("mergeClusters", () => {
     expect(c1.frame.figures).toHaveLength(2);
     expect(
       c1.frame.figures[0]!.getRelativeBounds().left -
-        c1.frame.figures[1]!.getRelativeBounds().right
+        c1.frame.figures[1]!.getRelativeBounds().right,
     ).toBeCloseTo(20);
   });
 });

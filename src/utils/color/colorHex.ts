@@ -20,7 +20,7 @@ export const colorHexWithAlpha = (value: string): boolean => {
 };
 
 export const colorHexSamples = (
-  value: string | undefined
+  value: string | undefined,
 ): ColorSamples | undefined => {
   if (!value) return undefined;
   const pure = withoutSharp(value);

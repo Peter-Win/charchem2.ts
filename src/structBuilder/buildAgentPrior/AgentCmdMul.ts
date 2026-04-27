@@ -29,7 +29,7 @@ export class AgentCmdMul extends AgentCmd {
         // eslint-disable-next-line prefer-destructuring
         begin.nodes[1] = this.mul.nodes[1];
       }
-      // eslint-disable-next-line no-param-reassign
+
       cmd.dstCmd = this;
     }
   }
@@ -44,7 +44,7 @@ export class AgentCmdMul extends AgentCmd {
       const figK = createCoeff(this.mul, ctx.props);
       figK.org.set(
         frame.bounds.left - figK.bounds.width,
-        ni.res.rcNodeCore.bottom + ni.res.nodeFrame.org.y
+        ni.res.rcNodeCore.bottom + ni.res.nodeFrame.org.y,
       );
       frame.addFigure(figK, true);
       this.figure = figK;

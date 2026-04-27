@@ -54,13 +54,13 @@ export class DraftGraph {
         (v, i) =>
           `v${i}: ${textFormula(v.content, "text")}*${v.valence}${
             v.reserved ? `*${v.reserved}` : ""
-          }${v.charge ? `^${v.charge}` : ""}`
+          }${v.charge ? `^${v.charge}` : ""}`,
       ),
       ...this.edges.map(
         (e, i) =>
           `e${i}: ${vIndex(e.v0)}-${vIndex(e.v1)}${
             e.mul !== 1 ? `*${e.mul}` : ""
-          }`
+          }`,
       ),
     ].join("; ");
   }

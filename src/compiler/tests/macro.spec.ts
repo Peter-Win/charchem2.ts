@@ -9,7 +9,7 @@ describe("Macro", () => {
     //    /   \
     // H3C     CH3
     const expr = compile(
-      "B@:ray(a,m:CH3)<_(A&a)&m>@(-90)@ray(30)@ray(150,H3C)"
+      "B@:ray(a,m:CH3)<_(A&a)&m>@(-90)@ray(30)@ray(150,H3C)",
     );
     expect(expr.getMessage()).toBe("");
     expect(expr.src).toBe("B<_(A-90)CH3><_(A30)CH3><_(A150)H3C> ");
@@ -21,7 +21,7 @@ describe("Macro", () => {
       "H3C",
     ]);
     expect(
-      agent.bonds.map((it) => Math.round(it.dir!.polarAngleDeg()))
+      agent.bonds.map((it) => Math.round(it.dir!.polarAngleDeg())),
     ).toEqual([-90, 30, 150]);
   });
 });

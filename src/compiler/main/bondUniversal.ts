@@ -35,7 +35,7 @@ export const makeParamsDict = (args: string[], argPos: Int[]): BondParams => {
             key: descr[0],
             value: descr.substring(1),
             valuePos: argPos[index]! + 1,
-          }
+          },
     )
     .filter((it) => it) as UniBondParam[];
   return listToDict(paramsList, ({ key }) => key);
@@ -43,7 +43,7 @@ export const makeParamsDict = (args: string[], argPos: Int[]): BondParams => {
 
 export const calcPolygonDir = (prevDir: Point, count: Int): Point =>
   pointFromRad(prevDir.polarAngle() + (Math.PI * 2) / count).times(
-    prevDir.length()
+    prevDir.length(),
   );
 
 /**
@@ -52,7 +52,7 @@ export const calcPolygonDir = (prevDir: Point, count: Int): Point =>
 export const createPolygonStep = (
   compiler: ChemCompiler,
   count: Int,
-  defaultLength: Double
+  defaultLength: Double,
 ): Point => {
   const prevDir = getLastBond(compiler)?.dir;
   return (
@@ -64,7 +64,7 @@ export const createPolygonStep = (
 export const parseRefsList = (
   compiler: ChemCompiler,
   value: string,
-  pos: Int
+  pos: Int,
 ): Point => {
   if (!value) {
     compiler.error("Invalid node reference '[ref]'", { ref: "", pos });
@@ -87,7 +87,7 @@ export const parseAxisCoordinate = (
   compiler: ChemCompiler,
   isX: boolean,
   value: string,
-  pos: Int
+  pos: Int,
 ): Double => {
   if (!value.startsWith("#")) return parseNum(compiler, value, pos);
 
@@ -101,7 +101,7 @@ export const getLastBond = (compiler: ChemCompiler): ChemBond | undefined =>
 
 export const calcBondDirection = (
   compiler: ChemCompiler,
-  params: BondParams
+  params: BondParams,
 ): Point => {
   const getLength = (): Double => {
     const it = params.L;
@@ -126,7 +126,7 @@ export const calcBondDirection = (
       return fromAngle(a + parseNum(compiler, aParam.value, aParam.valuePos));
     }) ??
     ifDef(params.A, (it) =>
-      fromAngle(parseNum(compiler, it.value, it.valuePos))
+      fromAngle(parseNum(compiler, it.value, it.valuePos)),
     ) ??
     ifDef(params.L, () => fromAngle(0)) ??
     new Point(0, 0);
@@ -145,7 +145,7 @@ const doubleBondSuffizes = { x: 1, l: 1, r: 1, m: 1 };
 export const parseBondMultiplicity = (
   compiler: ChemCompiler,
   bond: ChemBond,
-  param: UniBondParam
+  param: UniBondParam,
 ) => {
   const { value } = param;
   const getMode = (): Char => value[1]!.toLowerCase();
@@ -181,7 +181,7 @@ export const parseStyle = (bond: ChemBond, value: string) => {
 export const setBondProperties = (
   compiler: ChemCompiler,
   bond: ChemBond,
-  params: BondParams
+  params: BondParams,
 ) => {
   ifDef(params.N, (it) => parseBondMultiplicity(compiler, bond, it));
   ifDef(params.h, (it) => {
@@ -264,7 +264,7 @@ export const createUniversalBond = (
   compiler: ChemCompiler,
   args: string[],
   argPos: Int[],
-  begin: number
+  begin: number,
 ) => {
   const bond = createCommonBond(compiler);
   if (!compiler.curNode) {

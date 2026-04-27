@@ -9,7 +9,7 @@ import { Point } from "./Point";
  */
 export const bezierCubic = (
   p: readonly [Point, Point, Point, Point],
-  t: number
+  t: number,
 ): Point => {
   const t2 = t * t;
   const t3 = t2 * t;
@@ -31,7 +31,7 @@ export const bezierCubic = (
  */
 export const bezierQuadratic = (
   p: readonly [Point, Point, Point],
-  t: number
+  t: number,
 ): Point => {
   const t2 = t * t;
   const umt = 1 - t;

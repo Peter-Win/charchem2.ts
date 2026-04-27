@@ -73,7 +73,7 @@ export abstract class SvgSurface implements AbstractSurface {
     offset: Point,
     center: Point,
     radius: Point,
-    style: PathStyle
+    style: PathStyle,
   ): void {
     const attrs: XmlAttrs = {
       ...pathAttrs(style, offset),

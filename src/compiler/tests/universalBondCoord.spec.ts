@@ -39,7 +39,7 @@ describe("UniversalBondCoord", () => {
     const c = b.plus(pointFromDeg(135.0));
     const d = c.plus(pointFromDeg(45.0));
     expect(agent.nodes.map((it) => String(it.pt))).toEqual(
-      [a, b, c, d].map((p) => String(p))
+      [a, b, c, d].map((p) => String(p)),
     );
     expect(brutto(expr)).toBe("C3H8O");
   });
@@ -50,7 +50,7 @@ describe("UniversalBondCoord", () => {
     expect(
       expr
         .getAgents()[0]!
-        .bonds.map((it) => Math.round(it.dir!.polarAngleDeg()))
+        .bonds.map((it) => Math.round(it.dir!.polarAngleDeg())),
     ).toEqual([0, 72, 144, -144, -72]);
   });
   it("NegativePolygonal", () => {
@@ -82,13 +82,13 @@ describe("UniversalBondCoord", () => {
   it("EmptyRefList", () => {
     const expr = compile("_(p)");
     expect(expr.getMessage("ru")).toBe(
-      "Неправильная ссылка на узел '' в позиции 4"
+      "Неправильная ссылка на узел '' в позиции 4",
     );
   });
   it("InvalidRef", () => {
     const expr = compile("_(p22)");
     expect(expr.getMessage("ru")).toBe(
-      "Неправильная ссылка на узел '22' в позиции 4"
+      "Неправильная ссылка на узел '22' в позиции 4",
     );
   });
   it("WithoutParams", () => {
@@ -126,7 +126,7 @@ describe("UniversalBondCoord", () => {
   it("InvalidRefsListInXY", () => {
     const expr = compile("-_(x#1;-11,y1)");
     expect(expr.getMessage("ru")).toBe(
-      "Неправильная ссылка на узел '-11' в позиции 8"
+      "Неправильная ссылка на узел '-11' в позиции 8",
     );
   });
 });

@@ -12,7 +12,7 @@ export class HtmlCanvasLocalFont implements LocalFont {
   constructor(
     private context: CanvasRenderingContext2D,
     private readonly webProps: WebFontProps,
-    public readonly props: LocalFontProps
+    public readonly props: LocalFontProps,
   ) {}
 
   getFontFace(): CommonFontFace {
@@ -29,7 +29,7 @@ export class HtmlCanvasLocalFont implements LocalFont {
     surface: AbstractSurface,
     org: Point,
     textLine: string,
-    style: TextStyle
+    style: TextStyle,
   ) {
     const { context } = this;
     const { x, y } = org;

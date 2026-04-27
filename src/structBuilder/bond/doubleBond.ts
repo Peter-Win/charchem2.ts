@@ -9,7 +9,7 @@ import { singleLine } from "./singleLine";
 const getAlignSign = (
   bond: ChemBond,
   stA: StructAnalyzer,
-  align?: BondAlign
+  align?: BondAlign,
 ): 0 | 1 | -1 => {
   if (!align) {
     return stA.calcBondSign(bond);

@@ -16,7 +16,7 @@ export const scalePath = (desiredRect: Rect, data: SrcData): PathSeg[] => {
   const cvt = (p: Point) =>
     new Point(
       (p.x * desiredRect.width) / data.width,
-      (p.y * desiredRect.height) / data.height
+      (p.y * desiredRect.height) / data.height,
     );
   tracePath(data.segs, {
     onM(p: Point): void {

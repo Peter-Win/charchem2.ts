@@ -1,5 +1,7 @@
 {
   "compilerOptions": {
+    "rootDir": "../../",
+    "rootDirs": ["./src"],
     "outDir": "./dist/",
     "sourceMap": true,
     "module": "CommonJS",
@@ -25,9 +27,8 @@
         "name": "typescript-plugin-css-modules"
       }
     ],
-    "baseUrl": "./",
     "paths": {
-      "src/*": ["src/*"],
+      "src/*": ["./src/*"],
       "charchem2/*": ["../../dist/*"]
     }
   },

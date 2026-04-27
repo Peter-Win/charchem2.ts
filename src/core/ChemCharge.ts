@@ -12,7 +12,7 @@ export class ChemCharge {
     public readonly text: string, // Text description, for example: '2+'
     public readonly value: Double, // number value, for example: 2
     public readonly pos: CoeffPosOrAngle = "RT", // relative position of charge from $pos()
-    public readonly isRound: boolean = false // A sign of drawing a charge inside a circle
+    public readonly isRound: boolean = false, // A sign of drawing a charge inside a circle
   ) {}
 }
 
@@ -29,7 +29,7 @@ const pluses = new Set(["+", "++", "+++"]);
  */
 export const createCharge = (
   chargeDescr: string,
-  pos: CoeffPosOrAngle = "RT"
+  pos: CoeffPosOrAngle = "RT",
 ): ChemCharge | undefined => {
   if (chargeDescr === "") return undefined;
   const text = chargeDescr // Replace similar characters

@@ -6,7 +6,7 @@ import { adjustFontFace, findMaxY } from "../utils/adjustFontFace";
 import { SvgFontGlyph } from "../SvgFontTypes";
 
 const str2ff = (
-  fontFaceTag: string
+  fontFaceTag: string,
 ): [CommonFontFace, Record<string, SvgFontGlyph>] => {
   let ff: CommonFontFace | undefined;
   const cmap: Record<string, SvgFontGlyph> = {};

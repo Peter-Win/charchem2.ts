@@ -17,7 +17,7 @@ describe("ReadRealParams", () => {
   });
   it("Nested", () => {
     expect(
-      readRealParams(new PreProcCtx('A(rgb(255,0,0),"hello, world!")', 2))
+      readRealParams(new PreProcCtx('A(rgb(255,0,0),"hello, world!")', 2)),
     ).toEqual(["rgb(255,0,0)", '"hello, world!"']);
   });
 });

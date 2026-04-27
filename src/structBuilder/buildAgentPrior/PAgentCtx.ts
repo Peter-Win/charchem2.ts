@@ -22,7 +22,7 @@ export class PAgentCtx {
 
   constructor(
     public readonly agent: ChemAgent,
-    public readonly builderCtx: StructBuilderCtx
+    public readonly builderCtx: StructBuilderCtx,
   ) {
     this.agentFrame = new FigFrame();
   }

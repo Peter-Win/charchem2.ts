@@ -29,7 +29,7 @@ describe("getBracketsContent", () => {
 
     const content: ChemObj[] = getBracketsContent(
       c2 as ChemBracketBegin,
-      commands
+      commands,
     );
     expect(content.length).toBe(1);
     expect(content[0]).toBeInstanceOf(ChemNode);

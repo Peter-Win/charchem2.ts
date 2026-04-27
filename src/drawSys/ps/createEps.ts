@@ -13,7 +13,7 @@ export const createEps = ({ frame, title }: ParamsCreateEps): PsSurface => {
   const { size } = frame.bounds;
   surface.addPrologLine("%!PS-Adobe-3.0 EPSF-3.0");
   surface.addPrologLine(
-    `%%BoundingBox: 0 0 ${Math.ceil(size.x)} ${Math.ceil(size.y)}`
+    `%%BoundingBox: 0 0 ${Math.ceil(size.x)} ${Math.ceil(size.y)}`,
   );
   surface.addCreator();
   surface.addTitle(title);

@@ -5,12 +5,12 @@ export const isColorRgb = (value: string): boolean =>
 
 export const isColorRgba = (value: string): boolean =>
   /^rgba\(\s*\d{1,3}\s*,\s*\d{1,3}\s*,\s*\d{1,3}\s*,\s*(1|0|0?\.\d+)\s*\)$/i.test(
-    value
+    value,
   );
 
 export const colorRgbParse = (value: string): ColorRgb | undefined => {
   const chunks = value.split(/[\(\),]/);
-  let srcSamples: string[] = [];
+  let srcSamples: string[];
   if (isColorRgb(value)) {
     srcSamples = chunks.slice(1, 4);
   } else if (isColorRgba(value)) {

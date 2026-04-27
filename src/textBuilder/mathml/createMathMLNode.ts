@@ -14,7 +14,7 @@ import { onNodeItem } from "./utils/onNodeItem";
 
 const customNode = (
   srcNode: TextNode,
-  ctx: CtxCreateMathMLNode
+  ctx: CtxCreateMathMLNode,
 ): XmlNode | undefined => {
   // в отличие от comment, тут основной тег mi
   const customCtx = {
@@ -22,13 +22,13 @@ const customNode = (
     textMode: "custom",
   } satisfies CtxCreateMathMLNode;
   return mathOptRow(srcNode.items ?? [], (node: TextNode) =>
-    createMathMLNode(node, customCtx)
+    createMathMLNode(node, customCtx),
   );
 };
 
 export const createMathMLNode = (
   srcNode: TextNode,
-  ctx: CtxCreateMathMLNode
+  ctx: CtxCreateMathMLNode,
 ): XmlNode | undefined => {
   let dstNode: XmlNode | undefined;
   const create: FnNodeToXml = (node: TextNode) => createMathMLNode(node, ctx);
@@ -41,7 +41,7 @@ export const createMathMLNode = (
       dstNode = mathText(
         { ...ctx, textMode: "charge" },
         srcNode.charge.text,
-        color
+        color,
       );
       break;
     case "column":

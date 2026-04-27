@@ -50,7 +50,7 @@ export class ChemExpr extends ChemObj {
     // Но этот вариант работает быстрее, т.к. walk обходит все подчиненные объекты.
     // А здесь просто цикл по сущностям верхего уровня, которых обычно не более 10.
     const result = this.entities.filter(
-      (entity: ChemObj) => entity instanceof ChemAgent
+      (entity: ChemObj) => entity instanceof ChemAgent,
     );
     return result as ChemAgent[];
   }

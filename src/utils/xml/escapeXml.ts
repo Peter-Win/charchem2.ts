@@ -9,7 +9,7 @@ const dict: Record<string, string> = {
 
 export const escapeXml = (
   value: string,
-  nonAscii?: (code: number) => string
+  nonAscii?: (code: number) => string,
 ): string =>
   Array.from(value)
     .map((char) => {

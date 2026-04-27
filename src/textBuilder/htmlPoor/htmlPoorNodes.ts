@@ -12,12 +12,12 @@ import { XmlAttrs } from "../../utils/xml/xmlTypes";
 
 export const htmlPoorNodes = (
   srcNode: TextNode,
-  options?: OptionsHtmlPoor
+  options?: OptionsHtmlPoor,
 ): XmlNode[] | undefined => createHtmlPoorNodes(srcNode, options);
 
 const createHtmlPoorNodes = (
   node: TextNode,
-  ctx: OptionsHtmlPoor | undefined
+  ctx: OptionsHtmlPoor | undefined,
 ): XmlNode[] | undefined => {
   const textTag = (content: string, tag: string = "span"): XmlNode[] => [
     { tag, color: node.color, content },
@@ -49,7 +49,7 @@ const createHtmlPoorNodes = (
     case "k":
       return textTag(
         node.k.toString(),
-        node.kType === "agent" ? specTag("agentK", ctx) : undefined
+        node.kType === "agent" ? specTag("agentK", ctx) : undefined,
       );
     case "mul":
       return textTag("∙");
@@ -71,7 +71,7 @@ const createHtmlPoorNodes = (
 
 const nodesList = (
   items: TextNode[] | undefined,
-  ctx: OptionsHtmlPoor | undefined
+  ctx: OptionsHtmlPoor | undefined,
 ): XmlNode[] =>
   (items ?? [])
     .map((it) => createHtmlPoorNodes(it, ctx) ?? [])
@@ -81,7 +81,7 @@ const optGroupTag = (
   tag: string,
   color: string | undefined,
   items: TextNode[] | undefined,
-  ctx: OptionsHtmlPoor | undefined
+  ctx: OptionsHtmlPoor | undefined,
 ): XmlNode[] => {
   const content = nodesList(items, ctx);
   if (content.length === 0) return [];
@@ -90,7 +90,7 @@ const optGroupTag = (
 
 const specTag = (
   type: PoorHtmlPart,
-  ctx: OptionsHtmlPoor | undefined
+  ctx: OptionsHtmlPoor | undefined,
 ): string => {
   if (!ctx?.tags || ctx?.tags === "std") {
     return stdTagsMap[type] ?? "span";
@@ -101,7 +101,7 @@ const specTag = (
 const makeScripted = (
   srcNode: TextNode,
   ctx: OptionsHtmlPoor | undefined,
-  makeCenter: (items: TextNode[]) => XmlNode[]
+  makeCenter: (items: TextNode[]) => XmlNode[],
 ): XmlNode[] => {
   const { items = [] } = srcNode;
   const scr = splitScripts(items);
@@ -120,7 +120,7 @@ const operationCode = (node: TextNode, op: ChemOp): XmlNode[] => [
 
 const makeComplexOp = (
   node: TextNode,
-  ctx: OptionsHtmlPoor | undefined
+  ctx: OptionsHtmlPoor | undefined,
 ): XmlNode[] => {
   const { C, T, B } = splitColumn(node.items ?? []);
   const mode = ctx?.opComments ?? "text";
@@ -145,7 +145,7 @@ const makeComplexOp = (
 
 const makeItem = (
   srcNode: TextNode,
-  ctx: OptionsHtmlPoor | undefined
+  ctx: OptionsHtmlPoor | undefined,
 ): XmlNode[] => [
   {
     tag: "span",
@@ -164,7 +164,7 @@ const makeItem = (
 const makeRichText = (
   node: TextNode,
   ctx: OptionsHtmlPoor | undefined,
-  props: RichTextProps = {}
+  props: RichTextProps = {},
 ): XmlNode[] => {
   const scr = splitScripts(node.items ?? []);
   const center = nodesList(scr.C, ctx);

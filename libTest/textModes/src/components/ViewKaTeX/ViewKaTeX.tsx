@@ -6,7 +6,7 @@ import * as React from "react";
 import * as styles from "./ViewKaTeX.module.css";
 import katex, { KatexOptions } from "katex";
 import "katex/dist/katex.min.css";
-import "katex/dist/contrib/mhchem";
+import "katex/dist/contrib/mhchem.js";
 
 type PropsViewKaTeX = {
   texCode: string;

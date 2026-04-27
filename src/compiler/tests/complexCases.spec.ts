@@ -29,7 +29,7 @@ const bondTextStd = (it: ChemBond) =>
 
 const list2s = <T>(
   list: T[],
-  fn: (it: T) => string | number | undefined
+  fn: (it: T) => string | number | undefined,
 ): string => `[${list.map(fn).join(", ")}]`;
 
 const bondTextExt = (bond: ChemBond) =>
@@ -55,7 +55,7 @@ const diff = (actualList: string[], needList: string[]): string[] =>
       list.push(
         `${s}≠${
           need && need.indexOf(":") >= 0 ? substringAfter(need, ":") : need
-        }`
+        }`,
       );
     }
     return list;
@@ -64,12 +64,12 @@ const diff = (actualList: string[], needList: string[]): string[] =>
 describe("ComplexCases", () => {
   it("Pyrrole", () => {
     const expr = compile(
-      '-_pp_pN<_(y.5,Tv)H>_p_pp; $L(.45)#H|"1"; #3\\0"2"; #2/0"3"; #1`\\0"4"; #6`/0"5"'
+      '-_pp_pN<_(y.5,Tv)H>_p_pp; $L(.45)#H|"1"; #3\\0"2"; #2/0"3"; #1`\\0"4"; #6`/0"5"',
     );
     expect(expr.getMessage()).toBe("");
     const agent = expr.getAgents()[0]!;
     expect(
-      agent.bonds.map((it) => `${it.linearText()}${it.soft ? "*" : ""}`)
+      agent.bonds.map((it) => `${it.linearText()}${it.soft ? "*" : ""}`),
     ).toEqual([
       "-",
       "_pp",
@@ -85,10 +85,10 @@ describe("ComplexCases", () => {
     ]);
     const node0 = agent.nodes[0];
     expect(
-      new Set(Array.from(node0!.bonds).map((it) => it.linearText()))
+      new Set(Array.from(node0!.bonds).map((it) => it.linearText())),
     ).toEqual(new Set(["_pp", "-", "`\\0"]));
     expect(
-      agent.nodes.map((it) => textFormula(nodeCvt(it), "CharChem"))
+      agent.nodes.map((it) => textFormula(nodeCvt(it), "CharChem")),
     ).toEqual([
       "CH",
       "CH",
@@ -116,7 +116,7 @@ describe("ComplexCases", () => {
     //     2     6     10    15| |17
     //                     16 HO OH 18
     const expr = compile(
-      "HO-P|OH; O||#-3-O-P|OH;O||#-3-O-P|OH;O||#-3-O-|_(x1,y1,W+,TW+)<|HO>_(x1,T-)<|OH>_(x1,y-1,W-,TW-):a_(x-1.5,y-0.7,T<)O_(x-1.5,y0.7,T<<);||_pN<|#a>_p_ppN_p/<`|H2N>\\\\N|`//N`\\"
+      "HO-P|OH; O||#-3-O-P|OH;O||#-3-O-P|OH;O||#-3-O-|_(x1,y1,W+,TW+)<|HO>_(x1,T-)<|OH>_(x1,y-1,W-,TW-):a_(x-1.5,y-0.7,T<)O_(x-1.5,y0.7,T<<);||_pN<|#a>_p_ppN_p/<`|H2N>\\\\N|`//N`\\",
     );
     expect(expr.getMessage()).toBe("");
     const agent = expr.getAgents()[0]!;
@@ -164,7 +164,7 @@ describe("ComplexCases", () => {
         const need = needBonds[index];
         if (s !== need) acc.push(`${s}≠${need}`);
         return acc;
-      }, [] as string[])
+      }, [] as string[]),
     ).toEqual([]);
     const needNodes = [
       "0:HO",
@@ -200,20 +200,20 @@ describe("ComplexCases", () => {
       "30:N",
     ];
     const realNodes = agent.nodes.map(
-      (it) => `${it.index}:${textFormula(nodeCvt(it), "CharChem")}`
+      (it) => `${it.index}:${textFormula(nodeCvt(it), "CharChem")}`,
     );
     expect(
       realNodes.reduce((acc, s, index) => {
         if (needNodes[index] !== s)
           acc.push(`${s}≠${substringAfter(needNodes[index]!, ":")}`);
         return acc;
-      }, [] as string[])
+      }, [] as string[]),
     ).toEqual([]);
     expect(textFormula(makeBrutto(expr), "text")).toBe("C10H16N5O13P3");
   });
   it("BetaCyfluthrin", () => {
     const expr = compile(
-      "$slope(45)Cl-C<`|Cl>\\\\CH\\|<|CH3><`/H3C>_q3_q3; $slope()#-1-C<//O>\\O-C<`|H><|C%N>-\\\\-//<-F>`\\`-`/;#-1-/O-\\\\-//`\\`=`/"
+      "$slope(45)Cl-C<`|Cl>\\\\CH\\|<|CH3><`/H3C>_q3_q3; $slope()#-1-C<//O>\\O-C<`|H><|C%N>-\\\\-//<-F>`\\`-`/;#-1-/O-\\\\-//`\\`=`/",
     );
     expect(expr.getMessage()).toBe("");
     const agent = expr.getAgents()[0]!;
@@ -265,7 +265,7 @@ describe("ComplexCases", () => {
     ];
     expect(diff(makeBondsInfo(expr), needBonds)).toEqual([]);
     const actualNodes = agent.nodes.map(
-      (it) => `${it.index}:${textFormula(nodeCvt(it), "CharChem")}`
+      (it) => `${it.index}:${textFormula(nodeCvt(it), "CharChem")}`,
     );
     const needNodes = [
       "0:Cl",
@@ -313,7 +313,7 @@ describe("ComplexCases", () => {
     //   0  |1  |6   8   \\   N
     //      H 2 H 7       10 / 11
     const expr = compile(
-      "H3C-N<|H>/C<`||N`\\O2`N>\\N<|H>-H2C-_(A54,N2)_qN`||</Cl>_qS_q"
+      "H3C-N<|H>/C<`||N`\\O2`N>\\N<|H>-H2C-_(A54,N2)_qN`||</Cl>_qS_q",
     );
     expect(expr.getMessage()).toBe("");
     const needBonds = [
@@ -366,7 +366,7 @@ describe("ComplexCases", () => {
     //    HN 12
     //      \ 13
     const expr = compile(
-      "|_qO_q:a_q_q`\\\\`/||\\/`/|O\\/O`/|HN\\;$slope(45)`/#a\\"
+      "|_qO_q:a_q_q`\\\\`/||\\/`/|O\\/O`/|HN\\;$slope(45)`/#a\\",
     );
     expect(expr.getMessage()).toBe("");
     const needBonds = [
@@ -405,7 +405,7 @@ describe("ComplexCases", () => {
     //      ||
     //      O 7
     const expr = compile(
-      "O^-`/`\\O\\|\\N|`/|O`|`\\HO;#N/\\/N<`|/`|O|\\OH_(x1,y1,N0,TSpace)[Na^+]2>\\|\\O`\\`/O^-"
+      "O^-`/`\\O\\|\\N|`/|O`|`\\HO;#N/\\/N<`|/`|O|\\OH_(x1,y1,N0,TSpace)[Na^+]2>\\|\\O`\\`/O^-",
     );
     expect(expr.getMessage()).toBe("");
     const needNodes = [
@@ -492,7 +492,7 @@ describe("ComplexCases", () => {
   it("Isobacteriochlorin", () => {
     // _(a54,N)
     const expr = compile(
-      "|_q:a2_qN_qq<_(a54):a>_q; `-_q<_(a54,N2)#a>_qN_qq<_(a54,N):b>_q; `||_q<_(a54,N2)#b>_qN<`-H>_q<_(a54,N2):c>_q; -_qq<_(a54)#c>_qN<`|H>_q<_(a54)=#a2>_qq"
+      "|_q:a2_qN_qq<_(a54):a>_q; `-_q<_(a54,N2)#a>_qN_qq<_(a54,N):b>_q; `||_q<_(a54,N2)#b>_qN<`-H>_q<_(a54,N2):c>_q; -_qq<_(a54)#c>_qN<`|H>_q<_(a54)=#a2>_qq",
     );
     expect(expr.getMessage()).toBe("");
     expect(textFormula(makeBrutto(expr), "text")).toBe("C20H18N4");
@@ -512,13 +512,15 @@ describe("ComplexCases", () => {
     const node0 = agent.nodes[0]!;
     // all nodes in same chain
     expect(
-      agent.nodes.filter((it) => it.chain !== node0.chain).map((it) => it.index)
+      agent.nodes
+        .filter((it) => it.chain !== node0.chain)
+        .map((it) => it.index),
     ).toEqual([]);
     // all nodes in same sub chain
     expect(
       agent.nodes
         .filter((it) => it.subChain !== node0.subChain)
-        .map((it) => it.index)
+        .map((it) => it.index),
     ).toEqual([]);
     const needNodes = ["0:OH", "1:C", "2:O", "3:CH2", "4:C", "5:O", "6:OH"];
     expect(diff(makeNodesText(expr), needNodes)).toEqual([]);
@@ -572,7 +574,7 @@ describe("ComplexCases", () => {
   });
   it("HydrogenHexachlororhenateIV", () => {
     const expr = compile(
-      "$ver(1.0)[Re^4+$slope(60)$L(1.4)<--hCl^-></hCl^-><`\\hCl`^-><`-hCl`^-><`/hCl`^-><\\hCl^->]^2-; H^+_(x%w:3,y.5,N0)#Re; H^+_(x%w:3,y-.5,N0)#Re"
+      "$ver(1.0)[Re^4+$slope(60)$L(1.4)<--hCl^-></hCl^-><`\\hCl`^-><`-hCl`^-><`/hCl`^-><\\hCl^->]^2-; H^+_(x%w:3,y.5,N0)#Re; H^+_(x%w:3,y-.5,N0)#Re",
     );
     expect(expr.getMessage()).toBe("");
     const needNodes = [
@@ -592,7 +594,7 @@ describe("ComplexCases", () => {
   });
   it("DihexacyanoferrateII", () => {
     const expr = compile(
-      "$ver(1.0)[Fe^2+@:b(a,c)<_(A&a,L1.3,H)C&c^-_(a0,N3)N>@(-90)@b(-30,`)@b(30)@b(90)@b(150,`)@b(-150)]<_(x%w:-4,N0,y-%h:.8)K^+><_(x%w,y%h,N0)Fe^3+>"
+      "$ver(1.0)[Fe^2+@:b(a,c)<_(A&a,L1.3,H)C&c^-_(a0,N3)N>@(-90)@b(-30,`)@b(30)@b(90)@b(150,`)@b(-150)]<_(x%w:-4,N0,y-%h:.8)K^+><_(x%w,y%h,N0)Fe^3+>",
     );
     expect(expr.getMessage()).toBe("");
     const needNodes = [
@@ -617,7 +619,7 @@ describe("ComplexCases", () => {
   });
   it("5837", () => {
     const expr = compile(
-      "`\\`-_(a54)_q_p6_pp6_p6_pp6_p6_p6_qHN_q_qq; #1-<\\\\O>/N_(a54)<_q_q_q_q>_(a54,w+)<_pp6O>_q6N<_(y-.5)H>_(a60,d-)<_p6_q6_p6<_pp6O>_q6OH>_q6<_pp6O>_q6HN_p6<_(a60,d+)>_q6<_qq6O>_p6NH_(a-60,d-)<_p6_p6<_p6NH2>_qq6O>_q6<_qq6O>_p6NH_(a-60,w-)<_q6_q6_p6_q6_p6H2N>_p6<_qq6O>_p6NH_(a-60,w-)<_q6<_q6>_p6>_p6<_pp6O>_q6HN_p6_q6<_qq6O>_p6NH2; #1`/wHN\\<=O>`/<\\-_(a54)_qNH_q_qN<_(y-.5)H>_q>`-dHN`/<\\\\O>`-<`\\/<=O>`\\HO>`/wNH`-<`\\\\O>`/<\\`/\\`/\\NH2>`-dHN`/<\\\\O>`-<`\\/<=O>`\\H2N>`/wNH`-<`\\\\O>_(a-60,d-)_(a54)N<_q_q_q_q>_(a54)<_pp6O>_q6<_p6_p6<_qq6O>_p6NH2>_(a-60,w+)NH_p6<_pp6O>_q6<_p6_p6_pp6_q6_qq6_q6_qq6_q6>_(a-60,w+)NH_p6<_pp6O>_q6<_q6_(a-50)<_pp6O>_q6OH>_(a60,d+)HN_q6<_qq6O>_p6<_p6_p6_(a54,N2)_qN<_(y-.5)H>_q_qq<_q>_p6_pp6_p6_pp6_p6>_(a-60,w+)NH_p6<_pp6O>_q6<_p6_p6<_pp6O>_q6HO>_(a-60,w+)N<_(y-.5)H>_p6:a_pp6O; `-_q<_(a54,d+)#a>_qN<_q_q>|`/O/\\</\\|O`|/NH2>|dN<_(y.5)H>`/`\\O\\|<\\/`|O|\\NH2>`/dHN|\\O`\\`/<`\\`|HO>|wN<_(y.5)H>`/`\\O\\|<\\/`|O|\\NH2>`/dHN|\\O`\\`/<`\\w>|NH`/`\\O\\|`/HN|\\O`\\`/<`\\`|/`||`\\`//|\\\\>|wNH`/`\\O\\|<\\d>`/HN|\\O`\\_(a-60,w-)_(a54)_q_q_qN<_q>_(a54)<_qq6O>_p6<_p6_q6<_pp6O>_q6OH>_(a-60,w+)N<_(y.5)H>_q6<_qq6O>_p6<_p6_p6<_p6>_q6>_(a-60,w+)N<_(y-.5)H>_p6<_pp6O>_q6<_q6_p6_q6<_qq6O>_p6NH2>_(a60,d+)N<_(y-.5)H>_q6<_qq6O>_p6<_p6_p6_(a54)N<_(y.5)H>_q_qHN_q_q>_(a-60,w+)N<_(y-.5)H>_p6<_pp6O>_q6<_p6_p6<_pp6O>_q6OH>_(a-60,w+)HN_p6<_pp6O>_(a-60,d-)_(a54)N<_q_q_q_q>\\|O`|/<_(y-1.6)/\\//`|`\\\\`/||>\\dN<_(y.5)H>/`|O|\\<|`/`\\`//|\\\\/`||>/wN<_(y-.5)H>\\|O`|/\\N<_(y.5)H>/`|O|\\</`|<`\\>/>|dHN\\<//O>_(a60,d-)_(a54)N<_q_q_q_q>_(a54)<_pp6O>_q6<_p6_p6<_qq6O>_p6N_(y.5)H2>_(a-60,w+)NH_p6<_pp6O>_(a-60,w-)_(a54)_q_q_qN<_q>/`|O|\\<|<`/>\\>/wN<_(y-.5)H>\\|O`|/<`|d`\\HO>\\N<_(y.5)H>/`|O|\\<|w`/<_p7>_q6>/N<_(y.5)H>\\|O`|/<`|d`\\`|O|`/H2N>\\N<_(y.5)H>/`|O|\\<|<\\dOH>`/>/wN<_(y-.5)H>\\|O`|/\\N<_(y.5)H>/`|O|\\/\\/\\/\\/\\/\\/\\"
+      "`\\`-_(a54)_q_p6_pp6_p6_pp6_p6_p6_qHN_q_qq; #1-<\\\\O>/N_(a54)<_q_q_q_q>_(a54,w+)<_pp6O>_q6N<_(y-.5)H>_(a60,d-)<_p6_q6_p6<_pp6O>_q6OH>_q6<_pp6O>_q6HN_p6<_(a60,d+)>_q6<_qq6O>_p6NH_(a-60,d-)<_p6_p6<_p6NH2>_qq6O>_q6<_qq6O>_p6NH_(a-60,w-)<_q6_q6_p6_q6_p6H2N>_p6<_qq6O>_p6NH_(a-60,w-)<_q6<_q6>_p6>_p6<_pp6O>_q6HN_p6_q6<_qq6O>_p6NH2; #1`/wHN\\<=O>`/<\\-_(a54)_qNH_q_qN<_(y-.5)H>_q>`-dHN`/<\\\\O>`-<`\\/<=O>`\\HO>`/wNH`-<`\\\\O>`/<\\`/\\`/\\NH2>`-dHN`/<\\\\O>`-<`\\/<=O>`\\H2N>`/wNH`-<`\\\\O>_(a-60,d-)_(a54)N<_q_q_q_q>_(a54)<_pp6O>_q6<_p6_p6<_qq6O>_p6NH2>_(a-60,w+)NH_p6<_pp6O>_q6<_p6_p6_pp6_q6_qq6_q6_qq6_q6>_(a-60,w+)NH_p6<_pp6O>_q6<_q6_(a-50)<_pp6O>_q6OH>_(a60,d+)HN_q6<_qq6O>_p6<_p6_p6_(a54,N2)_qN<_(y-.5)H>_q_qq<_q>_p6_pp6_p6_pp6_p6>_(a-60,w+)NH_p6<_pp6O>_q6<_p6_p6<_pp6O>_q6HO>_(a-60,w+)N<_(y-.5)H>_p6:a_pp6O; `-_q<_(a54,d+)#a>_qN<_q_q>|`/O/\\</\\|O`|/NH2>|dN<_(y.5)H>`/`\\O\\|<\\/`|O|\\NH2>`/dHN|\\O`\\`/<`\\`|HO>|wN<_(y.5)H>`/`\\O\\|<\\/`|O|\\NH2>`/dHN|\\O`\\`/<`\\w>|NH`/`\\O\\|`/HN|\\O`\\`/<`\\`|/`||`\\`//|\\\\>|wNH`/`\\O\\|<\\d>`/HN|\\O`\\_(a-60,w-)_(a54)_q_q_qN<_q>_(a54)<_qq6O>_p6<_p6_q6<_pp6O>_q6OH>_(a-60,w+)N<_(y.5)H>_q6<_qq6O>_p6<_p6_p6<_p6>_q6>_(a-60,w+)N<_(y-.5)H>_p6<_pp6O>_q6<_q6_p6_q6<_qq6O>_p6NH2>_(a60,d+)N<_(y-.5)H>_q6<_qq6O>_p6<_p6_p6_(a54)N<_(y.5)H>_q_qHN_q_q>_(a-60,w+)N<_(y-.5)H>_p6<_pp6O>_q6<_p6_p6<_pp6O>_q6OH>_(a-60,w+)HN_p6<_pp6O>_(a-60,d-)_(a54)N<_q_q_q_q>\\|O`|/<_(y-1.6)/\\//`|`\\\\`/||>\\dN<_(y.5)H>/`|O|\\<|`/`\\`//|\\\\/`||>/wN<_(y-.5)H>\\|O`|/\\N<_(y.5)H>/`|O|\\</`|<`\\>/>|dHN\\<//O>_(a60,d-)_(a54)N<_q_q_q_q>_(a54)<_pp6O>_q6<_p6_p6<_qq6O>_p6N_(y.5)H2>_(a-60,w+)NH_p6<_pp6O>_(a-60,w-)_(a54)_q_q_qN<_q>/`|O|\\<|<`/>\\>/wN<_(y-.5)H>\\|O`|/<`|d`\\HO>\\N<_(y.5)H>/`|O|\\<|w`/<_p7>_q6>/N<_(y.5)H>\\|O`|/<`|d`\\`|O|`/H2N>\\N<_(y.5)H>/`|O|\\<|<\\dOH>`/>/wN<_(y-.5)H>\\|O`|/\\N<_(y.5)H>/`|O|\\/\\/\\/\\/\\/\\/\\",
     );
     expect(expr.getMessage()).toBe("");
     expect(textFormula(makeBrutto(expr), "text")).toBe("C248H363N65O72");

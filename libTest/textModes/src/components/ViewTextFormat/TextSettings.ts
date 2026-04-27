@@ -105,7 +105,7 @@ export const textOxidationStates: Option<TextSettings["oxidationState"]>[] = (
 ).map((value) => ({ value, label: value }));
 
 export const textMul: Option<string>[] = ["*", "·", "•", "×", "✕"].map(
-  (value) => ({ value, label: value })
+  (value) => ({ value, label: value }),
 );
 
 export const textScriptDivider = [

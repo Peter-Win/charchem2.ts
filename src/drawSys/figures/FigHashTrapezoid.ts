@@ -25,7 +25,7 @@ export class FigHashTrapezoid extends Figure {
     public readonly bWidth: number,
     public readonly color: string,
     public readonly lineWidth: number,
-    public readonly hatch: number
+    public readonly hatch: number,
   ) {
     super();
   }
@@ -39,7 +39,7 @@ export class FigHashTrapezoid extends Figure {
       b,
       bWidth,
       dL,
-      dR
+      dR,
     );
     this.bounds = new Rect(aL, aR);
     this.bounds.updatePoint(bL);
@@ -56,7 +56,7 @@ export class FigHashTrapezoid extends Figure {
       bWidth,
       lineWidth,
       hatch,
-      color
+      color,
     );
     if (segs.length > 0) {
       surface.drawPath(this.org.plus(offset), segs, style);
@@ -87,7 +87,7 @@ const calcTrapezoidPoints = (
   b: Point,
   bWidth: number,
   dL: Point,
-  dR: Point
+  dR: Point,
 ) => {
   const aw2 = aWidth / 2;
   const bw2 = bWidth / 2;
@@ -106,7 +106,7 @@ export const makeHashTrapezoidPath = (
   dstWidth: number,
   lineWidth: number,
   hatch: number,
-  color: string
+  color: string,
 ) => {
   // Алгоритм, дающий качественное изображение на больших размерах. Использует заливку.
   // Нужно разделить ось на нечетное количество равных отрезков.

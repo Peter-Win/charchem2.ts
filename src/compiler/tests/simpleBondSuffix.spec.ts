@@ -49,7 +49,7 @@ describe("SimpleBondSuffix", () => {
     expect(expr.getMessage()).toBe("");
     const { bonds } = expr.getAgents()[0]!;
     expect(
-      bonds.map((it) => `${it.arr0 ? "<" : ""}-${it.arr1 ? ">" : ""}`)
+      bonds.map((it) => `${it.arr0 ? "<" : ""}-${it.arr1 ? ">" : ""}`),
     ).toEqual(["<-", "<->", "->"]);
   });
 });

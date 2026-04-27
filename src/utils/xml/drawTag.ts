@@ -5,7 +5,7 @@ export const drawTag = (
   tagName: string,
   attrs?: XmlAttrs,
   closed?: boolean,
-  escape?: (value: string) => string
+  escape?: (value: string) => string,
 ) => {
   let result = `<${tagName}`;
   if (attrs) {

@@ -8,7 +8,7 @@ import { mathOptRow } from "./mathOptRow";
 export const mathScripted = (
   nodes: TextNode[],
   create: FnNodeToXml,
-  createCenter?: FnNodeToXml
+  createCenter?: FnNodeToXml,
 ): XmlNode => {
   const dict = splitScripts(nodes);
   const { C = [], RT, RB, LT, LB } = dict;
@@ -16,8 +16,8 @@ export const mathScripted = (
   if (key === "C") {
     return mathOptRow(C, create);
   }
-  let tag = "";
-  let groups: (TextNode[] | string | undefined)[] = [];
+  let tag;
+  let groups: (TextNode[] | string | undefined)[];
   if (RB && key === "C,RB") {
     tag = "msub";
     groups = [C, RB];
@@ -34,7 +34,7 @@ export const mathScripted = (
   const content: XmlNode[] = groups.map((it, i): XmlNode => {
     if (!it) return { tag: "mrow" };
     if (typeof it === "string") return { tag: it };
-    const fn = i ? create : createCenter ?? create;
+    const fn = i ? create : (createCenter ?? create);
     return mathOptRow(it, fn) ?? { tag: "mrow" };
   });
   return { tag, content };

@@ -61,7 +61,7 @@ describe("LocalSvgFont", () => {
     const surface = new SvgTestSurface();
     surface.setSize(size);
     surface.addFigure(
-      `<rect x="10" y="10" width="${tsize.x}" height="${tsize.y}" fill="none" stroke="brown" stroke-width="1" />`
+      `<rect x="10" y="10" width="${tsize.x}" height="${tsize.y}" fill="none" stroke="brown" stroke-width="1" />`,
     );
     const lff = localFont.getFontFace();
     const baseline = getBaseline(lff);
@@ -69,7 +69,7 @@ describe("LocalSvgFont", () => {
       fill: "blue",
     });
     surface.addFigure(
-      `<path d="M0 87.7H147" stroke="black" stroke-width="1" fill="none" />`
+      `<path d="M0 87.7H147" stroke="black" stroke-width="1" fill="none" />`,
     );
     const image = surface.exportText({
       ...standaloneExportOptions,

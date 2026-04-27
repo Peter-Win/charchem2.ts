@@ -15,10 +15,10 @@ describe("Locant", () => {
       new Locant([
         { value: "N", markup: "italic" },
         { value: 3, markup: "super" },
-      ]).toString()
+      ]).toString(),
     ).toBe("<i>N</i><sup>3</sup>");
     expect(
-      new Locant([{ value: 4 }, { value: "a", primed: 1 }]).toString()
+      new Locant([{ value: 4 }, { value: "a", primed: 1 }]).toString(),
     ).toBe("4a′");
   });
   it("create", () => {

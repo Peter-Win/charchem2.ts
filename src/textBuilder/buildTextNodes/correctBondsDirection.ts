@@ -1,7 +1,7 @@
 import { TextNode } from "./TextNode";
 
 export const correctBondsDirection = (
-  groupNode: TextNode | undefined
+  groupNode: TextNode | undefined,
 ): void => {
   if (groupNode?.type !== "group") return;
   const { items } = groupNode;

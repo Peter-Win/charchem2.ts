@@ -6,7 +6,6 @@ import { deg2rad } from "./radians";
 //              a       b       c       d       e       f
 type Double6 = [Double, Double, Double, Double, Double, Double];
 
-// eslint-disable-next-line no-shadow
 const enum Index6 {
   a,
   b,
@@ -106,7 +105,7 @@ export class Matrix2x3 {
   apply(pt: Point): Point {
     return new Point(
       this.a * pt.x + this.c * pt.y + this.e,
-      this.b * pt.x + this.d * pt.y + this.f
+      this.b * pt.x + this.d * pt.y + this.f,
     );
   }
 

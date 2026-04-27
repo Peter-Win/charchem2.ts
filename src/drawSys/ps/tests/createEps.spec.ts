@@ -26,7 +26,7 @@ describe("createEps", () => {
         strokeWidth: 5,
         cap: "round",
         join: "round",
-      })
+      }),
     );
     const title = "Stroke path";
     const surface = createEps({ frame, title });
@@ -44,7 +44,7 @@ describe("createEps", () => {
       new FigEllipse(new Point(50, 50), new Point(45, 20), {
         stroke: "#0FF",
         strokeWidth: 5,
-      })
+      }),
     );
     const title = "Ellipse demo";
     const surface = createEps({ frame, title });
@@ -72,7 +72,7 @@ describe("createEps", () => {
       "..",
       "static",
       "fonts",
-      "Cambria-regular.svg"
+      "Cambria-regular.svg",
     );
     const fontBody = await fs.promises.readFile(fontName, {
       encoding: "utf-8",
@@ -93,7 +93,7 @@ describe("createEps", () => {
     await createTestFile(
       __dirname,
       "skeletal.svg",
-      svgSurface.exportText(standaloneExportOptions)
+      svgSurface.exportText(standaloneExportOptions),
     );
 
     // EPS

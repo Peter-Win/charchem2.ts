@@ -65,7 +65,7 @@ export class RulesBase {
 
   operation(op: ChemOp): string {
     return `${this.opComment(op.commentPre)}${op.dstText}${this.opComment(
-      op.commentPost
+      op.commentPost,
     )}`;
   }
 

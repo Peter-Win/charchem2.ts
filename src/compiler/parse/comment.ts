@@ -27,7 +27,7 @@ const replaceLimited = (
   text: string,
   firstLimiter: Char,
   lastLimiter: Char,
-  transform: (s: string) => string | undefined
+  transform: (s: string) => string | undefined,
 ): string => {
   let i = 0;
   let result = text;
@@ -69,7 +69,7 @@ const convertComment = (text: string): string => {
   // замена частых символов
   let result: string = specChars.reduce(
     (acc, [first, second]) => acc.replace(first, second),
-    text
+    text,
   );
 
   // замена символов в квадратных скобках.

@@ -15,7 +15,7 @@ export const createTestSurface = (fontFactory?: SvgFont): SvgSurfacePortable =>
 export const createTestStyle = (
   surface: AbstractSurface,
   height: number,
-  fill?: string
+  fill?: string,
 ): TextProps => ({
   font: surface.getFont({ family: "", height }),
   style: { fill: fill || "black" },
@@ -24,9 +24,9 @@ export const createTestStyle = (
 export const createTestImgProps = (
   surface: AbstractSurface,
   height: number,
-  // eslint-disable-next-line default-param-last
+
   fill = "black",
-  preInit?: (imgProps: ChemImgProps) => void
+  preInit?: (imgProps: ChemImgProps) => void,
 ) => {
   const imgProps = new ChemImgProps(createTestStyle(surface, height, fill));
   const smallStyle = createTestStyle(surface, height * 0.6, fill);
@@ -41,7 +41,7 @@ export const createTestImgProps = (
 export const saveSurface = (
   shortFileName: string,
   frame: FigFrame,
-  surface: SvgSurfacePortable
+  surface: SvgSurfacePortable,
 ) => {
   frame.update();
   renderTopFrame(frame, surface);

@@ -7,7 +7,7 @@ import { ifDef } from "../../utils/ifDef";
 export const startMul = (
   compiler: ChemCompiler,
   k: ChemK,
-  isFirst: boolean
+  isFirst: boolean,
 ) => {
   const mul = new ChemMul(k, isFirst, compiler.varColor);
   const { curNode, curBond } = compiler;

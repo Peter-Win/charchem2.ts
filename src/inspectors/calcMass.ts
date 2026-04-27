@@ -16,7 +16,7 @@ import { ifDef } from "../utils/ifDef";
  */
 export const calcMass = (
   chemObj: ChemObj,
-  applyAgentK: boolean = true
+  applyAgentK: boolean = true,
 ): Double => {
   const stack: Double[] | [Double] = [0.0];
   const push = () => {

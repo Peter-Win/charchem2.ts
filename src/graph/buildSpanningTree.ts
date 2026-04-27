@@ -36,10 +36,9 @@ export const buildSpanningTree = (graph: ChemGraph<WithStep>): SpanningTree => {
     if (!farVertex) break;
     const path = backFindPath(graph, farVertex);
     const branch: SpanningTreeNode[] = path.vertices.map(
-      ({ index }) => nodes[index]!
+      ({ index }) => nodes[index]!,
     );
     path.vertices.forEach((v) => {
-      // eslint-disable-next-line no-param-reassign
       v.step = used;
     });
     path.edges.forEach((e, i) => {
@@ -84,7 +83,7 @@ export const buildSpanningTree = (graph: ChemGraph<WithStep>): SpanningTree => {
 
 export const backFindPath = (
   graph: ChemGraph<WithStep>,
-  start: VertexEx<WithStep>
+  start: VertexEx<WithStep>,
 ): Path => {
   let curVertex = start;
   const path: Path = {

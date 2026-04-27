@@ -35,7 +35,7 @@ export const createPolygonalBond = (compiler: ChemCompiler) => {
   bond.dir = createPolygonStep(
     compiler,
     sign * (count || 5),
-    compiler.varLength
+    compiler.varLength,
   );
 
   scanBondSuffix(compiler, bond);

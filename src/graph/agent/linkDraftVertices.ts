@@ -6,11 +6,11 @@ import { ChemError } from "../../core/ChemError";
 export const linkDraftVertices = (
   dstGraph: DraftGraph,
   bond: ChemBond,
-  nodesMap: Record<Int, DraftGraph>
+  nodesMap: Record<Int, DraftGraph>,
 ) => {
   const { n, w0, w1 } = bond;
   const graphs: (DraftGraph | undefined)[] = bond.nodes.map(
-    (node) => node && nodesMap[node.index]
+    (node) => node && nodesMap[node.index],
   );
   if (graphs.length === 2) {
     const [g0, g1] = graphs;
@@ -30,7 +30,7 @@ export const linkDraftVertices = (
           v1.reserved -= n;
           const commonCharge = Math.min(
             Math.abs(v0.charge ?? 0),
-            Math.abs(v1.charge ?? 0)
+            Math.abs(v1.charge ?? 0),
           );
           if (commonCharge) {
             // H^+/0S^2-\0H^+   H3O^+/0OH^-

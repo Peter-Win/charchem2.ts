@@ -32,7 +32,7 @@ const cc2ItemsMathML = (code: string): string => {
   });
   const tnodes = items.map((item) => buildTextNodes(item).items?.[0]);
   const xnodes = tnodes.map((node) =>
-    node ? onNodeItem(node, create) : undefined
+    node ? onNodeItem(node, create) : undefined,
   );
   const mml = xnodes.map((xn) => (xn ? renderXmlNode(xn) : "<undefined />"));
   return mml.join(";");
@@ -42,9 +42,9 @@ test("onNodeItem", () => {
   expect(cc2ItemsMathML("Al")).toBe("<mi>Al</mi>");
   expect(cc2ItemsMathML("Al2")).toBe("<msub><mi>Al</mi><mn>2</mn></msub>");
   expect(cc2ItemsMathML("Fe(iii)")).toBe(
-    "<mover><mi>Fe</mi><mi>III</mi></mover>"
+    "<mover><mi>Fe</mi><mi>III</mi></mover>",
   );
   expect(cc2ItemsMathML("$nM(238)U")).toBe(
-    "<mmultiscripts><mi>U</mi><mrow /><mrow /><mprescripts /><mn>92</mn><mn>238</mn></mmultiscripts>"
+    "<mmultiscripts><mi>U</mi><mrow /><mrow /><mprescripts /><mn>92</mn><mn>238</mn></mmultiscripts>",
   );
 });

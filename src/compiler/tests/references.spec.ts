@@ -58,19 +58,19 @@ describe("References", () => {
   it("InvalidNumberReference", () => {
     const expr = compile("H-N-H; H|#5");
     expect(expr.getMessage("ru")).toBe(
-      "Неправильная ссылка на узел '5' в позиции 11"
+      "Неправильная ссылка на узел '5' в позиции 11",
     );
   });
   it("ZeroReference", () => {
     const expr = compile("H-N-H; H|#0");
     expect(expr.getMessage("ru")).toBe(
-      "Неправильная ссылка на узел '0' в позиции 11"
+      "Неправильная ссылка на узел '0' в позиции 11",
     );
   });
   it("InvalidLabelReference", () => {
     const expr = compile("H-N-H; H|#abc");
     expect(expr.getMessage("ru")).toBe(
-      "Неправильная ссылка на узел 'abc' в позиции 11"
+      "Неправильная ссылка на узел 'abc' в позиции 11",
     );
   });
   it("InvalidLabel", () => {

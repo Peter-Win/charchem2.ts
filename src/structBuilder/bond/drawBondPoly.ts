@@ -17,7 +17,7 @@ export const drawBondPoly = (
   bond: ChemBond,
   frame: FigFrame,
   imgProps: ChemImgProps,
-  nodesInfo: NodeInfo[]
+  nodesInfo: NodeInfo[],
 ): void => {
   const color = getBondColor(bond, imgProps);
   const { lineWidth, dash } = imgProps;

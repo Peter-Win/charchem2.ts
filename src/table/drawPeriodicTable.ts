@@ -143,7 +143,7 @@ export const drawPeriodicTable = (rules: TableRules = tableRulesStd) => {
     list.forEach(({ text, x, y, tblN = 0, cls }) => {
       const curTable = actualTables[tblN]!;
       cells[tblN]![y + curTable.y1]![x + curTable.x1] = { text, cls };
-    })
+    }),
   );
 
   // Финальный рендер

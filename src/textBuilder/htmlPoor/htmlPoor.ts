@@ -9,13 +9,13 @@ import { OptionsHtmlPoor } from "./OptionsHtmlPoor";
 
 export const htmlPoor = (
   srcNode: TextNode,
-  options?: OptionsHtmlPoor
+  options?: OptionsHtmlPoor,
 ): string => {
   const dstNodes = htmlPoorNodes(srcNode, options);
   dstNodes?.forEach((n) =>
     optimizeColors(n, (owner) =>
-      Array.isArray(owner.content) ? owner.content : undefined
-    )
+      Array.isArray(owner.content) ? owner.content : undefined,
+    ),
   );
   hideSpanNodes(dstNodes);
   return renderXmlNodes(dstNodes, { noSelfClosed: true });

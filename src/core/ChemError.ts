@@ -16,7 +16,7 @@ export class ChemError extends Error {
   }
 }
 
-export const getErrorMessage = (err: Error, locale?: string): string => {
+export const getErrorMessage = (err: unknown, locale?: string): string => {
   if (err instanceof ChemError) {
     if (!locale) return err.getMessage();
     const oldLang = Lang.curLang;
@@ -25,5 +25,8 @@ export const getErrorMessage = (err: Error, locale?: string): string => {
     Lang.curLang = oldLang;
     return msg;
   }
-  return err.message;
+  if (err instanceof Error) {
+    return err.message;
+  }
+  return "Unknown error";
 };

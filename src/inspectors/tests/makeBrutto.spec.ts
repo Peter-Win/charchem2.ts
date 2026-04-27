@@ -39,10 +39,10 @@ describe("makeBrutto", () => {
     expect(node.charge?.value).toBe(-4.0);
     expect(calcCharge(brutto)).toBe(-4.0);
     expect(textFormula(expr, "htmlPoor")).toBe(
-      "[Fe(CN)<sub>6</sub>]<sup>4-</sup>"
+      "[Fe(CN)<sub>6</sub>]<sup>4-</sup>",
     );
     expect(textFormula(brutto, "htmlPoor")).toBe(
-      "C<sub>6</sub>FeN<sub>6</sub><sup>4-</sup>"
+      "C<sub>6</sub>FeN<sub>6</sub><sup>4-</sup>",
     );
   });
   it("IgnoreOfEmptyNode", () => {
@@ -57,12 +57,12 @@ describe("makeBrutto", () => {
     expect(
       expr
         .getAgents()[0]!
-        .nodes.map((it) => textFormula(nodeCvt(it), "CharChem"))
+        .nodes.map((it) => textFormula(nodeCvt(it), "CharChem")),
     ).toEqual(["CH2", "CH", '"(E)"', "CH3"]);
   });
   it("Comments2", () => {
     const expr = compile(
-      'N//`|`\\\\`/||\\$L(.6)|0"1"; $L(.4)#2\\0"2"; #3/0"3"; #4`|0"4"; #5`\\0"5"; #6`/0"6"'
+      'N//`|`\\\\`/||\\$L(.6)|0"1"; $L(.4)#2\\0"2"; #3/0"3"; #4`|0"4"; #5`\\0"5"; #6`/0"6"',
     );
     expect(expr.getMessage()).toBe("");
     const agent = expr.getAgents()[0]!;
@@ -70,7 +70,7 @@ describe("makeBrutto", () => {
       2, 1, 2, 1, 2, 1, 0, 0, 0, 0, 0, 0,
     ]);
     expect(
-      agent.nodes.map((it) => textFormula(nodeCvt(it), "CharChem"))
+      agent.nodes.map((it) => textFormula(nodeCvt(it), "CharChem")),
     ).toEqual([
       "N",
       "CH",

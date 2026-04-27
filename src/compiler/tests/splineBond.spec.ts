@@ -32,7 +32,7 @@ describe("SplineBond", () => {
     const p5 = p4.minus(p1);
     const p6 = p5.plus(pointFromDeg(-120.0));
     expect(expr.getAgents()[0]!.nodes.map((it) => String(it.pt))).toEqual(
-      [new Point(), p1, p2, p3, p4, p5, p6].map((p) => String(p))
+      [new Point(), p1, p2, p3, p4, p5, p6].map((p) => String(p)),
     );
     expect(brutto(expr)).toBe("C7H8");
     const s = lastItem(expr.getAgents()[0]!.bonds)!;

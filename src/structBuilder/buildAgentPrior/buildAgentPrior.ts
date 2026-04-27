@@ -24,7 +24,7 @@ export interface ResultBuildAgent {
 
 export const buildAgentPrior = (
   agent: ChemAgent,
-  builderCtx: StructBuilderCtx
+  builderCtx: StructBuilderCtx,
 ): ResultBuildAgent => {
   const ctx = new PAgentCtx(agent, builderCtx);
   const { agentFrame } = ctx;

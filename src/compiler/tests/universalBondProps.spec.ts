@@ -19,7 +19,7 @@ describe("universalBondProps", () => {
   });
   it("Styles", () => {
     const expr = compile(
-      "_(A0,N1.5,S:|r)_(A90,N1.5,S:|r)_(A180,N1.5,S:|r)_(A-90,N1.5,S:|r)"
+      "_(A0,N1.5,S:|r)_(A90,N1.5,S:|r)_(A180,N1.5,S:|r)_(A-90,N1.5,S:|r)",
     );
     expect(expr.getMessage()).toBe("");
     expect(makeBondsNAS(expr)).toEqual([
@@ -35,7 +35,7 @@ describe("universalBondProps", () => {
     //   \      /      \      /      \      /
     //    W+1==2        W-5--6        d+9||10
     const expr = compile(
-      "_(A60,W+)_(A0)_(A-60,w-)_(A0)_(A60,W-)_(A0)_(A-60,D+)_(A0)_(A60,d+)_(A0)_(A-60,D-)_(A0)"
+      "_(A60,W+)_(A0)_(A-60,w-)_(A0)_(A60,W-)_(A0)_(A-60,D+)_(A0)_(A60,d+)_(A0)_(A-60,D-)_(A0)",
     );
     expect(expr.getMessage()).toBe("");
     expect(getBonds(expr).map((it) => `${it.w0},${it.w1}`)).toEqual([
@@ -57,7 +57,7 @@ describe("universalBondProps", () => {
     const expr = compile("_(A60,C-)_(A0,C+)_(A-60,C)_(A0)_(A60,<)_(A0,>)");
     expect(expr.getMessage()).toBe("");
     const bonds = getBonds(expr).map(
-      (it) => `${it.arr0 ? "<" : ""}-${it.arr1 ? ">" : ""}`
+      (it) => `${it.arr0 ? "<" : ""}-${it.arr1 ? ">" : ""}`,
     );
     expect(bonds).toEqual(["<-", "<->", "->", "-", "<-", "->"]);
   });

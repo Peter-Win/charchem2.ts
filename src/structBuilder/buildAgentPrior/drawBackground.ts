@@ -14,7 +14,7 @@ import { applyPadding } from "../applyPadding";
 
 export const calcBgRect = (
   ctx: PAgentCtx,
-  nodes: ChemNode[] = []
+  nodes: ChemNode[] = [],
 ): Rect | undefined =>
   nodes.reduce((rc: Rect | undefined, node: ChemNode) => {
     const ni = getNodeInfo(node, ctx.nodesInfo);
@@ -48,7 +48,7 @@ const createBgEllipse = (rc: Rect, style: PathStyle) => {
 const calcRadius = (
   ctx: PAgentCtx,
   rect: Rect,
-  srcNodes?: ChemNode[]
+  srcNodes?: ChemNode[],
 ): number => {
   const nodes = srcNodes ?? ctx.agent.nodes;
   const { center } = rect;
@@ -59,7 +59,7 @@ const calcRadius = (
     const cc = rc.center;
     const p = new Point(
       cc.x < center.x ? rc.left : rc.right,
-      cc.y < center.y ? rc.top : rc.bottom
+      cc.y < center.y ? rc.top : rc.bottom,
     );
     maxSqr = Math.max(maxSqr, center.minus(p).lengthSqr());
   });
@@ -68,7 +68,7 @@ const calcRadius = (
 
 export const makeBackFigure = (
   ctx: PAgentCtx,
-  params: ParamsChemBackground
+  params: ParamsChemBackground,
 ): Figure => {
   const {
     nodes,
@@ -105,7 +105,7 @@ export const makeBackFigure = (
     const r0 = calcRadius(ctx, rect, nodes);
     const rPad = Math.min(
       (rect.width - srcRect.width) / 2,
-      (rect.height - srcRect.height) / 2
+      (rect.height - srcRect.height) / 2,
     );
     const r = r0 + rPad;
     return new FigEllipse(rect.center, new Point(r, r), style);
@@ -113,7 +113,7 @@ export const makeBackFigure = (
   if (shape === "ellipse") return createBgEllipse(rect, style);
   const radius = ifDef(
     borderRadius,
-    (it) => new Point(it * props.line, it * props.line)
+    (it) => new Point(it * props.line, it * props.line),
   );
   return createBgRect(rect, style, radius);
 };

@@ -32,7 +32,7 @@ describe("Item", () => {
     expect(mgo.isOk()).toBe(true);
     expect(toText(mgo)).toBe("MgO");
     expect(calcMass(mgo)).toBe(
-      PeriodicTable.dict.Mg.mass + PeriodicTable.dict.O.mass
+      PeriodicTable.dict.Mg.mass + PeriodicTable.dict.O.mass,
     );
   });
   it("Cl2", () => {
@@ -47,7 +47,7 @@ describe("Item", () => {
     expect(textFormula(expr, "htmlPoor")).toBe("C<sub>2</sub>H<sub>5</sub>OH");
     const { dict } = PeriodicTable;
     expect(calcMass(expr)).toBe(
-      dict.C.mass * 2 + dict.H.mass * 6 + dict.O.mass
+      dict.C.mass * 2 + dict.H.mass * 6 + dict.O.mass,
     );
   });
   it("AbstractItemCoeff", () => {

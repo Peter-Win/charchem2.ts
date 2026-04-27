@@ -13,7 +13,7 @@ import { ChemAgent } from "../../core/ChemAgent";
 
 export const createAgentCmd = (
   obj: ChemObj,
-  agent: ChemAgent
+  agent: ChemAgent,
 ): AgentCmd | undefined => {
   if (obj instanceof ChemBond) {
     if (obj.soft) return new AgentCmdSoftBond(obj, agent);

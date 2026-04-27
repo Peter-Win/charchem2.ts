@@ -32,7 +32,7 @@ export const ViewMathMLFormat: React.FC = observer(() => {
     },
     {
       name: "MathJax",
-      extra: <a href="https://docs.mathjax.org/en/latest/basic/mathjax.html" target="_blank">About MathJax</a>,
+      extra: <a href="https://docs.mathjax.org/en/latest/basic/mathjax.html" target="_blank" rel="noreferrer">About MathJax</a>,
       render: <div className={styles.demo}>
         <MathJaxView code={xmlCode} input={{type: "mml"}} />
       </div>,

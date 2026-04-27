@@ -15,7 +15,7 @@ const rules: TableRules = {
   },
   groupIds:
     "1A,2A,,,,,,,,,,,,,,,3B,4B,5B,6B,7B,┌──,8B,──┐,1B,2B,3A,4A,5A,6A,7A,8A".split(
-      ","
+      ",",
     ),
   groupCls: "group-id",
   drawGroups: fallingNumbers,

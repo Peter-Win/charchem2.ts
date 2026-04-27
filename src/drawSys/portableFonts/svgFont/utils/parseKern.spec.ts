@@ -11,7 +11,7 @@ describe("parseKern", () => {
     const nameMap: Record<string, SvgFontGlyph> = {};
     const kernMap: Record<string, number> = {};
     lightXmlParser(`<hkern u1="A" u2="t" k="33" />`, (tag, attrs) =>
-      parseKern(attrs, codeMap, nameMap, kernMap)
+      parseKern(attrs, codeMap, nameMap, kernMap),
     );
     expect(kernMap).toEqual({ "Aname:tname": 33 });
   });
@@ -24,12 +24,12 @@ describe("parseKern", () => {
       "u102",
     ].reduce(
       (map, name) => ({ ...map, [name]: { name, dx: 2 } }),
-      {} as Record<string, SvgFontGlyph>
+      {} as Record<string, SvgFontGlyph>,
     );
     const kernMap: Record<string, number> = {};
     lightXmlParser(
       `<hkern g1="u01,u02" g2="u101,u102" k="12" />`,
-      (tag, attrs) => parseKern(attrs, codeMap, nameMap, kernMap)
+      (tag, attrs) => parseKern(attrs, codeMap, nameMap, kernMap),
     );
     expect(kernMap).toEqual({
       "u01:u101": 12,

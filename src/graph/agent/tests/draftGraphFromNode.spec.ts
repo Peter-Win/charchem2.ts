@@ -26,7 +26,7 @@ describe("draftGraphFromNode", () => {
     expect(g2.toString()).toBe("v0: O*2*1^-1; v1: H*1; e0: 0-1");
     const g3 = draftGraphFromNode(compileNode("NH4^+"));
     expect(g3.toString()).toBe(
-      "v0: N*3*-1^1; v1: H*1; v2: H*1; v3: H*1; v4: H*1; e0: 0-1; e1: 0-2; e2: 0-3; e3: 0-4"
+      "v0: N*3*-1^1; v1: H*1; v2: H*1; v3: H*1; v4: H*1; e0: 0-1; e1: 0-2; e2: 0-3; e3: 0-4",
     );
   });
 });

@@ -14,7 +14,7 @@ import { mergeBonds } from "../main/bondCommon";
 const onReferenceError = (
   compiler: ChemCompiler,
   ref: string,
-  pos: Int
+  pos: Int,
 ): never => compiler.error("Invalid node reference '[ref]'", { ref, pos });
 
 const bondNodesKey = (bond: ChemBond): string =>
@@ -28,7 +28,7 @@ const useRef = (compiler: ChemCompiler, node: ChemNode) => {
     // Здесь нужна проверка на мерж связей...
     const curKey = bondNodesKey(curBond);
     const prevBond = compiler.curAgent?.bonds.find(
-      (b) => bondNodesKey(b) === curKey
+      (b) => bondNodesKey(b) === curKey,
     );
     if (prevBond && prevBond !== curBond) {
       compiler.chainSys.setCurNode(curBond.nodes[1]);
@@ -60,13 +60,13 @@ const isAtomNode = (node: ChemNode, atom: ChemAtom): boolean =>
 const useRefByAtom = (
   compiler: ChemCompiler,
   atom: ChemAtom,
-  startPos: Int
+  startPos: Int,
 ) => {
   const { nodes } = compiler.curAgent!;
   useRef(
     compiler,
     nodes.find((it) => isAtomNode(it, atom)) ??
-      onReferenceError(compiler, atom.id, startPos)
+      onReferenceError(compiler, atom.id, startPos),
   );
 };
 

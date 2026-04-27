@@ -79,7 +79,6 @@ export const draftGraphFromNode = (node: ChemNode): DraftGraph => {
     });
   } else if (cvList.length === 2 && g.vertices.length === 2) {
     cvList.forEach((v) => {
-      // eslint-disable-next-line no-param-reassign
       v.reserved = 0;
     });
     g.edges.push({

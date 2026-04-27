@@ -34,7 +34,10 @@ import { stateAgentMid } from "../state/stateAgentMid";
 import { stateBracketBegin } from "../state/stateBracketBegin";
 
 class BracketDecl extends StackItem {
-  constructor(pos: Int, public readonly begin: ChemBracketBegin) {
+  constructor(
+    pos: Int,
+    public readonly begin: ChemBracketBegin,
+  ) {
     super(pos);
   }
 
@@ -114,7 +117,7 @@ export const getNodeForBracketEnd = (compiler: ChemCompiler): ChemNode => {
 export const closeBracket = (
   compiler: ChemCompiler,
   text: string,
-  pos: Int
+  pos: Int,
 ): ChemBracketEnd =>
   ifDef(compiler.pop(), (decl) => {
     if (decl instanceof BracketDecl) {
@@ -139,7 +142,7 @@ export const closeBracket = (
       const bracketEnd = new ChemBracketEnd(
         text,
         decl.begin,
-        getNodeForBracketEnd(compiler)
+        getNodeForBracketEnd(compiler),
       );
       const { commands } = compiler.curAgent!;
       commands.push(bracketEnd);

@@ -15,7 +15,7 @@ const msgAbs = "Cant balance expression with abstract coefficients";
  * @param expr
  */
 export const isSuitableForEquation = (
-  expr: ChemExpr
+  expr: ChemExpr,
 ): NegativeResult | undefined =>
   expr.walkExt({
     isStop: false as boolean,

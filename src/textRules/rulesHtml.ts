@@ -47,7 +47,7 @@ export class RulesHtml extends RulesBase {
 
   itemMassAndNum(mass: Double, num: Int): string {
     return `${drawTag("span", { class: "echem-mass-and-num" })}${strMass(
-      mass
+      mass,
     )}<br/>${num}</span>`;
   }
 

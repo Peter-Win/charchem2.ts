@@ -25,7 +25,7 @@ interface BuildItemResult {
 
 export const buildItem = (
   item: ChemNodeItem,
-  ctx: StructBuilderCtx
+  ctx: StructBuilderCtx,
 ): BuildItemResult => {
   const { imgProps } = ctx;
   const itemFrame = new FigFrame();
@@ -52,7 +52,7 @@ export const buildItem = (
     atom(obj) {
       this.onText(
         obj.id,
-        imgProps.getStyleColored("atom", item.atomColor ?? item.color)
+        imgProps.getStyleColored("atom", item.atomColor ?? item.color),
       );
     },
     radical(obj) {

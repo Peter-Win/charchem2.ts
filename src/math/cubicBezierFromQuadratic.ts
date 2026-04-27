@@ -14,7 +14,7 @@ const twoThirds = 2 / 3;
 export const cubicBezierFromQuadratic = ([p0, p1, p2]: readonly [
   Point,
   Point,
-  Point
+  Point,
 ]): [Point, Point, Point, Point] => [
   p0,
   p1.minus(p0).scale(twoThirds).iadd(p0),

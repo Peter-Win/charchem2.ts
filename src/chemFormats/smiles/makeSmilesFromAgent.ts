@@ -61,7 +61,7 @@ const organicSubset = new Set<string>([
 
 const makeSmilesAtom = (
   vertex: Vertex,
-  options?: MakeSimilesOptions
+  options?: MakeSimilesOptions,
 ): string => {
   const { content, valence, hydrogen, charge, mass } = vertex;
   if (!(content instanceof ChemAtom)) {
@@ -108,7 +108,7 @@ const makeSmilesAtom = (
 
 export const makeSmilesFromAgent = (
   agent: ChemAgent,
-  options?: MakeSimilesOptions
+  options?: MakeSimilesOptions,
 ): string => {
   const draftH = makeGraphFromAgent(agent);
   const draft =

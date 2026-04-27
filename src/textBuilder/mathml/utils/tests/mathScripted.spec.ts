@@ -22,8 +22,8 @@ describe("mathScripted", () => {
           { type: "text", text: "One" },
           { type: "text", text: "Two" },
         ],
-        create
-      )
+        create,
+      ),
     ).toEqual({
       tag: "mrow",
       content: [
@@ -40,8 +40,8 @@ describe("mathScripted", () => {
           { type: "text", text: "A" },
           { type: "text", text: "2", pos: "RT" },
         ],
-        create
-      )
+        create,
+      ),
     ).toEqual({
       tag: "msup",
       content: [
@@ -58,8 +58,8 @@ describe("mathScripted", () => {
           { type: "text", text: "B" },
           { type: "text", text: "n", pos: "RB" },
         ],
-        create
-      )
+        create,
+      ),
     ).toEqual({
       tag: "msub",
       content: [
@@ -79,8 +79,8 @@ describe("mathScripted", () => {
           { type: "text", text: "3+", pos: "RT" },
           { type: "text", text: "2", pos: "RB" },
         ],
-        create
-      )
+        create,
+      ),
     ).toEqual({
       tag: "mmultiscripts",
       content: [
@@ -102,8 +102,8 @@ describe("mathScripted", () => {
           { type: "text", text: "235", pos: "LT" },
           { type: "text", text: "92", pos: "LB" },
         ],
-        create
-      )
+        create,
+      ),
     ).toEqual({
       tag: "mmultiscripts",
       content: [
@@ -125,8 +125,8 @@ describe("mathScripted", () => {
           { type: "text", text: "3+", pos: "RT" },
           { type: "text", text: "2", pos: "RB" },
         ],
-        create
-      )
+        create,
+      ),
     ).toEqual({
       tag: "msubsup",
       content: [

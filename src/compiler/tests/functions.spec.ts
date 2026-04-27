@@ -9,14 +9,14 @@ describe("Functions", () => {
   it("Mass", () => {
     expect(textFormula("$M(16)O", "htmlPoor")).toBe("<sup>16</sup>O");
     expect(textFormula("$nM(235)U", "htmlPoor")).toBe(
-      `<sup>235</sup><sub>92</sub>U`
+      `<sup>235</sup><sub>92</sub>U`,
     );
     expect(textFormula("$nM(1){n}", "htmlPoor")).toBe(`<sup>1</sup><i>n</i>`);
     expect(textFormula("$nM(1,0){n}", "htmlPoor")).toBe(
-      `<sup>1</sup><sub>0</sub><i>n</i>`
+      `<sup>1</sup><sub>0</sub><i>n</i>`,
     );
     expect(textFormula("$nM(1,-1){n}", "htmlPoor")).toBe(
-      `<sup>1</sup><sub>-1</sub><i>n</i>`
+      `<sup>1</sup><sub>-1</sub><i>n</i>`,
     );
   });
   it("Slope", () => {
@@ -46,17 +46,17 @@ describe("Functions", () => {
     expect(compile("$ver()H2").getMessage()).toBe("");
     expect(compile("$ver(1)H2").getMessage()).toBe("");
     expect(compile(`$ver(${hiVer + 1})H2`).getMessage("en")).toBe(
-      `Formula requires CharChem version ${hiVer + 1}.0 instead of ${curVer}`
+      `Formula requires CharChem version ${hiVer + 1}.0 instead of ${curVer}`,
     );
     expect(compile(`$ver(${hiVer},${lowVer + 1})H2`).getMessage("en")).toBe(
       `Formula requires CharChem version ${hiVer}.${
         lowVer + 1
-      } instead of ${curVer}`
+      } instead of ${curVer}`,
     );
     expect(compile(`$ver(${hiVer}.${lowVer + 1}.4)`).getMessage("ru")).toBe(
       `Для формулы требуется CharChem версии ${hiVer}.${
         lowVer + 1
-      } вместо ${curVer}`
+      } вместо ${curVer}`,
     );
   });
 });

@@ -7,7 +7,7 @@ export interface ParamsMarkupFlat {
 }
 export const markupFlat = (
   m: MarkupChunk,
-  onChunk: (params: ParamsMarkupFlat) => void
+  onChunk: (params: ParamsMarkupFlat) => void,
 ): void => {
   m.chunks.forEach((chunk) => {
     if (typeof chunk === "string") {

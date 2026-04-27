@@ -3,7 +3,7 @@ import { closeNode } from "./main/node";
 import { stateAgentMid } from "./state/stateAgentMid";
 
 export const createTestCompilerWithSingleAgent = (
-  text: string
+  text: string,
 ): ChemCompiler => {
   const compiler = createTestCompiler(text);
   while (!compiler.isFinish()) {

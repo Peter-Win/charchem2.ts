@@ -4,7 +4,7 @@ import { XmlNode } from "./XmlNode";
 
 export const addClassToXmlNode = (
   node: XmlNode,
-  className: string | string[]
+  className: string | string[],
 ) => {
   const newList = (
     typeof className === "string" ? className : className.join(" ")

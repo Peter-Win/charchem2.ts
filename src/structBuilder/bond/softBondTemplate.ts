@@ -5,7 +5,7 @@ import { ChemBond } from "../../core/ChemBond";
 export const softBondTemplate = (
   bond: ChemBond,
   imgProps: ChemImgProps,
-  src: Point
+  src: Point,
 ) => {
   const vDir = bond.dir ?? new Point(1, 0);
   const sign = vDir.x < 0 ? -1 : 1;

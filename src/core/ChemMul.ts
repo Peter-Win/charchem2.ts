@@ -34,7 +34,7 @@ export class ChemMul extends ChemObj {
   constructor(
     public readonly n: ChemK,
     public readonly isFirst: boolean,
-    public readonly color?: string
+    public readonly color?: string,
   ) {
     super();
   }

@@ -50,7 +50,7 @@ export class ChemBracketEnd
   constructor(
     public readonly text: string,
     public readonly begin: ChemBracketBegin,
-    nodeIn: ChemNode
+    nodeIn: ChemNode,
   ) {
     super();
     this.nodes[0] = nodeIn;
@@ -80,7 +80,7 @@ export class ChemBracketEnd
 
 export const getBracketsContent = (
   begin: ChemBracketBegin,
-  commands: ChemObj[]
+  commands: ChemObj[],
 ): ChemObj[] => {
   const { end } = begin;
   let start = 0;

@@ -5,6 +5,6 @@ test("makeCssClassBody", () => {
     makeCssClassBody({
       stroke: "blue",
       "stroke-width": "2px",
-    })
+    }),
   ).toBe("stroke: blue; stroke-width: 2px");
 });

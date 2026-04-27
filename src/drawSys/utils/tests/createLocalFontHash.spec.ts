@@ -10,14 +10,14 @@ describe("createLocalFontHash", () => {
   it("negatives", () => {
     expect(createLocalFontHash({ ...props, weight: "bold" })).not.toBe(stdHash);
     expect(createLocalFontHash({ ...props, style: "italic" })).not.toBe(
-      stdHash
+      stdHash,
     );
     expect(createLocalFontHash({ ...props, stretch: "condensed" })).not.toBe(
-      stdHash
+      stdHash,
     );
     expect(createLocalFontHash({ ...props, height: 12 })).not.toBe(stdHash);
     expect(createLocalFontHash({ ...props, family: "Times" })).not.toBe(
-      stdHash
+      stdHash,
     );
   });
   it("normal style and stretch", () => {
@@ -30,7 +30,7 @@ describe("createLocalFontHash", () => {
   });
   it("bold weight", () => {
     expect(createLocalFontHash({ ...props, weight: "bold" })).toBe(
-      createLocalFontHash({ ...props, weight: "700" })
+      createLocalFontHash({ ...props, weight: "700" }),
     );
   });
 });

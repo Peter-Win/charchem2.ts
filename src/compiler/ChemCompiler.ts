@@ -144,7 +144,7 @@ export class ChemCompiler {
   entityBegin?: number;
 
   eject<K extends "varPos" | "varDots" | "entityBegin" | "preCommPos">(
-    key: K
+    key: K,
   ): ChemCompiler[K] {
     const v = this[key];
     this[key] = undefined;
@@ -176,7 +176,7 @@ export class ChemCompiler {
       value ===
       this.text.slice(
         this.pos,
-        Math.min(this.text.length, this.pos + value.length)
+        Math.min(this.text.length, this.pos + value.length),
       )
     );
   }

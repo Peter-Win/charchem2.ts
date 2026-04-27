@@ -13,7 +13,7 @@ type ColDict = {
 
 export const mathColumn = (
   dict: ColDict,
-  create: FnNodeToXml
+  create: FnNodeToXml,
 ): XmlNode | undefined => {
   const keys = dictKeys(dict);
   const { C = [], T, B } = dict;

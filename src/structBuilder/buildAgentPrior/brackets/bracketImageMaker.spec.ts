@@ -55,7 +55,7 @@ class FigSimpleText extends Figure {
       surface.addFigure(
         `<text x="${offset.x + this.org.x}" y="${
           offset.y + this.org.y
-        }" font-size="50px" fill="blue">${this.text}</text>`
+        }" font-size="50px" fill="blue">${this.text}</text>`,
       );
     }
   }
@@ -179,7 +179,7 @@ it("bracketImgMaker", () => {
   });
   dstDataText += "    ]\n}";
   const fileName = path.normalize(
-    path.join(__dirname, "..", "..", "..", "..", "rubbers", "figure.txt")
+    path.join(__dirname, "..", "..", "..", "..", "rubbers", "figure.txt"),
   );
   fs.writeFileSync(fileName, dstDataText);
   saveSurface("bracketImgMaker", frame, surface);

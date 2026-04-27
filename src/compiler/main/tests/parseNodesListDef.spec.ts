@@ -34,7 +34,7 @@ describe("TestParseNodesListDef", () => {
     //      \     /
     //       F---E
     const compiler = createTestCompilerWithSingleAgent(
-      "$slope(45){A}--{B}\\{C}|{D}`/{E}`--{F}`\\{G}`|{H}/"
+      "$slope(45){A}--{B}\\{C}|{D}`/{E}`--{F}`\\{G}`|{H}/",
     );
     const nodes = parseNodesListDef(compiler, "1:3;5:7", 1);
     expect(nodes).toBeDefined();

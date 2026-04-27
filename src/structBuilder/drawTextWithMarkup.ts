@@ -68,7 +68,7 @@ const drawMarkup = ({
 
   const applyStyle = (
     prevStyle: TextStyle,
-    { underline, overline }: MarkupProps
+    { underline, overline }: MarkupProps,
   ): TextStyle => ({
     ...prevStyle,
     underline,
@@ -80,7 +80,7 @@ const drawMarkup = ({
       const txFig = new FigText(
         subChunk,
         applyFontFeatures(chunk.props ?? {}),
-        style
+        style,
       );
       txFig.org.x = fig.bounds.right;
       fig.addFigure(txFig, true);
@@ -135,7 +135,7 @@ const drawMarkup = ({
 export const drawTextWithMarkup = (
   text: string,
   ctx: StructBuilderCtx,
-  { font, style }: TextProps
+  { font, style }: TextProps,
 ): ResultTextWithMarkup => {
   const { imgProps } = ctx;
   const stdH = imgProps.stdStyle.font.getFontFace().ascent;

@@ -25,7 +25,7 @@ export class Rect {
     a?: Point | Double,
     b?: Point | Double,
     bx?: Double,
-    by?: Double
+    by?: Double,
   ) {
     if (typeof a === "number" && typeof b === "number") {
       this.A = new Point(a, b);
@@ -81,7 +81,7 @@ export class Rect {
 
   toString() {
     return `{${toa(this.left)}, ${toa(this.top)}, ${toa(this.right)}, ${toa(
-      this.bottom
+      this.bottom,
     )}}`;
   }
 

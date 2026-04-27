@@ -98,7 +98,7 @@ describe("drawBackground", () => {
   it("Border radius", () => {
     const { ctx } = build(
       "$bg(yellow,p:.2,r:.3)H|OH",
-      "drawBackground-borderRadius"
+      "drawBackground-borderRadius",
     );
     const { agent, agentFrame } = ctx;
     const bg = agent.commands[1] as ChemBackground;

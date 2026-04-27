@@ -23,7 +23,7 @@ const correct = (bond: ChemBond, length?: Double) => {
 const correctPrev = (
   compiler: ChemCompiler,
   prevBond: ChemBond,
-  length?: Double
+  length?: Double,
 ) => {
   if (prevBond.nodes[1]?.fixed) {
     return;
@@ -50,7 +50,7 @@ const correctPrev = (
 export const autoCorrection = (
   compiler: ChemCompiler,
   bond: ChemBond,
-  slopeSign: Int
+  slopeSign: Int,
 ) => {
   if (compiler.varSlope !== 0.0) {
     // Если указан угол наклона при помощи $slope(x)

@@ -42,7 +42,7 @@ export interface LocalFont {
     surface: AbstractSurface,
     org: Point, // org.y relative to the baseline of the font
     textLine: string,
-    style: TextStyle
+    style: TextStyle,
   ): void;
 }
 
@@ -61,7 +61,7 @@ export interface AbstractSurface {
     offset: Point,
     center: Point,
     radius: Point,
-    style: PathStyle
+    style: PathStyle,
   ): void;
   drawRect?(offset: Point, rect: Rect, style: PathStyle, radius?: Point): void;
   drawGlyph?(params: ParamsDrawGlyph): void;
@@ -75,7 +75,7 @@ export interface AbstractSurface {
  */
 export const drawGlyph = (
   surface: AbstractSurface,
-  params: ParamsDrawGlyph
+  params: ParamsDrawGlyph,
 ) => {
   if (surface.drawGlyph) {
     surface.drawGlyph(params);
@@ -88,7 +88,7 @@ export const drawGlyph = (
 export const createModifiedLocalFont = (
   surface: AbstractSurface,
   srcFont: Readonly<LocalFont>,
-  props: Readonly<Partial<LocalFontProps>>
+  props: Readonly<Partial<LocalFontProps>>,
 ): LocalFont => {
   const newProps: LocalFontProps = { ...srcFont.props, ...props };
   return surface.getFont(newProps);

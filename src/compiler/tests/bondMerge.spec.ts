@@ -14,9 +14,9 @@ describe("Bond Merge", () => {
       agent.bonds.map(
         (it) =>
           `${it.nodes[0]?.index}(${Math.round(
-            it.dir!.polarAngleDeg()
-          )}*${Math.round(it.n)})${it.nodes[1]?.index}`
-      )
+            it.dir!.polarAngleDeg(),
+          )}*${Math.round(it.n)})${it.nodes[1]?.index}`,
+      ),
     ).toEqual(["0(90*1)1", "1(30*2)2", "1(150*1)3"]);
   });
   it("MergeWithRef", () => {
@@ -58,7 +58,7 @@ describe("Bond Merge", () => {
     expect(nodes[0]?.pt.toString()).toBe("(0, 0)");
     expect(nodes[1]?.subChain).toBe(subChain1);
     expect(nodes[1]?.pt.toString()).toBe(
-      new Point(0.5, Math.sqrt(3) / 2).toString()
+      new Point(0.5, Math.sqrt(3) / 2).toString(),
     );
     // subchain #2
     const subChain2 = nodes[2]?.subChain;
@@ -66,7 +66,7 @@ describe("Bond Merge", () => {
     expect(nodes[2]?.pt.toString()).toBe("(0, 0)");
     expect(nodes[3]?.subChain).toBe(subChain2);
     expect(nodes[3]?.pt.toString()).toBe(
-      new Point(0.5, -Math.sqrt(3) / 2).toString()
+      new Point(0.5, -Math.sqrt(3) / 2).toString(),
     );
     // #1
     expect(nodes[4]?.subChain).toBe(subChain1);
@@ -74,7 +74,7 @@ describe("Bond Merge", () => {
     // #2
     expect(nodes[5]?.subChain).toBe(subChain2);
     expect(nodes[5]?.pt.toString()).toBe(
-      new Point(0.5, Math.sqrt(3) / 2).toString()
+      new Point(0.5, Math.sqrt(3) / 2).toString(),
     );
   });
 
@@ -99,7 +99,7 @@ describe("Bond Merge", () => {
     expect(nodes[0]?.pt.toString()).toBe("(0, 0)");
     expect(nodes[1]?.subChain).toBe(subChain1);
     expect(nodes[1]?.pt.toString()).toBe(
-      new Point(0.5, Math.sqrt(3) / 2).toString()
+      new Point(0.5, Math.sqrt(3) / 2).toString(),
     );
     // subchain #2
     const subChain2 = nodes[2]?.subChain;
@@ -107,7 +107,7 @@ describe("Bond Merge", () => {
     expect(nodes[2]?.pt.toString()).toBe("(0, 0)");
     expect(nodes[3]?.subChain).toBe(subChain2);
     expect(nodes[3]?.pt.toString()).toBe(
-      new Point(0.5, -Math.sqrt(3) / 2).toString()
+      new Point(0.5, -Math.sqrt(3) / 2).toString(),
     );
     // #1
     expect(nodes[4]?.subChain).toBe(subChain1);
@@ -115,7 +115,7 @@ describe("Bond Merge", () => {
     // #2
     expect(nodes[5]?.subChain).toBe(subChain2);
     expect(nodes[5]?.pt.toString()).toBe(
-      new Point(0.5, Math.sqrt(3) / 2).toString()
+      new Point(0.5, Math.sqrt(3) / 2).toString(),
     );
   });
 

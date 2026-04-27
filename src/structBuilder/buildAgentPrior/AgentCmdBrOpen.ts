@@ -25,18 +25,17 @@ export class AgentCmdBrOpen extends AgentCmd {
     ifDef(rtlNode, (it) => {
       ctx.rtlNodes.add(it.index);
       ifDef(this.begin?.end?.nodes[0], (endNode) =>
-        ctx.rtlNodes.add(endNode.index)
+        ctx.rtlNodes.add(endNode.index),
       );
     });
   }
 
-  // eslint-disable-next-line class-methods-use-this
   override canPush(ctx: PAgentCtx) {
     this.checkRtl(
       ctx,
       ifDef(this.begin.bond, (bond) =>
-        ifDef(bond.dir, (dir) => (dir.x < 0 ? bond.nodes[1] : undefined))
-      )
+        ifDef(bond.dir, (dir) => (dir.x < 0 ? bond.nodes[1] : undefined)),
+      ),
     );
     return true;
   }
@@ -46,7 +45,6 @@ export class AgentCmdBrOpen extends AgentCmd {
     // То предыдущая команда должна на выходе стыковаться с текущей на входе
     // -(, [(, ](
     if (cmd instanceof AgentCmdBridge || cmd instanceof AgentCmdBrOpen) {
-      // eslint-disable-next-line no-param-reassign
       cmd.dstCmd = this;
       this.srcCmd = cmd;
     } else if (cmd instanceof AgentCmdBrClose) {

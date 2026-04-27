@@ -13,7 +13,7 @@ describe("colors", () => {
     expect(items[1]!.color).toBe("blue");
     expect(items[2]!.color).toBeUndefined();
     expect(textFormula(expr, "htmlPoor")).toBe(
-      `<span style="color: red">H<sub>2</sub></span><span style="color: blue">S</span>O<sub>4</sub>`
+      `<span style="color: red">H<sub>2</sub></span><span style="color: blue">S</span>O<sub>4</sub>`,
     );
   });
 });

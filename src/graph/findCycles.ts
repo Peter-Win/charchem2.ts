@@ -12,7 +12,7 @@ export const findCycles = (graph: ChemGraph<WithStep>): GraphCycle[] => {
   const { vertices, edges } = graph;
   const addCycle = (
     vertex1: VertexEx<WithStep>,
-    vertex2: VertexEx<WithStep>
+    vertex2: VertexEx<WithStep>,
   ) => {
     const backQueue: VertexEx<WithStep>[] = [vertex2];
     if (vertex1.step === vertex2.step) backQueue.push(vertex1);
@@ -21,13 +21,12 @@ export const findCycles = (graph: ChemGraph<WithStep>): GraphCycle[] => {
       const vertex = backQueue.shift();
     }
     throw new Error(
-      `v1: ${vertex1.index}, ${vertex1.step}; v2: ${vertex2.index}, ${vertex2.step}`
+      `v1: ${vertex1.index}, ${vertex1.step}; v2: ${vertex2.index}, ${vertex2.step}`,
     );
   };
   const NA = vertices.length + 1;
   if (NA !== 1) {
     vertices.forEach((vertex) => {
-      // eslint-disable-next-line no-param-reassign
       vertex.step = NA;
     });
 

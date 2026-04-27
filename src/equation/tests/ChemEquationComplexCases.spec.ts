@@ -142,7 +142,7 @@ describe("ChemEquationComplexCases", () => {
     expect(eq.getMessage()).toBe("");
     expect(eq.K.join(" ")).toBe("2 2 1 1 1 10");
     expect(eq.getExpr()?.src?.trim()).toBe(
-      `2CuSO4*5H2O + 2NaBr "T"-> Cu2SO4 + Na2SO4 + Br2 + 10H2O`
+      `2CuSO4*5H2O + 2NaBr "T"-> Cu2SO4 + Na2SO4 + Br2 + 10H2O`,
     );
   });
 

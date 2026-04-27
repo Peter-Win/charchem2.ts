@@ -19,8 +19,8 @@ describe("createMathMLNode", () => {
           atom: PeriodicTable.dict.Fe,
           color: "brown",
         },
-        ctx
-      )
+        ctx,
+      ),
     ).toEqual({
       tag: "mi",
       color: "brown",
@@ -33,8 +33,8 @@ describe("createMathMLNode", () => {
           type: "atom",
           atom: PeriodicTable.dict.K,
         },
-        ctx
-      )
+        ctx,
+      ),
     ).toEqual({
       tag: "mi",
       attrs: { mathvariant: "normal" },
@@ -81,35 +81,35 @@ describe("createMathMLNode", () => {
   it("item", () => {
     expect(cvt("Al")).toBe("<mi>Al</mi>");
     expect(cvt("H2O")).toBe(
-      `<mrow><msub><mi mathvariant="normal">H</mi><mn>2</mn></msub><mi mathvariant="normal">O</mi></mrow>`
+      `<mrow><msub><mi mathvariant="normal">H</mi><mn>2</mn></msub><mi mathvariant="normal">O</mi></mrow>`,
     );
     // isotope
     expect(cvt("D2")).toBe(
-      `<msub><mi mathvariant="normal">D</mi><mn>2</mn></msub>`
+      `<msub><mi mathvariant="normal">D</mi><mn>2</mn></msub>`,
     );
     // abstract element
     expect(cvt("{R}")).toBe(`<mi mathvariant="normal">R</mi>`);
     expect(cvt("{R^1}")).toBe(
-      `<msup><mi mathvariant="normal">R</mi><mi mathvariant="normal">1</mi></msup>`
+      `<msup><mi mathvariant="normal">R</mi><mi mathvariant="normal">1</mi></msup>`,
     );
     expect(cvt("$color(green){Hal_2}")).toBe(
-      `<msub style="color: green"><mi mathvariant="normal">Hal</mi><mi mathvariant="normal">2</mi></msub>`
+      `<msub style="color: green"><mi mathvariant="normal">Hal</mi><mi mathvariant="normal">2</mi></msub>`,
     );
     // radical
     expect(cvt("Me2O")).toBe(
-      `<mrow><msub><mi>Me</mi><mn>2</mn></msub><mi mathvariant="normal">O</mi></mrow>`
+      `<mrow><msub><mi>Me</mi><mn>2</mn></msub><mi mathvariant="normal">O</mi></mrow>`,
     );
     // comma
     expect(cvt("Ca,Mg")).toBe(`<mrow><mi>Ca</mi><mo>,</mo><mi>Mg</mi></mrow>`);
     // comment
     expect(cvt(`Fe"AB{\\color{red}CD}EF"`)).toBe(
-      `<mrow><mi>Fe</mi><mrow><mtext>AB</mtext><mtext style="color: red">CD</mtext><mtext>EF</mtext></mrow></mrow>`
+      `<mrow><mi>Fe</mi><mrow><mtext>AB</mtext><mtext style="color: red">CD</mtext><mtext>EF</mtext></mrow></mrow>`,
     );
   });
 
   it("space in comment", () => {
     expect(cvt(`Cu"; "Cd`)).toBe(
-      `<mrow><mi>Cu</mi><mtext>;&nbsp;</mtext><mi>Cd</mi></mrow>`
+      `<mrow><mi>Cu</mi><mtext>;&nbsp;</mtext><mi>Cd</mi></mrow>`,
     );
   });
 });

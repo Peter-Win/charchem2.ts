@@ -14,8 +14,8 @@ describe("isWorkableForGraph", () => {
     expect(isWorkableForGraph(compile("{M}2SO4"))).toBe(true);
     expect(
       isWorkableForGraph(
-        compile(`CaCO3 + H2SO4"(aq)" -> CaSO4"|v" + CO2"|^" + H2O`)
-      )
+        compile(`CaCO3 + H2SO4"(aq)" -> CaSO4"|v" + CO2"|^" + H2O`),
+      ),
     ).toBe(true);
   });
 });

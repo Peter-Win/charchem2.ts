@@ -8,7 +8,7 @@ import { MathMLOptions, mathMLRootAttrs } from "./MathMLOptions";
 
 export const buildMathML = (
   rootNode: TextNode,
-  options?: MathMLOptions
+  options?: MathMLOptions,
 ): XmlNode => {
   const ctx: CtxCreateMathMLNode = {};
   const dstNode: XmlNode = {

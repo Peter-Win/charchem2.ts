@@ -20,8 +20,8 @@ export const PeriodicTable = Object.freeze({
         (id, index) =>
           new ChemAtom(index + 1, id, massMap[id][0], {
             epsilonMass: massMap[id][1],
-          })
-      )
+          }),
+      ),
     );
     elementsCache = list;
     return list;
@@ -40,8 +40,8 @@ export const PeriodicTable = Object.freeze({
     if (isotopesCache) return isotopesCache;
     const list = Object.freeze(
       isotopesDef.map(
-        ([n, id, mass, stable]) => new ChemAtom(n, id, mass, { stable })
-      )
+        ([n, id, mass, stable]) => new ChemAtom(n, id, mass, { stable }),
+      ),
     );
     isotopesCache = list;
     return list;

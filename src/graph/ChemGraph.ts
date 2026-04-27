@@ -28,6 +28,6 @@ export const otherVertex = ({ v0, v1 }: Edge, vIndex: Int): Int =>
 
 export const getChiralDir = (
   { v1, chiralDir }: Edge,
-  vIndex: Int
+  vIndex: Int,
 ): -1 | 0 | 1 =>
-  vIndex === v1 ? (-(chiralDir ?? 0) as -1 | 0 | 1) : chiralDir ?? 0;
+  vIndex === v1 ? (-(chiralDir ?? 0) as -1 | 0 | 1) : (chiralDir ?? 0);

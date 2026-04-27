@@ -36,7 +36,7 @@ interface ResultBuildOp {
 export const buildOp = (op: ChemOp, ctx: StructBuilderCtx): ResultBuildOp => {
   const comms: [
     ResultTextWithMarkup | undefined,
-    ResultTextWithMarkup | undefined
+    ResultTextWithMarkup | undefined,
   ] = [
     ifDef(op.commentPre, (it) => buildOpComment(it, ctx, op.color)),
     ifDef(op.commentPost, (it) => buildOpComment(it, ctx, op.color)),
@@ -44,7 +44,7 @@ export const buildOp = (op: ChemOp, ctx: StructBuilderCtx): ResultBuildOp => {
   const { srcText, dstText } = op;
   const commWidth = comms.reduce(
     (width, com) => Math.max(width, com ? com.fig.bounds.width : 0),
-    0
+    0,
   );
   const frame = new FigFrame();
   const style = ctx.imgProps.getStyleColored("operation", op.color);
@@ -58,7 +58,7 @@ export const buildOp = (op: ChemOp, ctx: StructBuilderCtx): ResultBuildOp => {
   });
   frame.addFigure(figOp, true);
   comms.forEach((com, i) =>
-    ifDef(com, (it) => addOpComment(frame, irc, it, i === 0))
+    ifDef(com, (it) => addOpComment(frame, irc, it, i === 0)),
   );
   return { frame, center: irc.center };
 };
@@ -341,13 +341,15 @@ const addOpComment = (
   frame: FigFrame,
   opRect: Rect,
   comm: ResultTextWithMarkup,
-  isTop: boolean
+  isTop: boolean,
 ): void => {
   const { fig, irc } = comm;
   const { bounds } = fig;
   fig.org.set(
     irc.left + opRect.width / 2 - irc.width / 2,
-    isTop ? -(bounds.bottom - irc.bottom) + opRect.top : opRect.bottom - irc.top
+    isTop
+      ? -(bounds.bottom - irc.bottom) + opRect.top
+      : opRect.bottom - irc.top,
   );
   frame.addFigure(fig, true);
 };
@@ -355,7 +357,7 @@ const addOpComment = (
 const buildOpComment = (
   comm: ChemComment,
   ctx: StructBuilderCtx,
-  color: string | undefined
+  color: string | undefined,
 ): ResultTextWithMarkup => {
   const textProps = ctx.imgProps.getStyleColored("opComment", color);
   return drawTextWithMarkup(comm.text, ctx, textProps);

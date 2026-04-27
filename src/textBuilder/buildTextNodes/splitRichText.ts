@@ -4,11 +4,11 @@ import { TextNode } from "./TextNode";
 export const splitRichText = (
   srcText: string,
   textColor: string | undefined,
-  needSrc?: boolean
+  needSrc?: boolean,
 ): TextNode => {
   const onChunk = (
     chunk: MarkupChunk | string,
-    superColor: string | undefined
+    superColor: string | undefined,
   ): TextNode => {
     if (typeof chunk === "string") {
       return {

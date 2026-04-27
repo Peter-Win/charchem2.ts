@@ -26,7 +26,7 @@ describe("AgentCmdMul", () => {
     imgProps.mulRadius = 0;
     const { agentFrame } = buildAgentPrior(
       agent,
-      createStructBuilderCtx(surface, imgProps)
+      createStructBuilderCtx(surface, imgProps),
     );
     saveSurface("AgentCmdMul-bridgeBetweenNodes", agentFrame, surface);
     const { figures } = agentFrame;
@@ -49,7 +49,7 @@ describe("AgentCmdMul", () => {
     const imgProps = createTestImgProps(surface, 40);
     const { agentFrame } = buildAgentPrior(
       agent,
-      createStructBuilderCtx(surface, imgProps)
+      createStructBuilderCtx(surface, imgProps),
     );
     saveSurface("AgentCmdMul-first", agentFrame, surface);
     const { figures } = agentFrame;
@@ -57,7 +57,7 @@ describe("AgentCmdMul", () => {
     expect(figures[0]).toBeInstanceOf(FigFrame);
     expect((figures[0] as FigFrame).figures[0]).toBeInstanceOf(FigFrame);
     expect(
-      ((figures[0] as FigFrame).figures[0] as FigFrame).figures[0]
+      ((figures[0] as FigFrame).figures[0] as FigFrame).figures[0],
     ).toHaveProperty("text", "H");
     expect(figures[1]).toBeInstanceOf(FigText);
     expect(figures[1]).toHaveProperty("text", "3");
@@ -135,24 +135,24 @@ describe("AgentCmdMul", () => {
     const imgProps = createTestImgProps(surface, 40);
     const { agentFrame } = buildAgentPrior(
       agent,
-      createStructBuilderCtx(surface, imgProps)
+      createStructBuilderCtx(surface, imgProps),
     );
     const figMulK = agentFrame.figures.find(
       (f) =>
         f instanceof FigFrame &&
         f.figures[1] instanceof FigText &&
-        f.figures[1].text === "5"
+        f.figures[1].text === "5",
     );
     expect(figMulK).toBeDefined();
     const figBB = agentFrame.figures.find(
       (f) =>
         f instanceof FigFrame &&
         f.figures[0] instanceof FigText &&
-        f.figures[0].text === "["
+        f.figures[0].text === "[",
     );
     expect(figBB).toBeDefined();
     expect(figMulK!.getRelativeBounds().right).toBeLessThanOrEqual(
-      figBB!.getRelativeBounds().left + 0.01
+      figBB!.getRelativeBounds().left + 0.01,
     );
   });
   it("Empty node + multiplier", () => {
@@ -165,7 +165,7 @@ describe("AgentCmdMul", () => {
     const imgProps = createTestImgProps(surface, 40);
     const { agentFrame } = buildAgentPrior(
       agent,
-      createStructBuilderCtx(surface, imgProps)
+      createStructBuilderCtx(surface, imgProps),
     );
     saveSurface("AgentCmdMul-emptyNode-mul", agentFrame, surface);
     // Фрейм для атома C
@@ -176,12 +176,12 @@ describe("AgentCmdMul", () => {
         fr.figures[0] instanceof FigFrame && // фрейм элемента узла
         fr.figures[0].figures.length === 1 &&
         fr.figures[0].figures[0] instanceof FigText && // текст C
-        fr.figures[0].figures[0].text === "C"
+        fr.figures[0].figures[0].text === "C",
     );
     expect(frC).toBeDefined();
     // Фрейм множителя содержит две текстовых фигуры: символ множителя и коэффициент
     const frMul = agentFrame.figures.find(
-      (fr) => fr instanceof FigFrame && fr.figures.length === 2
+      (fr) => fr instanceof FigFrame && fr.figures.length === 2,
     );
     expect(frMul).toBeDefined();
     // Важно, чтобы по высоте они должны совпасть (т.к. используется одинаковый шрифт)
@@ -198,7 +198,7 @@ describe("AgentCmdMul", () => {
     const imgProps = createTestImgProps(surface, 40);
     const { agentFrame } = buildAgentPrior(
       agent,
-      createStructBuilderCtx(surface, imgProps)
+      createStructBuilderCtx(surface, imgProps),
     );
     saveSurface("AgentCmdMul-twoMuls", agentFrame, surface);
     const { figures } = agentFrame;
@@ -209,28 +209,28 @@ describe("AgentCmdMul", () => {
     expect((figures[0] as FigFrame).figures.length).toBe(1);
     expect((figures[0] as FigFrame).figures[0]).toBeInstanceOf(FigFrame);
     expect(
-      ((figures[0] as FigFrame).figures[0] as FigFrame).figures.length
+      ((figures[0] as FigFrame).figures[0] as FigFrame).figures.length,
     ).toBe(1);
     expect(
-      ((figures[0] as FigFrame).figures[0] as FigFrame).figures[0]
+      ((figures[0] as FigFrame).figures[0] as FigFrame).figures[0],
     ).toBeInstanceOf(FigText);
     expect(
       (((figures[0] as FigFrame).figures[0] as FigFrame).figures[0] as FigText)
-        .text
+        .text,
     ).toBe("H");
 
     expect(figures[1]).toBeInstanceOf(FigFrame);
     expect((figures[1] as FigFrame).figures.length).toBe(1);
     expect((figures[1] as FigFrame).figures[0]).toBeInstanceOf(FigFrame);
     expect(
-      ((figures[1] as FigFrame).figures[0] as FigFrame).figures.length
+      ((figures[1] as FigFrame).figures[0] as FigFrame).figures.length,
     ).toBe(1);
     expect(
-      ((figures[1] as FigFrame).figures[0] as FigFrame).figures[0]
+      ((figures[1] as FigFrame).figures[0] as FigFrame).figures[0],
     ).toBeInstanceOf(FigText);
     expect(
       (((figures[1] as FigFrame).figures[0] as FigFrame).figures[0] as FigText)
-        .text
+        .text,
     ).toBe("C");
 
     expect(figures[2]).toBeInstanceOf(FigFrame);
@@ -252,14 +252,14 @@ describe("AgentCmdMul", () => {
     expect((figures[5] as FigFrame).figures.length).toBe(1);
     expect((figures[5] as FigFrame).figures[0]).toBeInstanceOf(FigFrame);
     expect(
-      ((figures[5] as FigFrame).figures[0] as FigFrame).figures.length
+      ((figures[5] as FigFrame).figures[0] as FigFrame).figures.length,
     ).toBe(1);
     expect(
-      ((figures[5] as FigFrame).figures[0] as FigFrame).figures[0]
+      ((figures[5] as FigFrame).figures[0] as FigFrame).figures[0],
     ).toBeInstanceOf(FigText);
     expect(
       (((figures[5] as FigFrame).figures[0] as FigFrame).figures[0] as FigText)
-        .text
+        .text,
     ).toBe("F");
 
     expect(figures[6]).toBeInstanceOf(FigFrame);

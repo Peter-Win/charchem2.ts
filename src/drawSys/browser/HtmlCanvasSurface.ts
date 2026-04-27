@@ -67,7 +67,7 @@ export class HtmlCanvasSurface implements AbstractSurface {
   drawPath(
     org: Point | Matrix2x3,
     segments: PathSeg[],
-    style: PathStyle
+    style: PathStyle,
   ): void {
     const { htmlContext } = this;
     htmlContext.save();
@@ -101,7 +101,7 @@ export class HtmlCanvasSurface implements AbstractSurface {
     offset: Point,
     center: Point,
     radius: Point,
-    style: PathStyle
+    style: PathStyle,
   ): void {
     const { htmlContext } = this;
     htmlContext.save();
@@ -113,7 +113,7 @@ export class HtmlCanvasSurface implements AbstractSurface {
       radius.y,
       0,
       0,
-      2 * Math.PI
+      2 * Math.PI,
     );
     if (style.fill) htmlContext.fill();
     if (style.stroke) htmlContext.stroke();

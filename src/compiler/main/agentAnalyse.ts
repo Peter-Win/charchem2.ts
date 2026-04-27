@@ -24,7 +24,7 @@ import { stateFuncName } from "../state/stateFuncName";
 
 export const agentAnalyse = (
   compiler: ChemCompiler,
-  onDefault: () => Int
+  onDefault: () => Int,
 ): Int => {
   compiler.agentMode = "in";
   const c = compiler.curChar();

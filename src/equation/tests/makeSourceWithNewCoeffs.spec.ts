@@ -24,7 +24,7 @@ describe("makeSourceWithNewCoeffs", () => {
       [1, 1, 2],
       expr.getAgents(),
       src,
-      expr.srcMap!
+      expr.srcMap!,
     );
     expect(newSrc).toBe("Si(OC2H5)4 → SiO2 + 2Et2O");
   });

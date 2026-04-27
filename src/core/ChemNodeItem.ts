@@ -13,7 +13,10 @@ export interface LewisDot {
 }
 
 export class ChemNodeItem extends ChemObj {
-  constructor(public readonly obj: ChemSubObj, public n: ChemK = ChemK.one) {
+  constructor(
+    public readonly obj: ChemSubObj,
+    public n: ChemK = ChemK.one,
+  ) {
     super();
   }
 

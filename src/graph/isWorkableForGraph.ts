@@ -2,7 +2,7 @@ import { ChemAgent } from "../core/ChemAgent";
 import { ChemExpr } from "../core/ChemExpr";
 
 export const isWorkableForGraph = (
-  exprOrAgent: ChemExpr | ChemAgent
+  exprOrAgent: ChemExpr | ChemAgent,
 ): boolean => {
   if (exprOrAgent instanceof ChemExpr) {
     if (!exprOrAgent.isOk()) return false;

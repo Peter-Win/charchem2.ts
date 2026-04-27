@@ -4,7 +4,10 @@ import { Int } from "../types";
  * rational fraction
  */
 export class Rational {
-  constructor(public x: Int = 0, public y: Int = 1) {}
+  constructor(
+    public x: Int = 0,
+    public y: Int = 1,
+  ) {}
 
   set(value: Int): this {
     this.x = value;

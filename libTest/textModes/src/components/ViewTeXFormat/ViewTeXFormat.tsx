@@ -33,14 +33,14 @@ export const ViewTeXFormat: React.FC = observer(() => {
       },
     {
       name: "MathJax",
-      extra: <a href="https://docs.mathjax.org/en/latest/basic/mathjax.html" target="_blank">About MathJax</a>,
+      extra: <a href="https://docs.mathjax.org/en/latest/basic/mathjax.html" target="_blank" rel="noreferrer">About MathJax</a>,
       render: <div className={styles.demo}>
         <MathJaxView code={code} input={{type: "tex"}} />
       </div>,
     },
     {
       name: "KaTeX",
-      extra: <a href="https://katex.org/" target="_blank">About KaTeX</a>,
+      extra: <a href="https://katex.org/" target="_blank" rel="noreferrer">About KaTeX</a>,
       render: (
         <SafeBox>
           <div className={styles.demo}>

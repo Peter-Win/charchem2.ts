@@ -2,7 +2,7 @@ import { CommonFontFace, FontFaceBBox } from "../CommonFontFace";
 
 export const scaleFontFace = (
   src: CommonFontFace,
-  scale: number
+  scale: number,
 ): CommonFontFace => {
   const dst: CommonFontFace = { ...src };
 

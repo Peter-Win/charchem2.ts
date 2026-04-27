@@ -21,7 +21,7 @@ const monoCycle = (ctx: PAgentCtx): Point | undefined => {
   return cy.nodes
     .reduce(
       (sum, node) => sum.iadd(getNodeCenterPos(getNodeInfo(node, nodesInfo))),
-      new Point()
+      new Point(),
     )
     .scale(1 / cy.nodes.length);
 };
@@ -30,7 +30,7 @@ export const findExplicitlyCentred = (allNodesInfo: NodeInfo[]): NodeInfo[] =>
   allNodesInfo.filter(({ node }) => node.bCenter);
 
 export const calcExplicitCenter = (
-  expNodesInfo: NodeInfo[]
+  expNodesInfo: NodeInfo[],
 ): Point | undefined => {
   const centers: Point[] = expNodesInfo.map((ni) => getNodeCenterPos(ni));
   if (centers.length === 0) {
@@ -45,7 +45,7 @@ export const calcExplicitCenter = (
 
 const findDefaultCenter = (
   nodesInfo: NodeInfo[],
-  rect: Rect
+  rect: Rect,
 ): Point | undefined =>
   ifDef(findDefaultY(nodesInfo), (y) => new Point(rect.center.x, y));
 

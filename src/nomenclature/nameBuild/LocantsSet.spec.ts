@@ -27,7 +27,7 @@ describe("LocantsSet", () => {
     const b1 = LocantsSet.create([[1], [1, 1], [2, 1], [1, 2], [3, 2], [1, 3]]);
     const b2 = LocantsSet.create([[1], [1, 1], [3, 1], [1, 2], [2, 2], [1, 3]]);
     expect(`${b1} is lower than ${b2}`).toBe(
-      "1,1′,2′,1′′,3′′,1′′′ is lower than 1,1′,3′,1′′,2′′,1′′′"
+      "1,1′,2′,1′′,3′′,1′′′ is lower than 1,1′,3′,1′′,2′′,1′′′",
     );
     expect(b1.less(b2)).toBe(true);
     expect(b2.less(b1)).toBe(false);
@@ -36,7 +36,7 @@ describe("LocantsSet", () => {
     const c1 = LocantsSet.create([["N"], ["α"], [1], [2]]);
     const c2 = LocantsSet.createNums([1, 2, 4, 6]);
     expect(`${c1} is lower than ${c2}`).toBe(
-      "<i>N</i>,α,1,2 is lower than 1,2,4,6"
+      "<i>N</i>,α,1,2 is lower than 1,2,4,6",
     );
   });
 });

@@ -6,13 +6,13 @@ describe("renderXmlNode", () => {
     expect(
       renderXmlNode({
         tag: "br",
-      })
+      }),
     ).toBe("<br />");
     expect(
       renderXmlNode({
         tag: "meta",
         attrs: { charset: "utf-8" },
-      })
+      }),
     ).toBe(`<meta charset="utf-8" />`);
   });
   it("text content", () => {
@@ -23,10 +23,10 @@ describe("renderXmlNode", () => {
       content: "value < 5",
     };
     expect(renderXmlNode(node)).toBe(
-      `<div data-size="small" style="color: magenta">value &lt; 5</div>`
+      `<div data-size="small" style="color: magenta">value &lt; 5</div>`,
     );
     expect(renderXmlNode(node, { indent: " " }, 2)).toBe(
-      `  <div data-size="small" style="color: magenta">value &lt; 5</div>\n`
+      `  <div data-size="small" style="color: magenta">value &lt; 5</div>\n`,
     );
   });
   it("sub nodes 1", () => {
@@ -39,10 +39,10 @@ describe("renderXmlNode", () => {
       ],
     };
     expect(renderXmlNode(node)).toBe(
-      `<math><mi mathvariant="normal">a</mi><mo>=</mo><mn>5</mn></math>`
+      `<math><mi mathvariant="normal">a</mi><mo>=</mo><mn>5</mn></math>`,
     );
     expect(renderXmlNode(node, { indent: "  " })).toBe(
-      `<math>\n  <mi mathvariant="normal">a</mi>\n  <mo>=</mo>\n  <mn>5</mn>\n</math>\n`
+      `<math>\n  <mi mathvariant="normal">a</mi>\n  <mo>=</mo>\n  <mn>5</mn>\n</math>\n`,
     );
   });
 
@@ -57,10 +57,10 @@ describe("renderXmlNode", () => {
       ],
     };
     expect(renderXmlNode(node)).toBe(
-      `<level1><level2><level3 /></level2></level1>`
+      `<level1><level2><level3 /></level2></level1>`,
     );
     expect(renderXmlNode(node, { indent: "  " })).toBe(
-      `<level1>\n  <level2>\n    <level3 />\n  </level2>\n</level1>\n`
+      `<level1>\n  <level2>\n    <level3 />\n  </level2>\n</level1>\n`,
     );
   });
 });
@@ -78,9 +78,9 @@ test("renderXmlNodes", () => {
   expect(renderXmlNodes(undefined)).toBe("");
   expect(renderXmlNodes([], {}, 1)).toBe("");
   expect(renderXmlNodes([n1], { indent: " " })).toBe(
-    `<span id="A">Abc</span>\n`
+    `<span id="A">Abc</span>\n`,
   );
   expect(renderXmlNodes([n1, n2], { indent: "  ", noSelfClosed: true })).toBe(
-    `<span id="A">Abc</span>\n<div>\n  <hr></hr>\n</div>\n`
+    `<span id="A">Abc</span>\n<div>\n  <hr></hr>\n</div>\n`,
   );
 });

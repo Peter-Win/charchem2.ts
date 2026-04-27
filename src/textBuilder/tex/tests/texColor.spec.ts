@@ -6,9 +6,9 @@ test("getTexColor", () => {
   expect(getTexColor("#000", { ...ctx, colors: "predefined" })).toBe("black");
   expect(getTexColor("#000", { ...ctx, colors: "dvips" })).toBe("Black");
   expect(getTexColor("#98CC70", { ...ctx, colors: "dvips" })).toBe(
-    "YellowGreen"
+    "YellowGreen",
   );
   expect(getTexColor("#98CC71", { ...ctx, colors: "dvips" })).toBe(
-    "YellowGreen"
+    "YellowGreen",
   );
 });

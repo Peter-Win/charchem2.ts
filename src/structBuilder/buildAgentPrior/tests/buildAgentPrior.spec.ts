@@ -16,7 +16,7 @@ describe("buildAgentPrior", () => {
     const imgProps = createTestImgProps(surface, 40);
     const { agentFrame } = buildAgentPrior(
       agent,
-      createStructBuilderCtx(surface, imgProps)
+      createStructBuilderCtx(surface, imgProps),
     );
     saveSurface("buildAgentPrior-1", agentFrame, surface);
   });

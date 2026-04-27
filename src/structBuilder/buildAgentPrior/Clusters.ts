@@ -17,7 +17,7 @@ export interface Cluster {
 export const insertToCluster = (
   cluster: Cluster,
   node: ChemNode,
-  nodesInfo: NodeInfo[]
+  nodesInfo: NodeInfo[],
 ) => {
   const { frame, nodes } = cluster;
   nodes.add(node.index);
@@ -33,7 +33,7 @@ interface ClusterConnection {
 
 const getClusterBoxConnection = (
   cluster: Cluster,
-  isLeft: boolean
+  isLeft: boolean,
 ): ClusterConnection => {
   const { bounds } = cluster.frame;
   return {
@@ -46,7 +46,7 @@ export const getClusterConnection = (
   allBox: boolean,
   cluster: Cluster,
   nodeInfo: NodeInfo,
-  isLeft: boolean
+  isLeft: boolean,
 ): ClusterConnection => {
   const { res } = nodeInfo;
   let rcNode: Rect | undefined;
@@ -88,19 +88,19 @@ export const getClusterConnection = (
 
 const isBothBaseline = (
   srcConn: ClusterConnection,
-  dstConn: ClusterConnection
+  dstConn: ClusterConnection,
 ) => srcConn.yBase !== undefined && dstConn.yBase !== undefined;
 
 export const calcOffset = (
   srcConn: ClusterConnection,
   dstConn: ClusterConnection,
-  step: Point
+  step: Point,
 ) =>
   new Point(
     srcConn.x - dstConn.x + step.x,
     (isBothBaseline(srcConn, dstConn)
       ? srcConn.yBase! - dstConn.yBase!
-      : srcConn.yMiddle - dstConn.yMiddle) + step.y
+      : srcConn.yMiddle - dstConn.yMiddle) + step.y,
   );
 
 export const calcOffsetAbs = (c0: Cluster, c1: Cluster, step: Point): Point => {
@@ -114,7 +114,7 @@ export const calcOffsetAbs = (c0: Cluster, c1: Cluster, step: Point): Point => {
 export const mergeClusters = (
   srcCluster: Cluster,
   dstCluster: Cluster,
-  offset: Point
+  offset: Point,
 ): void => {
   addAllSet(srcCluster.nodes, dstCluster.nodes);
   dstCluster.frame.figures.forEach((fig) => {
@@ -150,7 +150,7 @@ export class Clusters {
 
   findByIndex(nodeIndex: number): FindResult {
     const clusterIndex = this.clusters.findIndex((cl) =>
-      cl.nodes.has(nodeIndex)
+      cl.nodes.has(nodeIndex),
     );
     if (clusterIndex < 0)
       throw new Error(`Not found node with index ${nodeIndex}`);
@@ -167,7 +167,7 @@ export class Clusters {
     src: Connector,
     dst: Connector,
     step: Point,
-    bAbs?: boolean
+    bAbs?: boolean,
   ) {
     const { cluster: srcCluster } = this.findByNode(src.node);
     if (!dst.node) {
@@ -182,7 +182,7 @@ export class Clusters {
     }
     const srcNodeInfo = getNodeInfo(src.node, ctx.nodesInfo);
     const { cluster: dstCluster, clusterIndex: dstPos } = this.findByNode(
-      dst.node
+      dst.node,
     );
     const dstNodeInfo = getNodeInfo(dst.node, ctx.nodesInfo);
     const leftToRight = step.x >= 0;
@@ -191,14 +191,14 @@ export class Clusters {
       src.allBox,
       srcCluster,
       srcNodeInfo,
-      !leftToRight
+      !leftToRight,
     );
 
     const dstConn = getClusterConnection(
       dst.allBox,
       dstCluster,
       dstNodeInfo,
-      leftToRight
+      leftToRight,
     );
     if (bAbs) {
       offset = calcOffsetAbs(srcCluster, dstCluster, step);
@@ -225,7 +225,7 @@ export class Clusters {
       const offset = calcOffset(
         getClusterBoxConnection(c0, false),
         getClusterBoxConnection(c1, true),
-        new Point(ctx.props.horizLine, 0)
+        new Point(ctx.props.horizLine, 0),
       );
       mergeClusters(c0, c1, offset);
       clusters.splice(1, 1);

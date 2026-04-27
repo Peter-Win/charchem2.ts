@@ -19,7 +19,7 @@ describe("buildTextFormat", () => {
     expect(
       toText("H2S", {
         sub: (s) => `_${s}_`,
-      })
+      }),
     ).toBe("H_2_S");
   });
 
@@ -29,7 +29,7 @@ describe("buildTextFormat", () => {
     expect(
       toText("SO4^2-", {
         sup: (s) => `^{${s}}`,
-      })
+      }),
     ).toBe("SO4^{2-}");
   });
 
@@ -44,31 +44,31 @@ describe("buildTextFormat", () => {
       toText("Fe(+3)", {
         oxidationState: "sup",
         sup: (s) => `^(${s})`,
-      })
+      }),
     ).toBe("Fe^(+3)");
     expect(
       toText("Fe(iii)^3+", {
         oxidationState: "sup",
         scriptDivider: ",",
         sup: (s) => `^[${s}]`,
-      })
+      }),
     ).toBe("Fe^[III,3+]");
     expect(
       toText("Fe(ii)2", {
         oxidationState: (c, x) => `${c}<${x}>`,
-      })
+      }),
     ).toBe("Fe<II>2");
     expect(
       toText("$M(16)O(+2)", {
         oxidationState: "*LT",
         scriptDivider: ";",
-      })
+      }),
     ).toBe("^+2;16O");
     expect(
       toText("$M(16)O(+2)", {
         oxidationState: "LT*",
         scriptDivider: ";",
-      })
+      }),
     ).toBe("^16;+2O");
   });
 
@@ -76,7 +76,7 @@ describe("buildTextFormat", () => {
     expect(toText("Ca(OH)2")).toBe("Ca(OH)2");
     expect(toText("Ca(OH)2", { sub: "withUnderscore" })).toBe("Ca(OH)_2");
     expect(toText("Ca(OH)2", { sub: (s) => s.replace("2", "\u2082") })).toBe(
-      "Ca(OH)₂"
+      "Ca(OH)₂",
     );
     expect(toText("[OH]^-")).toBe("[OH]^-");
     expect(toText("[OH]^-", { sup: "text" })).toBe("[OH]-");
@@ -94,7 +94,7 @@ describe("buildTextFormat", () => {
     expect(toText("{R^1}OH", { sup: "text" })).toBe("R1OH");
     expect(toText("{R^1}OH", { sup: toSuperscript })).toBe("R¹OH");
     expect(toText("{A{\\color{red}BC}D}OH", { sup: toSuperscript })).toBe(
-      "ABCDOH"
+      "ABCDOH",
     );
   });
 
@@ -102,50 +102,50 @@ describe("buildTextFormat", () => {
     expect(toText(`H2"|^"`)).toBe("H2↑");
     expect(toText(`H2", [Delta]=1000"`)).toBe("H2, Δ=1000");
     expect(toText(`"A{\\color{red}BC}D"OH`, { sup: toSuperscript })).toBe(
-      "ABCDOH"
+      "ABCDOH",
     );
   });
 
   it("simple operations", () => {
     expect(toText("2H2 + O2 -> 2H2O")).toBe("2H2 + O2 -> 2H2O");
     expect(toText("2H2 + O2 -> 2H2O", { operations: "dstText" })).toBe(
-      "2H2 + O2 → 2H2O"
+      "2H2 + O2 → 2H2O",
     );
   });
 
   it("operations with comments", () => {
     expect(toText(`B "above"-->"below" C`)).toBe("B above->below C");
     expect(toText(`B "above"-->"below" C`, { opComments: "ignore" })).toBe(
-      "B -> C"
+      "B -> C",
     );
     expect(toText(`B "above"-->"below" C`, { opComments: "quoted" })).toBe(
-      `B "above"->"below" C`
+      `B "above"->"below" C`,
     );
     expect(toText(`B "above"-->"below" C`, { opComments: "quoted" })).toBe(
-      `B "above"->"below" C`
+      `B "above"->"below" C`,
     );
     const opComments = (text: string, where: "above" | "below") =>
       where === "above" ? `^${text}^` : `_${text}_`;
     expect(toText(`B "top"-->"bottom" C`, { opComments })).toBe(
-      `B ^top^->_bottom_ C`
+      `B ^top^->_bottom_ C`,
     );
     expect(
       toText(`{A} "H_2SO_4"--> {B}`, {
         sub: toSubscript,
         operations: "dstText",
-      })
+      }),
     ).toBe("A H₂SO₄—→ B");
   });
 
   it("mineral", () => {
     expect(toText(`(Ca'0.8',Mg'0.2')(OH)2CO3*15H2O`)).toBe(
-      "(Ca0.8,Mg0.2)(OH)2CO3*15H2O"
+      "(Ca0.8,Mg0.2)(OH)2CO3*15H2O",
     );
     expect(
       toText(`(Ca'0.8',Mg'0.2')(OH)2CO3*15H2O`, {
         mul: "×",
         sub: toSubscript,
-      })
+      }),
     ).toBe("(Ca₀.₈,Mg₀.₂)(OH)₂CO₃×15H₂O");
   });
 });

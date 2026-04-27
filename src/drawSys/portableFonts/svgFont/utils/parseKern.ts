@@ -6,7 +6,7 @@ export const parseKern = (
   kern: XmlAttrs,
   codeMap: Record<string, SvgFontGlyph>,
   nameMap: Record<string, SvgFontGlyph>,
-  kernMap: Record<string, number> // IN/OUT
+  kernMap: Record<string, number>, // IN/OUT
 ) => {
   const k: number = +kern.k!;
   if (!k) return;
@@ -32,7 +32,6 @@ export const parseKern = (
   };
   buildNames(kern.u1, kern.g1).forEach((name1) => {
     buildNames(kern.u2, kern.g2).forEach((name2) => {
-      // eslint-disable-next-line no-param-reassign
       kernMap[kernKey(name1, name2)] = k;
     });
   });

@@ -15,7 +15,7 @@ export interface ResultBuildNode {
 
 export const buildNode = (
   node: ChemNode,
-  ctx: StructBuilderCtx
+  ctx: StructBuilderCtx,
 ): ResultBuildNode | undefined => {
   if ((node.autoMode || isEmptyNode(node)) && !node.charge) {
     // auto node dont draw items. Example: /\/\

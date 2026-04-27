@@ -14,7 +14,7 @@ export class ChemAtom extends ChemSubObj {
     options?: {
       epsilonMass?: Double;
       stable?: boolean;
-    }
+    },
   ) {
     super();
     const { stable, epsilonMass } = options ?? {};

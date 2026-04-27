@@ -1,4 +1,3 @@
-/* eslint-disable no-param-reassign */
 import { Point } from "../math/Point";
 import { Int } from "../types";
 import { ChemCompiler } from "./ChemCompiler";
@@ -185,7 +184,7 @@ export class ChainSys {
         this.mergeSubChains(
           dstNode.subChain,
           srcNode.subChain,
-          bond.dir ?? new Point()
+          bond.dir ?? new Point(),
         );
       }
       this.curSubChainId = dstNode.subChain;

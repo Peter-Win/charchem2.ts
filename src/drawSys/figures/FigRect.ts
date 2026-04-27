@@ -7,7 +7,11 @@ import { Figure } from "./Figure";
 export class FigRect extends Figure {
   readonly radius?: Point;
 
-  constructor(rect: Rect, public readonly style: PathStyle, radius?: Point) {
+  constructor(
+    rect: Rect,
+    public readonly style: PathStyle,
+    radius?: Point,
+  ) {
     super();
     this.bounds = rect.clone();
     this.radius = radius;
@@ -22,7 +26,7 @@ export class FigRect extends Figure {
       offset.plus(this.org),
       this.bounds,
       this.style,
-      this.radius
+      this.radius,
     );
   }
 }

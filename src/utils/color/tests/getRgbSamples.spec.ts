@@ -10,7 +10,7 @@ describe("getRgbSamples", () => {
       a: undefined,
     } satisfies ColorSamples);
     expect(getRgbSamples({ type: "name", name: "wrong name" }) ?? null).toBe(
-      null
+      null,
     );
   });
 
@@ -37,7 +37,7 @@ describe("getRgbSamples", () => {
       a: undefined,
     });
     expect(
-      getRgbSamples({ type: "rgb", r: 0, g: 255, b: 199, a: 127 })
+      getRgbSamples({ type: "rgb", r: 0, g: 255, b: 199, a: 127 }),
     ).toEqual({
       r: 0,
       g: 255,

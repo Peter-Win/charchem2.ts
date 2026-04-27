@@ -21,7 +21,7 @@ class BondDef {
     public readonly angle: Int,
     public readonly slope: Int,
     public readonly soft: boolean = false,
-    public readonly text?: string
+    public readonly text?: string,
   ) {}
 
   create(compiler: ChemCompiler, bondId: string): ChemBond {
@@ -79,7 +79,7 @@ const bondDefDict: Record<string, BondDef> = {
 };
 
 export const scanSimpleBond = (
-  compiler: ChemCompiler
+  compiler: ChemCompiler,
 ): ChemBond | undefined => {
   let bondId = "";
   let bondDef: BondDef | null = null;
@@ -98,7 +98,7 @@ export const scanSimpleBond = (
 export const createSimpleBond = (
   compiler: ChemCompiler,
   bond: ChemBond,
-  begin: number
+  begin: number,
 ) => {
   scanBondSuffix(compiler, bond);
   onOpenBond(compiler, bond, begin);

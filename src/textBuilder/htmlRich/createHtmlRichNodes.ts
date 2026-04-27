@@ -31,7 +31,7 @@ export type CtxHtmlRich = {
 
 export const createHtmlRichNodes = (
   srcNode: TextNode,
-  ctx: CtxHtmlRich
+  ctx: CtxHtmlRich,
 ): XmlNode[] => {
   const textTag = (content: string, cls?: HtmlRichClass) => [
     makeCchTag({ ctx, srcNode, content, cls }),
@@ -73,7 +73,7 @@ export const createHtmlRichNodes = (
     case "k":
       return textTag(
         srcNode.k.toString(),
-        srcNode.kType === "agent" ? "agent-k" : undefined
+        srcNode.kType === "agent" ? "agent-k" : undefined,
       );
     case "mul":
       return textTag("∙", "mul");
@@ -99,7 +99,7 @@ const bondMap: Record<string, string> = {
 
 const nodesList = (
   items: TextNode[] | undefined,
-  ctx: CtxHtmlRich
+  ctx: CtxHtmlRich,
 ): XmlNode[] =>
   (items ?? []).map((it) => createHtmlRichNodes(it, ctx)).flatMap((it) => it);
 
@@ -113,7 +113,7 @@ const hasOver = (srcNode: TextNode): boolean => {
 const makeGroup = (
   srcNode: TextNode,
   groupType: string | undefined,
-  ctx: CtxHtmlRich
+  ctx: CtxHtmlRich,
 ): XmlNode[] => {
   let cls: HtmlRichClass | HtmlRichClass[] | undefined;
   if (groupType === "expr") {
@@ -135,7 +135,7 @@ const makeGroup = (
 const optionalGroup = (
   list: TextNode[] | undefined,
   ctx: CtxHtmlRich,
-  cls?: HtmlRichClass | HtmlRichClass[]
+  cls?: HtmlRichClass | HtmlRichClass[],
 ): XmlNode => {
   let tag: XmlNode | undefined;
   if (list?.length === 1) {
@@ -176,7 +176,7 @@ const makeItem = (srcNode: TextNode, ctx: CtxHtmlRich): XmlNode[] => {
 const makeScripted = (
   srcNode: TextNode,
   ctx: CtxHtmlRich,
-  makeCenter: (items: TextNode[]) => XmlNode[]
+  makeCenter: (items: TextNode[]) => XmlNode[],
 ): XmlNode[] => {
   const { items = [] } = srcNode;
   const result: XmlNode[] = [];
@@ -184,7 +184,7 @@ const makeScripted = (
   const addScripts = (
     top: TextNode[] | undefined,
     bottom: TextNode[] | undefined,
-    left: boolean
+    left: boolean,
   ) => {
     result.push(
       makeCchTag({
@@ -192,7 +192,7 @@ const makeScripted = (
         srcNode: undefined,
         cls: left ? ["supsub", "supsub-left"] : "supsub",
         content: () => [optionalGroup(top, ctx), optionalGroup(bottom, ctx)],
-      })
+      }),
     );
   };
   if (scr.LT || scr.LB) addScripts(scr.LT, scr.LB, true);
@@ -205,7 +205,7 @@ const makeScripted = (
 
 const makeColumn = (
   col: ReturnType<typeof splitColumn>,
-  ctx: CtxHtmlRich
+  ctx: CtxHtmlRich,
 ): XmlNode[] => {
   if (!col.T && !col.B) {
     return nodesList(col.C, ctx);
@@ -228,7 +228,7 @@ const makeColumn = (
 const makeCharge = (
   srcNode: TextNode,
   chargeText: string,
-  ctx: CtxHtmlRich
+  ctx: CtxHtmlRich,
 ): XmlNode[] => {
   const create = (value: string) => {
     if (value === "-") {
@@ -255,7 +255,7 @@ const makeCharge = (
 
 const splitChargeText = (
   text: string,
-  create: (value: string) => XmlNode
+  create: (value: string) => XmlNode,
 ): XmlNode[] =>
   text
     .split(/(-)/)
@@ -327,7 +327,7 @@ const opContainer = (
   ctx: CtxHtmlRich,
   srcNode: TextNode,
   cls: HtmlRichClass,
-  content: () => XmlNode[]
+  content: () => XmlNode[],
 ): XmlNode[] => [makeCchTag({ ctx, srcNode, cls, content })];
 
 const makeComplexOp = (srcNode: TextNode, ctx: CtxHtmlRich): XmlNode[] => {

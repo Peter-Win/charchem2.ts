@@ -35,15 +35,15 @@ describe("markupFlat", () => {
   });
   it("sub- and super-script", () => {
     expect(toHtml("A_{11}^2 + B_{12}^3")).toBe(
-      "A<sub>11</sub><sup>2</sup> + B<sub>12</sub><sup>3</sup>"
+      "A<sub>11</sub><sup>2</sup> + B<sub>12</sub><sup>3</sup>",
     );
   });
   it("color", () => {
     expect(toHtml("A, \\color{red}B.")).toBe(
-      `A, <span style="color: red">B.</span>`
+      `A, <span style="color: red">B.</span>`,
     );
     expect(toHtml("A, {\\color{green}Green}, C")).toBe(
-      `A, <span style="color: green">Green</span>, C`
+      `A, <span style="color: green">Green</span>, C`,
     );
   });
 });

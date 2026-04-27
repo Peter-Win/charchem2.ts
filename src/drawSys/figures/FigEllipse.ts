@@ -7,7 +7,7 @@ export class FigEllipse extends Figure {
   constructor(
     center: Point,
     public readonly radius: Point,
-    public readonly style: PathStyle
+    public readonly style: PathStyle,
   ) {
     super();
     this.org = center;

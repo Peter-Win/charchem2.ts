@@ -7,7 +7,7 @@ import { StructBuilderCtx } from "./StructBuilderCtx";
 
 export const buildFrame = (
   expr: ChemExpr | ChemAgent,
-  ctx: StructBuilderCtx
+  ctx: StructBuilderCtx,
 ): FigFrame =>
   expr instanceof ChemExpr
     ? buildExpression(expr, ctx).frame

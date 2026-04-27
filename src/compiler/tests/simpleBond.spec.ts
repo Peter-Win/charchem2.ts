@@ -110,10 +110,10 @@ describe("SimpleBond", () => {
     expect(agent.bonds).toHaveLength(5);
     expect(agent.bonds[0]!.n).toBe(2.0);
     expect(
-      Array.from(agent.nodes[0]!.bonds).map((it) => it.debugText())
+      Array.from(agent.nodes[0]!.bonds).map((it) => it.debugText()),
     ).toEqual(["0(0*2)1"]);
     expect(
-      Array.from(agent.nodes[1]!.bonds).map((it) => it.debugText())
+      Array.from(agent.nodes[1]!.bonds).map((it) => it.debugText()),
     ).toEqual(["0(0*2)1", "1(90)2", "4(180)1"]);
   });
   it("ChainBreak", () => {
@@ -126,7 +126,7 @@ describe("SimpleBond", () => {
     expect(expr.getMessage()).toBe("");
     const agent = expr.getAgents()[0]!;
     expect(
-      agent.bonds.map((it) => `${it.linearText()}${it.soft ? "*" : ""}`)
+      agent.bonds.map((it) => `${it.linearText()}${it.soft ? "*" : ""}`),
     ).toEqual(["`|", "`-", "|", "-"]);
     expect(agent.nodes.map((it) => toText(makeBrutto(it)))).toEqual([
       "HN",

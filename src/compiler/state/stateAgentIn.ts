@@ -6,5 +6,5 @@ export const stateAgentIn: CompilerState = (compiler) =>
     compiler.error("Unknown element character '[C]'", {
       C: compiler.curChar(),
       pos: compiler.pos,
-    })
+    }),
   );

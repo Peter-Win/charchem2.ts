@@ -27,7 +27,7 @@ describe("parsePath", () => {
   });
   it("Bezier curves", () => {
     expect(
-      parsePath("M 10 80 C 40 10, 65 10, 95 80 S 150 150, 180 80")
+      parsePath("M 10 80 C 40 10, 65 10, 95 80 S 150 150, 180 80"),
     ).toEqual([
       { cmd: "M", rel: false, pt: { x: 10, y: 80 } },
       {
@@ -47,7 +47,7 @@ describe("parsePath", () => {
     A 30 50 0 0 1 162.55 162.45
     L 172.55 152.45
     A 30 50 -45 0 1 215.1 109.9
-    L 315 10`)
+    L 315 10`),
     ).toEqual([
       { cmd: "M", rel: false, pt: { x: 10, y: 315 } },
       { cmd: "L", rel: false, pt: { x: 110, y: 215 } },
