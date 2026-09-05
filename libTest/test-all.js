@@ -50,6 +50,7 @@ const reportText = `<!DOCTYPE html>
         <div>Node.js result</div>
         <img src="./formula.svg" width="300px" />
       </li>
+      <li><a href="../brackets/brackets-test.html">Brackets</a></li>
       <li><a href="../react-ts/dist/index.html">React result</a></li>
       <li><a href="../textModes/dist/index.html">Text modes test</a></li>
     </ul>

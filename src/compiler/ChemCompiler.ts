@@ -98,8 +98,12 @@ export class ChemCompiler {
   }
 
   pop(): StackItem | undefined {
-    return this.stack.shift();
+    const it = this.stack.shift();
+    this.lastStackItem = it;
+    return it;
   }
+
+  lastStackItem?: StackItem;
 
   private altFlag: boolean = false;
 

@@ -19,7 +19,6 @@ H^+_(x1.4,N0)[Cu^+<`|hBr^-><|hBr^->]^-
 Кроме того, если после скобок объявить ветки, то можно сделать несколько исходящих связей.
  */
 import { Int } from "../../types";
-import { StackItem } from "./StackItem";
 import { ChemBracketBegin, ChemBracketEnd } from "../../core/ChemBracket";
 import { ChemCompiler } from "../ChemCompiler";
 import { ChemNode } from "../../core/ChemNode";
@@ -32,20 +31,7 @@ import { checkMulBeforeBracket } from "./multipier";
 import { scanPostItem } from "../parse/scanPostItem";
 import { stateAgentMid } from "../state/stateAgentMid";
 import { stateBracketBegin } from "../state/stateBracketBegin";
-
-class BracketDecl extends StackItem {
-  constructor(
-    pos: Int,
-    public readonly begin: ChemBracketBegin,
-  ) {
-    super(pos);
-  }
-
-  // eslint-disable-next-line class-methods-use-this
-  override msgInvalidClose(): string {
-    return "It is necessary to close the bracket";
-  }
-}
+import { BracketDecl } from "./BracketDecl";
 
 export const openParentheses = (compiler: ChemCompiler): Int => {
   // Здесь возможны следующие случаи
@@ -77,7 +63,9 @@ const openBracket = (compiler: ChemCompiler, text: string, pos: Int) => {
   const begin = new ChemBracketBegin(text);
   begin.color = compiler.varColor;
   compiler.mulCounter.onOpenBracket();
-  compiler.curAgent!.commands.push(begin);
+  const { commands } = compiler.curAgent!;
+  const lastCmd = lastItem(commands);
+  commands.push(begin);
   compiler.push(new BracketDecl(pos, begin));
   compiler.bracketsCtrl.onBracket(begin);
   if (compiler.varPadding.length) {
@@ -86,11 +74,30 @@ const openBracket = (compiler: ChemCompiler, text: string, pos: Int) => {
   }
   if (compiler.curBond) {
     begin.bond = compiler.curBond;
-    // eslint-disable-next-line prefer-destructuring
+
     begin.nodes[0] = begin.bond.nodes[0];
   } else {
-    begin.nodes[0] = compiler.curNode;
-    closeNode(compiler);
+    const { curNode } = compiler;
+    if (curNode) {
+      begin.nodes[0] = curNode;
+      closeNode(compiler);
+    } else {
+      const { lastStackItem } = compiler;
+      if (
+        lastCmd instanceof ChemBracketEnd &&
+        lastStackItem instanceof BracketDecl &&
+        lastCmd.begin === lastStackItem.begin
+      ) {
+        /* eslint prefer-destructuring: "off" */
+        if (lastCmd.isBranchBracket) {
+          // case: S(=O)(=Se)  - here Se connected to S
+          begin.nodes[0] = lastCmd.begin.nodes[0];
+        } else {
+          // C(O)[I]2
+          begin.nodes[0] = lastCmd.nodes[0];
+        }
+      }
+    }
     compiler.chainSys.createSubChain();
   }
 };
@@ -144,6 +151,7 @@ export const closeBracket = (
         decl.begin,
         getNodeForBracketEnd(compiler),
       );
+      bracketEnd.isBranchBracket = decl.begin.isBranchBracket;
       const { commands } = compiler.curAgent!;
       commands.push(bracketEnd);
       decl.begin.end = bracketEnd;

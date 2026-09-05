@@ -14,8 +14,13 @@ import {
 } from "./bondCommon";
 import { closeItem } from "./item";
 import { lastItem } from "../../utils/lastItem";
-import { ChemBracketEnd } from "../../core/ChemBracket";
+import { ChemBracketBegin, ChemBracketEnd } from "../../core/ChemBracket";
 import { createBackground } from "../../core/ChemBackground";
+import {
+  checkRightToLeftBranchBrackets,
+  makeRightToLeftBranchBrackets,
+  RightToLeftBranchBrackets,
+} from "./rightToLeftBranchBrackets";
 
 export const closeNode = (compiler: ChemCompiler) => {
   closeItem(compiler);
@@ -27,6 +32,7 @@ export const openNode = (
   compiler: ChemCompiler,
   isAuto: boolean = false,
 ): ChemNode => {
+  let rtlBB: RightToLeftBranchBrackets | undefined;
   const bond = compiler.curBond;
   if (bond) {
     const { dir } = bond;
@@ -72,12 +78,22 @@ export const openNode = (
           dir.equals(testDir),
       );
       if (softBond) {
-        const existsNode = softBond.nodes[1]!;
-        mergeBonds(compiler, softBond, bond, existsNode);
-        compiler.chainSys.setCurNode(existsNode);
-        return existsNode;
+        // Но это не должна быть ситуация C(=O)-OH, т.к. здесь тоже две мягкие связи из одного узла.
+        const bondIndex = compiler.curAgent?.commands.indexOf(softBond) ?? -1;
+        const prevCmd = compiler.curAgent?.commands[bondIndex - 1];
+        if (
+          !(prevCmd instanceof ChemBracketBegin) ||
+          !prevCmd.isBranchBracket
+        ) {
+          const existsNode = softBond.nodes[1]!;
+          mergeBonds(compiler, softBond, bond, existsNode);
+          compiler.chainSys.setCurNode(existsNode);
+          return existsNode;
+        }
       }
     }
+  } else if (!isAuto) {
+    rtlBB = checkRightToLeftBranchBrackets(compiler);
   }
   closeNode(compiler);
   checkMiddlePoints(compiler);
@@ -93,6 +109,10 @@ export const openNode = (
   node.autoMode = isAuto;
   // Цвет узла зависит только от $color, т.к. $itemColor и $atomColor относятся не к узлу, а к его элементам.
   node.color = compiler.varColor;
+
+  if (rtlBB) {
+    makeRightToLeftBranchBrackets(node, rtlBB, compiler);
+  }
 
   compiler.curNode = node;
   compiler.chargeOwner = node;

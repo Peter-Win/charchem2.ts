@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Brackets test</title>
+  <link href="../../lib/charchem.css" rel="stylesheet" />
+  <script src="../../lib/charchem2.js"></script>
+  <style>
+    .table { 
+      border-collapse: collapse; 
+      width: 100%;
+    }
+    .table td, .table th { 
+      border: thin solid silver; 
+      padding: 0.5em 1em;
+    }
+    .echem-formula {
+      font-size: 24px;
+    }
+  </style>
+  <script>
+    const data = [
+      ["K3[Fe(CN)6]", "Nested brackets"],
+      ["H-(CH2)'n'-OH", "Soft bonds"],
+      ["(HO)(S)P<`||mC_(h-)(CH3)2>-O-P<`||mC(CH3)2>(S)(OH)", "Combination of brackets and branches"],
+      ["CH3-C(=O)-CH3", "Branch-brackets + soft bond"],
+      ["HC(=O)OH", "Branch-brackets + node"],
+      ["C6H5|P(≡N)(OH)", "Branch-brackets + brackets"],
+      ["P(=O)(=S)", "Branch-brackets + branch-brackets"],
+      ["H-S(O)(=NH)-NH2", "Brackets + branch-brackets"],
+    ];
+    function createElem(tag, owner, options) {
+        options = options || {};
+        var elem = document.createElement(tag);
+        if (owner) owner.appendChild(elem);
+        if (options.cls) elem.classList.add(options.cls);
+        if (options.style) Object.assign(elem.style, options.style);
+        if (options.html) elem.innerHTML = options.html; 
+        if (options.text) elem.innerText = options.text;
+        return elem;
+    }
+    window.addEventListener("load", () => {
+      const tbody = document.querySelector("tbody");
+      data.forEach(([code, comment]) => {
+        const tr = createElem("tr", tbody);
+        const tdCode = createElem("td", tr);
+        createElem("code", tdCode, {text: code});
+        const tdFormula = createElem("td", tr);
+        const elemFormula = createElem("div", tdFormula, {cls: "echem-formula"});
+        ChemSys.draw(elemFormula, code, {nonText: true});
+        createElem("td", tr, {text: comment});
+      })
+    })
+  </script>
+</head>
+<body>
+  <h1>Brackets test</h1>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Code</th>
+        <th>Formula</th>
+        <th>Comment</th>
+      </tr>
+    </thead>
+    <tbody>
+    </tbody>
+  </table>
+</body>
+</html>

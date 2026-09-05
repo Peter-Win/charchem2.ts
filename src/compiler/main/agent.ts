@@ -35,6 +35,7 @@ export const createAgent = (compiler: ChemCompiler): ChemAgent => {
   if (compiler.srcMap) {
     compiler.entityBegin = pos;
   }
+  compiler.lastStackItem = undefined;
   return agent;
 };
 

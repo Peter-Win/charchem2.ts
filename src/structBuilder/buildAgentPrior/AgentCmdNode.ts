@@ -14,7 +14,7 @@ export class AgentCmdNode extends AgentCmd {
   }
 
   override canPush(ctx: PAgentCtx): boolean {
-    const { prevBracket } = this;
+    const { prevBracket, node } = this;
     if (prevBracket) {
       const br = prevBracket.end;
       if (br) {
@@ -25,7 +25,14 @@ export class AgentCmdNode extends AgentCmd {
           step.y = ni0.res.nodeFrame.org.y + ni0.res.center.y;
         }
         const isBothText = !!prevBracket.isRealText;
-        makeBridge(ctx, br, true, isBothText);
+        makeBridge({
+          ctx,
+          bracket: br,
+          isSrcBracket: true,
+          isDstBracket: false,
+          isBothText,
+          dstNode: node,
+        });
       }
     }
     return false;

@@ -19,6 +19,7 @@ export interface CommonBracket {
   color?: string;
   nodes: ChemNodeOptPair;
   bond?: ChemBond;
+  isBranchBracket?: boolean; // added in ver 2.4, see https://github.com/Peter-Win/charchem2.ts/issues/42
 }
 
 export class ChemBracketBegin extends ChemObj implements CommonBracket {
@@ -37,6 +38,8 @@ export class ChemBracketBegin extends ChemObj implements CommonBracket {
   nodes: ChemNodeOptPair = [undefined, undefined];
 
   padding?: number[];
+
+  isBranchBracket?: boolean;
 
   override walk(visitor: Visitor) {
     visitor.bracketBegin?.(this);
@@ -61,6 +64,8 @@ export class ChemBracketEnd
   n: ChemK = new ChemK(1);
 
   bond?: ChemBond;
+
+  isBranchBracket?: boolean;
 
   nodes: ChemNodeOptPair = [undefined, undefined];
 
