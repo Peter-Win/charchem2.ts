@@ -10,12 +10,18 @@ export class BracketsCtrl {
 
   onNode(node: ChemNode) {
     this.queue.forEach((obj) => {
-      obj.nodes[1] = node;
+      if (!(obj instanceof ChemBracketEnd && obj.isBranchBracket)) {
+        obj.nodes[1] = node;
+      }
     });
     this.clear();
   }
 
   onBracket(obj: ChemBracketBegin | ChemBracketEnd) {
     this.queue.push(obj);
+  }
+
+  onCloseBranch() {
+    this.clear();
   }
 }

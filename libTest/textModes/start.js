@@ -14,5 +14,6 @@ commands.forEach(cmd => {
 // Change script url
 const indexName = path.resolve(__dirname, "dist", "index.html");
 const srcText = fs.readFileSync(indexName, {encoding: "utf-8"});
-const dstText = srcText.replace('src="/bundle.js"', 'src="./bundle.js"');
+// раньше было src="/bundle.js" потом вдруг кавычки исчезли. пришлось использовать регэксп
+const dstText = srcText.replace(/src="?\/bundle.js"?/, 'src="./bundle.js"');
 fs.writeFileSync(indexName, dstText, {encoding: "utf-8"});

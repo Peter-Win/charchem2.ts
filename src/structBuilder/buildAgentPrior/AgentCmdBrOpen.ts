@@ -43,30 +43,37 @@ export class AgentCmdBrOpen extends AgentCmd {
   override onPrevious(cmd: AgentCmd, ctx: PAgentCtx): void {
     // Если перед началом скобки стоит мост или любая скобка,
     // То предыдущая команда должна на выходе стыковаться с текущей на входе
-    // -(, [(, ](
+    // -(, [(
     if (cmd instanceof AgentCmdBridge || cmd instanceof AgentCmdBrOpen) {
       cmd.dstCmd = this;
       this.srcCmd = cmd;
     } else if (cmd instanceof AgentCmdBrClose) {
-      // eslint-disable-next-line prefer-destructuring
-      this.begin.nodes[0] = cmd.end.nodes[0];
-
-      ifDef(this.begin.nodes[0], (beginNode) => {
+      const [beginNode] = this.begin.nodes;
+      if (
+        beginNode &&
+        (cmd.end.nodes[0] === beginNode || cmd.end.begin.nodes[0] === beginNode)
+      ) {
+        // Это случай, когда скобки являются соседями. Т.е (A)(B) or (=A)(=B)
         if (ctx.rtlNodes.has(beginNode.index)) {
           this.checkRtl(ctx, beginNode);
         }
-      });
-      this.isBridge = true;
-      this.prevBracket = cmd;
+        this.prevBracket = cmd;
+        this.isBridge = true;
+      } else {
+        // здесь скобки хотя и рядом, но находятся в разных ветках A<(B)>(C)
+        this.isBridge = true;
+      }
     } else {
       if (cmd instanceof AgentCmdNode) {
+        // todo: тут тоже надо проверять узел, чтобы он не оказался в ветке
         this.prevText = true;
         // Если у узла одна связь, то проверить направление
         const { node } = cmd;
         if (node.bonds.size === 1) {
           const nodeBond = Array.from(node.bonds)[0]!;
           ifDef(nodeBond.dir, (dir) => {
-            if (dir.x < 0) this.checkRtl(ctx, node);
+            // если просто < 0, то случаются ошибки и `|C(CH3) выводило скобку влево, т.к x ~ -1E-17
+            if (dir.x < -0.0001) this.checkRtl(ctx, node);
           });
         }
       }

@@ -20,16 +20,12 @@
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
     "paths": {},
-    "types": [
-      "jest", "node"
-    ],
+    "types": ["jest", "node"],
     "typeRoots": [
       "node_modules/@types",
       "src/types"
     ]
   },
-  "include": [
-    "./src/**/*"
-  ],
-  "exclude": ["node_modules", "**/*.spec.ts"]
+  "include": ["./src/**/*"],
+  "exclude": ["node_modules"]
 }

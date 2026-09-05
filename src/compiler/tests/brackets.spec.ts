@@ -14,7 +14,8 @@ import { calcCharge } from "../../inspectors/calcCharge";
 
 /* eslint no-useless-assignment: "off" */
 
-const toText = (obj: ChemObj) => textFormula(obj, "text");
+const toText = (obj: ChemObj | undefined) =>
+  obj ? textFormula(obj, "text") : "";
 const toHtml = (obj: ChemObj) =>
   textFormula(obj, {
     type: "text",
@@ -24,7 +25,7 @@ const toHtml = (obj: ChemObj) =>
     },
   });
 
-const cmd2str = (cmd: ChemObj): string => {
+const cmd2str = (cmd: ChemObj | undefined): string => {
   if (cmd instanceof ChemNode && cmd.autoMode) return "Auto";
   if (cmd instanceof ChemBond && cmd.isNeg) return `\`${toText(cmd)}`;
   return toText(cmd);
@@ -35,40 +36,53 @@ describe("Brackets", () => {
     const expr = compile("Ca(OH]2");
     expect(expr.getMessage("ru")).toBe("Требуется ) вместо ] в позиции 6");
   });
+
   it("ErrorNotClosed", () => {
     const expr = compile("Ca(OH2");
     expect(expr.getMessage("ru")).toBe(
       "Необходимо закрыть скобку, открытую в позиции 3",
     );
   });
+
   it("ErrorNotOpen", () => {
     const expr = compile("CaOH)2");
     expect(expr.getMessage("ru")).toBe(
       "Нет пары для скобки, закрытой в позиции 5",
     );
   });
+
   it("ErrorNestedBranch", () => {
     const expr = compile("H-C<|(CH2>");
     expect(expr.getMessage("ru")).toBe(
       "Нельзя закрыть ветку в позиции 10, пока не закрыта скобка в позиции 6",
     );
   });
+
   it("ErrorNestedBracket", () => {
     const expr = compile("H-C<|CH2)>");
     expect(expr.getMessage("ru")).toBe(
       "Нельзя закрыть скобку в позиции 9, пока не закрыта ветка в позиции 4",
     );
   });
+
   it("SimpleRoundBrackets", () => {
     const expr = compile("(NH4)2SO4");
     expect(expr.getMessage()).toBe("");
     expect(toText(expr)).toBe("(NH4)2SO4");
 
     const { commands } = expr.getAgents()[0]!;
-    expect(commands[0]).toBeInstanceOf(ChemBracketBegin);
-    expect(commands[0]).toHaveProperty("text", "(");
-    expect(commands[2]).toBeInstanceOf(ChemBracketEnd);
-    expect(commands[2]).toHaveProperty("text", ")");
+
+    const begin = commands[0] as ChemBracketBegin;
+    expect(begin).toBeInstanceOf(ChemBracketBegin);
+    expect(begin).toHaveProperty("text", "(");
+    expect(begin.nodes[0]).toBeUndefined();
+    expect(textFormula(begin.nodes[1] ?? "", "text")).toBe("NH4");
+
+    const end = commands[2] as ChemBracketEnd;
+    expect(end).toBeInstanceOf(ChemBracketEnd);
+    expect(end).toHaveProperty("text", ")");
+    expect(cmd2str(end.nodes[0])).toBe("NH4");
+    expect(cmd2str(end.nodes[1])).toBe("SO4");
 
     const { dict } = PeriodicTable;
     const m = dict.H.mass * 8 + dict.N.mass * 2 + dict.O.mass * 4 + dict.S.mass;
@@ -79,22 +93,24 @@ describe("Brackets", () => {
     const expr = compile("K3[Fe(CN)6]");
     expect(expr.getMessage()).toBe("");
     const cm = expr.getAgents()[0]!.commands;
-    expect(cmd2str(cm[0]!)).toEqual("K3");
-    expect(cmd2str(cm[1]!)).toEqual("[");
-    expect(cmd2str(cm[2]!)).toEqual("Fe");
-    expect(cmd2str(cm[3]!)).toEqual("(");
-    expect(cmd2str(cm[4]!)).toEqual("CN");
-    expect(cmd2str(cm[5]!)).toEqual(")6");
-    expect(cmd2str(cm[6]!)).toEqual("]");
+    expect(cmd2str(cm[0])).toEqual("K3");
+    expect(cmd2str(cm[1])).toEqual("[");
+    expect(cmd2str(cm[2])).toEqual("Fe");
+    expect(cmd2str(cm[3])).toEqual("(");
+    expect(cmd2str(cm[4])).toEqual("CN");
+    expect(cmd2str(cm[5])).toEqual(")6");
+    expect(cmd2str(cm[6])).toEqual("]");
     expect(toHtml(expr)).toEqual("K<sub>3</sub>[Fe(CN)<sub>6</sub>]");
     expect(toText(makeBrutto(expr))).toBe("C6FeK3N6");
   });
+
   it("Charge", () => {
     const expr = compile("[SO4]^2-");
     expect(expr.getMessage()).toBe("");
     expect(toHtml(expr)).toBe("[SO<sub>4</sub>]<sup>2-</sup>");
     expect(toText(makeBrutto(expr))).toBe("O4S^2-");
   });
+
   it("ChargePrefix", () => {
     const expr = compile("[SO4]`^-2");
     expect(expr.getMessage()).toBe("");
@@ -107,11 +123,26 @@ describe("Brackets", () => {
     expect(toHtml(expr)).toBe("<sup>-2</sup>[SO<sub>4</sub>]");
     expect(toHtml(makeBrutto(expr))).toBe("O<sub>4</sub>S<sup>2-</sup>");
   });
+
   it("InputBond", () => {
     const expr = compile("H-[Cu<|Br><`|Br>]");
     expect(expr.getMessage()).toBe("");
     expect(toText(makeBrutto(expr))).toBe("HBr2Cu");
+
+    const agent = expr.getAgents()[0]!;
+    expect(agent).toBeDefined();
+
+    const begin = agent.commands[2] as ChemBracketBegin;
+    expect(begin).toBeInstanceOf(ChemBracketBegin);
+    expect(cmd2str(begin.nodes[0])).toBe("H");
+    expect(cmd2str(begin.nodes[1])).toBe("Cu");
+
+    const end = agent.commands[8] as ChemBracketEnd;
+    expect(end).toBeInstanceOf(ChemBracketEnd);
+    expect(cmd2str(end.nodes[0])).toBe("Cu");
+    expect(cmd2str(end.nodes[1])).toBe("");
   });
+
   it("OutputBond", () => {
     const expr = compile("[Cu<|Br><`|Br>]-H");
     expect(expr.getMessage()).toBe("");
@@ -131,20 +162,88 @@ describe("Brackets", () => {
     const bracketEnd = agent.commands[6] as ChemBracketEnd;
     expect(bracketEnd).toBeInstanceOf(ChemBracketEnd);
     const { nodeIn } = bracketEnd;
-    expect(nodeIn).toBeDefined();
-    expect(toText(nodeIn!)).toBe("Cu");
+    expect(toText(nodeIn)).toBe("Cu");
+    expect(cmd2str(bracketEnd.nodes[1])).toBe("H");
     const bracketEndBond = bracketEnd.bond;
     expect(bracketEndBond).toBeDefined();
-    expect(toText(bracketEndBond!)).toBe("-");
+    expect(toText(bracketEndBond)).toBe("-");
 
     expect(toText(makeBrutto(expr))).toBe("HBr2Cu");
   });
+
   it("InputOutputBond", () => {
     const expr = compile("H-(CH2)4-Cl");
     expect(expr.getMessage()).toBe("");
     expect(toHtml(expr)).toBe("H-(CH<sub>2</sub>)<sub>4</sub>-Cl");
     expect(toText(makeBrutto(expr))).toBe("C4H9Cl");
   });
+
+  it("Brackets after brackets", () => {
+    // 0:C, 1:(, 2: O, 3:), 4:[, 5: I, 6:]
+    const expr = compile("C(O)[I]2");
+    expect(expr.getMessage()).toBe("");
+    const agent = expr.getAgents()[0]!;
+    expect(agent).toBeDefined();
+    const { commands } = agent;
+
+    const begin1 = commands[1] as ChemBracketBegin;
+    expect(begin1).toBeInstanceOf(ChemBracketBegin);
+    expect(cmd2str(begin1.nodes[0])).toBe("C");
+    expect(cmd2str(begin1.nodes[1])).toBe("O");
+
+    const end1 = commands[3] as ChemBracketEnd;
+    expect(end1).toBeInstanceOf(ChemBracketEnd);
+    expect(cmd2str(end1.nodes[0])).toBe("O");
+    expect(cmd2str(end1.nodes[1])).toBe("I");
+
+    const begin2 = commands[4] as ChemBracketBegin;
+    expect(begin2).toBeInstanceOf(ChemBracketBegin);
+    expect(begin2.text).toBe("[");
+    expect(cmd2str(begin2.nodes[0])).toBe("O");
+    expect(cmd2str(begin2.nodes[1])).toBe("I");
+
+    const end2 = commands[6] as ChemBracketEnd;
+    expect(end2).toBeInstanceOf(ChemBracketEnd);
+    expect(cmd2str(end2.nodes[0])).toBe("I");
+    expect(cmd2str(end2.nodes[1])).toBe("");
+  });
+
+  it("Brackets after brackets in branch", () => {
+    // HC[F]₂
+    //  |
+    //  N(O)
+    // 0: HC, 1:|, 2: N, 3: (, 4: O, 5:), 6: [, 7: F, 8:]
+    const expr = compile("HC<|N(O)>[F]2");
+    expect(expr.getMessage()).toBe("");
+    const agent = expr.getAgents()[0]!;
+    expect(agent).toBeDefined();
+    const { commands } = agent;
+
+    const begin1 = commands[3] as ChemBracketBegin;
+    expect(begin1).toBeInstanceOf(ChemBracketBegin);
+    expect(begin1.text).toBe("(");
+    expect(cmd2str(begin1.nodes[0])).toBe("N");
+    expect(cmd2str(begin1.nodes[1])).toBe("O");
+
+    const end1 = commands[5] as ChemBracketEnd;
+    expect(end1).toBeInstanceOf(ChemBracketEnd);
+    expect(end1.text).toBe(")");
+    expect(cmd2str(end1.nodes[0])).toBe("O");
+    expect(cmd2str(end1.nodes[1])).toBe("");
+
+    const begin2 = commands[6] as ChemBracketBegin;
+    expect(begin2).toBeInstanceOf(ChemBracketBegin);
+    expect(begin2.text).toBe("[");
+    expect(cmd2str(begin2.nodes[0])).toBe("HC");
+    expect(cmd2str(begin2.nodes[1])).toBe("F");
+
+    const end2 = commands[8] as ChemBracketEnd;
+    expect(end2).toBeInstanceOf(ChemBracketEnd);
+    expect(end2.text).toBe("]");
+    expect(cmd2str(end2.nodes[0])).toBe("F");
+    expect(cmd2str(end2.nodes[1])).toBe("");
+  });
+
   it("Fenestrane5555", () => {
     // see https://en.wikipedia.org/wiki/Fenestrane
     //  2(H2C)-+-(CH2)2
@@ -204,6 +303,7 @@ describe("Brackets", () => {
     ]);
     expect(toText(makeBrutto(expr))).toBe("C13H20");
   });
+
   it("FenestraneAbs", () => {
     // see https://en.wikipedia.org/wiki/Fenestrane
     // ┌   ┐     ┌   ┐
@@ -291,6 +391,7 @@ describe("Brackets", () => {
       ),
     );
   });
+
   it("Connect Of Last Node In Brackets With Next Bond", () => {
     //   ┌    O 2   ┐
     //   |    ||    |    2+
@@ -302,6 +403,7 @@ describe("Brackets", () => {
     expect(toText(makeBrutto(expr))).toBe("C2H2MgO6");
     expect(calcCharge(expr)).toBe(0.0);
   });
+
   it("BranchAfterBracket", () => {
     //  ┌    ┐/I
     //  | Mg<|

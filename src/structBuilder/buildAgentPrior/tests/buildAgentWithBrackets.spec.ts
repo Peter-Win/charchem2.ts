@@ -246,9 +246,6 @@ describe("buildAgentPrior with brackets", () => {
         topFig.figures.every((fig) => fig instanceof FigFrame),
     );
     expect(txNodeFrames.length).toBe(3);
-    // console.log(txNodeFrames[0]!.getRelativeBounds().toString());
-    // console.log(txNodeFrames[1]!.getRelativeBounds().toString());
-    // console.log(txNodeFrames[2]!.getRelativeBounds().toString());
   });
 
   it("Text brackets with different font sizes", () => {
@@ -370,7 +367,7 @@ describe("buildAgentPrior with brackets", () => {
 
   it("ltrTxtBrackets", () => {
     // H`-[O](CH2-O-CH2){F}  =>  {F}(CH2-O-CH2)[O]-H
-    const expr = compile("H`-[O](CH2-O-CH2){{F}}");
+    const expr = compile("H`-[O](CH2-O-CI2){{F}}");
     expect(expr.getMessage()).toBe("");
     const agent = expr.getAgents()[0]!;
     const surface = createTestSurface();

@@ -5,3 +5,4 @@
 2.2.1 PoorHtml and CharChem textBuilder
 2.3.0 \italic, \bold, \fontsize, \underline, \overline for structBuilder, richHtml and poorHtml
 2.3.2 Update TypeScript version to 6.0
+2.4.0 Branch brackets HC(=O)-OH

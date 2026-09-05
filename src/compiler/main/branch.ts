@@ -42,6 +42,7 @@ export const closeBranch = (compiler: ChemCompiler): Int => {
       compiler.chainSys.onBranchEnd();
       compiler.nodesBranch.onBranchEnd();
       compiler.chainSys.setCurNode(decl.node);
+      compiler.bracketsCtrl.onCloseBranch();
 
       return compiler.setState(stateAgentMid, 1);
     }

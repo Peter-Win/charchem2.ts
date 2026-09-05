@@ -1,11 +1,12 @@
 import { ChemCompiler } from "../ChemCompiler";
 import { ChemBond } from "../../core/ChemBond";
 import { ChemNode } from "../../core/ChemNode";
-import { ChemBracketEnd } from "../../core/ChemBracket";
+import { ChemBracketBegin, ChemBracketEnd } from "../../core/ChemBracket";
 import { closeNode, openNode } from "./node";
 import { lastItem } from "../../utils/lastItem";
 import { removeItem } from "../../utils/removeItem";
 import { applyMiddlePoints } from "./middlePoint";
+import { BracketDecl } from "./BracketDecl";
 
 export const createCommonBond = (compiler: ChemCompiler): ChemBond => {
   const bond = new ChemBond();
@@ -79,16 +80,56 @@ export const getNodeForBondStart = (
     return curNode;
   }
   // Возможна ситуация, когда связь стыкуется к ранее закрытой скобке
-  const lastCmd = lastItem(compiler.curAgent!.commands);
-  const bracketEnd: ChemBracketEnd | undefined =
-    lastCmd instanceof ChemBracketEnd ? lastCmd : undefined;
-  if (bracketEnd) {
-    const { nodeIn } = bracketEnd;
-    if (nodeIn) {
-      bracketEnd.bond = bond;
-      return nodeIn;
+  const { lastStackItem } = compiler;
+  const { commands } = compiler.curAgent!;
+
+  const lastCmd = lastItem(commands);
+  if (
+    lastCmd instanceof ChemBracketEnd &&
+    lastStackItem instanceof BracketDecl &&
+    lastCmd.begin === lastStackItem.begin
+  ) {
+    if (lastCmd.isBranchBracket) {
+      const node0 = lastCmd.begin.nodes[0];
+      if (node0) {
+        return node0;
+      }
+    } else {
+      const { nodeIn } = lastCmd;
+      if (nodeIn) {
+        lastCmd.bond = bond;
+        return nodeIn;
+      }
     }
   }
+
+  // Branch Brackets. Case of R(=
+  if (lastCmd instanceof ChemBracketBegin && bond?.isHorizontal()) {
+    const prevNode = commands[commands.length - 2];
+    bond.soft = true; // Это не работает. т.к. создаётся автоузел и связь считается не мягкой
+    if (prevNode instanceof ChemNode && !prevNode.autoMode) {
+      lastCmd.isBranchBracket = true;
+      lastCmd.bond = bond;
+      return prevNode;
+    }
+    if (prevNode instanceof ChemBracketEnd && prevNode.isBranchBracket) {
+      // case: -S(=O)(=O)-OH  (second bracket)
+      const { begin } = prevNode;
+      const beginIndex = commands.indexOf(begin);
+      if (beginIndex >= 0) {
+        const prevBond = commands[beginIndex + 1];
+        if (prevBond instanceof ChemBond) {
+          const n0 = prevBond.nodes[0];
+          if (n0) {
+            lastCmd.isBranchBracket = true;
+            lastCmd.bond = bond;
+            return n0;
+          }
+        }
+      }
+    }
+  }
+
   return openNode(compiler, true);
 };
 

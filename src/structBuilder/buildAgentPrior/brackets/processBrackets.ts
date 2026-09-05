@@ -94,7 +94,9 @@ const textBracket = (
   k?: ChemK,
   charge?: ChemCharge,
 ): ResBracket => {
-  const style = props.getStyleColored("bracket", bracket.color);
+  const { color } = bracket;
+
+  const style = props.getStyleColored("bracket", color);
   const frame = new FigFrame();
   const figText = new FigText(bracket.text, style.font, style.style);
   frame.addFigure(figText, true);
@@ -143,19 +145,33 @@ const drawBracket = ({
   return figure;
 };
 
-export const makeBridge = (
-  ctx: PAgentCtx,
-  bracket: CommonBracket,
-  isSrcBracket: boolean,
-  isBothText: boolean,
-) => {
-  const [node0, node1] = bracket.nodes;
+export const makeBridge = (params: {
+  ctx: PAgentCtx;
+  bracket: CommonBracket;
+  isSrcBracket: boolean;
+  isDstBracket: boolean;
+  isBothText: boolean;
+  srcNode?: ChemNode;
+  dstNode?: ChemNode;
+}) => {
+  const {
+    ctx,
+    bracket,
+    isSrcBracket,
+    isDstBracket,
+    isBothText,
+    srcNode,
+    dstNode,
+  } = params;
+  const [node0a, node1a] = bracket.nodes;
+  const node1 = node1a ?? dstNode;
+  const node0 = srcNode ?? node0a;
   if (node0 && node1) {
     const src = { node: node0, allBox: isSrcBracket };
-    const dst = { node: node1, allBox: true };
+    const dst = { node: node1, allBox: isDstBracket };
     const sign = ctx.rtlNodes.has(node0.index) ? -1 : 1;
     let dy = 0;
-    const flAbs = !isBothText;
+    const flAbs = !isBothText && isSrcBracket && isDstBracket;
     if (flAbs) {
       // Стыковка скобки со скобкой. Выравнивание пропорционально высоте содержимого кластеров
       const { cluster: c0 } = ctx.clusters.findByNode(node0);
@@ -304,6 +320,21 @@ export const processBrackets = (
   if (cmdOpen.isBridge) {
     const isBothText =
       isText && (!!cmdOpen?.prevBracket?.isRealText || !!cmdOpen.prevText);
-    makeBridge(ctx, cmdOpen.begin, !!cmdOpen.prevBracket, isBothText);
+    let srcNode: ChemNode | undefined;
+    if (begin.isBranchBracket && cmdOpen.prevBracket) {
+      const prevEnd = cmdOpen.prevBracket.end;
+      // ...)(=O)
+      if (prevEnd.isBranchBracket) {
+        [srcNode] = cmdOpen.prevBracket.end.nodes;
+      }
+    }
+    makeBridge({
+      ctx,
+      bracket: cmdOpen.begin,
+      isSrcBracket: !!cmdOpen.prevBracket,
+      isDstBracket: true,
+      srcNode,
+      isBothText,
+    });
   }
 };
